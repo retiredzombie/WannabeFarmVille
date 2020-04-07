@@ -2,9 +2,9 @@ D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVil
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.pdb
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csprojAssemblyReference.cache
-D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Form1.resources
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Properties.Resources.resources
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csproj.GenerateResource.cache
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csproj.CoreCompileInputs.cache
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.exe
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.pdb
+D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Form1.resources
