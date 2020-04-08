@@ -1,6 +1,6 @@
 ﻿namespace WannabeFarmVille
 {
-    partial class Form1
+    partial class Jeu
     {
         /// <summary>
         /// Required designer variable.
@@ -51,16 +51,16 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // Jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 921);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "Jeu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Wannabe Farm Ville";
             this.ResumeLayout(false);
 
         }
