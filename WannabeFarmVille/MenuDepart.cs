@@ -10,16 +10,18 @@ using System.Windows.Forms;
 
 namespace WannabeFarmVille
 {
-    public partial class Form1 : Form
+    public partial class MenuDepart : Form
     {
-        public Form1()
+        public MenuDepart()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Hello World!");
+            Jeu jeu = new Jeu();
+            Hide();
+            jeu.ShowDialog();
         }
     }
 }
