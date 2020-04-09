@@ -12,14 +12,18 @@ namespace WannabeFarmVille
 {
     public partial class Jeu : Form
     {
+        TilesetImageGenerator TilesetIG;
+
         public Jeu()
         {
             InitializeComponent();
+
+            TilesetIG = new TilesetImageGenerator();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Jeu_Load(object sender, EventArgs e)
         {
-            Console.WriteLine("Hello World!");
+
         }
     }
 }

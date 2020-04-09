@@ -38,6 +38,7 @@
             this.Name = "Jeu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Wannabe Farm Ville";
+            this.Load += new System.EventHandler(this.Jeu_Load);
             this.ResumeLayout(false);
 
         }

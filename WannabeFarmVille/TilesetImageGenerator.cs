@@ -45,7 +45,8 @@ using System.Threading.Tasks;
 
         private static Bitmap LoadTile(int posListe)
         {
-            Image source = WannabeFarmVille.Properties.Resources.SMB_Tiles;
+            string directory = AppDomain.CurrentDomain.BaseDirectory + "Ressources\\Tileset\\zoo_tileset.png";
+            Image source = Image.FromFile(directory);
             TileCoord coord = listeCoord[posListe];
             Rectangle crop = new Rectangle(TILE_LEFT + (coord.Colonne * (IMAGE_WIDTH + SEPARATEUR_TILE)), TILE_TOP + coord.Ligne * (IMAGE_HEIGHT + SEPARATEUR_TILE), IMAGE_WIDTH, IMAGE_HEIGHT);
 
