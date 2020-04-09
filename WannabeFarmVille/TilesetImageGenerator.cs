@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+namespace TestTilesetMario
+{
     class TilesetImageGenerator
     {
         // Différentes tailles concernant les images dans le fichier de tuiles de jeu
@@ -45,7 +47,7 @@ using System.Threading.Tasks;
 
         private static Bitmap LoadTile(int posListe)
         {
-            Image source = WannabeFarmVille.Properties.Resources.SMB_Tiles;
+            Image source = WannabeFarmVille.Properties.Resources.zoo_tileset;
             TileCoord coord = listeCoord[posListe];
             Rectangle crop = new Rectangle(TILE_LEFT + (coord.Colonne * (IMAGE_WIDTH + SEPARATEUR_TILE)), TILE_TOP + coord.Ligne * (IMAGE_HEIGHT + SEPARATEUR_TILE), IMAGE_WIDTH, IMAGE_HEIGHT);
 
@@ -69,3 +71,5 @@ using System.Threading.Tasks;
         public int Ligne { get; set; }
         public int Colonne { get; set; }
     };
+}
+

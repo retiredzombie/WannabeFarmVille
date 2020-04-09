@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestTilesetMario;
 
 namespace WannabeFarmVille
 {
@@ -23,11 +24,22 @@ namespace WannabeFarmVille
         public Jeu()
         {
             InitializeComponent();
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Jeu_Load(object sender, EventArgs e)
         {
-            Console.WriteLine("Hello World!");
+
+        }
+
+        private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
