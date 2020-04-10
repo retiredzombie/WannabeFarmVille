@@ -16,7 +16,6 @@ namespace WannabeFarmVille
         public Jeu()
         {
             InitializeComponent();
-
         }
 
         private void Jeu_Load(object sender, EventArgs e)

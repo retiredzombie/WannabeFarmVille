@@ -9,3 +9,14 @@ D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVil
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.pdb
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Jeu.resources
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.MenuDepart.resources
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe.config
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.pdb
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csprojAssemblyReference.cache
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Jeu.resources
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.MenuDepart.resources
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Properties.Resources.resources
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csproj.GenerateResource.cache
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csproj.CoreCompileInputs.cache
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.exe
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.pdb
