@@ -16,11 +16,14 @@ namespace WannabeFarmVille
         public Jeu()
         {
             InitializeComponent();
-
-
             
+        }
 
-
+        
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Bitmap bitmap = new Bitmap(Properties.Resources.zoo_tileset);
+            e.Graphics.DrawImage(bitmap, 100, 100);
         }
 
         private void Jeu_Load(object sender, EventArgs e)
