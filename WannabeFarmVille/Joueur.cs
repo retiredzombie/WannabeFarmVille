@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WannabeFarmVille
 {
+    /// <summary>
+    /// Cette classe représente le joueur
+    /// </summary>
     class Joueur
     {
         public Joueur()
