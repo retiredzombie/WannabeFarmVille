@@ -63,6 +63,16 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap img_menu_bois {
+            get {
+                object obj = ResourceManager.GetObject("img_menu_bois", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap zoo_tileset {
             get {
                 object obj = ResourceManager.GetObject("zoo_tileset", resourceCulture);

@@ -28,25 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Jeu));
             this.menu_haut = new System.Windows.Forms.MenuStrip();
             this.dateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.animauxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.déchetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mouton20ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grizzly30ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lion35ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buffle30ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rhinocéros40ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buffle40ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.déchetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_haut.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu_haut
             // 
             this.menu_haut.BackColor = System.Drawing.Color.Peru;
+            this.menu_haut.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menu_haut.BackgroundImage")));
             this.menu_haut.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_haut.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateToolStripMenuItem,
@@ -62,6 +64,7 @@
             // 
             // dateToolStripMenuItem
             // 
+            this.dateToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.dateToolStripMenuItem.Name = "dateToolStripMenuItem";
             this.dateToolStripMenuItem.Size = new System.Drawing.Size(142, 28);
             this.dateToolStripMenuItem.Text = "24 mai 2020";
@@ -69,6 +72,7 @@
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(70, 28);
             this.toolStripMenuItem1.Text = "100$";
@@ -82,32 +86,10 @@
             this.buffle30ToolStripMenuItem,
             this.rhinocéros40ToolStripMenuItem,
             this.buffle40ToolStripMenuItem});
+            this.animauxToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.animauxToolStripMenuItem.Name = "animauxToolStripMenuItem";
             this.animauxToolStripMenuItem.Size = new System.Drawing.Size(128, 28);
             this.animauxToolStripMenuItem.Text = "0 Animaux";
-            // 
-            // déchetsToolStripMenuItem
-            // 
-            this.déchetsToolStripMenuItem.Name = "déchetsToolStripMenuItem";
-            this.déchetsToolStripMenuItem.Size = new System.Drawing.Size(123, 28);
-            this.déchetsToolStripMenuItem.Text = "0 Déchets";
-            // 
-            // conciergesToolStripMenuItem
-            // 
-            this.conciergesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.embaucherToolStripMenuItem});
-            this.conciergesToolStripMenuItem.Name = "conciergesToolStripMenuItem";
-            this.conciergesToolStripMenuItem.Size = new System.Drawing.Size(155, 28);
-            this.conciergesToolStripMenuItem.Text = "0 Concierges";
-            // 
-            // embaucherToolStripMenuItem
-            // 
-            this.embaucherToolStripMenuItem.Enabled = false;
-            this.embaucherToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.embaucherToolStripMenuItem.Name = "embaucherToolStripMenuItem";
-            this.embaucherToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
-            this.embaucherToolStripMenuItem.Text = "Embaucher";
-            this.embaucherToolStripMenuItem.Click += new System.EventHandler(this.embaucherToolStripMenuItem_Click);
             // 
             // mouton20ToolStripMenuItem
             // 
@@ -156,6 +138,31 @@
             this.buffle40ToolStripMenuItem.Name = "buffle40ToolStripMenuItem";
             this.buffle40ToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.buffle40ToolStripMenuItem.Text = "+Buffle 40$";
+            // 
+            // déchetsToolStripMenuItem
+            // 
+            this.déchetsToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.déchetsToolStripMenuItem.Name = "déchetsToolStripMenuItem";
+            this.déchetsToolStripMenuItem.Size = new System.Drawing.Size(123, 28);
+            this.déchetsToolStripMenuItem.Text = "0 Déchets";
+            // 
+            // conciergesToolStripMenuItem
+            // 
+            this.conciergesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.embaucherToolStripMenuItem});
+            this.conciergesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.conciergesToolStripMenuItem.Name = "conciergesToolStripMenuItem";
+            this.conciergesToolStripMenuItem.Size = new System.Drawing.Size(155, 28);
+            this.conciergesToolStripMenuItem.Text = "0 Concierges";
+            // 
+            // embaucherToolStripMenuItem
+            // 
+            this.embaucherToolStripMenuItem.Enabled = false;
+            this.embaucherToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.embaucherToolStripMenuItem.Name = "embaucherToolStripMenuItem";
+            this.embaucherToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
+            this.embaucherToolStripMenuItem.Text = "Embaucher";
+            this.embaucherToolStripMenuItem.Click += new System.EventHandler(this.embaucherToolStripMenuItem_Click);
             // 
             // Jeu
             // 
