@@ -23,5 +23,10 @@ namespace WannabeFarmVille
             Hide();
             jeu.ShowDialog();
         }
+
+        private void MenuDepart_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

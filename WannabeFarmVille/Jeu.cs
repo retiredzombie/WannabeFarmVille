@@ -20,7 +20,8 @@ namespace WannabeFarmVille
 
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
 
-            MessageBox.Show(map.GetMapHeight().ToString());
+            map.setTypeTuile(20, 20, 2);
+            Refresh();
         }
 
 
@@ -39,7 +40,7 @@ namespace WannabeFarmVille
             {
                 for (int o = 0; o < this.Width; o += tuileWidth)
                 {
-                    tuile = TilesetImageGenerator.GetTile(map.getTypeTuile(o/Width, i/Height));
+                    tuile = TilesetImageGenerator.GetTile(map.getTypeTuile(o/tuileWidth, i/tuileHeight));
                     e.Graphics.DrawImage(tuile, o, i);
                 }
             }

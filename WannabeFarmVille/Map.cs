@@ -22,10 +22,10 @@ namespace WannabeFarmVille
 
             for (int i = 0; i < screenHeight; i += tuileHeight)
             {
+                listeTuiles.Add(new List<Tuile>());
                 for (int o = 0; o < screenWidth; o += tuileWidth)
                 {
-                    listeTuiles.Add(new List<Tuile>());
-                    listeTuiles[i / screenHeight].Add(new Tuile(0));
+                    listeTuiles[i / tuileHeight].Add(new Tuile(0));
                 }
             }
         }
