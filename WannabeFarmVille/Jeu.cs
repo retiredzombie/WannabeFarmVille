@@ -21,8 +21,6 @@ namespace WannabeFarmVille
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-
-            map.setTypeTuile(20, 20, 2);
         }
 
 

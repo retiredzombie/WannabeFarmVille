@@ -15,6 +15,12 @@ namespace WannabeFarmVille
         {
             listeTuiles = new List<List<Tuile>>();
 
+            DrawBaseMap(screenWidth, screenHeight, tuileExemple);
+            
+        }
+
+        private void DrawBaseMap(int screenWidth, int screenHeight, Bitmap tuileExemple)
+        {
             Bitmap tuile = TilesetImageGenerator.GetTile(0);
 
             int tuileWidth = tuile.Width;
@@ -22,12 +28,17 @@ namespace WannabeFarmVille
 
             for (int i = 0; i < screenHeight; i += tuileHeight)
             {
-                listeTuiles.Add(new List<Tuile>());
-                for (int o = 0; o < screenWidth; o += tuileWidth)
                 {
-                    listeTuiles[i / tuileHeight].Add(new Tuile(0));
+                    listeTuiles.Add(new List<Tuile>());
+                    for (int o = 0; o < screenWidth; o += tuileWidth)
+                        listeTuiles[i / tuileHeight].Add(new Tuile(0));
                 }
             }
+        }
+
+        private void drawFarm()
+        {
+            setTypeTuile(10, 10, 6);
         }
 
         public int getTypeTuile(int x, int y)
