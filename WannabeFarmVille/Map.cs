@@ -36,9 +36,76 @@ namespace WannabeFarmVille
             }
         }
 
+        // Dessine la ferme (4 enclos).
         private void drawFarm()
         {
-            setTypeTuile(10, 10, 6);
+            // Enclos En haut à gauche.
+            int[] enclos1 = { 4, 4, 10, 10 };
+            for (int y = enclos1[1]; y < enclos1[1] + enclos1[3]; y++)
+            {
+                for (int x = enclos1[0]; x < enclos1[0] + enclos1[2]; x++)
+                {
+                    if (y == enclos1[1] || y == enclos1[1] + enclos1[3] - 1)
+                    {
+                        setTypeTuile(x, y, 6);
+                    }
+                    if (x == enclos1[0] || x == enclos1[0] + enclos1[2] - 1)
+                    {
+                        setTypeTuile(x, y, 6);
+                    }
+                }
+            }
+
+            // Enclos En haut à droite.
+            enclos1 = new int[] { 25, 4, 10, 10 };
+            for (int y = enclos1[1]; y < enclos1[1] + enclos1[3]; y++)
+            {
+                for (int x = enclos1[0]; x < enclos1[0] + enclos1[2]; x++)
+                {
+                    if (y == enclos1[1] || y == enclos1[1] + enclos1[3] - 1)
+                    {
+                        setTypeTuile(x, y, 6);
+                    }
+                    if (x == enclos1[0] || x == enclos1[0] + enclos1[2] - 1)
+                    {
+                        setTypeTuile(x, y, 6);
+                    }
+                }
+            }
+
+            // Enclos En bas à gauche.
+            enclos1 = new int[] { 4, 16, 10, 10 };
+            for (int y = enclos1[1]; y < enclos1[1] + enclos1[3]; y++)
+            {
+                for (int x = enclos1[0]; x < enclos1[0] + enclos1[2]; x++)
+                {
+                    if (y == enclos1[1] || y == enclos1[1] + enclos1[3] - 1)
+                    {
+                        setTypeTuile(x, y, 6);
+                    }
+                    if (x == enclos1[0] || x == enclos1[0] + enclos1[2] - 1)
+                    {
+                        setTypeTuile(x, y, 6);
+                    }
+                }
+            }
+
+            // Enclos En bas à droite.
+            enclos1 = new int[] { 25, 16, 10, 10 };
+            for (int y = enclos1[1]; y < enclos1[1] + enclos1[3]; y++)
+            {
+                for (int x = enclos1[0]; x < enclos1[0] + enclos1[2]; x++)
+                {
+                    if (y == enclos1[1] || y == enclos1[1] + enclos1[3] - 1)
+                    {
+                        setTypeTuile(x, y, 6);
+                    }
+                    if (x == enclos1[0] || x == enclos1[0] + enclos1[2] - 1)
+                    {
+                        setTypeTuile(x, y, 6);
+                    }
+                }
+            }
         }
 
         public int getTypeTuile(int x, int y)
