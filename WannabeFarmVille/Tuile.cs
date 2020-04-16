@@ -15,6 +15,10 @@ namespace WannabeFarmVille
             this.type = type;
         }
 
-       
+       public int Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
     }
 }

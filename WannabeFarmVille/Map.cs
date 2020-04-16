@@ -16,7 +16,12 @@ namespace WannabeFarmVille
 
         int getType(int x, int y)
         {
-            return listeTuiles[y][x].GetType();
+            return listeTuiles[y][x].Type;
+        }
+
+        void setType(int x, int y, int newType)
+        {
+            listeTuiles[y][x].Type = newType;
         }
     }
 }
