@@ -13,10 +13,14 @@ namespace WannabeFarmVille
 {
     public partial class Jeu : Form
     {
+        Map map;
         public Jeu()
         {
             InitializeComponent();
-            
+
+            map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
+
+            MessageBox.Show(map.GetMapHeight().ToString());
         }
 
 
@@ -35,6 +39,7 @@ namespace WannabeFarmVille
             {
                 for (int o = 0; o < this.Width; o += tuileWidth)
                 {
+                    tuile = TilesetImageGenerator.GetTile(map.getTypeTuile(o/Width, i/Height));
                     e.Graphics.DrawImage(tuile, o, i);
                 }
             }
