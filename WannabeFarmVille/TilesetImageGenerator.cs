@@ -30,7 +30,7 @@ namespace TestTilesetMario
         /// </summary>
         static TilesetImageGenerator()
         {
-            listeCoord.Add(new TileCoord() { Ligne = 0, Colonne = 0 }); // PLANCHER
+            listeCoord.Add(new TileCoord() { Ligne = 9, Colonne = 0 }); // PLANCHER
             listeCoord.Add(new TileCoord() { Ligne = 0, Colonne = 5 }); // BRIQUE_BRUNE
             listeCoord.Add(new TileCoord() { Ligne = 6, Colonne = 12 }); // CIEL_BLEU
             listeCoord.Add(new TileCoord() { Ligne = 9, Colonne = 8 }); // COIN_BLOCK
