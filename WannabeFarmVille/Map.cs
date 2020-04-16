@@ -16,7 +16,7 @@ namespace WannabeFarmVille
             listeTuiles = new List<List<Tuile>>();
 
             DrawBaseMap(screenWidth, screenHeight, tuileExemple);
-            
+            drawFarm();
         }
 
         private void DrawBaseMap(int screenWidth, int screenHeight, Bitmap tuileExemple)
