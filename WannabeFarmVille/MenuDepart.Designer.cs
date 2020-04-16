@@ -68,6 +68,7 @@
             this.Name = "MenuDepart";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Wannabe Farm Ville";
+            this.Load += new System.EventHandler(this.MenuDepart_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

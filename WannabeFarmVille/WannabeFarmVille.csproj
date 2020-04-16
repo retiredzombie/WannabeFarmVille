@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\zoo_tileset.png" />
+    <None Include="Resources\tigerKingRezize.jpg" />
     <None Include="Resources\img.jpg" />
     <None Include="Resources\wooden-logs-background-14341154.jpg" />
     <None Include="Resources\img_menu_bois.bmp" />
