@@ -20,8 +20,9 @@ namespace WannabeFarmVille
 
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
 
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+
             map.setTypeTuile(20, 20, 2);
-            Refresh();
         }
 
 
@@ -48,7 +49,17 @@ namespace WannabeFarmVille
 
         private void Jeu_Load(object sender, EventArgs e)
         {
+            // FPS timer
+            Timer timer = new Timer();
+            timer.Interval = (1 * 1000); // FPS
+            timer.Tick += new EventHandler(TickTick);
+            timer.Start();
+        }
 
+        // Roule à chaque fois que le timer tick.
+        private void TickTick(object sender, EventArgs e)
+        {
+            this.Refresh();
         }
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
