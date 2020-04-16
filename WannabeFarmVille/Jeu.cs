@@ -19,11 +19,25 @@ namespace WannabeFarmVille
             
         }
 
-        
+
         protected override void OnPaint(PaintEventArgs e)
         {
+            Graphics g = e.Graphics;
+
             Bitmap bitmap = new Bitmap(Properties.Resources.zoo_tileset);
-            e.Graphics.DrawImage(bitmap, 100, 100);
+
+            Bitmap tuile = TilesetImageGenerator.GetTile(0);
+
+            int tuileWidth = tuile.Width;
+            int tuileHeight = tuile.Height;
+
+            for (int i = 0; i < this.Height; i += tuileHeight)
+            {
+                for (int o = 0; o < this.Width; o += tuileWidth)
+                {
+                    e.Graphics.DrawImage(tuile, o, i);
+                }
+            }
         }
 
         private void Jeu_Load(object sender, EventArgs e)
