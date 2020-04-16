@@ -170,10 +170,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 921);
             this.Controls.Add(this.menu_haut);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu_haut;
             this.Name = "Jeu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Wannabe Farm Ville";
+            this.Text = "TIGER KING: THE GAME";
             this.Load += new System.EventHandler(this.Jeu_Load);
             this.menu_haut.ResumeLayout(false);
             this.menu_haut.PerformLayout();

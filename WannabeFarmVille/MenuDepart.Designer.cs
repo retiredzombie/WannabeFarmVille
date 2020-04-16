@@ -65,6 +65,7 @@
             this.ClientSize = new System.Drawing.Size(1264, 921);
             this.Controls.Add(this.lblTitre);
             this.Controls.Add(this.pictureBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuDepart";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Wannabe Farm Ville";
