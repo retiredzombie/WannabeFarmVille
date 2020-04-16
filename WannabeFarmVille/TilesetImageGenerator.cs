@@ -21,6 +21,7 @@ namespace TestTilesetMario
         public static int COIN_BLOCK = 3;
         public static int NUAGE = 4;
         public static int HACHE = 5;
+        public static int GATE = 6;
 
         private static List<TileCoord> listeCoord = new List<TileCoord>();
         private static List<Bitmap> listeBitmap = new List<Bitmap>();
@@ -36,6 +37,8 @@ namespace TestTilesetMario
             listeCoord.Add(new TileCoord() { Ligne = 9, Colonne = 8 }); // COIN_BLOCK
             listeCoord.Add(new TileCoord() { Ligne = 3, Colonne = 12 }); // NUAGE
             listeCoord.Add(new TileCoord() { Ligne = 0, Colonne = 7 }); // HACHE
+            listeCoord.Add(new TileCoord() { Ligne = 0, Colonne = 9 }); // GATE
+
 
             listeBitmap.Add(LoadTile(PLANCHER)); // PLANCHER
             listeBitmap.Add(LoadTile(BRIQUE_BRUNE)); // BRIQUE_BRUNE
