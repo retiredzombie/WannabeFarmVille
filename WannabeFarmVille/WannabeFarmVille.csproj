@@ -102,5 +102,11 @@
     <None Include="Resources\img_menu_bois.bmp" />
     <None Include="Ressources\TileSet\zoo_tileset.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joeExotic.bmp" />
+    <Content Include="Resources\joeExotic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

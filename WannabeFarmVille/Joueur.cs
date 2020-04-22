@@ -14,7 +14,12 @@ namespace WannabeFarmVille
         public Joueur()
         {
             Argent = 100;
+            X = 50;
+            Y = 50;
         }
         public int Argent { get; set; }
+
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }
