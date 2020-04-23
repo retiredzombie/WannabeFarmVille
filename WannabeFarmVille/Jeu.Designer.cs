@@ -171,7 +171,7 @@
             this.PicJoe.BackColor = System.Drawing.Color.Transparent;
             this.PicJoe.BackgroundImage = global::WannabeFarmVille.Properties.Resources.joeExotic;
             this.PicJoe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PicJoe.Image = global::WannabeFarmVille.Properties.Resources.JoeUplLeft;
+            this.PicJoe.Image = global::WannabeFarmVille.Properties.Resources.joeUplLeft;
             this.PicJoe.Location = new System.Drawing.Point(169, 224);
             this.PicJoe.Name = "PicJoe";
             this.PicJoe.Size = new System.Drawing.Size(100, 98);

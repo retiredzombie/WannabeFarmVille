@@ -97,7 +97,7 @@ namespace WannabeFarmVille
             }
         }
 
-        /* Logique du jeu.
+        /* Logique du jeu (1x par tick).
          */
         private void Logic()
         {

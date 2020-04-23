@@ -73,9 +73,9 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JoeDownLeft {
+        internal static System.Drawing.Bitmap joeDownLeft {
             get {
-                object obj = ResourceManager.GetObject("JoeDownLeft", resourceCulture);
+                object obj = ResourceManager.GetObject("joeDownLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JoeDownRight {
+        internal static System.Drawing.Bitmap joeDownRight {
             get {
-                object obj = ResourceManager.GetObject("JoeDownRight", resourceCulture);
+                object obj = ResourceManager.GetObject("joeDownRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JoeLeftLeft {
+        internal static System.Drawing.Bitmap joeLeftLeft {
             get {
-                object obj = ResourceManager.GetObject("JoeLeftLeft", resourceCulture);
+                object obj = ResourceManager.GetObject("joeLeftLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JoeLeftRight {
+        internal static System.Drawing.Bitmap joeLeftRight {
             get {
-                object obj = ResourceManager.GetObject("JoeLeftRight", resourceCulture);
+                object obj = ResourceManager.GetObject("joeLeftRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JoeRightLeft {
+        internal static System.Drawing.Bitmap joeRightLeft {
             get {
-                object obj = ResourceManager.GetObject("JoeRightLeft", resourceCulture);
+                object obj = ResourceManager.GetObject("joeRightLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JoeRightRight {
+        internal static System.Drawing.Bitmap joeRightRight {
             get {
-                object obj = ResourceManager.GetObject("JoeRightRight", resourceCulture);
+                object obj = ResourceManager.GetObject("joeRightRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +143,9 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JoeUplLeft {
+        internal static System.Drawing.Bitmap joeUplLeft {
             get {
-                object obj = ResourceManager.GetObject("JoeUplLeft", resourceCulture);
+                object obj = ResourceManager.GetObject("joeUplLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JoeUpRight {
+        internal static System.Drawing.Bitmap joeUpRight {
             get {
-                object obj = ResourceManager.GetObject("JoeUpRight", resourceCulture);
+                object obj = ResourceManager.GetObject("joeUpRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
