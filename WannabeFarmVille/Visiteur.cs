@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,9 +33,14 @@ namespace WannabeFarmVille
                                       "Gill", "Fontaine", "Parent", "Magnan", "Montpetit", "Deschamps", "Levesque",
                                       "Nelson", "Robitaille", "Rheault", "Bridelle", "Desormeaux", "Brown", "Mirandette", "Désilet",
                                       "Belhumeur", "Gontar", "Bray" };
+        private Image[] images;
+
         public Visiteur()
         {
-
+            X = 0;
+            Y = 0;
+            Width = 50;
+            Height = 20;
         }
         public Visiteur(Enum genre)
         {
@@ -53,7 +59,13 @@ namespace WannabeFarmVille
             random = rand.Next(0, ListeNom.Length - 1);
             Nom += ListeNom[random];
         }
-        public String Nom { get; set; }        
+        public String Nom { get; set; }
+
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public int Width { get; set; }
+        public int Height { get; set; }
 
     }
 }
