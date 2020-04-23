@@ -41,13 +41,26 @@ namespace WannabeFarmVille
             tuile = TilesetImageGenerator.GetTile(0);
             Player.Y += tuile.Height;
             visiteurs = new List<Visiteur>();
-            AjouterVisiteur();
+            AjouterVisiteur(Genre.Homme, 19, 28);
         }
 
-        public void AjouterVisiteur()
+        /*
+         * Ajoute un visiteur à la tuile position X, Y (en tuiles pas en pixels).
+         * Le spawn des visiteurs est à (19, 28).
+         */
+        public void AjouterVisiteur(Genre genre, int x, int y)
         {
-            visiteurs.Add(new Visiteur(Genre.Homme));
+            visiteurs.Add(new Visiteur(Genre.Homme, tuile.Width * x, tuile.Height * y));
         }
+
+        /*
+         * Ajoute un visiteur directemnet au spawn de visiteur.
+         */
+        public void AjouterVisiteurSpawn(Genre genre)
+        {
+            visiteurs.Add(new Visiteur(Genre.Homme, tuile.Width * 19, tuile.Height * 28));
+        }
+
 
         /* Tout ce qui est dessiner sur l'écran.
          */
@@ -71,7 +84,7 @@ namespace WannabeFarmVille
             {
                 for (int i = 0; i < visiteurs.Count; i++)
                 {
-                    g.DrawImage(visiteurs[i].image, visiteurs[i].X, visiteurs[i].Y);
+                    g.DrawImage(visiteurs[i].image, visiteurs[i].X, visiteurs[i].Y, tuile.Width, tuile.Height);
                 }
             }
         }
@@ -82,6 +95,8 @@ namespace WannabeFarmVille
         {
             PicJoe.Size = new Size(Player.Width, Player.Height);
             PicJoe.Location = new Point(Player.X, Player.Y);
+            
+            
         }
 
         /*
