@@ -27,7 +27,7 @@ namespace WannabeFarmVille
 
         public int Width { get; set; }
         public int Height { get; set; }
-
         public PictureBox JoeUpLeft { get; set; }
+        public PictureBox JoeUpRight { get; set; }
     }
 }
