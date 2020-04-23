@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTilesetMario;
@@ -98,31 +99,38 @@ namespace WannabeFarmVille
             PicJoe.Size = new Size(Player.Width, Player.Height);
             PicJoe.Location = new Point(Player.X, Player.Y);
 
-            LogicVisiteurs();
+            Thread threadLogiqueVisiteurs = new Thread(LogicVisiteurs);
+            threadLogiqueVisiteurs.Start();
         }
 
         private void LogicVisiteurs()
         {
-            for (int i = 0; i < visiteurs.Count; i++)
+            try
             {
-                int randX = new Random().Next(3);
-                int randY = new Random().Next(3);
-                while ((randX == randY) ||
-                       (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
-                       (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
-                       (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
-                       (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
-                      )
+                for (int i = 0; i < visiteurs.Count; i++)
                 {
-                   randX = new Random().Next(3);
-                   randY = new Random().Next(3);
-                }
+                    int randX = new Random().Next(3);
+                    int randY = new Random().Next(3);
+                    while ((randX == randY) ||
+                           (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                           (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                           (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
+                           (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
+                          )
+                    {
+                        randX = new Random().Next(3);
+                        randY = new Random().Next(3);
+                    }
 
-                if (randX == 0) visiteurs[i].X -= tuile.Width;
-                else if (randX == 1) visiteurs[i].X += tuile.Width;
-                
-                if (randY == 0) visiteurs[i].Y -= tuile.Height;
-                else if (randY == 1) visiteurs[i].Y += tuile.Height;
+                    if (randX == 0) visiteurs[i].X -= tuile.Width;
+                    else if (randX == 1) visiteurs[i].X += tuile.Width;
+
+                    if (randY == 0) visiteurs[i].Y -= tuile.Height;
+                    else if (randY == 1) visiteurs[i].Y += tuile.Height;
+                }
+            } catch (InvalidOperationException)
+            {
+
             }
         }
 
@@ -156,7 +164,7 @@ namespace WannabeFarmVille
         private void Jeu_Load(object sender, EventArgs e)
         {
             // FPS timer
-            Timer timer = new Timer();
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             timer.Interval = (1 * 1000); // FPS
             timer.Tick += new EventHandler(TickTick);
             timer.Start();
