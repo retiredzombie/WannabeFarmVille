@@ -33,23 +33,23 @@ namespace WannabeFarmVille
                                       "Gill", "Fontaine", "Parent", "Magnan", "Montpetit", "Deschamps", "Levesque",
                                       "Nelson", "Robitaille", "Rheault", "Bridelle", "Desormeaux", "Brown", "Mirandette", "Désilet",
                                       "Belhumeur", "Gontar", "Bray" };
-        private Image[] images;
+        private List<Image> images;
 
         public Visiteur()
         {
-            X = 0;
-            Y = 0;
-            Width = 50;
-            Height = 20;
+            init();
         }
         public Visiteur(Enum genre)
         {
+            init();
+
             Random rand = new Random();
             int random;
             if(genre.Equals(Genre.Homme))
             {
                 random = rand.Next(0, ListePrenomHommes.Length - 1);
                 Nom = ListePrenomHommes[random] + " ";
+                
             }
             else if (genre.Equals(Genre.Femme))
             {
@@ -59,6 +59,18 @@ namespace WannabeFarmVille
             random = rand.Next(0, ListeNom.Length - 1);
             Nom += ListeNom[random];
         }
+
+        private void init()
+        {
+            X = 0;
+            Y = 0;
+            Width = 50;
+            Height = 20;
+
+            images = new List<Image>();
+            
+        }
+
         public String Nom { get; set; }
 
         public int X { get; set; }
@@ -66,6 +78,8 @@ namespace WannabeFarmVille
 
         public int Width { get; set; }
         public int Height { get; set; }
+
+        public Image image { get; set; }
 
     }
 }
