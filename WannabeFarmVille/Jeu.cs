@@ -46,6 +46,11 @@ namespace WannabeFarmVille
             visiteurs = new List<Visiteur>();
             Player.Width = tuile.Width;
             Player.Height = tuile.Height;
+            Player.JoeDownLeft = PicDownLeft;
+            Player.JoeDownRight = PicDownRight;
+            Player.JoeUpLeft = PicUpLeft;
+            Player.JoeUpRight = PicUpRight;
+            Player.JoeRightLeft = PicRightLeft;
             for (int i = 0; i < 50; i++)
             {
                AjouterVisiteurSpawn();
@@ -98,8 +103,8 @@ namespace WannabeFarmVille
          */
         private void Logic()
         {
-            PicJoe.Size = new Size(Player.Width, Player.Height);
-            PicJoe.Location = new Point(Player.X, Player.Y);
+            PicUpRight.Size = new Size(Player.Width, Player.Height);
+            PicUpRight.Location = new Point(Player.X, Player.Y);
 
             Thread threadLogiqueVisiteurs = new Thread(LogicVisiteurs);
             threadLogiqueVisiteurs.Start();
@@ -167,22 +172,22 @@ namespace WannabeFarmVille
             if(e.KeyCode == Keys.S)
             {
                 Player.Y += tuile.Height;
-                PicJoe.Location = new Point(Player.X, Player.Y);
+                PicUpRight.Location = new Point(Player.X, Player.Y);
             }
             if (e.KeyCode == Keys.W)
             {
                 Player.Y -= tuile.Height;
-                PicJoe.Location = new Point(Player.X, Player.Y);
+                PicUpRight.Location = new Point(Player.X, Player.Y);
             }
             if (e.KeyCode == Keys.D)
             {
                 Player.X += tuile.Width;
-                PicJoe.Location = new Point(Player.X, Player.Y);
+                PicUpRight.Location = new Point(Player.X, Player.Y);
             }
             if (e.KeyCode == Keys.A)
             {
                 Player.X -= tuile.Width;
-                PicJoe.Location = new Point(Player.X, Player.Y);
+                PicUpRight.Location = new Point(Player.X, Player.Y);
             }
         }
     }
