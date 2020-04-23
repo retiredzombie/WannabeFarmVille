@@ -22,6 +22,7 @@ namespace WannabeFarmVille
         private Graphics g;
         private System.Windows.Forms.PictureBox Joe;
         Bitmap tuile;
+        bool gameStarted;
 
 
         public Jeu()
@@ -41,7 +42,7 @@ namespace WannabeFarmVille
             tuile = TilesetImageGenerator.GetTile(0);
             Player.Y += tuile.Height;
             visiteurs = new List<Visiteur>();
-            AjouterVisiteur(Genre.Homme, 19, 28);
+            AjouterVisiteurSpawn(Genre.Homme);
         }
 
         /*
@@ -95,8 +96,16 @@ namespace WannabeFarmVille
         {
             PicJoe.Size = new Size(Player.Width, Player.Height);
             PicJoe.Location = new Point(Player.X, Player.Y);
-            
-            
+
+            LogicVisiteurs();
+        }
+
+        private void LogicVisiteurs()
+        {
+            for (int i = 0; i < visiteurs.Count; i++)
+            {
+                visiteurs[i].Y -= tuile.Height;
+            }
         }
 
         /*
