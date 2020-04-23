@@ -104,6 +104,7 @@ namespace WannabeFarmVille
         {
             for (int i = 0; i < visiteurs.Count; i++)
             {
+                visiteurs[i].X -= tuile.Width;
                 visiteurs[i].Y -= tuile.Height;
             }
         }
