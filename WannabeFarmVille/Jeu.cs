@@ -43,6 +43,15 @@ namespace WannabeFarmVille
             Player.Y += tuile.Height;
             visiteurs = new List<Visiteur>();
             AjouterVisiteurSpawn();
+            AjouterVisiteurSpawn();
+            AjouterVisiteurSpawn();
+            AjouterVisiteurSpawn();
+            AjouterVisiteurSpawn();
+            AjouterVisiteurSpawn();
+            AjouterVisiteurSpawn();
+            AjouterVisiteurSpawn();
+            AjouterVisiteurSpawn();
+            AjouterVisiteurSpawn();
         }
 
         /*
@@ -104,11 +113,11 @@ namespace WannabeFarmVille
             {
                 int randX = new Random().Next(3);
                 int randY = new Random().Next(3);
-                while ((randX == 2 && randY == 2) || 
-                       (randY == 0 && visiteurs[i].Y - tuile.Height < 0) ||
-                       (randY == 1 && visiteurs[i].Y + tuile.Height > this.Height) ||
-                       (randX == 0 && visiteurs[i].X - tuile.Height < 0) ||
-                       (randX == 1 && visiteurs[i].X + tuile.Width > this.Width)
+                while ((randX == randY) ||
+                       (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                       (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                       (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
+                       (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
                       )
                 {
                    randX = new Random().Next(3);
