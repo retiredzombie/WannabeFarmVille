@@ -142,8 +142,8 @@
   <data name="joeRightRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\joeRightRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="joeUplLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joeUplLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="JoeUpLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\JoeUpLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="joeUpRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\joeUpRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

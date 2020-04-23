@@ -103,6 +103,7 @@
     <None Include="Ressources\TileSet\zoo_tileset.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\JoeUpLeft.png" />
     <None Include="Resources\visiteur_exotique.jpg" />
     <None Include="Resources\joeUpRight.png" />
     <None Include="Resources\joeUplLeft.png" />

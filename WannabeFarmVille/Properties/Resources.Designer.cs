@@ -143,9 +143,9 @@ namespace WannabeFarmVille.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap joeUplLeft {
+        internal static System.Drawing.Bitmap JoeUpLeft {
             get {
-                object obj = ResourceManager.GetObject("joeUplLeft", resourceCulture);
+                object obj = ResourceManager.GetObject("JoeUpLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
