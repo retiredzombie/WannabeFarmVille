@@ -8,12 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTilesetMario;
+using WannabeFarmVille.Properties;
 
 namespace WannabeFarmVille
 {
     public partial class Jeu : Form
     {
-        Map map;
+        private Map map;
+        private Joueur Player = new Joueur();
+        private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
+        private Graphics g;
+        private System.Windows.Forms.PictureBox Joe;
+
+
         public Jeu()
         {
             InitializeComponent();
@@ -26,7 +33,7 @@ namespace WannabeFarmVille
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
+            g = e.Graphics;
 
             Bitmap bitmap = new Bitmap(Properties.Resources.zoo_tileset);
 
@@ -43,6 +50,7 @@ namespace WannabeFarmVille
                     e.Graphics.DrawImage(tuile, o, i);
                 }
             }
+            PicJoe.Location = new Point(Player.X, Player.Y);
         }
 
         private void Jeu_Load(object sender, EventArgs e)
@@ -68,6 +76,30 @@ namespace WannabeFarmVille
         private void dateToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Jeu_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.S)
+            {
+                Player.Y += 3;
+                PicJoe.Location = new Point(Player.X, Player.Y);
+            }
+            if (e.KeyCode == Keys.W)
+            {
+                Player.Y -= 3;
+                PicJoe.Location = new Point(Player.X, Player.Y);
+            }
+            if (e.KeyCode == Keys.D)
+            {
+                Player.X += 3;
+                PicJoe.Location = new Point(Player.X, Player.Y);
+            }
+            if (e.KeyCode == Keys.A)
+            {
+                Player.X -= 3;
+                PicJoe.Location = new Point(Player.X, Player.Y);
+            }
         }
     }
 }

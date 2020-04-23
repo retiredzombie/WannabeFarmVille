@@ -42,7 +42,9 @@
             this.déchetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PicJoe = new System.Windows.Forms.PictureBox();
             this.menu_haut.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PicJoe)).BeginInit();
             this.SuspendLayout();
             // 
             // menu_haut
@@ -164,11 +166,21 @@
             this.embaucherToolStripMenuItem.Text = "Embaucher";
             this.embaucherToolStripMenuItem.Click += new System.EventHandler(this.embaucherToolStripMenuItem_Click);
             // 
+            // PicJoe
+            // 
+            this.PicJoe.Image = ((System.Drawing.Image)(resources.GetObject("PicJoe.Image")));
+            this.PicJoe.Location = new System.Drawing.Point(169, 224);
+            this.PicJoe.Name = "PicJoe";
+            this.PicJoe.Size = new System.Drawing.Size(100, 98);
+            this.PicJoe.TabIndex = 1;
+            this.PicJoe.TabStop = false;
+            // 
             // Jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 921);
+            this.Controls.Add(this.PicJoe);
             this.Controls.Add(this.menu_haut);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu_haut;
@@ -176,8 +188,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TIGER KING: THE GAME";
             this.Load += new System.EventHandler(this.Jeu_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Jeu_KeyDown);
             this.menu_haut.ResumeLayout(false);
             this.menu_haut.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PicJoe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,6 +212,7 @@
         private System.Windows.Forms.ToolStripMenuItem buffle30ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rhinocéros40ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buffle40ToolStripMenuItem;
+        private System.Windows.Forms.PictureBox PicJoe;
     }
 }
 
