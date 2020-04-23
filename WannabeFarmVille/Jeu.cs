@@ -17,6 +17,7 @@ namespace WannabeFarmVille
     public partial class Jeu : Form
     {
         private Map map;
+        private bool backDrawn = false;
         private Joueur Player = new Joueur();
         private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
@@ -43,6 +44,8 @@ namespace WannabeFarmVille
             tuile = TilesetImageGenerator.GetTile(0);
             Player.Y += tuile.Height;
             visiteurs = new List<Visiteur>();
+            Player.Width = tuile.Width;
+            Player.Height = tuile.Height;
             for (int i = 0; i < 50; i++)
             {
                AjouterVisiteurSpawn();
@@ -72,8 +75,6 @@ namespace WannabeFarmVille
         protected override void OnPaint(PaintEventArgs e)
         {
             g = e.Graphics;
-            
-            DrawTiles(g);
 
             DrawVisiteurs(g);
         }
@@ -88,6 +89,7 @@ namespace WannabeFarmVille
                 for (int i = 0; i < visiteurs.Count; i++)
                 {
                     g.DrawImage(visiteurs[i].imageVisiteur, visiteurs[i].X, visiteurs[i].Y, tuile.Width, tuile.Height);
+                    pictureBox1.SendToBack();
                 }
             }
         }
@@ -131,33 +133,6 @@ namespace WannabeFarmVille
             } catch (InvalidOperationException)
             {
 
-            }
-        }
-
-        /*
-         * Dessiner les tuiles.
-         */
-        private void DrawTiles(Graphics g)
-        {
-            Bitmap bitmap = new Bitmap(Properties.Resources.zoo_tileset);
-
-            Bitmap tuile = TilesetImageGenerator.GetTile(0);
-            
-            int tuileWidth = tuile.Width;
-            int tuileHeight = tuile.Height;
-
-            Player.Width = tuileWidth;
-            Player.Height = tuileHeight;
-
-            for (int i = 0; i < this.Height; i += tuileHeight)
-            {
-                for (int o = 0; o < this.Width; o += tuileWidth)
-                {
-
-                    tuile = TilesetImageGenerator.GetTile(map.getTypeTuile(o / tuileWidth, i / tuileHeight));
-
-                    g.DrawImage(tuile, o, i);
-                }
             }
         }
 

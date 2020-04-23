@@ -114,6 +114,7 @@
     <None Include="Resources\joeExotic.bmp" />
     <None Include="Resources\joeDownLeft.png" />
     <None Include="Resources\joeDownRight.png" />
+    <None Include="Resources\Background_game.png" />
     <Content Include="Resources\joeExotic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
