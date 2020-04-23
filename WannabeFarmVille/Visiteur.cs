@@ -35,13 +35,13 @@ namespace WannabeFarmVille
                                       "Belhumeur", "Gontar", "Bray" };
         private List<Image> images;
 
-        public Visiteur()
+        public Visiteur(int x, int y)
         {
-            init();
+            init(x, y);
         }
-        public Visiteur(Enum genre)
+        public Visiteur(Enum genre, int x, int y)
         {
-            init();
+            init(x, y);
 
             Random rand = new Random();
             int random;
@@ -49,7 +49,8 @@ namespace WannabeFarmVille
             {
                 random = rand.Next(0, ListePrenomHommes.Length - 1);
                 Nom = ListePrenomHommes[random] + " ";
-                
+
+                image = Properties.Resources.visiteur_exotique;
             }
             else if (genre.Equals(Genre.Femme))
             {
@@ -60,10 +61,10 @@ namespace WannabeFarmVille
             Nom += ListeNom[random];
         }
 
-        private void init()
+        private void init(int x, int y)
         {
-            X = 0;
-            Y = 0;
+            X = x;
+            Y = y;
             Width = 50;
             Height = 20;
 
@@ -79,7 +80,7 @@ namespace WannabeFarmVille
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public Image image { get; set; }
+        public Bitmap image { get; set; }
 
     }
 }
