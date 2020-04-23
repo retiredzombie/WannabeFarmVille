@@ -42,16 +42,10 @@ namespace WannabeFarmVille
             tuile = TilesetImageGenerator.GetTile(0);
             Player.Y += tuile.Height;
             visiteurs = new List<Visiteur>();
-            AjouterVisiteurSpawn();
-            AjouterVisiteurSpawn();
-            AjouterVisiteurSpawn();
-            AjouterVisiteurSpawn();
-            AjouterVisiteurSpawn();
-            AjouterVisiteurSpawn();
-            AjouterVisiteurSpawn();
-            AjouterVisiteurSpawn();
-            AjouterVisiteurSpawn();
-            AjouterVisiteurSpawn();
+            for (int i = 0; i < 50; i++)
+            {
+               AjouterVisiteurSpawn();
+            }
         }
 
         /*
