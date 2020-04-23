@@ -59,7 +59,7 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteurSpawn()
         {
-            visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 28));
+            visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 19));
         }
 
 
@@ -104,8 +104,19 @@ namespace WannabeFarmVille
         {
             for (int i = 0; i < visiteurs.Count; i++)
             {
-                visiteurs[i].X -= tuile.Width;
-                visiteurs[i].Y -= tuile.Height;
+                int randX = new Random().Next(2);
+                int randY = new Random().Next(2);
+                while (randX == 2 && randY == 2)
+                {
+                   randX = new Random().Next(2);
+                   randY = new Random().Next(2);
+                }
+
+                if (randX == 0) visiteurs[i].X -= tuile.Width;
+                else if (randX == 1) visiteurs[i].X += tuile.Width;
+                
+                if (randY == 0) visiteurs[i].Y -= tuile.Height;
+                else if (randY == 1) visiteurs[i].Y += tuile.Height;
             }
         }
 
