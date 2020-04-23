@@ -68,8 +68,6 @@ namespace WannabeFarmVille
         protected override void OnPaint(PaintEventArgs e)
         {
             g = e.Graphics;
-
-            Logic();
             
             DrawTiles(g);
 
@@ -107,7 +105,10 @@ namespace WannabeFarmVille
                 int randX = new Random().Next(3);
                 int randY = new Random().Next(3);
                 while ((randX == 2 && randY == 2) || 
-                       (randY == 0 && visiteurs[i].Y + tuile.Height > this.Height)
+                       (randY == 0 && visiteurs[i].Y - tuile.Height < 0) ||
+                       (randY == 1 && visiteurs[i].Y + tuile.Height > this.Height) ||
+                       (randX == 0 && visiteurs[i].X - tuile.Height < 0) ||
+                       (randX == 1 && visiteurs[i].X + tuile.Width > this.Width)
                       )
                 {
                    randX = new Random().Next(3);
@@ -161,6 +162,7 @@ namespace WannabeFarmVille
         // Roule à chaque fois que le timer tick.
         private void TickTick(object sender, EventArgs e)
         {
+            Logic();
             this.Refresh();
         }
 
