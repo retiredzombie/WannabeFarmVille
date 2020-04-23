@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Jeu));
+            this.PicJoe = new System.Windows.Forms.PictureBox();
             this.menu_haut = new System.Windows.Forms.MenuStrip();
             this.dateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,10 +43,22 @@
             this.déchetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PicJoe = new System.Windows.Forms.PictureBox();
-            this.menu_haut.SuspendLayout();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PicJoe)).BeginInit();
+            this.menu_haut.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // PicJoe
+            // 
+            this.PicJoe.BackColor = System.Drawing.Color.Transparent;
+            this.PicJoe.BackgroundImage = global::WannabeFarmVille.Properties.Resources.joeDownRight;
+            this.PicJoe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PicJoe.Location = new System.Drawing.Point(0, 35);
+            this.PicJoe.Name = "PicJoe";
+            this.PicJoe.Size = new System.Drawing.Size(14, 10);
+            this.PicJoe.TabIndex = 1;
+            this.PicJoe.TabStop = false;
             // 
             // menu_haut
             // 
@@ -166,24 +179,28 @@
             this.embaucherToolStripMenuItem.Text = "Embaucher";
             this.embaucherToolStripMenuItem.Click += new System.EventHandler(this.embaucherToolStripMenuItem_Click);
             // 
-            // PicJoe
+            // pictureBox1
             // 
-            this.PicJoe.BackColor = System.Drawing.Color.White;
-            this.PicJoe.BackgroundImage = global::WannabeFarmVille.Properties.Resources.joeDownRight;
-            this.PicJoe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PicJoe.Location = new System.Drawing.Point(169, 224);
-            this.PicJoe.Name = "PicJoe";
-            this.PicJoe.Size = new System.Drawing.Size(100, 98);
-            this.PicJoe.TabIndex = 1;
-            this.PicJoe.TabStop = false;
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.BackgroundImage = global::WannabeFarmVille.Properties.Resources.Background_game;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 28);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1264, 898);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // Jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::WannabeFarmVille.Properties.Resources.Background_game;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1264, 921);
             this.Controls.Add(this.PicJoe);
             this.Controls.Add(this.menu_haut);
+            this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu_haut;
             this.Name = "Jeu";
@@ -191,9 +208,10 @@
             this.Text = "TIGER KING: THE GAME";
             this.Load += new System.EventHandler(this.Jeu_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Jeu_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.PicJoe)).EndInit();
             this.menu_haut.ResumeLayout(false);
             this.menu_haut.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicJoe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,6 +233,7 @@
         private System.Windows.Forms.ToolStripMenuItem rhinocéros40ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buffle40ToolStripMenuItem;
         private System.Windows.Forms.PictureBox PicJoe;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

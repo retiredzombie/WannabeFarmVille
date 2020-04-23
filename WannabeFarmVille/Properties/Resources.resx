@@ -118,43 +118,46 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="img_menu_bois" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\img.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="joeDownLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joeDownLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="joeDownRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joeDownRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="joeExotic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joeExotic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="joeLeftLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joeLeftLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="joeLeftRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joeLeftRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="JoeUpLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\JoeUpLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="joeRightLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\joeRightLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="joeRightRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joeRightRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="joeDownLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\joeDownLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="JoeUpLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\JoeUpLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="joeUpRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\joeUpRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="joeExotic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\joeExotic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tigerKingRezize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tigerKingRezize.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="visiteur_exotique" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\visiteur_exotique.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="joeRightRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\joeRightRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="joeUpRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\joeUpRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="zoo_tileset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Ressources\TileSet\zoo_tileset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="joeLeftRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\joeLeftRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_menu_bois" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="joeDownRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\joeDownRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="joeLeftLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\joeLeftLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="visiteur_exotique" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\visiteur_exotique.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Background_game" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Background_game.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
