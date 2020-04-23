@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WannabeFarmVille
 {
@@ -26,5 +27,7 @@ namespace WannabeFarmVille
 
         public int Width { get; set; }
         public int Height { get; set; }
+
+        public PictureBox JoeUpLeft { get; set; }
     }
 }

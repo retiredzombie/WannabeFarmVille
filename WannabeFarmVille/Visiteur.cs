@@ -56,6 +56,8 @@ namespace WannabeFarmVille
             {
                 random = rand.Next(0, ListePrenomFemmes.Length - 1);
                 Nom = ListePrenomFemmes[random] + " ";
+
+                image = Properties.Resources.visiteur_exotique;
             }
             random = rand.Next(0, ListeNom.Length - 1);
             Nom += ListeNom[random];
