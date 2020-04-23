@@ -17,6 +17,7 @@ namespace WannabeFarmVille
     {
         private Map map;
         private Joueur Player = new Joueur();
+        private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
         private System.Windows.Forms.PictureBox Joe;
@@ -27,19 +28,67 @@ namespace WannabeFarmVille
         {
             InitializeComponent();
 
-            map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
-
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-
-            tuile = TilesetImageGenerator.GetTile(0);
-            Player.Y += tuile.Height;
+            Init();
         }
 
+        /*
+         * Initialiser les composants du jeu/
+         */
+        private void Init()
+        {
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
+            tuile = TilesetImageGenerator.GetTile(0);
+            Player.Y += tuile.Height;
+            visiteurs = new List<Visiteur>();
+            AjouterVisiteur();
+        }
 
+        public void AjouterVisiteur()
+        {
+            visiteurs.Add(new Visiteur(Genre.Homme));
+        }
+
+        /* Tout ce qui est dessiner sur l'écran.
+         */
         protected override void OnPaint(PaintEventArgs e)
         {
             g = e.Graphics;
 
+            Logic();
+            
+            DrawTiles(g);
+
+            DrawVisiteurs(g);
+        }
+
+        /*
+         * Dessine les visiteurs.
+         */
+        private void DrawVisiteurs(Graphics g)
+        {
+            if (visiteurs.Count > 0)
+            {
+                for (int i = 0; i < visiteurs.Count; i++)
+                {
+                    g.DrawImage(visiteurs[i].image, visiteurs[i].X, visiteurs[i].Y);
+                }
+            }
+        }
+
+        /* Logique du jeu.
+         */
+        private void Logic()
+        {
+            PicJoe.Size = new Size(Player.Width, Player.Height);
+            PicJoe.Location = new Point(Player.X, Player.Y);
+        }
+
+        /*
+         * Dessiner les tuiles.
+         */
+        private void DrawTiles(Graphics g)
+        {
             Bitmap bitmap = new Bitmap(Properties.Resources.zoo_tileset);
 
             Bitmap tuile = TilesetImageGenerator.GetTile(0);
@@ -54,14 +103,12 @@ namespace WannabeFarmVille
             {
                 for (int o = 0; o < this.Width; o += tuileWidth)
                 {
-                    tuile = TilesetImageGenerator.GetTile(map.getTypeTuile(o/tuileWidth, i/tuileHeight));
-                    e.Graphics.DrawImage(tuile, o, i);
+
+                    tuile = TilesetImageGenerator.GetTile(map.getTypeTuile(o / tuileWidth, i / tuileHeight));
+
+                    g.DrawImage(tuile, o, i);
                 }
             }
-
-            
-            PicJoe.Size = new Size(Player.Width, Player.Height);
-            PicJoe.Location = new Point(Player.X, Player.Y);
         }
 
         private void Jeu_Load(object sender, EventArgs e)
