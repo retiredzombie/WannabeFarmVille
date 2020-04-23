@@ -12,6 +12,7 @@ using WannabeFarmVille.Properties;
 
 namespace WannabeFarmVille
 {
+
     public partial class Jeu : Form
     {
         private Map map;
@@ -19,6 +20,7 @@ namespace WannabeFarmVille
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
         private System.Windows.Forms.PictureBox Joe;
+        Bitmap tuile;
 
 
         public Jeu()
@@ -28,6 +30,9 @@ namespace WannabeFarmVille
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+
+            tuile = TilesetImageGenerator.GetTile(0);
+            Player.Y += tuile.Height;
         }
 
 
@@ -42,6 +47,9 @@ namespace WannabeFarmVille
             int tuileWidth = tuile.Width;
             int tuileHeight = tuile.Height;
 
+            Player.Width = tuileWidth;
+            Player.Height = tuileHeight;
+
             for (int i = 0; i < this.Height; i += tuileHeight)
             {
                 for (int o = 0; o < this.Width; o += tuileWidth)
@@ -50,6 +58,9 @@ namespace WannabeFarmVille
                     e.Graphics.DrawImage(tuile, o, i);
                 }
             }
+
+            
+            PicJoe.Size = new Size(Player.Width, Player.Height);
             PicJoe.Location = new Point(Player.X, Player.Y);
         }
 
@@ -82,22 +93,22 @@ namespace WannabeFarmVille
         {
             if(e.KeyCode == Keys.S)
             {
-                Player.Y += 3;
+                Player.Y += tuile.Height;
                 PicJoe.Location = new Point(Player.X, Player.Y);
             }
             if (e.KeyCode == Keys.W)
             {
-                Player.Y -= 3;
+                Player.Y -= tuile.Height;
                 PicJoe.Location = new Point(Player.X, Player.Y);
             }
             if (e.KeyCode == Keys.D)
             {
-                Player.X += 3;
+                Player.X += tuile.Width;
                 PicJoe.Location = new Point(Player.X, Player.Y);
             }
             if (e.KeyCode == Keys.A)
             {
-                Player.X -= 3;
+                Player.X -= tuile.Width;
                 PicJoe.Location = new Point(Player.X, Player.Y);
             }
         }

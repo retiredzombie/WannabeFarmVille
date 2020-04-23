@@ -19,6 +19,16 @@ namespace WannabeFarmVille
             drawFarm();
         }
 
+        public List<List<Tuile>> getListeTuiles()
+        {
+            return listeTuiles;
+        }
+
+        public void getListeTuiles(List<List<Tuile>> newListTuiles)
+        {
+            listeTuiles = newListTuiles;
+        }
+
         private void DrawBaseMap(int screenWidth, int screenHeight, Bitmap tuileExemple)
         {
             Bitmap tuile = TilesetImageGenerator.GetTile(0);

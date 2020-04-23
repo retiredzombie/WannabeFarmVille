@@ -7,7 +7,6 @@ D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVil
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csproj.CoreCompileInputs.cache
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.exe
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.pdb
-D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Jeu.resources
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.MenuDepart.resources
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe.config
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe
@@ -21,3 +20,5 @@ C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\Wan
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.exe
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.pdb
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\Resources\joeExotic.png
+D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\bin\Debug\Resources\joeExotic.png
+D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Jeu.resources
