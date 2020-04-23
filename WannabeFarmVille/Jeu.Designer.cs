@@ -45,7 +45,7 @@
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PicUpLeft = new System.Windows.Forms.PictureBox();
-            this.PicRighRight = new System.Windows.Forms.PictureBox();
+            this.PicRightRight = new System.Windows.Forms.PictureBox();
             this.PicRightLeft = new System.Windows.Forms.PictureBox();
             this.PicLeftLeft = new System.Windows.Forms.PictureBox();
             this.PicLeftRight = new System.Windows.Forms.PictureBox();
@@ -55,7 +55,7 @@
             this.menu_haut.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicRighRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicRightRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicRightLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
@@ -215,16 +215,16 @@
             this.PicUpLeft.TabStop = false;
             this.PicUpLeft.Visible = false;
             // 
-            // PicRighRight
+            // PicRightRight
             // 
-            this.PicRighRight.BackColor = System.Drawing.Color.Transparent;
-            this.PicRighRight.Image = global::WannabeFarmVille.Properties.Resources.joeRightRight;
-            this.PicRighRight.Location = new System.Drawing.Point(56, 35);
-            this.PicRighRight.Name = "PicRighRight";
-            this.PicRighRight.Size = new System.Drawing.Size(32, 29);
-            this.PicRighRight.TabIndex = 4;
-            this.PicRighRight.TabStop = false;
-            this.PicRighRight.Visible = false;
+            this.PicRightRight.BackColor = System.Drawing.Color.Transparent;
+            this.PicRightRight.Image = global::WannabeFarmVille.Properties.Resources.joeRightRight;
+            this.PicRightRight.Location = new System.Drawing.Point(56, 35);
+            this.PicRightRight.Name = "PicRightRight";
+            this.PicRightRight.Size = new System.Drawing.Size(32, 29);
+            this.PicRightRight.TabIndex = 4;
+            this.PicRightRight.TabStop = false;
+            this.PicRightRight.Visible = false;
             // 
             // PicRightLeft
             // 
@@ -294,7 +294,7 @@
             this.Controls.Add(this.PicLeftRight);
             this.Controls.Add(this.PicLeftLeft);
             this.Controls.Add(this.PicRightLeft);
-            this.Controls.Add(this.PicRighRight);
+            this.Controls.Add(this.PicRightRight);
             this.Controls.Add(this.PicUpLeft);
             this.Controls.Add(this.PicUpRight);
             this.Controls.Add(this.menu_haut);
@@ -311,7 +311,7 @@
             this.menu_haut.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicRighRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicRightRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicRightLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).EndInit();
@@ -340,7 +340,7 @@
         private System.Windows.Forms.PictureBox PicUpRight;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox PicUpLeft;
-        private System.Windows.Forms.PictureBox PicRighRight;
+        private System.Windows.Forms.PictureBox PicRightRight;
         private System.Windows.Forms.PictureBox PicRightLeft;
         private System.Windows.Forms.PictureBox PicLeftLeft;
         private System.Windows.Forms.PictureBox PicLeftRight;
