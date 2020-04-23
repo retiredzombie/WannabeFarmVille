@@ -168,7 +168,8 @@
             // 
             // PicJoe
             // 
-            this.PicJoe.Image = ((System.Drawing.Image)(resources.GetObject("PicJoe.Image")));
+            this.PicJoe.BackgroundImage = global::WannabeFarmVille.Properties.Resources.joeExotic;
+            this.PicJoe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicJoe.Location = new System.Drawing.Point(169, 224);
             this.PicJoe.Name = "PicJoe";
             this.PicJoe.Size = new System.Drawing.Size(100, 98);

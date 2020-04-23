@@ -22,5 +22,14 @@ namespace WannabeFarmVille
             get { return type; }
             set { type = value; }
         }
+
+        public int getWitdth()
+        {
+            return image.Width;
+        }
+        public int getHeight()
+        {
+            return image.Height;
+        }
     }
 }
