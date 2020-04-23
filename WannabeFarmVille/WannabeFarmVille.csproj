@@ -103,7 +103,15 @@
     <None Include="Ressources\TileSet\zoo_tileset.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\joeUpRight.png" />
+    <None Include="Resources\joeUplLeft.png" />
+    <None Include="Resources\joeRightRight.png" />
+    <None Include="Resources\joeRightLeft.png" />
+    <None Include="Resources\joeLeftRight.png" />
+    <None Include="Resources\joeLeftLeft.png" />
     <None Include="Resources\joeExotic.bmp" />
+    <None Include="Resources\joeDownLeft.png" />
+    <None Include="Resources\joeDownRight.png" />
     <Content Include="Resources\joeExotic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
