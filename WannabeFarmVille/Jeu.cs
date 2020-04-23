@@ -42,7 +42,7 @@ namespace WannabeFarmVille
             tuile = TilesetImageGenerator.GetTile(0);
             Player.Y += tuile.Height;
             visiteurs = new List<Visiteur>();
-            AjouterVisiteurSpawn(Genre.Homme);
+            AjouterVisiteurSpawn();
         }
 
         /*
@@ -51,15 +51,15 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteur(Genre genre, int x, int y)
         {
-            visiteurs.Add(new Visiteur(Genre.Homme, tuile.Width * x, tuile.Height * y));
+            visiteurs.Add(new Visiteur(tuile.Width * x, tuile.Height * y));
         }
 
         /*
          * Ajoute un visiteur directemnet au spawn de visiteur.
          */
-        public void AjouterVisiteurSpawn(Genre genre)
+        public void AjouterVisiteurSpawn()
         {
-            visiteurs.Add(new Visiteur(Genre.Homme, tuile.Width * 19, tuile.Height * 28));
+            visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 28));
         }
 
 
@@ -85,7 +85,7 @@ namespace WannabeFarmVille
             {
                 for (int i = 0; i < visiteurs.Count; i++)
                 {
-                    g.DrawImage(visiteurs[i].image, visiteurs[i].X, visiteurs[i].Y, tuile.Width, tuile.Height);
+                    g.DrawImage(visiteurs[i].imageVisiteur, visiteurs[i].X, visiteurs[i].Y, tuile.Width, tuile.Height);
                 }
             }
         }

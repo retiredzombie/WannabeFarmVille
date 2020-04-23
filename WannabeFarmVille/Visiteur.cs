@@ -37,33 +37,40 @@ namespace WannabeFarmVille
 
         public Visiteur(int x, int y)
         {
-            init(x, y);
-        }
-        public Visiteur(Enum genre, int x, int y)
-        {
-            init(x, y);
+            Init(x, y);
 
             Random rand = new Random();
             int random;
-            if(genre.Equals(Genre.Homme))
+
+            Genre genre;
+
+            if (new Random().Next(1) == 1)
+            {
+                genre = Genre.Femme;
+            } else
+            {
+                genre = Genre.Homme;
+            }
+
+            if (genre.Equals(Genre.Homme))
             {
                 random = rand.Next(0, ListePrenomHommes.Length - 1);
                 Nom = ListePrenomHommes[random] + " ";
 
-                image = Properties.Resources.visiteur_exotique;
+                imageVisiteur = Properties.Resources.visiteur_exotique;
             }
             else if (genre.Equals(Genre.Femme))
             {
                 random = rand.Next(0, ListePrenomFemmes.Length - 1);
                 Nom = ListePrenomFemmes[random] + " ";
 
-                image = Properties.Resources.visiteur_exotique;
+                imageVisiteur = Properties.Resources.visiteur_exotique;
             }
             random = rand.Next(0, ListeNom.Length - 1);
             Nom += ListeNom[random];
         }
 
-        private void init(int x, int y)
+        private void Init(int x, int y)
         {
             X = x;
             Y = y;
@@ -82,7 +89,7 @@ namespace WannabeFarmVille
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public Bitmap image { get; set; }
+        public Image imageVisiteur { get; set; }
 
     }
 }
