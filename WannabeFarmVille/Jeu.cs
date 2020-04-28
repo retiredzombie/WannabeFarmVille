@@ -16,6 +16,7 @@ namespace WannabeFarmVille
 
     public partial class Jeu : Form
     {
+        private Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
         private bool backDrawn = false;
         private Joueur Player = new Joueur();
@@ -175,6 +176,8 @@ namespace WannabeFarmVille
         {
             if(e.KeyCode == Keys.S)
             {
+
+                Player.CurrentRow++;
                 if (Player.JoeDownLeft.Visible == false)
                 {
                     Player.JoeDownLeft.Location = new Point(Player.X, Player.Y);
