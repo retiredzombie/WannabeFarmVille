@@ -32,7 +32,6 @@ namespace WannabeFarmVille
         public Jeu()
         {
             InitializeComponent();
-
             Init();
         }
 
@@ -57,10 +56,48 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
+            for(int row = 0; row < 28; row++)
+            {
+                for(int column = 0; column < 40; column++)
+                {
+                    Carte[row, column] = new Tuile();
+                }
+            }
+            AjouterObstacle(2, 4);
+            AjouterObstacle(14, 4);
+            AjouterObstacle(14, 25);
+            AjouterObstacle(2, 25);
             visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 50; i++)
             {
                AjouterVisiteurSpawn();
+            }
+        }
+
+        private void AjouterObstacle(int row, int column)
+        {   
+            for (int i = 0; i < 9; i++)
+            {
+                Carte[row, column].EstUnObstacle = true;
+                column++;
+            }
+            column++;
+            for (int i = 0; i < 9; i++)
+            {
+                Carte[row, column].EstUnObstacle = true;
+                row++;
+            }
+            row++;
+            for (int i = 0; i < 9; i++)
+            {
+                Carte[row, column].EstUnObstacle = true;
+                column--;
+            }
+            column--;
+            for (int i = 0; i < 9; i++)
+            {
+                Carte[row, column].EstUnObstacle = true;
+                row--;
             }
         }
 
@@ -173,6 +210,10 @@ namespace WannabeFarmVille
 
         private void Jeu_KeyDown(object sender, KeyEventArgs e)
         {
+            if(e.KeyCode == Keys.U)
+            {
+                MessageBox.Show("(" + Player.CurrentRow + "," + Player.CurrentColumn + ")");
+            }
             if(e.KeyCode == Keys.S)
             {
                 if (Player.CurrentRow != 27)

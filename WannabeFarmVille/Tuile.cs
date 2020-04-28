@@ -12,6 +12,10 @@ namespace WannabeFarmVille
         private int type;
         Bitmap image;
 
+        public Tuile()
+        {
+            EstUnObstacle = false;
+        }
         public Tuile(int type)
         {
             this.type = type;
