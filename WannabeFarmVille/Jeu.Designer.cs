@@ -43,7 +43,6 @@
             this.déchetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PicUpLeft = new System.Windows.Forms.PictureBox();
             this.PicRightRight = new System.Windows.Forms.PictureBox();
             this.PicRightLeft = new System.Windows.Forms.PictureBox();
@@ -53,7 +52,6 @@
             this.PicDownRight = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PicUpRight)).BeginInit();
             this.menu_haut.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicRightRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicRightLeft)).BeginInit();
@@ -194,17 +192,6 @@
             this.embaucherToolStripMenuItem.Text = "Embaucher";
             this.embaucherToolStripMenuItem.Click += new System.EventHandler(this.embaucherToolStripMenuItem_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.BackgroundImage = global::WannabeFarmVille.Properties.Resources.Background_game;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 28);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1264, 898);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // PicUpLeft
             // 
             this.PicUpLeft.BackColor = System.Drawing.Color.Transparent;
@@ -299,18 +286,21 @@
             this.Controls.Add(this.PicUpLeft);
             this.Controls.Add(this.PicUpRight);
             this.Controls.Add(this.menu_haut);
-            this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu_haut;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1280, 960);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1280, 960);
             this.Name = "Jeu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TIGER KING: THE GAME";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Jeu_FormClosing);
             this.Load += new System.EventHandler(this.Jeu_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Jeu_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.PicUpRight)).EndInit();
             this.menu_haut.ResumeLayout(false);
             this.menu_haut.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicRightRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicRightLeft)).EndInit();
@@ -339,7 +329,6 @@
         private System.Windows.Forms.ToolStripMenuItem rhinocéros40ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buffle40ToolStripMenuItem;
         private System.Windows.Forms.PictureBox PicUpRight;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox PicUpLeft;
         private System.Windows.Forms.PictureBox PicRightRight;
         private System.Windows.Forms.PictureBox PicRightLeft;

@@ -17,6 +17,8 @@ namespace WannabeFarmVille
             Argent = 100;
             X = 0;
             Y = 0;
+            CurrentRow = 0;
+            CurrentColumn = 0;
             Width = 50;
             Height = 20;
         }
@@ -24,7 +26,8 @@ namespace WannabeFarmVille
 
         public int X { get; set; }
         public int Y { get; set; }
-
+        public int CurrentRow { get; set; }
+        public int CurrentColumn { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         public PictureBox JoeUpLeft { get; set; }

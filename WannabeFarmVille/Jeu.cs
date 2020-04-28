@@ -16,6 +16,7 @@ namespace WannabeFarmVille
 
     public partial class Jeu : Form
     {
+        private Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
         private bool backDrawn = false;
         private Joueur Player = new Joueur();
@@ -25,11 +26,15 @@ namespace WannabeFarmVille
         private System.Windows.Forms.PictureBox Joe;
         Bitmap tuile;
         bool gameStarted;
+        List<PictureBox> visiteursPicBox;
+        MenuDepart menuDepart;
 
 
-        public Jeu()
+        public Jeu(MenuDepart menuDepart)
         {
             InitializeComponent();
+
+            this.menuDepart = menuDepart;
 
             Init();
         }
@@ -40,6 +45,7 @@ namespace WannabeFarmVille
         private void Init()
         {
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.DoubleBuffered = true;
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
             tuile = TilesetImageGenerator.GetTile(0);
             Player.Y += tuile.Height;
@@ -55,6 +61,7 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
+            visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 50; i++)
             {
                AjouterVisiteurSpawn();
@@ -75,7 +82,18 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteurSpawn()
         {
-            visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 28));
+            visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25));
+            PictureBox newVisiteur = new PictureBox();
+            newVisiteur.BackgroundImage = visiteurs[visiteurs.Count - 1].imageVisiteur;
+            newVisiteur.Location = new Point(visiteurs[visiteurs.Count - 1].X, visiteurs[visiteurs.Count - 1].Y);
+            newVisiteur.Width = visiteurs[visiteurs.Count - 1].Width;
+            newVisiteur.Height = visiteurs[visiteurs.Count - 1].Height;
+            newVisiteur.BringToFront();
+            newVisiteur.Name = "visiteurPB" + visiteursPicBox.Count.ToString().Trim();
+            newVisiteur.BackgroundImageLayout = ImageLayout.Stretch;
+            this.Controls.Add(newVisiteur);
+
+            visiteursPicBox.Add(newVisiteur);
         }
 
 
@@ -84,23 +102,6 @@ namespace WannabeFarmVille
         protected override void OnPaint(PaintEventArgs e)
         {
             g = e.Graphics;
-
-            DrawVisiteurs(g);
-        }
-
-        /*
-         * Dessine les visiteurs.
-         */
-        private void DrawVisiteurs(Graphics g)
-        {
-            if (visiteurs.Count > 0)
-            {
-                for (int i = 0; i < visiteurs.Count; i++)
-                {
-                    g.DrawImage(visiteurs[i].imageVisiteur, visiteurs[i].X, visiteurs[i].Y, tuile.Width, tuile.Height);
-                    pictureBox1.SendToBack();
-                }
-            }
         }
 
         /* Logique du jeu (1x par tick).
@@ -114,6 +115,9 @@ namespace WannabeFarmVille
             threadLogiqueVisiteurs.Start();
         }
 
+        /*
+         * Fait bouger les visiteurs.
+         */
         private void LogicVisiteurs()
         {
             try
@@ -132,12 +136,14 @@ namespace WannabeFarmVille
                         randX = new Random().Next(3);
                         randY = new Random().Next(3);
                     }
+                    string visiteurPBName = "visiteurPB" + i.ToString().Trim();
+                    Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
+                    PictureBox visiteurPB = (PictureBox) foundVisiteurs.First();
+                    if (randX == 0) visiteurPB.Location = new Point(visiteurPB.Location.X - tuile.Width, visiteurPB.Location.Y);
+                    else if (randX == 1) visiteurPB.Location = new Point(visiteurPB.Location.X + tuile.Width, visiteurPB.Location.Y);
 
-                    if (randX == 0) visiteurs[i].X -= tuile.Width;
-                    else if (randX == 1) visiteurs[i].X += tuile.Width;
-
-                    if (randY == 0) visiteurs[i].Y -= tuile.Height;
-                    else if (randY == 1) visiteurs[i].Y += tuile.Height;
+                    if (randY == 0) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y - tuile.Height);
+                    else if (randY == 1) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y + tuile.Height);
                 }
             } catch (InvalidOperationException)
             {
@@ -158,7 +164,6 @@ namespace WannabeFarmVille
         private void TickTick(object sender, EventArgs e)
         {
             Logic();
-            this.Refresh();
         }
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,109 +180,129 @@ namespace WannabeFarmVille
         {
             if(e.KeyCode == Keys.S)
             {
-                if (Player.JoeDownLeft.Visible == false)
+                if (Player.CurrentRow != 27)
                 {
-                    Player.JoeDownLeft.Location = new Point(Player.X, Player.Y);
-                    Player.JoeDownLeft.Visible = true;
-                    if (Player.CurrentSprite != Player.JoeDownLeft)
+                    Player.CurrentRow++;
+                    if (Player.JoeDownLeft.Visible == false)
                     {
-                        Player.CurrentSprite.Visible = false;
+                        Player.JoeDownLeft.Location = new Point(Player.X, Player.Y);
+                        Player.JoeDownLeft.Visible = true;
+                        if (Player.CurrentSprite != Player.JoeDownLeft)
+                        {
+                            Player.CurrentSprite.Visible = false;
+                        }
+                        Player.CurrentSprite = Player.JoeDownLeft;
                     }
-                    Player.CurrentSprite = Player.JoeDownLeft;
-                }
-                else
-                {
-                    Player.JoeDownRight.Location = new Point(Player.X, Player.Y);
-                    Player.JoeDownRight.Visible = true;
-                    if (Player.CurrentSprite != Player.JoeDownRight)
+                    else
                     {
-                        Player.CurrentSprite.Visible = false;
+                        Player.JoeDownRight.Location = new Point(Player.X, Player.Y);
+                        Player.JoeDownRight.Visible = true;
+                        if (Player.CurrentSprite != Player.JoeDownRight)
+                        {
+                            Player.CurrentSprite.Visible = false;
+                        }
+                        Player.CurrentSprite = Player.JoeDownRight;
                     }
-                    Player.CurrentSprite = Player.JoeDownRight;
+                    Player.Y += tuile.Height;
+                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
-                Player.Y += tuile.Height;
-                Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
             }
             if (e.KeyCode == Keys.W)
             {
-                if (Player.JoeUpLeft.Visible == false)
+                if (Player.CurrentRow != 0)
                 {
-                    Player.JoeUpLeft.Location = new Point(Player.X, Player.Y);
-                    Player.JoeUpLeft.Visible = true;
-                    if (Player.CurrentSprite != Player.JoeUpLeft)
+                    Player.CurrentRow--;
+                    if (Player.JoeUpLeft.Visible == false)
                     {
-                        Player.CurrentSprite.Visible = false;
+                        Player.JoeUpLeft.Location = new Point(Player.X, Player.Y);
+                        Player.JoeUpLeft.Visible = true;
+                        if (Player.CurrentSprite != Player.JoeUpLeft)
+                        {
+                            Player.CurrentSprite.Visible = false;
+                        }
+                        Player.CurrentSprite = Player.JoeUpLeft;
                     }
-                    Player.CurrentSprite = Player.JoeUpLeft;
-                }
-                else
-                {
-                    Player.JoeUpRight.Location = new Point(Player.X, Player.Y);
-                    Player.JoeUpRight.Visible = true;
-                    if (Player.CurrentSprite != Player.JoeUpRight)
+                    else
                     {
-                        Player.CurrentSprite.Visible = false;
+                        Player.JoeUpRight.Location = new Point(Player.X, Player.Y);
+                        Player.JoeUpRight.Visible = true;
+                        if (Player.CurrentSprite != Player.JoeUpRight)
+                        {
+                            Player.CurrentSprite.Visible = false;
+                        }
+                        Player.CurrentSprite = Player.JoeUpRight;
                     }
-                    Player.CurrentSprite = Player.JoeUpRight;
+                    Player.Y -= tuile.Height;
+                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
-                Player.Y -= tuile.Height;
-                Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
             }
             if (e.KeyCode == Keys.D)
             {
-                if (Player.JoeRightLeft.Visible == false)
+                if (Player.CurrentColumn != 39)
                 {
-                    Player.JoeRightLeft.Location = new Point(Player.X, Player.Y);
-                    Player.JoeRightLeft.Visible = true;
-                    if (Player.CurrentSprite != Player.JoeRightLeft)
+                    Player.CurrentColumn++;
+                    if (Player.JoeRightLeft.Visible == false)
                     {
-                        Player.CurrentSprite.Visible = false;
+                        Player.JoeRightLeft.Location = new Point(Player.X, Player.Y);
+                        Player.JoeRightLeft.Visible = true;
+                        if (Player.CurrentSprite != Player.JoeRightLeft)
+                        {
+                            Player.CurrentSprite.Visible = false;
+                        }
+                        Player.CurrentSprite = Player.JoeRightLeft;
                     }
-                    Player.CurrentSprite = Player.JoeRightLeft;
-                }
-                else
-                {
-                    Player.JoeRightRight.Location = new Point(Player.X, Player.Y);
-                    Player.JoeRightRight.Visible = true;
-                    if (Player.CurrentSprite != Player.JoeRightRight)
+                    else
                     {
-                        Player.CurrentSprite.Visible = false;
+                        Player.JoeRightRight.Location = new Point(Player.X, Player.Y);
+                        Player.JoeRightRight.Visible = true;
+                        if (Player.CurrentSprite != Player.JoeRightRight)
+                        {
+                            Player.CurrentSprite.Visible = false;
+                        }
+                        Player.CurrentSprite = Player.JoeRightRight;
                     }
-                    Player.CurrentSprite = Player.JoeRightRight;
+                    Player.X += tuile.Width;
+                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
-                Player.X += tuile.Width;
-                Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
             }
             if (e.KeyCode == Keys.A)
             {
-                if (Player.JoeLeftLeft.Visible == false)
+                if (Player.CurrentColumn != 0)
                 {
-                    Player.JoeLeftLeft.Location = new Point(Player.X, Player.Y);
-                    Player.JoeLeftLeft.Visible = true;
-                    if (Player.CurrentSprite != Player.JoeLeftLeft)
+                    Player.CurrentColumn--;
+                    if (Player.JoeLeftLeft.Visible == false)
                     {
-                        Player.CurrentSprite.Visible = false;
+                        Player.JoeLeftLeft.Location = new Point(Player.X, Player.Y);
+                        Player.JoeLeftLeft.Visible = true;
+                        if (Player.CurrentSprite != Player.JoeLeftLeft)
+                        {
+                            Player.CurrentSprite.Visible = false;
+                        }
+                        Player.CurrentSprite = Player.JoeLeftLeft;
                     }
-                    Player.CurrentSprite = Player.JoeLeftLeft;
-                }
-                else
-                {
-                    Player.JoeLeftRight.Location = new Point(Player.X, Player.Y);
-                    Player.JoeLeftRight.Visible = true;
-                    if (Player.CurrentSprite != Player.JoeLeftRight)
+                    else
                     {
-                        Player.CurrentSprite.Visible = false;
+                        Player.JoeLeftRight.Location = new Point(Player.X, Player.Y);
+                        Player.JoeLeftRight.Visible = true;
+                        if (Player.CurrentSprite != Player.JoeLeftRight)
+                        {
+                            Player.CurrentSprite.Visible = false;
+                        }
+                        Player.CurrentSprite = Player.JoeLeftRight;
                     }
-                    Player.CurrentSprite = Player.JoeLeftRight;
+                    Player.X -= tuile.Width;
+                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
-                Player.X -= tuile.Width;
-                Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
             }
         }
 
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Lion lion = new Lion(0);
+        }
+        private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            menuDepart.Dispose();
         }
     }
 }

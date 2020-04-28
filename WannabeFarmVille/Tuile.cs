@@ -15,6 +15,7 @@ namespace WannabeFarmVille
         public Tuile(int type)
         {
             this.type = type;
+            EstUnObstacle = false;
         }
 
        public int Type
@@ -31,7 +32,6 @@ namespace WannabeFarmVille
         {
             return image.Height;
         }
-
-
+        public bool EstUnObstacle { get; set; }
     }
 }
