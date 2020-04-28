@@ -301,6 +301,10 @@ namespace WannabeFarmVille
             }
         }
 
+        private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Lion lion = new Lion(0);
+        }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
             menuDepart.Dispose();

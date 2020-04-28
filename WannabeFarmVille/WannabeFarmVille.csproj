@@ -54,6 +54,7 @@
       <DependentUpon>Jeu.cs</DependentUpon>
     </Compile>
     <Compile Include="Joueur.cs" />
+    <Compile Include="Lion.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MenuDepart.cs">
       <SubType>Form</SubType>
