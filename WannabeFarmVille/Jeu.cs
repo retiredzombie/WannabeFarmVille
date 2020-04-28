@@ -62,7 +62,7 @@ namespace WannabeFarmVille
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
             visiteursPicBox = new List<PictureBox>();
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 10; i++)
             {
                AjouterVisiteurSpawn();
             }
@@ -111,8 +111,7 @@ namespace WannabeFarmVille
             PicUpRight.Size = new Size(Player.Width, Player.Height);
             PicUpRight.Location = new Point(Player.X, Player.Y);
 
-            Thread threadLogiqueVisiteurs = new Thread(LogicVisiteurs);
-            threadLogiqueVisiteurs.Start();
+            LogicVisiteurs();
         }
 
         /*
@@ -127,18 +126,18 @@ namespace WannabeFarmVille
                     int randX = new Random().Next(3);
                     int randY = new Random().Next(3);
                     while ((randX == randY) ||
-                           (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
-                           (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
-                           (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
-                           (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
-                          )
+                            (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                            (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                            (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
+                            (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
+                            )
                     {
                         randX = new Random().Next(3);
                         randY = new Random().Next(3);
                     }
                     string visiteurPBName = "visiteurPB" + i.ToString().Trim();
                     Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
-                    PictureBox visiteurPB = (PictureBox) foundVisiteurs.First();
+                    PictureBox visiteurPB = (PictureBox)foundVisiteurs.First();
                     if (randX == 0) visiteurPB.Location = new Point(visiteurPB.Location.X - tuile.Width, visiteurPB.Location.Y);
                     else if (randX == 1) visiteurPB.Location = new Point(visiteurPB.Location.X + tuile.Width, visiteurPB.Location.Y);
 
@@ -149,6 +148,7 @@ namespace WannabeFarmVille
             {
 
             }
+
         }
 
         private void Jeu_Load(object sender, EventArgs e)
@@ -172,6 +172,11 @@ namespace WannabeFarmVille
         }
 
         private void dateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeplacerJoueur()
         {
 
         }
