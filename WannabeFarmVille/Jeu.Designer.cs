@@ -287,6 +287,10 @@
             this.Controls.Add(this.menu_haut);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu_haut;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1280, 960);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1280, 960);
             this.Name = "Jeu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TIGER KING: THE GAME";

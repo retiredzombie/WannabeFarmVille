@@ -74,8 +74,8 @@ namespace WannabeFarmVille
         {
             X = x;
             Y = y;
-            Width = 50;
-            Height = 20;
+            Width = 32;
+            Height = 32;
 
             images = new List<Image>();
             
