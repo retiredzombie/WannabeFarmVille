@@ -141,6 +141,7 @@
             this.lion35ToolStripMenuItem.Name = "lion35ToolStripMenuItem";
             this.lion35ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
             this.lion35ToolStripMenuItem.Text = "+ Lion 35$";
+            this.lion35ToolStripMenuItem.Click += new System.EventHandler(this.lion35ToolStripMenuItem_Click);
             // 
             // buffle30ToolStripMenuItem
             // 
@@ -287,6 +288,10 @@
             this.Controls.Add(this.menu_haut);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu_haut;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1280, 960);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1280, 960);
             this.Name = "Jeu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TIGER KING: THE GAME";
