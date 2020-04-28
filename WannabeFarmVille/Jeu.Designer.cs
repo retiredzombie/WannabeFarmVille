@@ -143,6 +143,7 @@
             this.lion35ToolStripMenuItem.Name = "lion35ToolStripMenuItem";
             this.lion35ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
             this.lion35ToolStripMenuItem.Text = "+ Lion 35$";
+            this.lion35ToolStripMenuItem.Click += new System.EventHandler(this.lion35ToolStripMenuItem_Click);
             // 
             // buffle30ToolStripMenuItem
             // 

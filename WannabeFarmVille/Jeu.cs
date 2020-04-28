@@ -274,5 +274,10 @@ namespace WannabeFarmVille
                 Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
             }
         }
+
+        private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Lion lion = new Lion(0);
+        }
     }
 }
