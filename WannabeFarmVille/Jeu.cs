@@ -26,6 +26,7 @@ namespace WannabeFarmVille
         private System.Windows.Forms.PictureBox Joe;
         Bitmap tuile;
         bool gameStarted;
+        List<PictureBox> visiteursPicBox;
 
 
         public Jeu()
@@ -56,6 +57,7 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
+            visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 50; i++)
             {
                AjouterVisiteurSpawn();
@@ -77,6 +79,16 @@ namespace WannabeFarmVille
         public void AjouterVisiteurSpawn()
         {
             visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 28));
+            PictureBox newVisiteur = new PictureBox();
+            newVisiteur.Image = visiteurs[visiteurs.Count - 1].imageVisiteur;
+            newVisiteur.Location = new Point(visiteurs[visiteurs.Count - 1].X, visiteurs[visiteurs.Count - 1].Y);
+            newVisiteur.Width = visiteurs[visiteurs.Count - 1].Width;
+            newVisiteur.Height = visiteurs[visiteurs.Count - 1].Height;
+            newVisiteur.BringToFront();
+            newVisiteur.Name = "visiteurPB" + visiteursPicBox.Count.ToString().Trim();
+            this.Controls.Add(newVisiteur);
+
+            visiteursPicBox.Add(newVisiteur);
         }
 
 
@@ -85,23 +97,6 @@ namespace WannabeFarmVille
         protected override void OnPaint(PaintEventArgs e)
         {
             g = e.Graphics;
-
-            DrawVisiteurs(g);
-        }
-
-        /*
-         * Dessine les visiteurs.
-         */
-        private void DrawVisiteurs(Graphics g)
-        {
-            if (visiteurs.Count > 0)
-            {
-                for (int i = 0; i < visiteurs.Count; i++)
-                {
-                    g.DrawImage(visiteurs[i].imageVisiteur, visiteurs[i].X, visiteurs[i].Y, tuile.Width, tuile.Height);
-                    pictureBox1.SendToBack();
-                }
-            }
         }
 
         /* Logique du jeu (1x par tick).
@@ -115,6 +110,9 @@ namespace WannabeFarmVille
             threadLogiqueVisiteurs.Start();
         }
 
+        /*
+         * Fait bouger les visiteurs.
+         */
         private void LogicVisiteurs()
         {
             try
@@ -133,12 +131,14 @@ namespace WannabeFarmVille
                         randX = new Random().Next(3);
                         randY = new Random().Next(3);
                     }
+                    string visiteurPBName = "visiteurPB" + i.ToString().Trim();
+                    Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
+                    PictureBox visiteurPB = (PictureBox) foundVisiteurs.First();
+                    if (randX == 0) foundVisiteurs.First().Location = new Point(foundVisiteurs.First().Location.X - tuile.Width, foundVisiteurs.First().Location.Y);
+                    else if (randX == 1) foundVisiteurs.First().Location = new Point(foundVisiteurs.First().Location.X + tuile.Width, foundVisiteurs.First().Location.Y);
 
-                    if (randX == 0) visiteurs[i].X -= tuile.Width;
-                    else if (randX == 1) visiteurs[i].X += tuile.Width;
-
-                    if (randY == 0) visiteurs[i].Y -= tuile.Height;
-                    else if (randY == 1) visiteurs[i].Y += tuile.Height;
+                    if (randY == 0) foundVisiteurs.First().Location = new Point(foundVisiteurs.First().Location.X, foundVisiteurs.First().Location.Y - tuile.Height);
+                    else if (randY == 1) foundVisiteurs.First().Location = new Point(foundVisiteurs.First().Location.X, foundVisiteurs.First().Location.Y + tuile.Height);
                 }
             } catch (InvalidOperationException)
             {
@@ -159,7 +159,6 @@ namespace WannabeFarmVille
         private void TickTick(object sender, EventArgs e)
         {
             Logic();
-            this.Refresh();
         }
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
@@ -276,6 +275,11 @@ namespace WannabeFarmVille
                 Player.X -= tuile.Width;
                 Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
             }
+        }
+
+        private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
