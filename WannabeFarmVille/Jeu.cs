@@ -28,7 +28,7 @@ namespace WannabeFarmVille
         bool gameStarted;
         List<PictureBox> visiteursPicBox;
         MenuDepart menuDepart;
-
+        Thread threadTimer;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -62,6 +62,8 @@ namespace WannabeFarmVille
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
             visiteursPicBox = new List<PictureBox>();
+            PicUpRight.Size = new Size(Player.Width, Player.Height);
+            PicUpRight.Location = new Point(Player.X, Player.Y);
             for (int i = 0; i < 10; i++)
             {
                AjouterVisiteurSpawn();
@@ -108,9 +110,6 @@ namespace WannabeFarmVille
          */
         private void Logic()
         {
-            PicUpRight.Size = new Size(Player.Width, Player.Height);
-            PicUpRight.Location = new Point(Player.X, Player.Y);
-
             LogicVisiteurs();
         }
 
@@ -144,14 +143,20 @@ namespace WannabeFarmVille
                     if (randY == 0) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y - tuile.Height);
                     else if (randY == 1) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y + tuile.Height);
                 }
-            } catch (InvalidOperationException)
+            }
+            catch (InvalidOperationException)
             {
 
             }
-
         }
 
         private void Jeu_Load(object sender, EventArgs e)
+        {
+            threadTimer = new Thread(StartTimer);
+            threadTimer.Start();
+        }
+
+        private void StartTimer()
         {
             // FPS timer
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
