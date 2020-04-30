@@ -48,6 +48,17 @@ namespace WannabeFarmVille
             this.DoubleBuffered = true;
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
             tuile = TilesetImageGenerator.GetTile(0);
+            for (int row = 0; row < 28; row++)
+            {
+                for (int column = 0; column < 40; column++)
+                {
+                    Carte[row, column] = new Tuile();
+                }
+            }
+            AjouterObstacle(2, 4);
+            AjouterObstacle(14, 4);
+            AjouterObstacle(14, 25);
+            AjouterObstacle(2, 25);
             Player.Y += tuile.Height;
             visiteurs = new List<Visiteur>();
             Player.Width = tuile.Width;
@@ -61,25 +72,14 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
-            Stream str = Properties.Resources.rd2;
+           /* Stream str = Properties.Resources.rd2;
             System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
-            snd.Play();
-            for (int row = 0; row < 28; row++)
-            {
-                for(int column = 0; column < 40; column++)
-                {
-                    Carte[row, column] = new Tuile();
-                }
-            }
-            AjouterObstacle(2, 4);
-            AjouterObstacle(14, 4);
-            AjouterObstacle(14, 25);
-            AjouterObstacle(2, 25);
+            snd.Play();*/
             visiteursPicBox = new List<PictureBox>();
-            for (int i = 0; i < 10; i++)
+           /* for (int i = 0; i < 10; i++)
             {
                AjouterVisiteurSpawn();
-            }
+            }*/
         }
 
         private void AjouterObstacle(int row, int column)
@@ -89,19 +89,16 @@ namespace WannabeFarmVille
                 Carte[row, column].EstUnObstacle = true;
                 column++;
             }
-            column++;
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
                 row++;
             }
-            row++;
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
                 column--;
             }
-            column--;
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
@@ -232,116 +229,129 @@ namespace WannabeFarmVille
             {
                 if (Player.CurrentRow != 27)
                 {
-                    Player.CurrentRow++;
-                    if (Player.JoeDownLeft.Visible == false)
+                    if (!Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstUnObstacle)
                     {
-                        Player.JoeDownLeft.Location = new Point(Player.X, Player.Y);
-                        Player.JoeDownLeft.Visible = true;
-                        if (Player.CurrentSprite != Player.JoeDownLeft)
+                        Player.CurrentRow++;
+                        if (Player.JoeDownLeft.Visible == false)
                         {
-                            Player.CurrentSprite.Visible = false;
+                            Player.JoeDownLeft.Location = new Point(Player.X, Player.Y);
+                            Player.JoeDownLeft.Visible = true;
+                            if (Player.CurrentSprite != Player.JoeDownLeft)
+                            {
+                                Player.CurrentSprite.Visible = false;
+                            }
+                            Player.CurrentSprite = Player.JoeDownLeft;
                         }
-                        Player.CurrentSprite = Player.JoeDownLeft;
-                    }
-                    else
-                    {
-                        Player.JoeDownRight.Location = new Point(Player.X, Player.Y);
-                        Player.JoeDownRight.Visible = true;
-                        if (Player.CurrentSprite != Player.JoeDownRight)
+                        else
                         {
-                            Player.CurrentSprite.Visible = false;
+                            Player.JoeDownRight.Location = new Point(Player.X, Player.Y);
+                            Player.JoeDownRight.Visible = true;
+                            if (Player.CurrentSprite != Player.JoeDownRight)
+                            {
+                                Player.CurrentSprite.Visible = false;
+                            }
+                            Player.CurrentSprite = Player.JoeDownRight;
                         }
-                        Player.CurrentSprite = Player.JoeDownRight;
+                        Player.Y += tuile.Height;
+                        Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                     }
-                    Player.Y += tuile.Height;
-                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
             }
             if (e.KeyCode == Keys.W)
             {
                 if (Player.CurrentRow != 0)
                 {
-                    Player.CurrentRow--;
-                    if (Player.JoeUpLeft.Visible == false)
+                    if (!Carte[Player.CurrentRow - 1, Player.CurrentColumn].EstUnObstacle)
                     {
-                        Player.JoeUpLeft.Location = new Point(Player.X, Player.Y);
-                        Player.JoeUpLeft.Visible = true;
-                        if (Player.CurrentSprite != Player.JoeUpLeft)
+                        Player.CurrentRow--;
+                        if (Player.JoeUpLeft.Visible == false)
                         {
-                            Player.CurrentSprite.Visible = false;
+                            Player.JoeUpLeft.Location = new Point(Player.X, Player.Y);
+                            Player.JoeUpLeft.Visible = true;
+                            if (Player.CurrentSprite != Player.JoeUpLeft)
+                            {
+                                Player.CurrentSprite.Visible = false;
+                            }
+                            Player.CurrentSprite = Player.JoeUpLeft;
                         }
-                        Player.CurrentSprite = Player.JoeUpLeft;
-                    }
-                    else
-                    {
-                        Player.JoeUpRight.Location = new Point(Player.X, Player.Y);
-                        Player.JoeUpRight.Visible = true;
-                        if (Player.CurrentSprite != Player.JoeUpRight)
+                        else
                         {
-                            Player.CurrentSprite.Visible = false;
+                            Player.JoeUpRight.Location = new Point(Player.X, Player.Y);
+                            Player.JoeUpRight.Visible = true;
+                            if (Player.CurrentSprite != Player.JoeUpRight)
+                            {
+                                Player.CurrentSprite.Visible = false;
+                            }
+                            Player.CurrentSprite = Player.JoeUpRight;
                         }
-                        Player.CurrentSprite = Player.JoeUpRight;
+                        Player.Y -= tuile.Height;
+                        Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                     }
-                    Player.Y -= tuile.Height;
-                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
             }
             if (e.KeyCode == Keys.D)
             {
                 if (Player.CurrentColumn != 39)
                 {
-                    Player.CurrentColumn++;
-                    if (Player.JoeRightLeft.Visible == false)
+                    if (!Carte[Player.CurrentRow, Player.CurrentColumn + 1].EstUnObstacle)
                     {
-                        Player.JoeRightLeft.Location = new Point(Player.X, Player.Y);
-                        Player.JoeRightLeft.Visible = true;
-                        if (Player.CurrentSprite != Player.JoeRightLeft)
+                        Player.CurrentColumn++;
+                        if (Player.JoeRightLeft.Visible == false)
                         {
-                            Player.CurrentSprite.Visible = false;
+                            Player.JoeRightLeft.Location = new Point(Player.X, Player.Y);
+                            Player.JoeRightLeft.Visible = true;
+                            if (Player.CurrentSprite != Player.JoeRightLeft)
+                            {
+                                Player.CurrentSprite.Visible = false;
+                            }
+                            Player.CurrentSprite = Player.JoeRightLeft;
                         }
-                        Player.CurrentSprite = Player.JoeRightLeft;
-                    }
-                    else
-                    {
-                        Player.JoeRightRight.Location = new Point(Player.X, Player.Y);
-                        Player.JoeRightRight.Visible = true;
-                        if (Player.CurrentSprite != Player.JoeRightRight)
+                        else
                         {
-                            Player.CurrentSprite.Visible = false;
+                            Player.JoeRightRight.Location = new Point(Player.X, Player.Y);
+                            Player.JoeRightRight.Visible = true;
+                            if (Player.CurrentSprite != Player.JoeRightRight)
+                            {
+                                Player.CurrentSprite.Visible = false;
+                            }
+                            Player.CurrentSprite = Player.JoeRightRight;
                         }
-                        Player.CurrentSprite = Player.JoeRightRight;
+                        Player.X += tuile.Width;
+                        Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                     }
-                    Player.X += tuile.Width;
-                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
+
             }
             if (e.KeyCode == Keys.A)
             {
                 if (Player.CurrentColumn != 0)
                 {
-                    Player.CurrentColumn--;
-                    if (Player.JoeLeftLeft.Visible == false)
+                    if (!Carte[Player.CurrentRow, Player.CurrentColumn - 1].EstUnObstacle)
                     {
-                        Player.JoeLeftLeft.Location = new Point(Player.X, Player.Y);
-                        Player.JoeLeftLeft.Visible = true;
-                        if (Player.CurrentSprite != Player.JoeLeftLeft)
+                        Player.CurrentColumn--;
+                        if (Player.JoeLeftLeft.Visible == false)
                         {
-                            Player.CurrentSprite.Visible = false;
+                            Player.JoeLeftLeft.Location = new Point(Player.X, Player.Y);
+                            Player.JoeLeftLeft.Visible = true;
+                            if (Player.CurrentSprite != Player.JoeLeftLeft)
+                            {
+                                Player.CurrentSprite.Visible = false;
+                            }
+                            Player.CurrentSprite = Player.JoeLeftLeft;
                         }
-                        Player.CurrentSprite = Player.JoeLeftLeft;
-                    }
-                    else
-                    {
-                        Player.JoeLeftRight.Location = new Point(Player.X, Player.Y);
-                        Player.JoeLeftRight.Visible = true;
-                        if (Player.CurrentSprite != Player.JoeLeftRight)
+                        else
                         {
-                            Player.CurrentSprite.Visible = false;
+                            Player.JoeLeftRight.Location = new Point(Player.X, Player.Y);
+                            Player.JoeLeftRight.Visible = true;
+                            if (Player.CurrentSprite != Player.JoeLeftRight)
+                            {
+                                Player.CurrentSprite.Visible = false;
+                            }
+                            Player.CurrentSprite = Player.JoeLeftRight;
                         }
-                        Player.CurrentSprite = Player.JoeLeftRight;
+                        Player.X -= tuile.Width;
+                        Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                     }
-                    Player.X -= tuile.Width;
-                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
             }
         }
