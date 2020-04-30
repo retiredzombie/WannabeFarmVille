@@ -32,7 +32,7 @@
             this.PicUpRight = new System.Windows.Forms.PictureBox();
             this.menu_haut = new System.Windows.Forms.MenuStrip();
             this.dateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.affichageArgent = new System.Windows.Forms.ToolStripMenuItem();
             this.animauxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mouton20ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grizzly30ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +79,7 @@
             this.menu_haut.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_haut.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateToolStripMenuItem,
-            this.toolStripMenuItem1,
+            this.affichageArgent,
             this.animauxToolStripMenuItem,
             this.déchetsToolStripMenuItem,
             this.conciergesToolStripMenuItem});
@@ -97,12 +97,12 @@
             this.dateToolStripMenuItem.Text = "24 mai 2020";
             this.dateToolStripMenuItem.Click += new System.EventHandler(this.dateToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem1
+            // affichageArgent
             // 
-            this.toolStripMenuItem1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(70, 28);
-            this.toolStripMenuItem1.Text = "100$";
+            this.affichageArgent.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.affichageArgent.Name = "affichageArgent";
+            this.affichageArgent.Size = new System.Drawing.Size(70, 28);
+            this.affichageArgent.Text = "100$";
             // 
             // animauxToolStripMenuItem
             // 
@@ -317,7 +317,7 @@
 
         private System.Windows.Forms.MenuStrip menu_haut;
         private System.Windows.Forms.ToolStripMenuItem dateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem affichageArgent;
         private System.Windows.Forms.ToolStripMenuItem animauxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem déchetsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem conciergesToolStripMenuItem;

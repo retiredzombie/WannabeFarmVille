@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -35,7 +36,6 @@ namespace WannabeFarmVille
             InitializeComponent();
 
             this.menuDepart = menuDepart;
-
             Init();
         }
 
@@ -61,12 +61,53 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
+            Stream str = Properties.Resources.rd2;
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();
+            for (int row = 0; row < 28; row++)
+            {
+                for(int column = 0; column < 40; column++)
+                {
+                    Carte[row, column] = new Tuile();
+                }
+            }
+            AjouterObstacle(2, 4);
+            AjouterObstacle(14, 4);
+            AjouterObstacle(14, 25);
+            AjouterObstacle(2, 25);
             visiteursPicBox = new List<PictureBox>();
             PicUpRight.Size = new Size(Player.Width, Player.Height);
             PicUpRight.Location = new Point(Player.X, Player.Y);
             for (int i = 0; i < 10; i++)
             {
                AjouterVisiteurSpawn();
+            }
+        }
+
+        private void AjouterObstacle(int row, int column)
+        {   
+            for (int i = 0; i < 9; i++)
+            {
+                Carte[row, column].EstUnObstacle = true;
+                column++;
+            }
+            column++;
+            for (int i = 0; i < 9; i++)
+            {
+                Carte[row, column].EstUnObstacle = true;
+                row++;
+            }
+            row++;
+            for (int i = 0; i < 9; i++)
+            {
+                Carte[row, column].EstUnObstacle = true;
+                column--;
+            }
+            column--;
+            for (int i = 0; i < 9; i++)
+            {
+                Carte[row, column].EstUnObstacle = true;
+                row--;
             }
         }
 
@@ -188,6 +229,10 @@ namespace WannabeFarmVille
 
         private void Jeu_KeyDown(object sender, KeyEventArgs e)
         {
+            if(e.KeyCode == Keys.U)
+            {
+                MessageBox.Show("(" + Player.CurrentRow + "," + Player.CurrentColumn + ")");
+            }
             if(e.KeyCode == Keys.S)
             {
                 if (Player.CurrentRow != 27)
@@ -306,9 +351,22 @@ namespace WannabeFarmVille
             }
         }
 
+        // Déduit 35$ du joueur et crée un nouveau Lion
+        // NE FONCTIONNE PAS
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            String[] TextArray = affichageArgent.Text.Split('$');
+            String TextArgent = TextArray[0];
+            int IntArgent = Int32.Parse(TextArgent);
+
+            Player.Argent -= 35;
+            IntArgent = Player.Argent;
+            TextArgent = IntArgent.ToString();
+            
+            affichageArgent.Text = TextArgent + "$";
+            
             Lion lion = new Lion(0);
+            Console.WriteLine("Un lion a été ajouté");
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
