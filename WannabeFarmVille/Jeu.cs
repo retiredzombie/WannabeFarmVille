@@ -342,9 +342,22 @@ namespace WannabeFarmVille
             }
         }
 
+        // Déduit 35$ du joueur et crée un nouveau Lion
+        // NE FONCTIONNE PAS
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            String[] TextArray = affichageArgent.Text.Split('$');
+            String TextArgent = TextArray[0];
+            int IntArgent = Int32.Parse(TextArgent);
+
+            Player.Argent -= 35;
+            IntArgent = Player.Argent;
+            TextArgent = IntArgent.ToString();
+            
+            affichageArgent.Text = TextArgent + "$";
+            
             Lion lion = new Lion(0);
+            Console.WriteLine("Un lion a été ajouté");
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
