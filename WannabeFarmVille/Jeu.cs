@@ -30,6 +30,10 @@ namespace WannabeFarmVille
         List<PictureBox> visiteursPicBox;
         MenuDepart menuDepart;
         Thread threadTimer;
+        bool joueurBouge;
+        bool jeuBoucle;
+        Thread visiteursThread;
+        List<Thread> visiteursThreads;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -61,9 +65,11 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
-            Stream str = Properties.Resources.rd2;
-            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
-            snd.Play();
+            joueurBouge = false;
+            jeuBoucle = true;
+            //Stream str = Properties.Resources.rd2;
+            //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            //snd.Play();
             for (int row = 0; row < 28; row++)
             {
                 for(int column = 0; column < 40; column++)
@@ -126,6 +132,7 @@ namespace WannabeFarmVille
         public void AjouterVisiteurSpawn()
         {
             visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25));
+            /*
             PictureBox newVisiteur = new PictureBox();
             newVisiteur.BackgroundImage = visiteurs[visiteurs.Count - 1].imageVisiteur;
             newVisiteur.Location = new Point(visiteurs[visiteurs.Count - 1].X, visiteurs[visiteurs.Count - 1].Y);
@@ -134,9 +141,11 @@ namespace WannabeFarmVille
             newVisiteur.BringToFront();
             newVisiteur.Name = "visiteurPB" + visiteursPicBox.Count.ToString().Trim();
             newVisiteur.BackgroundImageLayout = ImageLayout.Stretch;
+            
             this.Controls.Add(newVisiteur);
 
             visiteursPicBox.Add(newVisiteur);
+            */
         }
 
 
@@ -145,6 +154,14 @@ namespace WannabeFarmVille
         protected override void OnPaint(PaintEventArgs e)
         {
             g = e.Graphics;
+
+            g.DrawImage(Properties.Resources.Background_game, 0, 0, this.Width, this.Height);
+
+            for (int i = 0; i < visiteurs.Count; i++)
+            {
+                g.DrawImage(visiteurs[i].imageVisiteur, visiteurs[i].X, visiteurs[i].Y, 32, 32);
+            }
+            
         }
 
         /* Logique du jeu (1x par tick).
@@ -159,8 +176,8 @@ namespace WannabeFarmVille
          */
         private void LogicVisiteurs()
         {
-            try
-            {
+            Console.WriteLine("LogicVisiteurs.");
+            
                 for (int i = 0; i < visiteurs.Count; i++)
                 {
                     int randX = new Random().Next(3);
@@ -175,6 +192,26 @@ namespace WannabeFarmVille
                         randX = new Random().Next(3);
                         randY = new Random().Next(3);
                     }
+
+                    if (randX == 0)
+                    { 
+                        visiteurs[i].X -= tuile.Width;
+                    } 
+                    else if (randX == 1)
+                    { 
+                        visiteurs[i].X += tuile.Width;
+                    }
+
+                    if (randY == 0)
+                    {
+                        visiteurs[i].Y -= tuile.Height;
+                    }
+                    else if (randY == 1)
+                    {
+                        visiteurs[i].Y += tuile.Height;
+                    }
+
+                    /*
                     string visiteurPBName = "visiteurPB" + i.ToString().Trim();
                     Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
                     PictureBox visiteurPB = (PictureBox)foundVisiteurs.First();
@@ -183,21 +220,17 @@ namespace WannabeFarmVille
 
                     if (randY == 0) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y - tuile.Height);
                     else if (randY == 1) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y + tuile.Height);
-                }
+                    */
             }
-            catch (InvalidOperationException)
-            {
-
-            }
+            Console.WriteLine("LogicVisiteurs Fin.");
         }
 
         private void Jeu_Load(object sender, EventArgs e)
         {
-            threadTimer = new Thread(StartTimer);
-            threadTimer.Start();
+            BouclePrincipaleDuJeu();
         }
 
-        private void StartTimer()
+        private void BouclePrincipaleDuJeu()
         {
             // FPS timer
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
@@ -210,7 +243,9 @@ namespace WannabeFarmVille
         private void TickTick(object sender, EventArgs e)
         {
             Logic();
+            Refresh();
         }
+
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -229,11 +264,17 @@ namespace WannabeFarmVille
 
         private void Jeu_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.U)
+            BougerJoueur(e);
+        }
+
+        private void BougerJoueur(KeyEventArgs e)
+        {
+            Console.WriteLine("KeyDown");
+            if (e.KeyCode == Keys.U)
             {
                 MessageBox.Show("(" + Player.CurrentRow + "," + Player.CurrentColumn + ")");
             }
-            if(e.KeyCode == Keys.S)
+            if (e.KeyCode == Keys.S)
             {
                 if (Player.CurrentRow != 27)
                 {
@@ -259,7 +300,8 @@ namespace WannabeFarmVille
                         Player.CurrentSprite = Player.JoeDownRight;
                     }
                     Player.Y += tuile.Height;
-                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
+                    Player.Location = new Point(Player.X, Player.Y);
+                    Player.CurrentSprite.Location = Player.Location;
                 }
             }
             if (e.KeyCode == Keys.W)
@@ -288,7 +330,8 @@ namespace WannabeFarmVille
                         Player.CurrentSprite = Player.JoeUpRight;
                     }
                     Player.Y -= tuile.Height;
-                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
+                    Player.Location = new Point(Player.X, Player.Y);
+                    Player.CurrentSprite.Location = Player.Location;
                 }
             }
             if (e.KeyCode == Keys.D)
@@ -317,7 +360,8 @@ namespace WannabeFarmVille
                         Player.CurrentSprite = Player.JoeRightRight;
                     }
                     Player.X += tuile.Width;
-                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
+                    Player.Location = new Point(Player.X, Player.Y);
+                    Player.CurrentSprite.Location = Player.Location;
                 }
             }
             if (e.KeyCode == Keys.A)
@@ -346,7 +390,8 @@ namespace WannabeFarmVille
                         Player.CurrentSprite = Player.JoeLeftRight;
                     }
                     Player.X -= tuile.Width;
-                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
+                    Player.Location = new Point(Player.X, Player.Y);
+                    Player.CurrentSprite.Location = Player.Location;
                 }
             }
         }
