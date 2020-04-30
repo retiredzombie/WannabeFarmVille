@@ -69,7 +69,7 @@ namespace WannabeFarmVille
                 PicLeftLeft, PicLeftRight, PicRightLeft, PicRightRight, 0, 0, 0, 32, Carte);
             Player.Y += tuile.Height;
             visiteurs = new List<Visiteur>();
-       /*     Player.Width = tuile.Width;
+            Player.Width = tuile.Width;
             Player.Height = tuile.Height;
             Player.JoeDownLeft = PicDownLeft;
             Player.JoeDownRight = PicDownRight;
@@ -93,23 +93,21 @@ namespace WannabeFarmVille
                     Carte[row, column] = new Tuile();
                 }
             }
-            AjouterObstacle(2, 4);
+            /*AjouterObstacle(2, 4);
             AjouterObstacle(14, 4);
             AjouterObstacle(14, 25);
-            AjouterObstacle(2, 25);
+            AjouterObstacle(2, 25);*/
 
-            Player.CurrentSprite = Player.JoeUpRight;*/
+            Player.CurrentSprite = Player.JoeUpRight;
            /* Stream str = Properties.Resources.rd2;
             System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
             snd.Play();*/
 
             visiteursPicBox = new List<PictureBox>();
-            //Je l'ai mis en commentaires, histoire de tester
-           /* for (int i = 0; i < 10; i++)
             for (int i = 0; i < 10; i++)
             {
                AjouterVisiteurSpawn();
-            }*/
+            }
         }
 
         private void RendreClotureSolide(int row, int column)
@@ -319,8 +317,7 @@ namespace WannabeFarmVille
                         Player.CurrentSprite = Player.JoeDownRight;
                     }
                     Player.Y += tuile.Height;
-                    Player.Location = new Point(Player.X, Player.Y);
-                    Player.CurrentSprite.Location = Player.Location;
+                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
             }
             if (e.KeyCode == Keys.W)
@@ -349,8 +346,8 @@ namespace WannabeFarmVille
                         Player.CurrentSprite = Player.JoeUpRight;
                     }
                     Player.Y -= tuile.Height;
-                    Player.Location = new Point(Player.X, Player.Y);
-                    Player.CurrentSprite.Location = Player.Location;
+                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
+                    
                 }
             }
             if (e.KeyCode == Keys.D)
@@ -379,8 +376,7 @@ namespace WannabeFarmVille
                         Player.CurrentSprite = Player.JoeRightRight;
                     }
                     Player.X += tuile.Width;
-                    Player.Location = new Point(Player.X, Player.Y);
-                    Player.CurrentSprite.Location = Player.Location;
+                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                 }
             }
             if (e.KeyCode == Keys.A)
@@ -409,8 +405,8 @@ namespace WannabeFarmVille
                         Player.CurrentSprite = Player.JoeLeftRight;
                     }
                     Player.X -= tuile.Width;
-                    Player.Location = new Point(Player.X, Player.Y);
-                    Player.CurrentSprite.Location = Player.Location;
+                    Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
+                    
                 }
             }
         }
