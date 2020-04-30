@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -60,7 +61,10 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
-            for(int row = 0; row < 28; row++)
+            Stream str = Properties.Resources.rd2;
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();
+            for (int row = 0; row < 28; row++)
             {
                 for(int column = 0; column < 40; column++)
                 {
