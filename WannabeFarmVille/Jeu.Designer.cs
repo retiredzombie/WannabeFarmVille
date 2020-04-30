@@ -273,8 +273,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::WannabeFarmVille.Properties.Resources.Background_game;
+            this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1264, 921);
             this.Controls.Add(this.PicDownRight);
@@ -286,6 +285,8 @@
             this.Controls.Add(this.PicUpLeft);
             this.Controls.Add(this.PicUpRight);
             this.Controls.Add(this.menu_haut);
+            this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.Transparent;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu_haut;
             this.MaximizeBox = false;
