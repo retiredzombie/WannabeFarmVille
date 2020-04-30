@@ -17,10 +17,10 @@ namespace WannabeFarmVille
 
     public partial class Jeu : Form
     {
-        private Tuile[,] Carte = new Tuile[28, 40];
+        private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
         private bool backDrawn = false;
-        private Joueur Player = new Joueur();
+        private Joueur Player;
         private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
@@ -52,9 +52,24 @@ namespace WannabeFarmVille
             this.DoubleBuffered = true;
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
             tuile = TilesetImageGenerator.GetTile(0);
+            for (int row = 0; row < 28; row++)
+            {
+                for (int column = 0; column < 40; column++)
+                {
+                    Carte[row, column] = new Tuile();
+                }
+            }
+            RendreClotureSolide(2, 4);
+            RendreClotureSolide(14, 4);
+            RendreClotureSolide(14, 25);
+            RendreClotureSolide(2, 25);
+            PicUpRight.Size = new Size(32, 32);
+            PicUpRight.Location = new Point(0, 32);
+            Player = new Joueur(PicUpLeft, PicUpRight, PicDownLeft, PicDownRight, 
+                PicLeftLeft, PicLeftRight, PicRightLeft, PicRightRight, 0, 0, 0, 32, Carte);
             Player.Y += tuile.Height;
             visiteurs = new List<Visiteur>();
-            Player.Width = tuile.Width;
+       /*     Player.Width = tuile.Width;
             Player.Height = tuile.Height;
             Player.JoeDownLeft = PicDownLeft;
             Player.JoeDownRight = PicDownRight;
@@ -64,6 +79,7 @@ namespace WannabeFarmVille
             Player.JoeRightRight = PicRightRight;
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
+
             Player.CurrentSprite = Player.JoeUpRight;
             joueurBouge = false;
             jeuBoucle = true;
@@ -81,35 +97,38 @@ namespace WannabeFarmVille
             AjouterObstacle(14, 4);
             AjouterObstacle(14, 25);
             AjouterObstacle(2, 25);
+
+            Player.CurrentSprite = Player.JoeUpRight;*/
+           /* Stream str = Properties.Resources.rd2;
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();*/
+
             visiteursPicBox = new List<PictureBox>();
-            PicUpRight.Size = new Size(Player.Width, Player.Height);
-            PicUpRight.Location = new Point(Player.X, Player.Y);
+            //Je l'ai mis en commentaires, histoire de tester
+           /* for (int i = 0; i < 10; i++)
             for (int i = 0; i < 10; i++)
             {
                AjouterVisiteurSpawn();
-            }
+            }*/
         }
 
-        private void AjouterObstacle(int row, int column)
+        private void RendreClotureSolide(int row, int column)
         {   
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
                 column++;
             }
-            column++;
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
                 row++;
             }
-            row++;
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
                 column--;
             }
-            column--;
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;

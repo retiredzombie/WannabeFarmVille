@@ -11,9 +11,13 @@ namespace WannabeFarmVille
     /// <summary>
     /// Cette classe représente le joueur
     /// </summary>
-    class Joueur
+    class Joueur: Movable
     {
-        public Joueur()
+        public Joueur(PictureBox PicUpLeft, PictureBox PicUpRight, PictureBox PicDownLeft, PictureBox PicDownRight,
+            PictureBox PicLeftLeft, PictureBox PicLeftRight, PictureBox PicRightLeft, PictureBox PicRightRight, int CurrentRow,
+            int CurrentColumn, int X, int Y, Tuile[,] carte)       
+               : base(PicUpLeft, PicUpRight, PicDownLeft, PicDownRight, PicLeftLeft, PicLeftRight, PicRightLeft,
+                       PicRightRight, CurrentRow, CurrentColumn, X, Y, carte)
         {
             Argent = 100;
             X = 0;
@@ -25,15 +29,13 @@ namespace WannabeFarmVille
         }
         public int Argent { get; set; }
 
-        public int X { get; set; }
+   /*     public int X { get; set; }
         public int Y { get; set; }
         public int CurrentRow { get; set; }
-        public int CurrentColumn { get; set; }
+        public int CurrentColumn { get; set; }*/
         public int Width { get; set; }
         public int Height { get; set; }
-        public Point Location { get; set; }
-        public PictureBox JoeUpLeft { get; set; }
-        public Point JoeUpLeftLocation { get; set; }
+     /*   public PictureBox JoeUpLeft { get; set; }
         public PictureBox JoeUpRight { get; set; }
         public Point JoeUpRightLocation { get; set; }
         public PictureBox JoeDownRight { get; set; }
@@ -47,8 +49,7 @@ namespace WannabeFarmVille
         public PictureBox JoeRightRight { get; set; }
         public Point JoeRightRightLocation { get; set; }
         public PictureBox JoeRightLeft { get; set; }
-        public Point JoeRightLeftLocation { get; set; }
-        public PictureBox CurrentSprite { get; set; }
+        public PictureBox CurrentSprite { get; set; }*/
 
     }
 }
