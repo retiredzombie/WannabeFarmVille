@@ -194,54 +194,54 @@ namespace WannabeFarmVille
         private void LogicVisiteurs()
         {
             Console.WriteLine("LogicVisiteurs.");
-            
-                for (int i = 0; i < visiteurs.Count; i++)
+
+            for (int i = 0; i < visiteurs.Count; i++)
+            {
+                int randX = new Random().Next(3);
+                int randY = new Random().Next(3);
+                while ((randX == randY) ||
+                        (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                        (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                        (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
+                        (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
+                        )
                 {
-                    int randX = new Random().Next(3);
-                    int randY = new Random().Next(3);
-                    while ((randX == randY) ||
-                            (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
-                            (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
-                            (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
-                            (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
-                            )
-                    {
-                        randX = new Random().Next(3);
-                        randY = new Random().Next(3);
-                    }
+                    randX = new Random().Next(3);
+                    randY = new Random().Next(3);
+                }
 
-                    if (randX == 0)
-                    { 
-                        visiteurs[i].X -= tuile.Width;
-                    } 
-                    else if (randX == 1)
-                    { 
-                        visiteurs[i].X += tuile.Width;
-                    }
+                if (randX == 0)
+                {
+                    visiteurs[i].X -= tuile.Width;
+                }
+                else if (randX == 1)
+                {
+                    visiteurs[i].X += tuile.Width;
+                }
 
-                    if (randY == 0)
-                    {
-                        visiteurs[i].Y -= tuile.Height;
-                    }
-                    else if (randY == 1)
-                    {
-                        visiteurs[i].Y += tuile.Height;
-                    }
+                if (randY == 0)
+                {
+                    visiteurs[i].Y -= tuile.Height;
+                }
+                else if (randY == 1)
+                {
+                    visiteurs[i].Y += tuile.Height;
+                }
 
-                    /*
-                    string visiteurPBName = "visiteurPB" + i.ToString().Trim();
-                    Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
-                    PictureBox visiteurPB = (PictureBox)foundVisiteurs.First();
-                    if (randX == 0) visiteurPB.Location = new Point(visiteurPB.Location.X - tuile.Width, visiteurPB.Location.Y);
-                    else if (randX == 1) visiteurPB.Location = new Point(visiteurPB.Location.X + tuile.Width, visiteurPB.Location.Y);
+                /*
+                string visiteurPBName = "visiteurPB" + i.ToString().Trim();
+                Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
+                PictureBox visiteurPB = (PictureBox)foundVisiteurs.First();
+                if (randX == 0) visiteurPB.Location = new Point(visiteurPB.Location.X - tuile.Width, visiteurPB.Location.Y);
+                else if (randX == 1) visiteurPB.Location = new Point(visiteurPB.Location.X + tuile.Width, visiteurPB.Location.Y);
 
-                    if (randY == 0) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y - tuile.Height);
-                    else if (randY == 1) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y + tuile.Height);
-                    */
+                if (randY == 0) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y - tuile.Height);
+                else if (randY == 1) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y + tuile.Height);
+                */
             }
             Console.WriteLine("LogicVisiteurs Fin.");
         }
-
+        
         private void Jeu_Load(object sender, EventArgs e)
         {
             BouclePrincipaleDuJeu();
@@ -411,23 +411,80 @@ namespace WannabeFarmVille
             }
         }
 
-        // Déduit 35$ du joueur et crée un nouveau Lion
-        // NE FONCTIONNE PAS
+        /**
+         * Déduit 35$ du joueur et instancie un nouveau Lion
+         */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(35, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Lion lion = new Lion(Lion.Nombre_Lions);
+                Console.WriteLine(Lion.Nombre_Lions);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
+            }
+            
+        }
+
+        /**
+         * Ajoute ou retire de l'argent du joueur selon le modificateur indiqué.
+         * Met à jour l'affichage.
+         * 
+         * @param Montant - Quantité d'argent
+         * @param Modificateur - True => Ajouter / False => Retirer
+         */
+        private bool Modifier_Argent(int Montant, bool Modificateur)
         {
             String[] TextArray = affichageArgent.Text.Split('$');
             String TextArgent = TextArray[0];
-            int IntArgent = Int32.Parse(TextArgent);
+            int IntArgent;
+            bool AjoutReussi = true;
 
-            Player.Argent -= 35;
+            if (Modificateur)
+            {
+                Player.Argent += Montant;
+            }
+            else
+            {
+                if (Player.Argent - Montant >= 0)
+                {
+                    Player.Argent -= Montant;
+                }
+                else
+                {
+                    AjoutReussi = false;
+                }
+            }
+
             IntArgent = Player.Argent;
             TextArgent = IntArgent.ToString();
-            
-            affichageArgent.Text = TextArgent + "$";
-            
-            Lion lion = new Lion(0);
-            Console.WriteLine("Un lion a été ajouté");
+
+            affichageArgent.Text = TextArgent + " $";
+
+            return AjoutReussi;
         }
+
+        /**
+         * Ajoute un animal au compteur visuel.
+         */
+        private void Ajouter_Animal()
+        {
+            String[] TextArray = animauxToolStripMenuItem.Text.Split(' ');
+            String TextAnimaux = TextArray[0];
+            int NombreAnimaux = Int32.Parse(TextAnimaux);
+
+            TextAnimaux = (++NombreAnimaux).ToString();
+
+            animauxToolStripMenuItem.Text = NombreAnimaux + " Animaux";
+        }
+
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
             menuDepart.Dispose();
