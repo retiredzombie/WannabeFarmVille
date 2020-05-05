@@ -46,7 +46,7 @@ namespace WannabeFarmVille
 
 
 
-            if (new Random().Next(1) == 1)
+            if (new Random().Next(2) == 1)
             {
                 genre = Genre.Femme;
             } else
@@ -56,14 +56,14 @@ namespace WannabeFarmVille
 
             if (genre.Equals(Genre.Homme))
             {
-                random = rand.Next(0, ListePrenomHommes.Length - 1);
+                random = rand.Next(0, ListePrenomHommes.Length);
                 Nom = ListePrenomHommes[random] + " ";
 
                 this.imageVisiteur = Properties.Resources.HomUpLeft;
             }
             else if (genre.Equals(Genre.Femme))
             {
-                random = rand.Next(0, ListePrenomFemmes.Length - 1);
+                random = rand.Next(0, ListePrenomFemmes.Length);
                 Nom = ListePrenomFemmes[random] + " ";
 
                 this.imageVisiteur = Properties.Resources.FemUpLeft;

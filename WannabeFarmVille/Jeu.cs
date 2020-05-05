@@ -151,6 +151,13 @@ namespace WannabeFarmVille
             for (int i = 0; i < visiteurs.Count; i++)
             {
                 g.DrawImage(visiteurs[i].imageVisiteur, visiteurs[i].X, visiteurs[i].Y, 32, 32);
+
+                Font font = new Font("Arial", 8);
+                SolidBrush drawBrush = new SolidBrush(Color.Black);
+                int nomX = visiteurs[i].X - visiteurs[i].Width / 2;
+                int nomY = visiteurs[i].Y - 20;
+
+                g.DrawString(visiteurs[i].Nom, font, drawBrush, new Point(nomX, nomY));
             }
             
         }
@@ -188,22 +195,26 @@ namespace WannabeFarmVille
                     { 
                         visiteurs[i].X -= tuile.Width;
                         visiteurs[i].MovingX = -1;
+                        visiteurs[i].MovingY = 0;
                     } 
                     else if (randX == 1)
                     { 
                         visiteurs[i].X += tuile.Width;
                         visiteurs[i].MovingX = 1;
+                        visiteurs[i].MovingY = 0;
                     }
 
                     if (randY == 0)
                     {
                         visiteurs[i].Y -= tuile.Height;
-                        visiteurs[i].MovingY = -1;
+                        visiteurs[i].MovingY = 1;
+                        visiteurs[i].MovingX = -0;
                     }
                     else if (randY == 1)
                     {
                         visiteurs[i].Y += tuile.Height;
-                        visiteurs[i].MovingY = 1;
+                        visiteurs[i].MovingY = -1;
+                        visiteurs[i].MovingX = 0;
                     }
 
                     visiteurs[i].ReloadImages();
