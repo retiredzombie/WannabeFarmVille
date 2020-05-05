@@ -23,7 +23,7 @@ namespace WannabeFarmVille
                                                      "Jacob", "Leo", "Felix", "Marc", "André",
                                                      "Pierre", "Jack", "Clément", "Edouard"};
         private String[] ListePrenomFemmes = { "Sarah", "Alexa", "Aurélie", "Megan", "Anna",
-                                                     "Laura", "Fatimna", "Emma", "Alice", "Olivia",
+                                                     "Laura", "Fatima", "Emma", "Alice", "Olivia",
                                                      "Léa", "Florence", "Charlotte", "Zoé", "Béatrice",
                                                      "Virginie", "Joannie", "Tania", "Laurie"};
         private String[] ListeNom = { "Lapointe", "Shepard", "Duplessis", "Lavoie", "Meloche", "Morissette",
@@ -37,16 +37,15 @@ namespace WannabeFarmVille
 
         private Genre genre;
 
-        public Visiteur(int x, int y)
+        public Visiteur(int x, int y, Random rand)
         {
             Init(x, y);
 
-            Random rand = new Random();
             int random;
 
 
 
-            if (new Random().Next(1) == 1)
+            if (rand.Next(2) == 1)
             {
                 genre = Genre.Femme;
             } else
@@ -56,20 +55,20 @@ namespace WannabeFarmVille
 
             if (genre.Equals(Genre.Homme))
             {
-                random = rand.Next(0, ListePrenomHommes.Length - 1);
-                Nom = ListePrenomHommes[random] + " ";
+                random = rand.Next(0, ListePrenomHommes.Length);
+                this.Nom = ListePrenomHommes[random] + " ";
 
                 this.imageVisiteur = Properties.Resources.HomUpLeft;
             }
             else if (genre.Equals(Genre.Femme))
             {
-                random = rand.Next(0, ListePrenomFemmes.Length - 1);
-                Nom = ListePrenomFemmes[random] + " ";
+                random = rand.Next(0, ListePrenomFemmes.Length);
+                this.Nom = ListePrenomFemmes[random] + " ";
 
                 this.imageVisiteur = Properties.Resources.FemUpLeft;
             }
             random = rand.Next(0, ListeNom.Length - 1);
-            Nom += ListeNom[random];
+            this.Nom += ListeNom[random];
         }
 
         private void Init(int x, int y)

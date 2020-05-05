@@ -27,6 +27,7 @@ namespace WannabeFarmVille
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
         MenuDepart menuDepart;
+        Random rand;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -41,6 +42,7 @@ namespace WannabeFarmVille
          */
         private void Init()
         {
+            rand = new Random();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.DoubleBuffered = true;
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
@@ -115,7 +117,7 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteur(Genre genre, int x, int y)
         {
-            visiteurs.Add(new Visiteur(tuile.Width * x, tuile.Height * y));
+            this.visiteurs.Add(new Visiteur(tuile.Width * x, tuile.Height * y, rand));
         }
 
         /*
@@ -123,7 +125,7 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteurSpawn()
         {
-            visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25));
+            this.visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25, rand));
             /*
             PictureBox newVisiteur = new PictureBox();
             newVisiteur.BackgroundImage = visiteurs[visiteurs.Count - 1].imageVisiteur;
@@ -152,6 +154,14 @@ namespace WannabeFarmVille
             for (int i = 0; i < visiteurs.Count; i++)
             {
                 g.DrawImage(visiteurs[i].imageVisiteur, visiteurs[i].X, visiteurs[i].Y, 32, 32);
+
+                Font font = new Font("Arial", 8);
+                SolidBrush drawBrush = new SolidBrush(Color.Black);
+                int nomX = visiteurs[i].X - visiteurs[i].Width / 2;
+                int nomY = visiteurs[i].Y - 20;
+                string nom = visiteurs[i].Nom;
+
+                g.DrawString(nom, font, drawBrush, new Point(nomX, nomY));
             }
             
         }
@@ -174,12 +184,13 @@ namespace WannabeFarmVille
                 {
                     int randX = new Random().Next(3);
                     int randY = new Random().Next(3);
-                    while ((randX == randY) ||
-                            (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
-                            (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
-                            (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
-                            (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
-                            )
+                while ( (randX == randY) ||
+                        (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                        (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                        (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
+                        (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height) ||
+                        (randX != 2 && randY != 2)
+                      )
                     {
                         randX = new Random().Next(3);
                         randY = new Random().Next(3);
@@ -189,22 +200,26 @@ namespace WannabeFarmVille
                     { 
                         visiteurs[i].X -= tuile.Width;
                         visiteurs[i].MovingX = -1;
+                        visiteurs[i].MovingY = 0;
                     } 
                     else if (randX == 1)
                     { 
                         visiteurs[i].X += tuile.Width;
                         visiteurs[i].MovingX = 1;
+                        visiteurs[i].MovingY = 0;
                     }
 
                     if (randY == 0)
                     {
                         visiteurs[i].Y -= tuile.Height;
-                        visiteurs[i].MovingY = -1;
+                        visiteurs[i].MovingY = 1;
+                        visiteurs[i].MovingX = -0;
                     }
                     else if (randY == 1)
                     {
                         visiteurs[i].Y += tuile.Height;
-                        visiteurs[i].MovingY = 1;
+                        visiteurs[i].MovingY = -1;
+                        visiteurs[i].MovingX = 0;
                     }
 
                     visiteurs[i].ReloadImages();
@@ -232,7 +247,7 @@ namespace WannabeFarmVille
         {
             // FPS timer
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-            timer.Interval = (1 * 1000); // FPS
+            timer.Interval = (1000); // FPS
             timer.Tick += new EventHandler(TickTick);
             timer.Start();
         }
