@@ -105,6 +105,30 @@
     <None Include="Ressources\TileSet\zoo_tileset.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SpritesConcierge\ConUpRight.png" />
+    <None Include="Resources\SpritesConcierge\ConUpLeft.png" />
+    <None Include="Resources\SpritesConcierge\ConRightRight.png" />
+    <None Include="Resources\SpritesConcierge\ConRightLeft.png" />
+    <None Include="Resources\SpritesConcierge\ConLeftRight.png" />
+    <None Include="Resources\SpritesConcierge\ConLeftLeft.png" />
+    <None Include="Resources\SpritesConcierge\ConDownRight.png" />
+    <None Include="Resources\SpritesConcierge\ConDownLeft.png" />
+    <None Include="Resources\SpritesVisiteurHomme\HomUpRight.png" />
+    <None Include="Resources\SpritesVisiteurHomme\HomUpLeft.png" />
+    <None Include="Resources\SpritesVisiteurHomme\HomRightRight.png" />
+    <None Include="Resources\SpritesVisiteurHomme\HomRightLeft.png" />
+    <None Include="Resources\SpritesVisiteurHomme\HomLeftRight.png" />
+    <None Include="Resources\SpritesVisiteurHomme\HomLeftLeft.png" />
+    <None Include="Resources\SpritesVisiteurHomme\HomDownRight.png" />
+    <None Include="Resources\SpritesVisiteurHomme\HomDownLeft.png" />
+    <None Include="Resources\SpritesVisiteurFemme\FemUpRight.png" />
+    <None Include="Resources\SpritesVisiteurFemme\FemUpLeft.png" />
+    <None Include="Resources\SpritesVisiteurFemme\FemRightRight.png" />
+    <None Include="Resources\SpritesVisiteurFemme\FemRightLeft.png" />
+    <None Include="Resources\SpritesVisiteurFemme\FemLeftRight.png" />
+    <None Include="Resources\SpritesVisiteurFemme\FemLeftLeft.png" />
+    <None Include="Resources\SpritesVisiteurFemme\FemDownRight.png" />
+    <None Include="Resources\SpritesVisiteurFemme\FemDownLeft.png" />
     <None Include="Resources\rd2.wav" />
     <None Include="Resources\Red Dead Redemption 2 Official Soundtrack - House Building Theme HD %28With Visualizer%29.mp3" />
     <None Include="Resources\JoeUpLeft.png" />
