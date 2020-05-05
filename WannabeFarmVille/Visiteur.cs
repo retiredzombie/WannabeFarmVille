@@ -85,7 +85,7 @@ namespace WannabeFarmVille
 
         private void LoadImages()
         {
-            this.images.Add(Properties.Resources.)
+            
         }
 
         public String Nom { get; set; }

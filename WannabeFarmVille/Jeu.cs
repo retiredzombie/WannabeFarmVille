@@ -19,21 +19,13 @@ namespace WannabeFarmVille
     {
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
-        private bool backDrawn = false;
         private Joueur Player;
         private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
-        private System.Windows.Forms.PictureBox Joe;
         Bitmap tuile;
-        bool gameStarted;
         List<PictureBox> visiteursPicBox;
         MenuDepart menuDepart;
-        Thread threadTimer;
-        bool joueurBouge;
-        bool jeuBoucle;
-        Thread visiteursThread;
-        List<Thread> visiteursThreads;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -81,8 +73,6 @@ namespace WannabeFarmVille
             Player.JoeLeftRight = PicLeftRight;
 
             Player.CurrentSprite = Player.JoeUpRight;
-            joueurBouge = false;
-            jeuBoucle = true;
             //Stream str = Properties.Resources.rd2;
             //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
             //snd.Play();
