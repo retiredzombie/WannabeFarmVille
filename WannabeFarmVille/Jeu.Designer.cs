@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Jeu));
+            this.PicDownRight = new System.Windows.Forms.PictureBox();
+            this.PicDownLeft = new System.Windows.Forms.PictureBox();
+            this.PicLeftRight = new System.Windows.Forms.PictureBox();
+            this.PicLeftLeft = new System.Windows.Forms.PictureBox();
+            this.PicRightLeft = new System.Windows.Forms.PictureBox();
+            this.PicRightRight = new System.Windows.Forms.PictureBox();
+            this.PicUpLeft = new System.Windows.Forms.PictureBox();
             this.PicUpRight = new System.Windows.Forms.PictureBox();
             this.menu_haut = new System.Windows.Forms.MenuStrip();
             this.dateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,28 +50,98 @@
             this.déchetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PicUpLeft = new System.Windows.Forms.PictureBox();
-            this.PicRightRight = new System.Windows.Forms.PictureBox();
-            this.PicRightLeft = new System.Windows.Forms.PictureBox();
-            this.PicLeftLeft = new System.Windows.Forms.PictureBox();
-            this.PicLeftRight = new System.Windows.Forms.PictureBox();
-            this.PicDownLeft = new System.Windows.Forms.PictureBox();
-            this.PicDownRight = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicLeftLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicRightLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicRightRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicUpRight)).BeginInit();
             this.menu_haut.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicRightRight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicRightLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicLeftLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).BeginInit();
             this.SuspendLayout();
+            // 
+            // PicDownRight
+            // 
+            this.PicDownRight.BackColor = System.Drawing.Color.Transparent;
+            this.PicDownRight.Image = global::WannabeFarmVille.Properties.Resources.joeDownRight1;
+            this.PicDownRight.Location = new System.Drawing.Point(132, 35);
+            this.PicDownRight.Name = "PicDownRight";
+            this.PicDownRight.Size = new System.Drawing.Size(32, 29);
+            this.PicDownRight.TabIndex = 9;
+            this.PicDownRight.TabStop = false;
+            this.PicDownRight.Visible = false;
+            // 
+            // PicDownLeft
+            // 
+            this.PicDownLeft.BackColor = System.Drawing.Color.Transparent;
+            this.PicDownLeft.Image = global::WannabeFarmVille.Properties.Resources.joeDownLeft1;
+            this.PicDownLeft.Location = new System.Drawing.Point(256, 35);
+            this.PicDownLeft.Name = "PicDownLeft";
+            this.PicDownLeft.Size = new System.Drawing.Size(32, 29);
+            this.PicDownLeft.TabIndex = 8;
+            this.PicDownLeft.TabStop = false;
+            this.PicDownLeft.Visible = false;
+            // 
+            // PicLeftRight
+            // 
+            this.PicLeftRight.BackColor = System.Drawing.Color.Transparent;
+            this.PicLeftRight.Image = global::WannabeFarmVille.Properties.Resources.joeLeftRight1;
+            this.PicLeftRight.Location = new System.Drawing.Point(170, 35);
+            this.PicLeftRight.Name = "PicLeftRight";
+            this.PicLeftRight.Size = new System.Drawing.Size(32, 29);
+            this.PicLeftRight.TabIndex = 7;
+            this.PicLeftRight.TabStop = false;
+            this.PicLeftRight.Visible = false;
+            // 
+            // PicLeftLeft
+            // 
+            this.PicLeftLeft.BackColor = System.Drawing.Color.Transparent;
+            this.PicLeftLeft.Image = global::WannabeFarmVille.Properties.Resources.joeLeftLeft1;
+            this.PicLeftLeft.Location = new System.Drawing.Point(94, 35);
+            this.PicLeftLeft.Name = "PicLeftLeft";
+            this.PicLeftLeft.Size = new System.Drawing.Size(32, 29);
+            this.PicLeftLeft.TabIndex = 6;
+            this.PicLeftLeft.TabStop = false;
+            this.PicLeftLeft.Visible = false;
+            // 
+            // PicRightLeft
+            // 
+            this.PicRightLeft.BackColor = System.Drawing.Color.Transparent;
+            this.PicRightLeft.Image = global::WannabeFarmVille.Properties.Resources.joeRightLeft1;
+            this.PicRightLeft.Location = new System.Drawing.Point(208, 35);
+            this.PicRightLeft.Name = "PicRightLeft";
+            this.PicRightLeft.Size = new System.Drawing.Size(32, 29);
+            this.PicRightLeft.TabIndex = 5;
+            this.PicRightLeft.TabStop = false;
+            this.PicRightLeft.Visible = false;
+            // 
+            // PicRightRight
+            // 
+            this.PicRightRight.BackColor = System.Drawing.Color.Transparent;
+            this.PicRightRight.Image = global::WannabeFarmVille.Properties.Resources.joeRightRight1;
+            this.PicRightRight.Location = new System.Drawing.Point(56, 35);
+            this.PicRightRight.Name = "PicRightRight";
+            this.PicRightRight.Size = new System.Drawing.Size(32, 29);
+            this.PicRightRight.TabIndex = 4;
+            this.PicRightRight.TabStop = false;
+            this.PicRightRight.Visible = false;
+            // 
+            // PicUpLeft
+            // 
+            this.PicUpLeft.BackColor = System.Drawing.Color.Transparent;
+            this.PicUpLeft.Image = global::WannabeFarmVille.Properties.Resources.JoeUpLeft1;
+            this.PicUpLeft.Location = new System.Drawing.Point(18, 35);
+            this.PicUpLeft.Name = "PicUpLeft";
+            this.PicUpLeft.Size = new System.Drawing.Size(32, 29);
+            this.PicUpLeft.TabIndex = 3;
+            this.PicUpLeft.TabStop = false;
+            this.PicUpLeft.Visible = false;
             // 
             // PicUpRight
             // 
             this.PicUpRight.BackColor = System.Drawing.Color.Transparent;
-            this.PicUpRight.BackgroundImage = global::WannabeFarmVille.Properties.Resources.joeDownRight;
+            this.PicUpRight.BackgroundImage = global::WannabeFarmVille.Properties.Resources.joeUpRight1;
             this.PicUpRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicUpRight.Location = new System.Drawing.Point(0, 35);
             this.PicUpRight.Name = "PicUpRight";
@@ -192,83 +269,6 @@
             this.embaucherToolStripMenuItem.Text = "Embaucher";
             this.embaucherToolStripMenuItem.Click += new System.EventHandler(this.embaucherToolStripMenuItem_Click);
             // 
-            // PicUpLeft
-            // 
-            this.PicUpLeft.BackColor = System.Drawing.Color.Transparent;
-            this.PicUpLeft.Image = global::WannabeFarmVille.Properties.Resources.JoeUpLeft;
-            this.PicUpLeft.Location = new System.Drawing.Point(18, 35);
-            this.PicUpLeft.Name = "PicUpLeft";
-            this.PicUpLeft.Size = new System.Drawing.Size(32, 29);
-            this.PicUpLeft.TabIndex = 3;
-            this.PicUpLeft.TabStop = false;
-            this.PicUpLeft.Visible = false;
-            // 
-            // PicRightRight
-            // 
-            this.PicRightRight.BackColor = System.Drawing.Color.Transparent;
-            this.PicRightRight.Image = global::WannabeFarmVille.Properties.Resources.joeRightRight;
-            this.PicRightRight.Location = new System.Drawing.Point(56, 35);
-            this.PicRightRight.Name = "PicRightRight";
-            this.PicRightRight.Size = new System.Drawing.Size(32, 29);
-            this.PicRightRight.TabIndex = 4;
-            this.PicRightRight.TabStop = false;
-            this.PicRightRight.Visible = false;
-            // 
-            // PicRightLeft
-            // 
-            this.PicRightLeft.BackColor = System.Drawing.Color.Transparent;
-            this.PicRightLeft.Image = global::WannabeFarmVille.Properties.Resources.joeRightLeft;
-            this.PicRightLeft.Location = new System.Drawing.Point(208, 35);
-            this.PicRightLeft.Name = "PicRightLeft";
-            this.PicRightLeft.Size = new System.Drawing.Size(32, 29);
-            this.PicRightLeft.TabIndex = 5;
-            this.PicRightLeft.TabStop = false;
-            this.PicRightLeft.Visible = false;
-            // 
-            // PicLeftLeft
-            // 
-            this.PicLeftLeft.BackColor = System.Drawing.Color.Transparent;
-            this.PicLeftLeft.Image = global::WannabeFarmVille.Properties.Resources.joeLeftLeft;
-            this.PicLeftLeft.Location = new System.Drawing.Point(94, 35);
-            this.PicLeftLeft.Name = "PicLeftLeft";
-            this.PicLeftLeft.Size = new System.Drawing.Size(32, 29);
-            this.PicLeftLeft.TabIndex = 6;
-            this.PicLeftLeft.TabStop = false;
-            this.PicLeftLeft.Visible = false;
-            // 
-            // PicLeftRight
-            // 
-            this.PicLeftRight.BackColor = System.Drawing.Color.Transparent;
-            this.PicLeftRight.Image = global::WannabeFarmVille.Properties.Resources.joeLeftRight;
-            this.PicLeftRight.Location = new System.Drawing.Point(170, 35);
-            this.PicLeftRight.Name = "PicLeftRight";
-            this.PicLeftRight.Size = new System.Drawing.Size(32, 29);
-            this.PicLeftRight.TabIndex = 7;
-            this.PicLeftRight.TabStop = false;
-            this.PicLeftRight.Visible = false;
-            // 
-            // PicDownLeft
-            // 
-            this.PicDownLeft.BackColor = System.Drawing.Color.Transparent;
-            this.PicDownLeft.Image = global::WannabeFarmVille.Properties.Resources.joeDownLeft;
-            this.PicDownLeft.Location = new System.Drawing.Point(256, 35);
-            this.PicDownLeft.Name = "PicDownLeft";
-            this.PicDownLeft.Size = new System.Drawing.Size(32, 29);
-            this.PicDownLeft.TabIndex = 8;
-            this.PicDownLeft.TabStop = false;
-            this.PicDownLeft.Visible = false;
-            // 
-            // PicDownRight
-            // 
-            this.PicDownRight.BackColor = System.Drawing.Color.Transparent;
-            this.PicDownRight.Image = global::WannabeFarmVille.Properties.Resources.joeDownRight;
-            this.PicDownRight.Location = new System.Drawing.Point(132, 35);
-            this.PicDownRight.Name = "PicDownRight";
-            this.PicDownRight.Size = new System.Drawing.Size(32, 29);
-            this.PicDownRight.TabIndex = 9;
-            this.PicDownRight.TabStop = false;
-            this.PicDownRight.Visible = false;
-            // 
             // Jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,16 +299,16 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Jeu_FormClosing);
             this.Load += new System.EventHandler(this.Jeu_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Jeu_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicLeftLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicRightLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicRightRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicUpRight)).EndInit();
             this.menu_haut.ResumeLayout(false);
             this.menu_haut.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicRightRight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicRightLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicLeftLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
