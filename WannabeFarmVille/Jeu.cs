@@ -187,20 +187,26 @@ namespace WannabeFarmVille
                     if (randX == 0)
                     { 
                         visiteurs[i].X -= tuile.Width;
+                        visiteurs[i].MovingX = -1;
                     } 
                     else if (randX == 1)
                     { 
                         visiteurs[i].X += tuile.Width;
+                        visiteurs[i].MovingX = 1;
                     }
 
                     if (randY == 0)
                     {
                         visiteurs[i].Y -= tuile.Height;
+                        visiteurs[i].MovingY = -1;
                     }
                     else if (randY == 1)
                     {
                         visiteurs[i].Y += tuile.Height;
+                        visiteurs[i].MovingY = 1;
                     }
+
+                    visiteurs[i].ReloadImages();
 
                     /*
                     string visiteurPBName = "visiteurPB" + i.ToString().Trim();
@@ -212,7 +218,7 @@ namespace WannabeFarmVille
                     if (randY == 0) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y - tuile.Height);
                     else if (randY == 1) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y + tuile.Height);
                     */
-            }
+                }
             Console.WriteLine("LogicVisiteurs Fin.");
         }
 
