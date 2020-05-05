@@ -26,6 +26,7 @@ namespace WannabeFarmVille
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
         MenuDepart menuDepart;
+        Random rand;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -40,6 +41,7 @@ namespace WannabeFarmVille
          */
         private void Init()
         {
+            rand = new Random();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.DoubleBuffered = true;
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
@@ -114,7 +116,7 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteur(Genre genre, int x, int y)
         {
-            this.visiteurs.Add(new Visiteur(tuile.Width * x, tuile.Height * y));
+            this.visiteurs.Add(new Visiteur(tuile.Width * x, tuile.Height * y, rand));
         }
 
         /*
@@ -122,7 +124,7 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteurSpawn()
         {
-            this.visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25));
+            this.visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25, rand));
             /*
             PictureBox newVisiteur = new PictureBox();
             newVisiteur.BackgroundImage = visiteurs[visiteurs.Count - 1].imageVisiteur;
@@ -244,7 +246,7 @@ namespace WannabeFarmVille
         {
             // FPS timer
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-            timer.Interval = (1 * 1000); // FPS
+            timer.Interval = (1000); // FPS
             timer.Tick += new EventHandler(TickTick);
             timer.Start();
         }

@@ -37,16 +37,15 @@ namespace WannabeFarmVille
 
         private Genre genre;
 
-        public Visiteur(int x, int y)
+        public Visiteur(int x, int y, Random rand)
         {
             Init(x, y);
 
-            Random rand = new Random();
             int random;
 
 
 
-            if (new Random().Next(2) == 1)
+            if (rand.Next(2) == 1)
             {
                 genre = Genre.Femme;
             } else
