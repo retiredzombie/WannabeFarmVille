@@ -23,6 +23,7 @@ namespace WannabeFarmVille
         private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
+        ThreadStart thStart; 
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
         MenuDepart menuDepart;
@@ -76,7 +77,7 @@ namespace WannabeFarmVille
             //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
             //snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
-
+            thStart = delegate { this.VisiteurThread(); };
             visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 10; i++)
             {
@@ -157,7 +158,7 @@ namespace WannabeFarmVille
 
         /* Logique du jeu (1x par tick).
          */
-        private void Logic()
+        public void Logic()
         {
             LogicVisiteurs();
         }
@@ -239,10 +240,16 @@ namespace WannabeFarmVille
         // Roule à chaque fois que le timer tick.
         private void TickTick(object sender, EventArgs e)
         {
-            Logic();
-            Refresh();
+             Logic();
+             Refresh();
+        /*    Thread th = new Thread(thStart);
+            th.Start();*/
         }
 
+        private void VisiteurThread()
+        {
+
+        }
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -250,11 +257,6 @@ namespace WannabeFarmVille
         }
 
         private void dateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DeplacerJoueur()
         {
 
         }
