@@ -78,7 +78,14 @@ namespace WannabeFarmVille
             Height = 32;
 
             images = new List<Image>();
+
+            LoadImages();
             
+        }
+
+        private void LoadImages()
+        {
+            this.images.Add(Properties.Resources.)
         }
 
         public String Nom { get; set; }
