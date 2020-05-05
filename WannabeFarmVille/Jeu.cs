@@ -114,7 +114,7 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteur(Genre genre, int x, int y)
         {
-            visiteurs.Add(new Visiteur(tuile.Width * x, tuile.Height * y));
+            this.visiteurs.Add(new Visiteur(tuile.Width * x, tuile.Height * y));
         }
 
         /*
@@ -122,7 +122,7 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteurSpawn()
         {
-            visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25));
+            this.visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25));
             /*
             PictureBox newVisiteur = new PictureBox();
             newVisiteur.BackgroundImage = visiteurs[visiteurs.Count - 1].imageVisiteur;
@@ -156,8 +156,9 @@ namespace WannabeFarmVille
                 SolidBrush drawBrush = new SolidBrush(Color.Black);
                 int nomX = visiteurs[i].X - visiteurs[i].Width / 2;
                 int nomY = visiteurs[i].Y - 20;
+                string nom = visiteurs[i].Nom;
 
-                g.DrawString(visiteurs[i].Nom, font, drawBrush, new Point(nomX, nomY));
+                g.DrawString(nom, font, drawBrush, new Point(nomX, nomY));
             }
             
         }
@@ -180,12 +181,13 @@ namespace WannabeFarmVille
                 {
                     int randX = new Random().Next(3);
                     int randY = new Random().Next(3);
-                    while ((randX == randY) ||
-                            (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
-                            (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
-                            (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
-                            (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
-                            )
+                while ( (randX == randY) ||
+                        (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                        (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                        (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
+                        (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height) ||
+                        (randX != 2 && randY != 2)
+                      )
                     {
                         randX = new Random().Next(3);
                         randY = new Random().Next(3);

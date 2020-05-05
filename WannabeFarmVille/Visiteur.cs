@@ -23,7 +23,7 @@ namespace WannabeFarmVille
                                                      "Jacob", "Leo", "Felix", "Marc", "André",
                                                      "Pierre", "Jack", "Clément", "Edouard"};
         private String[] ListePrenomFemmes = { "Sarah", "Alexa", "Aurélie", "Megan", "Anna",
-                                                     "Laura", "Fatimna", "Emma", "Alice", "Olivia",
+                                                     "Laura", "Fatima", "Emma", "Alice", "Olivia",
                                                      "Léa", "Florence", "Charlotte", "Zoé", "Béatrice",
                                                      "Virginie", "Joannie", "Tania", "Laurie"};
         private String[] ListeNom = { "Lapointe", "Shepard", "Duplessis", "Lavoie", "Meloche", "Morissette",
@@ -57,19 +57,19 @@ namespace WannabeFarmVille
             if (genre.Equals(Genre.Homme))
             {
                 random = rand.Next(0, ListePrenomHommes.Length);
-                Nom = ListePrenomHommes[random] + " ";
+                this.Nom = ListePrenomHommes[random] + " ";
 
                 this.imageVisiteur = Properties.Resources.HomUpLeft;
             }
             else if (genre.Equals(Genre.Femme))
             {
                 random = rand.Next(0, ListePrenomFemmes.Length);
-                Nom = ListePrenomFemmes[random] + " ";
+                this.Nom = ListePrenomFemmes[random] + " ";
 
                 this.imageVisiteur = Properties.Resources.FemUpLeft;
             }
             random = rand.Next(0, ListeNom.Length - 1);
-            Nom += ListeNom[random];
+            this.Nom += ListeNom[random];
         }
 
         private void Init(int x, int y)
