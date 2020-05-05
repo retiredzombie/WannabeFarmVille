@@ -79,29 +79,13 @@ namespace WannabeFarmVille
             Player.JoeRightRight = PicRightRight;
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
-
             Player.CurrentSprite = Player.JoeUpRight;
             joueurBouge = false;
             jeuBoucle = true;
             //Stream str = Properties.Resources.rd2;
             //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
             //snd.Play();
-            for (int row = 0; row < 28; row++)
-            {
-                for(int column = 0; column < 40; column++)
-                {
-                    Carte[row, column] = new Tuile();
-                }
-            }
-            /*AjouterObstacle(2, 4);
-            AjouterObstacle(14, 4);
-            AjouterObstacle(14, 25);
-            AjouterObstacle(2, 25);*/
-
             Player.CurrentSprite = Player.JoeUpRight;
-           /* Stream str = Properties.Resources.rd2;
-            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
-            snd.Play();*/
 
             visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 10; i++)
@@ -293,7 +277,8 @@ namespace WannabeFarmVille
             }
             if (e.KeyCode == Keys.S)
             {
-                if (Player.CurrentRow != 27)
+                Player.MoveDown();
+                /*if (Player.CurrentRow != 27)
                 {
                     Player.CurrentRow++;
                     if (Player.JoeDownLeft.Visible == false)
@@ -318,11 +303,12 @@ namespace WannabeFarmVille
                     }
                     Player.Y += tuile.Height;
                     Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
-                }
+                }*/
             }
             if (e.KeyCode == Keys.W)
             {
-                if (Player.CurrentRow != 0)
+                Player.MoveUp();
+                /*if (Player.CurrentRow != 0)
                 {
                     Player.CurrentRow--;
                     if (Player.JoeUpLeft.Visible == false)
@@ -348,10 +334,12 @@ namespace WannabeFarmVille
                     Player.Y -= tuile.Height;
                     Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                     
-                }
+                }*/
             }
             if (e.KeyCode == Keys.D)
             {
+                Player.MoveRight();
+                /*
                 if (Player.CurrentColumn != 39)
                 {
                     Player.CurrentColumn++;
@@ -377,11 +365,12 @@ namespace WannabeFarmVille
                     }
                     Player.X += tuile.Width;
                     Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
-                }
+                }*/
             }
             if (e.KeyCode == Keys.A)
             {
-                if (Player.CurrentColumn != 0)
+                Player.MoveLeft();
+             /*   if (Player.CurrentColumn != 0)
                 {
                     Player.CurrentColumn--;
                     if (Player.JoeLeftLeft.Visible == false)
@@ -407,7 +396,7 @@ namespace WannabeFarmVille
                     Player.X -= tuile.Width;
                     Player.CurrentSprite.Location = new Point(Player.X, Player.Y);
                     
-                }
+                }*/
             }
         }
 
