@@ -35,6 +35,8 @@ namespace WannabeFarmVille
                                       "Belhumeur", "Gontar", "Bray" };
         private List<Image> images;
 
+        private Genre genre;
+
         public Visiteur(int x, int y)
         {
             Init(x, y);
@@ -42,7 +44,7 @@ namespace WannabeFarmVille
             Random rand = new Random();
             int random;
 
-            Genre genre;
+
 
             if (new Random().Next(1) == 1)
             {
@@ -57,14 +59,14 @@ namespace WannabeFarmVille
                 random = rand.Next(0, ListePrenomHommes.Length - 1);
                 Nom = ListePrenomHommes[random] + " ";
 
-                imageVisiteur = Properties.Resources.visiteur_exotique;
+                this.imageVisiteur = Properties.Resources.HomUpLeft;
             }
             else if (genre.Equals(Genre.Femme))
             {
                 random = rand.Next(0, ListePrenomFemmes.Length - 1);
                 Nom = ListePrenomFemmes[random] + " ";
 
-                imageVisiteur = Properties.Resources.visiteur_exotique;
+                this.imageVisiteur = Properties.Resources.FemUpLeft;
             }
             random = rand.Next(0, ListeNom.Length - 1);
             Nom += ListeNom[random];
@@ -76,9 +78,65 @@ namespace WannabeFarmVille
             Y = y;
             Width = 32;
             Height = 32;
+            MovingX = 0;
+            MovingY = 0;
 
             images = new List<Image>();
             
+        }
+
+        public void ReloadImages()
+        {
+            if (this.genre == Genre.Homme)
+            {
+                ReloadImageHomme();
+            }
+            else if (this.genre == Genre.Femme)
+            {
+                ReloadImageFemme();
+            }
+        }
+
+        private void ReloadImageHomme()
+        {
+            if (movingX == 1 && movingY == 0)
+            {
+                this.imageVisiteur = Properties.Resources.HomRightRight;
+            }
+            else if (movingX == -1 && movingY == 0)
+            {
+                this.imageVisiteur = Properties.Resources.HomLeftLeft;
+            }
+
+            else if (movingX == 0 && movingY == 1)
+            {
+                this.imageVisiteur = Properties.Resources.HomUpLeft;
+            }
+            else if (movingX == 0 && movingY == -1)
+            {
+                this.imageVisiteur = Properties.Resources.HomDownLeft;
+            }
+        }
+
+        private void ReloadImageFemme()
+        {
+            if (movingX == 1 && movingY == 0)
+            {
+                this.imageVisiteur = Properties.Resources.FemRightRight;
+            }
+            else if (movingX == -1 && movingY == 0)
+            {
+                this.imageVisiteur = Properties.Resources.FemLeftLeft;
+            }
+
+            else if (movingX == 0 && movingY == 1)
+            {
+                this.imageVisiteur = Properties.Resources.FemUpLeft;
+            }
+            else if (movingX == 0 && movingY == -1)
+            {
+                this.imageVisiteur = Properties.Resources.FemDownLeft;
+            }
         }
 
         public String Nom { get; set; }
@@ -89,7 +147,11 @@ namespace WannabeFarmVille
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public Image imageVisiteur { get; set; }
+        private int movingX;
+        private int movingY;
 
+        public Image imageVisiteur { get; set; }
+        public int MovingX { get => movingX; set => movingX = value; }
+        public int MovingY { get => movingY; set => movingY = value; }
     }
 }
