@@ -397,6 +397,46 @@ namespace WannabeFarmVille
         }
 
         /**
+         * Déduit 20$ du joueur et instancie un nouveau Mouton
+         */
+        private void mouton20ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(20, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Mouton mouton = new Mouton(Mouton.Nombre_Moutons);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un mouton.");
+            }
+        }
+
+        /**
+         * Déduit 30$ du joueur et instancie un nouveau Grizzly
+         */
+        private void grizzly30ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(30, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Grizzly grizzly = new Grizzly(Grizzly.Nombre_Grizzlys);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un grizzly.");
+            }
+        }
+
+        /**
          * Déduit 35$ du joueur et instancie un nouveau Lion
          */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -409,13 +449,71 @@ namespace WannabeFarmVille
             {
                 Ajouter_Animal();
                 Lion lion = new Lion(Lion.Nombre_Lions);
-                Console.WriteLine(Lion.Nombre_Lions);
             }
             else
             {
                 Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
             }
-            
+        }
+
+        /**
+         * Déduit 50$ du joueur et instancie une nouvelle Licorne
+         */
+        private void licorne50ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(50, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Licorne licorne = new Licorne(Licorne.Nombre_Licornes);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter une licorne.");
+            }
+        }
+
+        /**
+         * Déduit 40$ du joueur et instancie un nouveau Rhinocéros
+         */
+        private void rhinocéros40ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Rhino rhino = new Rhino(Rhino.Nombre_Rhinos);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un rhinocéros.");
+            }
+        }
+
+        /**
+         * Déduit 40$ du joueur et instancie un nouveau Buffle
+         */
+        private void buffle40ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Buffle buffle = new Buffle(Buffle.Nombre_Buffles);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un buffle.");
+            }
         }
 
         /**
@@ -469,6 +567,8 @@ namespace WannabeFarmVille
 
             animauxToolStripMenuItem.Text = NombreAnimaux + " Animaux";
         }
+
+        
 
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
