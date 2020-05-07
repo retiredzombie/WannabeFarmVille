@@ -20,12 +20,13 @@ namespace WannabeFarmVille
     {
         // OPTIONS
 
-        int FPS = 1;
+        double FPS = 1;
 
 
         // VARIABLES
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
+        int intFPS;
         private Joueur Player;
         private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
@@ -74,6 +75,7 @@ namespace WannabeFarmVille
             }
             refreshFormDelegate = new DelegateRefresh(Refresh);
             FPS = 1 / FPS * 1000;
+            intFPS = Convert.ToInt32(FPS);
             RendreClotureSolide(2, 4);
             RendreClotureSolide(15, 4);
             RendreClotureSolide(15, 25);
@@ -267,6 +269,10 @@ namespace WannabeFarmVille
         {
             bool colliding = false;
 
+            int oldX = visiteur.X;
+            int oldMovingX = visiteur.MovingX;
+            int oldMovingY = visiteur.MovingX;
+
             if (randX == 0)
             {
                 visiteur.X -= tuile.Width;
@@ -305,14 +311,23 @@ namespace WannabeFarmVille
                     int tS = 32;
                     int tX = Carte[o, i].Colonne * tS;
                     int tY = Carte[o, i].Ligne * tS;
+                    bool estObstacle = Carte[o, i].EstUnObstacle;
 
 
-                    if (vX > tX && vX < tX + tS && vY > tY && vY < tY + tS)
+                    if (vX >= tX && vX <= tX + tS && vY >= tY && vY <= tY + tS && estObstacle)
                     {
                         colliding = true;
+                        break;
+                    } else
+                    {
+                        
                     }
                 }
             }
+
+            visiteur.X = oldX;
+            visiteur.MovingX = oldMovingX;
+            visiteur.MovingX = oldMovingY;
 
             return colliding;
         }
@@ -322,7 +337,7 @@ namespace WannabeFarmVille
         {
             /// FPS timer
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-            timer.Interval = (FPS); // FPS
+            timer.Interval = (intFPS); // FPS
             timer.Tick += new EventHandler(TickTick);
             timer.Start();
         }
