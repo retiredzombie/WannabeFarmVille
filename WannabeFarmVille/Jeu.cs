@@ -28,7 +28,6 @@ namespace WannabeFarmVille
         List<PictureBox> visiteursPicBox;
         MenuDepart menuDepart;
         Random rand;
-        private bool gameOver;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -82,15 +81,10 @@ namespace WannabeFarmVille
             Player.CurrentSprite = Player.JoeUpRight;
             thStart = delegate { this.VisiteurThread(); };
             visiteursPicBox = new List<PictureBox>();
-
-
             for (int i = 0; i < 10; i++)
             {
                AjouterVisiteurSpawn();
             }
-
-
-            BouclePrincipaleDuJeu();
         }
 
         private void RendreClotureSolide(int row, int column)
@@ -255,24 +249,16 @@ namespace WannabeFarmVille
         
         private void Jeu_Load(object sender, EventArgs e)
         {
-
+            BouclePrincipaleDuJeu();
         }
 
         private void BouclePrincipaleDuJeu()
         {
             // FPS timer
-            /*
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             timer.Interval = (1000); // FPS
             timer.Tick += new EventHandler(TickTick);
             timer.Start();
-            */
-
-            while (!gameOver) {
-
-
-
-            }
         }
 
         // Roule à chaque fois que le timer tick.
