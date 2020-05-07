@@ -75,9 +75,9 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
-            //Stream str = Properties.Resources.rd2;
-            //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
-            //snd.Play();
+            Stream str = Properties.Resources.rd2;
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
             thStart = delegate { this.VisiteurThread(); };
             visiteursPicBox = new List<PictureBox>();
