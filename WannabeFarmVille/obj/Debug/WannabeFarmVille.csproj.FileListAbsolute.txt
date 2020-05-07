@@ -22,3 +22,14 @@ C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\Wan
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csproj.CoreCompileInputs.cache
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.exe
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.pdb
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\Resources\joeExotic.png
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe.config
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.pdb
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csprojAssemblyReference.cache
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Jeu.resources
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.MenuDepart.resources
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Properties.Resources.resources
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csproj.GenerateResource.cache
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.exe
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.pdb

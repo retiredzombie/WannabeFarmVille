@@ -185,8 +185,17 @@ namespace WannabeFarmVille
         private void LogicVisiteurs()
         {
             Console.WriteLine("LogicVisiteurs.");
-            
-                for (int i = 0; i < visiteurs.Count; i++)
+
+            for (int i = 0; i < visiteurs.Count; i++)
+            {
+                int randX = new Random().Next(3);
+                int randY = new Random().Next(3);
+                while ((randX == randY) ||
+                        (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                        (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                        (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
+                        (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height)
+                        )
                 {
                     int randX = new Random().Next(3);
                     int randY = new Random().Next(3);
@@ -243,7 +252,7 @@ namespace WannabeFarmVille
                 }
             Console.WriteLine("LogicVisiteurs Fin.");
         }
-
+        
         private void Jeu_Load(object sender, EventArgs e)
         {
 
@@ -427,23 +436,180 @@ namespace WannabeFarmVille
             }
         }
 
-        // Déduit 35$ du joueur et crée un nouveau Lion
-        // NE FONCTIONNE PAS
+        /**
+         * Déduit 20$ du joueur et instancie un nouveau Mouton
+         */
+        private void mouton20ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(20, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Mouton mouton = new Mouton(Mouton.Nombre_Moutons);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un mouton.");
+            }
+        }
+
+        /**
+         * Déduit 30$ du joueur et instancie un nouveau Grizzly
+         */
+        private void grizzly30ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(30, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Grizzly grizzly = new Grizzly(Grizzly.Nombre_Grizzlys);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un grizzly.");
+            }
+        }
+
+        /**
+         * Déduit 35$ du joueur et instancie un nouveau Lion
+         */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(35, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Lion lion = new Lion(Lion.Nombre_Lions);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
+            }
+        }
+
+        /**
+         * Déduit 50$ du joueur et instancie une nouvelle Licorne
+         */
+        private void licorne50ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(50, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Licorne licorne = new Licorne(Licorne.Nombre_Licornes);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter une licorne.");
+            }
+        }
+
+        /**
+         * Déduit 40$ du joueur et instancie un nouveau Rhinocéros
+         */
+        private void rhinocéros40ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Rhino rhino = new Rhino(Rhino.Nombre_Rhinos);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un rhinocéros.");
+            }
+        }
+
+        /**
+         * Déduit 40$ du joueur et instancie un nouveau Buffle
+         */
+        private void buffle40ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                //Buffle buffle = new Buffle(Buffle.Nombre_Buffles);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un buffle.");
+            }
+        }
+
+        /**
+         * Ajoute ou retire de l'argent du joueur selon le modificateur indiqué.
+         * Met à jour l'affichage.
+         * 
+         * @param Montant - Quantité d'argent
+         * @param Modificateur - True => Ajouter / False => Retirer
+         */
+        private bool Modifier_Argent(int Montant, bool Modificateur)
         {
             String[] TextArray = affichageArgent.Text.Split('$');
             String TextArgent = TextArray[0];
-            int IntArgent = Int32.Parse(TextArgent);
+            int IntArgent;
+            bool AjoutReussi = true;
 
-            Player.Argent -= 35;
+            if (Modificateur)
+            {
+                Player.Argent += Montant;
+            }
+            else
+            {
+                if (Player.Argent - Montant >= 0)
+                {
+                    Player.Argent -= Montant;
+                }
+                else
+                {
+                    AjoutReussi = false;
+                }
+            }
+
             IntArgent = Player.Argent;
             TextArgent = IntArgent.ToString();
-            
-            affichageArgent.Text = TextArgent + "$";
-            
-            Lion lion = new Lion(0);
-            Console.WriteLine("Un lion a été ajouté");
+
+            affichageArgent.Text = TextArgent + " $";
+
+            return AjoutReussi;
         }
+
+        /**
+         * Ajoute un animal au compteur visuel.
+         */
+        private void Ajouter_Animal()
+        {
+            String[] TextArray = animauxToolStripMenuItem.Text.Split(' ');
+            String TextAnimaux = TextArray[0];
+            int NombreAnimaux = Int32.Parse(TextAnimaux);
+
+            TextAnimaux = (++NombreAnimaux).ToString();
+
+            animauxToolStripMenuItem.Text = NombreAnimaux + " Animaux";
+        }
+
+        
+
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
             menuDepart.Dispose();
