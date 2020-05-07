@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace WannabeFarmVille
         public Tuile()
         {
             EstUnObstacle = false;
+            Ligne = 0;
+            Colonne = 0;
         }
         public Tuile(int type)
         {
@@ -37,5 +40,7 @@ namespace WannabeFarmVille
             return image.Height;
         }
         public bool EstUnObstacle { get; set; }
+        public int Ligne { get; set; }
+        public int Colonne { get; set; }
     }
 }
