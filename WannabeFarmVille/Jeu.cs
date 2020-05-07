@@ -278,8 +278,8 @@ namespace WannabeFarmVille
         // Roule à chaque fois que le timer tick.
         private void TickTick(object sender, EventArgs e)
         {
-           Logic();
-           Refresh();
+             Logic();
+             Refresh();
         /*    Thread th = new Thread(thStart);
             th.Start();*/
         }
