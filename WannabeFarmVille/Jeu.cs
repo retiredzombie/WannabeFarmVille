@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,12 @@ namespace WannabeFarmVille
 
     public partial class Jeu : Form
     {
+        // OPTIONS
+
+        int FPS = 1;
+
+
+        // VARIABLES
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
         private Joueur Player;
@@ -28,6 +35,9 @@ namespace WannabeFarmVille
         List<PictureBox> visiteursPicBox;
         MenuDepart menuDepart;
         Random rand;
+        private bool gameover;
+        Stopwatch stopWatch;
+        DelegateRefresh refreshFormDelegate;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -35,6 +45,9 @@ namespace WannabeFarmVille
 
             this.menuDepart = menuDepart;
             Init();
+
+            Thread bouclePrincipale = new Thread(BouclePrincipaleDuJeu);
+            bouclePrincipale.Start();
         }
 
         /*
@@ -42,6 +55,8 @@ namespace WannabeFarmVille
          */
         private void Init()
         {
+            stopWatch = new Stopwatch();
+            stopWatch.Start();
             rand = new Random();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.DoubleBuffered = true;
@@ -54,6 +69,8 @@ namespace WannabeFarmVille
                     Carte[row, column] = new Tuile();
                 }
             }
+            refreshFormDelegate = new DelegateRefresh(Refresh);
+            FPS = 1 / FPS * 1000;
             RendreClotureSolide(2, 4);
             RendreClotureSolide(14, 4);
             RendreClotureSolide(14, 25);
@@ -75,6 +92,7 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
+            gameover = false;
             //Stream str = Properties.Resources.rd2;
             //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
             //snd.Play();
@@ -184,12 +202,13 @@ namespace WannabeFarmVille
                 {
                     int randX = rand.Next(3);
                     int randY = rand.Next(3);
-                while ( (randX == randY) ||
+                while ((randX == randY) ||
                         (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
                         (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
                         (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
                         (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height) ||
-                        (randX != 2 && randY != 2)
+                        (randX != 2 && randY != 2) ||
+                        (IsColliding(randX, randY, visiteurs[i]))
                       )
                     {
                         randX = rand.Next(3);
@@ -238,24 +257,81 @@ namespace WannabeFarmVille
             Console.WriteLine("LogicVisiteurs Fin.");
         }
 
+        private bool IsColliding(int randX, int randY, Visiteur visiteur)
+        {
+            bool colliding = false;
+
+            if (randX == 0)
+            {
+                visiteur.X -= tuile.Width;
+                visiteur.MovingX = -1;
+                visiteur.MovingY = 0;
+            }
+            else if (randX == 1)
+            {
+                visiteur.X += tuile.Width;
+                visiteur.MovingX = 1;
+                visiteur.MovingY = 0;
+            }
+
+            if (randY == 0)
+            {
+                visiteur.Y -= tuile.Height;
+                visiteur.MovingY = 1;
+                visiteur.MovingX = -0;
+            }
+            else if (randY == 1)
+            {
+                visiteur.Y += tuile.Height;
+                visiteur.MovingY = -1;
+                visiteur.MovingX = 0;
+            }
+
+
+            for (int i = 0; i < Carte.Length; i++)
+            {
+                for (int o = 0; o < Carte.GetLength(i); o++)
+                {
+                    int vX = visiteur.X;
+                    int vY = visiteur.Y;
+                    int tX = Carte[i, o].
+                }
+            }
+
+            return colliding;
+        }
+
+
         private void Jeu_Load(object sender, EventArgs e)
         {
-            BouclePrincipaleDuJeu();
+            /// FPS timer
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = (FPS); // FPS
+            timer.Tick += new EventHandler(TickTick);
+            timer.Start();
         }
+
+        public delegate void DelegateRefresh();
+        
 
         private void BouclePrincipaleDuJeu()
         {
-            // FPS timer
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-            timer.Interval = (1000); // FPS
-            timer.Tick += new EventHandler(TickTick);
-            timer.Start();
+            
+
+            while (!gameover)
+            {
+                if (stopWatch.ElapsedMilliseconds >= FPS)
+                {
+                    Logic();
+                    stopWatch.Restart();
+                }
+                
+            }
         }
 
         // Roule à chaque fois que le timer tick.
         private void TickTick(object sender, EventArgs e)
         {
-             Logic();
              Refresh();
         /*    Thread th = new Thread(thStart);
             th.Start();*/
@@ -433,6 +509,11 @@ namespace WannabeFarmVille
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
             menuDepart.Dispose();
+        }
+
+        private void PicUpRight_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+
         }
     }
 }
