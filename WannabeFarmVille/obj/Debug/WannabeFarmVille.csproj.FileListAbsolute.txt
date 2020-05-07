@@ -10,7 +10,7 @@ D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVil
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csproj.CoreCompileInputs.cache
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.exe
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.pdb
-E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\Resources\joeExotic.png
+E:\Prog VisualStudio\WannabeFarsmVille\WannabeFarmVille\bin\Debug\Resources\joeExotic.png
 E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe.config
 E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe
 E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.pdb
