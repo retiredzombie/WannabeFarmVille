@@ -148,6 +148,7 @@
             this.PicUpRight.Size = new System.Drawing.Size(12, 17);
             this.PicUpRight.TabIndex = 1;
             this.PicUpRight.TabStop = false;
+            this.PicUpRight.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.PicUpRight_LoadCompleted);
             // 
             // menu_haut
             // 
