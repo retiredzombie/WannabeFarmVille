@@ -291,13 +291,12 @@ namespace WannabeFarmVille
             }
 
 
-            for (int i = 0; i < Carte.Length; i++)
+            for (int i = 0; i < Carte.GetLength(1); i++)
             {
-                for (int o = 0; o < Carte.GetLength(i); o++)
+                for (int o = 0; o < Carte.GetLength(0); o++)
                 {
                     int vX = visiteur.X;
                     int vY = visiteur.Y;
-                    int tX = Carte[i, o].
                 }
             }
 
