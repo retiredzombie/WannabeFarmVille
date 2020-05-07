@@ -30,6 +30,7 @@ namespace WannabeFarmVille
         private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
+        private System.Media.SoundPlayer snd;
         ThreadStart thStart; 
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
@@ -99,7 +100,7 @@ namespace WannabeFarmVille
             //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
             //snd.Play();
             Stream str = Properties.Resources.rd2;
-            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd = new System.Media.SoundPlayer(str);
             snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
             thStart = delegate { this.VisiteurThread(); };
@@ -378,6 +379,10 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.U)
             {
                 MessageBox.Show("(" + Player.CurrentRow + "," + Player.CurrentColumn + ")");
+            }
+            if(e.KeyCode == Keys.M)
+            {
+                snd.Stop();
             }
             if (e.KeyCode == Keys.S)
             {
