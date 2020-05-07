@@ -299,6 +299,17 @@ namespace WannabeFarmVille
                 {
                     int vX = visiteur.X;
                     int vY = visiteur.Y;
+                    int vW = visiteur.Width;
+                    int vH = visiteur.Height;
+                    int tS = 32;
+                    int tX = Carte[o, i].Colonne * tS;
+                    int tY = Carte[o, i].Ligne * tS;
+
+
+                    if (vX > tX && vX < tX + tS && vY > tY && vY < tY + tS)
+                    {
+                        colliding = true;
+                    }
                 }
             }
 
