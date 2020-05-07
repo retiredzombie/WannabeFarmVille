@@ -72,8 +72,8 @@ namespace WannabeFarmVille
             refreshFormDelegate = new DelegateRefresh(Refresh);
             FPS = 1 / FPS * 1000;
             RendreClotureSolide(2, 4);
-            RendreClotureSolide(14, 4);
-            RendreClotureSolide(14, 25);
+            RendreClotureSolide(15, 4);
+            RendreClotureSolide(15, 25);
             RendreClotureSolide(2, 25);
             PicUpRight.Size = new Size(32, 32);
             PicUpRight.Location = new Point(0, 32);
@@ -96,6 +96,9 @@ namespace WannabeFarmVille
             //Stream str = Properties.Resources.rd2;
             //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
             //snd.Play();
+            Stream str = Properties.Resources.rd2;
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
             thStart = delegate { this.VisiteurThread(); };
             visiteursPicBox = new List<PictureBox>();

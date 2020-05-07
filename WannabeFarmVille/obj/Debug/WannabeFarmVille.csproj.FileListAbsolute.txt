@@ -28,3 +28,8 @@ C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\Wan
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csproj.CoreCompileInputs.cache
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.exe
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.pdb
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\Resources\joeExotic.png
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe.config
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.pdb
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csprojAssemblyReference.cache
