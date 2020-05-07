@@ -182,8 +182,8 @@ namespace WannabeFarmVille
             
                 for (int i = 0; i < visiteurs.Count; i++)
                 {
-                    int randX = new Random().Next(3);
-                    int randY = new Random().Next(3);
+                    int randX = rand.Next(3);
+                    int randY = rand.Next(3);
                 while ( (randX == randY) ||
                         (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
                         (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
@@ -192,8 +192,8 @@ namespace WannabeFarmVille
                         (randX != 2 && randY != 2)
                       )
                     {
-                        randX = new Random().Next(3);
-                        randY = new Random().Next(3);
+                        randX = rand.Next(3);
+                        randY = rand.Next(3);
                     }
 
                     if (randX == 0)
