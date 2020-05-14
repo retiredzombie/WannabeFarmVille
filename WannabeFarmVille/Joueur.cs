@@ -13,13 +13,16 @@ namespace WannabeFarmVille
     /// </summary>
     class Joueur: Movable
     {
+        private int profitTotal;
+
         public Joueur(PictureBox PicUpLeft, PictureBox PicUpRight, PictureBox PicDownLeft, PictureBox PicDownRight,
             PictureBox PicLeftLeft, PictureBox PicLeftRight, PictureBox PicRightLeft, PictureBox PicRightRight, int CurrentRow,
             int CurrentColumn, int X, int Y, Tuile[,] carte)       
                : base(PicUpLeft, PicUpRight, PicDownLeft, PicDownRight, PicLeftLeft, PicLeftRight, PicRightLeft,
                        PicRightRight, CurrentRow, CurrentColumn, X, Y, carte)
         {
-            Argent = 100;
+            this.Argent = 100;
+            this.profitTotal = this.Argent;
             X = 0;
             Y = 0;
             CurrentRow = 0;
@@ -48,6 +51,7 @@ namespace WannabeFarmVille
         public Point JoeRightRightLocation { get; set; }
         public PictureBox JoeRightLeft { get; set; }
         public PictureBox CurrentSprite { get; set; }
+        public int ProfitTotal { get => profitTotal; set => profitTotal = value; }
 
         public void RetirerArgent(int cout)
         {
@@ -57,6 +61,8 @@ namespace WannabeFarmVille
             {
                 this.Argent = 0;
             }
+
+            this.profitTotal = this.Argent;
         }
 
         public void AjouterArgent(int cout)

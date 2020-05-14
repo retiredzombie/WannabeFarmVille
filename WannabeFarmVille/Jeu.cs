@@ -27,13 +27,14 @@ namespace WannabeFarmVille
         // VARIABLES
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
-        int intFPS, coutConcierge;
+        int intFPS;
         private Joueur Player;
         private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
         private System.Media.SoundPlayer snd;
         Stopwatch stopwatchPayerConcierges;
+        Stopwatch stopwatchJeu;
         ThreadStart thStart; 
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
@@ -45,6 +46,8 @@ namespace WannabeFarmVille
         int tailleTuile;
         List<Dechet> dechets;
         List<Concierge> concierges;
+        Thread bouclePrincipale;
+        DateTime datejeu;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -62,11 +65,12 @@ namespace WannabeFarmVille
          */
         private void Init()
         {
+            datejeu = DateTime.Now;
             stopWatch = new Stopwatch();
+            stopwatchJeu = new Stopwatch();
             stopwatchPayerConcierges = new Stopwatch();
             stopwatchPayerConcierges.Start();
             concierges = new List<Concierge>();
-            coutConcierge = 2;
             stopWatch.Start();
             rand = new Random();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -188,6 +192,8 @@ namespace WannabeFarmVille
 
             this.affichageArgent.Text = this.Player.Argent.ToString() + "$";
 
+            this.dateToolStripMenuItem.Text = this.datejeu.Date.ToString("dd MMMM yyyy");
+
             g.DrawImage(Properties.Resources.Background_game, 0, 0, this.Width, this.Height);
 
             for (int i = 0; i < visiteurs.Count; i++)
@@ -220,6 +226,13 @@ namespace WannabeFarmVille
         {
             LogicVisiteurs();
             LogicConcierges();
+
+            if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
+            {
+                this.datejeu = this.datejeu.AddDays(1);
+
+                this.stopwatchJeu.Restart();
+            }
         }
 
         /*
@@ -297,111 +310,6 @@ namespace WannabeFarmVille
                 
                 Console.WriteLine("LogicVisiteurs Fin.");
         }
-
-        /*
-         * Fait bouger les concierges.
-         */
-        private void LogicConcierges()
-        {
-
-            for (int i = 0; i < concierges.Count; i++)
-            {
-                int randX = rand.Next(3);
-                int randY = rand.Next(3);
-
-                while ((randX == randY) ||
-                        (randY == 0 && concierges[i].Y - tuile.Height <= 0 + tuile.Height) ||
-                        (randY == 1 && concierges[i].Y + tuile.Height >= this.Height - tuile.Height) ||
-                        (randX == 0 && concierges[i].X - tuile.Width <= 0 + tuile.Width) ||
-                        (randX == 1 && concierges[i].X + tuile.Width >= this.Width - tuile.Height) ||
-                        (randX != 2 && randY != 2) //||
-                                                   //(IsColliding(randX, randY, visiteurs[i]))
-                        )
-                {
-                    randX = rand.Next(3);
-                    randY = rand.Next(3);
-                }
-
-                int vX = concierges[i].X / this.tailleTuile;
-                int vY = concierges[i].Y / this.tailleTuile;
-
-                Console.WriteLine("vX = " + vX);
-                Console.WriteLine("vY = " + vY);
-
-                if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
-                {
-                    concierges[i].X -= tuile.Width;
-                    concierges[i].MovingX = -1;
-                    concierges[i].MovingY = 0;
-                }
-                else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
-                {
-                    concierges[i].X += tuile.Width;
-                    concierges[i].MovingX = 1;
-                    concierges[i].MovingY = 0;
-                }
-
-                if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 4 && vX <= 13) && !(vY >= 3 && vY <= 13 && vX >= 25 && vX <= 34) && !(vY >= 16 && vY <= 26 && vX >= 4 && vX <= 13) && !(vY >= 16 && vY <= 26 && vX >= 25 && vX <= 34))
-                {
-                    concierges[i].Y -= tuile.Height;
-                    concierges[i].MovingY = 1;
-                    concierges[i].MovingX = 0;
-                }
-                else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 4 && vX <= 13) && !(vY >= 1 && vY <= 10 && vX >= 25 && vX <= 34) && !(vY >= 14 && vY <= 24 && vX >= 4 && vX <= 13) && !(vY >= 14 && vY <= 24 && vX >= 25 && vX <= 34))
-                {
-                    concierges[i].Y += tuile.Height;
-                    concierges[i].MovingY = -1;
-                    concierges[i].MovingX = 0;
-                }
-
-                concierges[i].ReloadImages();
-
-                int cX = concierges[i].X;
-                int cY = concierges[i].Y;
-
-                //Ramasser déchets.
-
-                for (int d = 0; d < dechets.Count; d++)
-                {
-                    int dX = dechets[d].X;
-                    int dY = dechets[d].Y;
-
-                    if (dX == cX && dY == cY)
-                    {
-                        dechets.RemoveAt(d);
-                    }
-                }
-
-
-                PayerConcierges();
-            }
-;
-        }
-
-        private void PayerConcierges()
-        {
-            if (stopwatchPayerConcierges.Elapsed.TotalSeconds >= 60)
-            {
-                int cout = this.concierges.Count * coutConcierge;
-
-                this.Player.RetirerArgent(cout);
-
-                stopwatchPayerConcierges.Restart();
-            }
-        }
-
-        public bool AssezArgent(int cout)
-        {
-            bool assez = true;
-
-            if (this.Player.Argent < cout)
-            {
-                assez = false;
-            }
-
-            return assez;
-        }
-
 
         /*
          * Un visiteur a certaines chances d'échapper un déchet.
@@ -503,8 +411,6 @@ namespace WannabeFarmVille
 
         private void BouclePrincipaleDuJeu()
         {
-            
-
             while (!gameover)
             {
                 if (stopWatch.ElapsedMilliseconds >= FPS)
@@ -536,8 +442,8 @@ namespace WannabeFarmVille
 
         private void NewConcierge()
         {
-            int cX = Player.CurrentColumn * tailleTuile;
-            int cY = Player.CurrentRow * tailleTuile;
+            int cX = Player.X * tailleTuile;
+            int cY = Player.Y * tailleTuile;
 
             concierges.Add(new Concierge(cX, cY));
         }
@@ -751,37 +657,23 @@ namespace WannabeFarmVille
                 }
             }
 
+            Player.Argent -= 35;
             IntArgent = Player.Argent;
             TextArgent = IntArgent.ToString();
-
-            affichageArgent.Text = TextArgent + " $";
-
-            return AjoutReussi;
-        }
-
-        /**
-         * Ajoute un animal au compteur visuel.
-         */
-        private void Ajouter_Animal()
-        {
-            String[] TextArray = animauxToolStripMenuItem.Text.Split(' ');
-            String TextAnimaux = TextArray[0];
-            int NombreAnimaux = Int32.Parse(TextAnimaux);
-
-            TextAnimaux = (++NombreAnimaux).ToString();
-
-            animauxToolStripMenuItem.Text = NombreAnimaux + " Animaux";
+            
+            affichageArgent.Text = TextArgent + "$";
+            
+            Lion lion = new Lion(0);
+            Console.WriteLine("Un lion a été ajouté");
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            snd.Stop();
-            snd.Dispose();
             menuDepart.Dispose();
         }
 
         private void PicUpRight_LoadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-
+            
         }
 
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)

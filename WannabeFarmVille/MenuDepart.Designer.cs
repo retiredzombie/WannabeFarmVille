@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuDepart));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitre = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,11 +52,23 @@
             this.lblTitre.BackColor = System.Drawing.Color.Transparent;
             this.lblTitre.Font = new System.Drawing.Font("Comic Sans MS", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitre.ForeColor = System.Drawing.Color.Red;
-            this.lblTitre.Location = new System.Drawing.Point(25, 9);
+            this.lblTitre.Location = new System.Drawing.Point(57, 9);
             this.lblTitre.Name = "lblTitre";
-            this.lblTitre.Size = new System.Drawing.Size(1207, 135);
+            this.lblTitre.Size = new System.Drawing.Size(1231, 540);
             this.lblTitre.TabIndex = 3;
-            this.lblTitre.Text = "TIGER KING: THE GAME";
+            this.lblTitre.Text = "LION (AND OTHER \r\nIRRELVANT ANIMALS \r\nTHAT ARE NOT TIGERS)\r\nKING: THE GAME";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(1072, 686);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(179, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "<- Ceci n\'est pas un tigre";
             // 
             // MenuDepart
             // 
@@ -63,6 +76,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::WannabeFarmVille.Properties.Resources.tigerKingRezize;
             this.ClientSize = new System.Drawing.Size(1264, 921);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTitre);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -79,5 +93,6 @@
         #endregion
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblTitre;
+        private System.Windows.Forms.Label label1;
     }
 }
