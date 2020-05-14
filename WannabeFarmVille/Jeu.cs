@@ -50,6 +50,9 @@ namespace WannabeFarmVille
 
             this.menuDepart = menuDepart;
             Init();
+
+            Thread bouclePrincipale = new Thread(BouclePrincipaleDuJeu);
+            bouclePrincipale.Start();
         }
 
         /*
@@ -99,6 +102,7 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
+            thStart = delegate { this.VisiteurThread(); };
             gameover = false;
             tailleTuile = 32;
             //Stream str = Properties.Resources.rd2;
@@ -197,6 +201,10 @@ namespace WannabeFarmVille
                 g.DrawImage(dechets[i].Image, dechets[i].X, dechets[i].Y, 32, 32);
             }
 
+            for (int i = 0; i < concierges.Count; i++)
+            {
+                g.DrawImage(concierges[i].Image, concierges[i].X, concierges[i].Y, 32, 32);
+            }
         }
 
         /* Logique du jeu (1x par tick).
@@ -410,7 +418,15 @@ namespace WannabeFarmVille
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            NewConcierge();
+        }
 
+        private void NewConcierge()
+        {
+            int cX = Player.X * tailleTuile;
+            int cY = Player.Y * tailleTuile;
+
+            concierges.Add(new Concierge(cX, cY));
         }
 
         private void dateToolStripMenuItem_Click(object sender, EventArgs e)
