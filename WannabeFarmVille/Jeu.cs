@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTilesetMario;
+using WannabeFarmVille.Animaux;
 using WannabeFarmVille.Properties;
 
 namespace WannabeFarmVille
@@ -32,11 +33,8 @@ namespace WannabeFarmVille
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
         private System.Media.SoundPlayer snd;
-<<<<<<< HEAD
-=======
         Stopwatch stopwatchPayerConcierges;
         Stopwatch stopwatchJeu;
->>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
         ThreadStart thStart; 
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
@@ -48,11 +46,8 @@ namespace WannabeFarmVille
         int tailleTuile;
         List<Dechet> dechets;
         List<Concierge> concierges;
-<<<<<<< HEAD
-=======
         Thread bouclePrincipale;
         DateTime datejeu;
->>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -72,12 +67,9 @@ namespace WannabeFarmVille
         {
             datejeu = DateTime.Now;
             stopWatch = new Stopwatch();
-<<<<<<< HEAD
-=======
             stopwatchJeu = new Stopwatch();
             stopwatchPayerConcierges = new Stopwatch();
             stopwatchPayerConcierges.Start();
->>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
             concierges = new List<Concierge>();
             stopWatch.Start();
             rand = new Random();
@@ -198,13 +190,10 @@ namespace WannabeFarmVille
         {
             g = e.Graphics;
 
-<<<<<<< HEAD
-=======
             this.affichageArgent.Text = this.Player.Argent.ToString() + "$";
 
             this.dateToolStripMenuItem.Text = this.datejeu.Date.ToString("dd MMMM yyyy");
 
->>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
             g.DrawImage(Properties.Resources.Background_game, 0, 0, this.Width, this.Height);
 
             for (int i = 0; i < visiteurs.Count; i++)
@@ -518,13 +507,155 @@ namespace WannabeFarmVille
             }
         }
 
-        // Déduit 35$ du joueur et crée un nouveau Lion
-        // NE FONCTIONNE PAS
+        /**
+         * Déduit 20$ du joueur et instancie un nouveau Mouton
+         */
+        private void mouton20ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(20, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Mouton mouton = new Mouton(Mouton.Nombre_Moutons);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un mouton.");
+            }
+        }
+
+        /**
+         * Déduit 30$ du joueur et instancie un nouveau Grizzly
+         */
+        private void grizzly30ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(30, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Grizzly grizzly = new Grizzly(Grizzly.Nombre_Grizzlys);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un grizzly.");
+            }
+        }
+
+        /**
+         * Déduit 35$ du joueur et instancie un nouveau Lion
+         */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(35, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Lion lion = new Lion(Lion.Nombre_Lions);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
+            }
+        }
+
+        /**
+         * Déduit 50$ du joueur et instancie une nouvelle Licorne
+         */
+        private void licorne50ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(50, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Licorne licorne = new Licorne(Licorne.Nombre_Licornes);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter une licorne.");
+            }
+        }
+
+        /**
+         * Déduit 40$ du joueur et instancie un nouveau Rhinocéros
+         */
+        private void rhinocéros40ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Rhino rhino = new Rhino(Rhino.Nombre_Rhinos);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un rhinocéros.");
+            }
+        }
+
+        /**
+         * Déduit 40$ du joueur et instancie un nouveau Buffle
+         */
+        private void buffle40ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Buffle buffle = new Buffle(Buffle.Nombre_Buffles);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un buffle.");
+            }
+        }
+
+        /**
+         * Ajoute ou retire de l'argent du joueur selon le modificateur indiqué.
+         * Met à jour l'affichage.
+         * 
+         * @param Montant - Quantité d'argent
+         * @param Modificateur - True => Ajouter / False => Retirer
+         */
+        private bool Modifier_Argent(int Montant, bool Modificateur)
         {
             String[] TextArray = affichageArgent.Text.Split('$');
             String TextArgent = TextArray[0];
-            int IntArgent = Int32.Parse(TextArgent);
+            int IntArgent;
+            bool AjoutReussi = true;
+
+            if (Modificateur)
+            {
+                Player.AjouterArgent(Montant);
+            }
+            else
+            {
+                if (Player.Argent - Montant >= 0)
+                {
+                    Player.RetirerArgent(Montant);
+                }
+                else
+                {
+                    AjoutReussi = false;
+                }
+            }
 
             Player.Argent -= 35;
             IntArgent = Player.Argent;

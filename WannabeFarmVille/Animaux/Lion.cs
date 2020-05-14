@@ -7,17 +7,18 @@ using System.Timers;
 
 namespace WannabeFarmVille
 {
-    class Lion
+    class Lion : Animal
     {
         public static int Nombre_Lions = 0;
 
         private const int MS = 1000;
+
         // Toutes les durées sont en "jours"
-        private int Gestation { get; set; } = 110;
-        private int Croissance { get; set; } = 110;
-        private int Faim { get; set; } = 120;
-        private int Genre { get; set; }
-        private int ID { get; set; }
+        private int Gestation = 110;
+        private int Croissance = 110;
+        private int Faim = 120;
+        private int Genre; // 1 = mâle, 0 = femelle
+        private int ID = 0;
         private Timer CompteARebours { get; set; }
 
         private const int Jour = MS; // En millisecondes
@@ -25,10 +26,9 @@ namespace WannabeFarmVille
         // Commence le timer et assigne un id à l'animal
         public Lion(int id)
         {
-            Nombre_Lions++;
             this.ID = id;
+            Nombre_Lions++;
             Commencer_Timer(CompteARebours, Jour);
-            
         }
 
         /**
@@ -72,6 +72,26 @@ namespace WannabeFarmVille
                 Faim = 120;
                 Console.WriteLine("Fin de la Faim");
             }
+        }
+
+        public override int getGestation()
+        {
+            return Gestation;
+        }
+
+        public override int getCroissance()
+        {
+            return Croissance;
+        }
+
+        public override int getFaim()
+        {
+            return Faim;
+        }
+
+        public override int getGenre()
+        {
+            return Genre;
         }
     }
 }
