@@ -49,5 +49,16 @@ namespace WannabeFarmVille
         public PictureBox JoeRightLeft { get; set; }
         public PictureBox CurrentSprite { get; set; }
 
+        public void RetirerArgent(int cout)
+        {
+            this.Argent -= cout;
+
+            if (this.Argent < 0)
+            {
+                this.Argent = 0;
+            }
+
+
+        }
     }
 }

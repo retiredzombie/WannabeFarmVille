@@ -26,12 +26,13 @@ namespace WannabeFarmVille
         // VARIABLES
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
-        int intFPS;
+        int intFPS, coutConcierge;
         private Joueur Player;
         private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
         private System.Media.SoundPlayer snd;
+        Stopwatch stopwatchPayerConcierges;
         ThreadStart thStart; 
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
@@ -61,7 +62,10 @@ namespace WannabeFarmVille
         private void Init()
         {
             stopWatch = new Stopwatch();
+            stopwatchPayerConcierges = new Stopwatch();
+            stopwatchPayerConcierges.Start();
             concierges = new List<Concierge>();
+            coutConcierge = 2;
             stopWatch.Start();
             rand = new Random();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -180,6 +184,8 @@ namespace WannabeFarmVille
         protected override void OnPaint(PaintEventArgs e)
         {
             g = e.Graphics;
+
+            this.affichageArgent.Text = this.Player.Argent.ToString() + "$";
 
             g.DrawImage(Properties.Resources.Background_game, 0, 0, this.Width, this.Height);
 
@@ -349,8 +355,50 @@ namespace WannabeFarmVille
 
                 concierges[i].ReloadImages();
 
+                int cX = concierges[i].X;
+                int cY = concierges[i].Y;
+
+                //Ramasser déchets.
+
+                for (int d = 0; d < dechets.Count; d++)
+                {
+                    int dX = dechets[d].X;
+                    int dY = dechets[d].Y;
+
+                    if (dX == cX && dY == cY)
+                    {
+                        dechets.RemoveAt(d);
+                    }
+                }
+
+
+                PayerConcierges();
             }
 ;
+        }
+
+        private void PayerConcierges()
+        {
+            if (stopwatchPayerConcierges.Elapsed.TotalSeconds >= 60)
+            {
+                int cout = this.concierges.Count * coutConcierge;
+
+                this.Player.RetirerArgent(cout);
+
+                stopwatchPayerConcierges.Restart();
+            }
+        }
+
+        public bool AssezArgent(int cout)
+        {
+            bool assez = true;
+
+            if (this.Player.Argent < cout)
+            {
+                assez = false;
+            }
+
+            return assez;
         }
 
 
