@@ -58,7 +58,7 @@ namespace WannabeFarmVille
         private void Init()
         {
             stopWatch = new Stopwatch();
-            concierges = List<Concierge>();
+            concierges = new List<Concierge>();
             stopWatch.Start();
             rand = new Random();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -332,7 +332,7 @@ namespace WannabeFarmVille
                 visiteur.MovingY = -1;
                 visiteur.MovingX = 0;
             }
-            */
+            
 
 
             for (int i = 0; i < Carte.GetLength(1); i++)
@@ -365,7 +365,7 @@ namespace WannabeFarmVille
             visiteur.MovingX = oldMovingY;
 
             return colliding;
-        }
+        }*/
 
 
         private void Jeu_Load(object sender, EventArgs e)
