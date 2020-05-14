@@ -47,7 +47,5 @@ namespace WannabeFarmVille
         public PictureBox JoeRightRight { get; set; }
         public Point JoeRightRightLocation { get; set; }
         public PictureBox JoeRightLeft { get; set; }
-        public PictureBox CurrentSprite { get; set; }
-
     }
 }
