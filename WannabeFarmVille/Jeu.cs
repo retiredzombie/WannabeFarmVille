@@ -212,6 +212,7 @@ namespace WannabeFarmVille
         public void Logic()
         {
             LogicVisiteurs();
+            LogicConcierges();
         }
 
         /*
@@ -289,6 +290,69 @@ namespace WannabeFarmVille
                 
                 Console.WriteLine("LogicVisiteurs Fin.");
         }
+
+        /*
+         * Fait bouger les concierges.
+         */
+        private void LogicConcierges()
+        {
+
+            for (int i = 0; i < concierges.Count; i++)
+            {
+                int randX = rand.Next(3);
+                int randY = rand.Next(3);
+
+                while ((randX == randY) ||
+                        (randY == 0 && concierges[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                        (randY == 1 && concierges[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                        (randX == 0 && concierges[i].X - tuile.Width <= 0 + tuile.Width) ||
+                        (randX == 1 && concierges[i].X + tuile.Width >= this.Width - tuile.Height) ||
+                        (randX != 2 && randY != 2) //||
+                                                   //(IsColliding(randX, randY, visiteurs[i]))
+                        )
+                {
+                    randX = rand.Next(3);
+                    randY = rand.Next(3);
+                }
+
+                int vX = concierges[i].X / this.tailleTuile;
+                int vY = concierges[i].Y / this.tailleTuile;
+
+                Console.WriteLine("vX = " + vX);
+                Console.WriteLine("vY = " + vY);
+
+                if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
+                {
+                    concierges[i].X -= tuile.Width;
+                    concierges[i].MovingX = -1;
+                    concierges[i].MovingY = 0;
+                }
+                else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
+                {
+                    concierges[i].X += tuile.Width;
+                    concierges[i].MovingX = 1;
+                    concierges[i].MovingY = 0;
+                }
+
+                if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 4 && vX <= 13) && !(vY >= 3 && vY <= 13 && vX >= 25 && vX <= 34) && !(vY >= 16 && vY <= 26 && vX >= 4 && vX <= 13) && !(vY >= 16 && vY <= 26 && vX >= 25 && vX <= 34))
+                {
+                    concierges[i].Y -= tuile.Height;
+                    concierges[i].MovingY = 1;
+                    concierges[i].MovingX = 0;
+                }
+                else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 4 && vX <= 13) && !(vY >= 1 && vY <= 10 && vX >= 25 && vX <= 34) && !(vY >= 14 && vY <= 24 && vX >= 4 && vX <= 13) && !(vY >= 14 && vY <= 24 && vX >= 25 && vX <= 34))
+                {
+                    concierges[i].Y += tuile.Height;
+                    concierges[i].MovingY = -1;
+                    concierges[i].MovingX = 0;
+                }
+
+                concierges[i].ReloadImages();
+
+            }
+;
+        }
+
 
         /*
          * Un visiteur a certaines chances d'échapper un déchet.
@@ -423,8 +487,8 @@ namespace WannabeFarmVille
 
         private void NewConcierge()
         {
-            int cX = Player.X * tailleTuile;
-            int cY = Player.Y * tailleTuile;
+            int cX = Player.CurrentColumn * tailleTuile;
+            int cY = Player.CurrentRow * tailleTuile;
 
             concierges.Add(new Concierge(cX, cY));
         }
@@ -487,6 +551,8 @@ namespace WannabeFarmVille
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
+            snd.Stop();
+            snd.Dispose();
             menuDepart.Dispose();
         }
 
