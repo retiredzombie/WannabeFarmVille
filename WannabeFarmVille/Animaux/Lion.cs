@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace WannabeFarmVille
 {
-    class Lion : IAnimal
+    class Lion : Animal
     {
         public static int Nombre_Lions = 0;
 
@@ -74,22 +74,22 @@ namespace WannabeFarmVille
             }
         }
 
-        public int getGestation()
+        public override int getGestation()
         {
             return Gestation;
         }
 
-        public int getCroissance()
+        public override int getCroissance()
         {
             return Croissance;
         }
 
-        public int getFaim()
+        public override int getFaim()
         {
             return Faim;
         }
 
-        public int getGenre()
+        public override int getGenre()
         {
             return Genre;
         }
