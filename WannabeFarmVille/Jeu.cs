@@ -42,6 +42,7 @@ namespace WannabeFarmVille
         DelegateRefresh refreshFormDelegate;
         int tailleTuile;
         List<Dechet> dechets;
+        List<Concierge> concierges;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -49,9 +50,6 @@ namespace WannabeFarmVille
 
             this.menuDepart = menuDepart;
             Init();
-
-            Thread bouclePrincipale = new Thread(BouclePrincipaleDuJeu);
-            bouclePrincipale.Start();
         }
 
         /*
@@ -60,6 +58,7 @@ namespace WannabeFarmVille
         private void Init()
         {
             stopWatch = new Stopwatch();
+            concierges = List<Concierge>();
             stopWatch.Start();
             rand = new Random();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -109,7 +108,6 @@ namespace WannabeFarmVille
             snd = new System.Media.SoundPlayer(str);
             snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
-            thStart = delegate { this.VisiteurThread(); };
             visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 10; i++)
             {
@@ -284,6 +282,9 @@ namespace WannabeFarmVille
                 Console.WriteLine("LogicVisiteurs Fin.");
         }
 
+        /*
+         * Un visiteur a certaines chances d'échapper un déchet.
+         */
         private void EchapeDechet(int x, int y)
         {
             int chance = this.rand.Next(0, 100);
@@ -298,7 +299,7 @@ namespace WannabeFarmVille
             }
         }
 
-        private bool IsColliding(int randX, int randY, Visiteur visiteur)
+        /*private bool IsColliding(int randX, int randY, Visiteur visiteur)
         {
             bool colliding = false;
 
@@ -331,6 +332,7 @@ namespace WannabeFarmVille
                 visiteur.MovingY = -1;
                 visiteur.MovingX = 0;
             }
+            */
 
 
             for (int i = 0; i < Carte.GetLength(1); i++)
