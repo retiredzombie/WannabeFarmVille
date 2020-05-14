@@ -32,6 +32,11 @@ namespace WannabeFarmVille
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
         private System.Media.SoundPlayer snd;
+<<<<<<< HEAD
+=======
+        Stopwatch stopwatchPayerConcierges;
+        Stopwatch stopwatchJeu;
+>>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
         ThreadStart thStart; 
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
@@ -43,6 +48,11 @@ namespace WannabeFarmVille
         int tailleTuile;
         List<Dechet> dechets;
         List<Concierge> concierges;
+<<<<<<< HEAD
+=======
+        Thread bouclePrincipale;
+        DateTime datejeu;
+>>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -60,7 +70,14 @@ namespace WannabeFarmVille
          */
         private void Init()
         {
+            datejeu = DateTime.Now;
             stopWatch = new Stopwatch();
+<<<<<<< HEAD
+=======
+            stopwatchJeu = new Stopwatch();
+            stopwatchPayerConcierges = new Stopwatch();
+            stopwatchPayerConcierges.Start();
+>>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
             concierges = new List<Concierge>();
             stopWatch.Start();
             rand = new Random();
@@ -181,6 +198,13 @@ namespace WannabeFarmVille
         {
             g = e.Graphics;
 
+<<<<<<< HEAD
+=======
+            this.affichageArgent.Text = this.Player.Argent.ToString() + "$";
+
+            this.dateToolStripMenuItem.Text = this.datejeu.Date.ToString("dd MMMM yyyy");
+
+>>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
             g.DrawImage(Properties.Resources.Background_game, 0, 0, this.Width, this.Height);
 
             for (int i = 0; i < visiteurs.Count; i++)
@@ -212,6 +236,14 @@ namespace WannabeFarmVille
         public void Logic()
         {
             LogicVisiteurs();
+            LogicConcierges();
+
+            if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
+            {
+                this.datejeu = this.datejeu.AddDays(1);
+
+                this.stopwatchJeu.Restart();
+            }
         }
 
         /*
@@ -390,8 +422,6 @@ namespace WannabeFarmVille
 
         private void BouclePrincipaleDuJeu()
         {
-            
-
             while (!gameover)
             {
                 if (stopWatch.ElapsedMilliseconds >= FPS)
