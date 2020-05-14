@@ -44,6 +44,7 @@ namespace WannabeFarmVille
         int tailleTuile;
         List<Dechet> dechets;
         List<Concierge> concierges;
+        Thread bouclePrincipale;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -52,7 +53,7 @@ namespace WannabeFarmVille
             this.menuDepart = menuDepart;
             Init();
 
-            Thread bouclePrincipale = new Thread(BouclePrincipaleDuJeu);
+            bouclePrincipale = new Thread(BouclePrincipaleDuJeu);
             bouclePrincipale.Start();
         }
 
@@ -773,9 +774,14 @@ namespace WannabeFarmVille
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
+            MessageBox.Show("Vous avez fait un profit de " + this.Player.ProfitTotal.ToString() + "$.");
+
+            this.bouclePrincipale.Abort();
+
             snd.Stop();
             snd.Dispose();
             menuDepart.Dispose();
+            this.Dispose();
         }
 
         private void PicUpRight_LoadCompleted(object sender, AsyncCompletedEventArgs e)
