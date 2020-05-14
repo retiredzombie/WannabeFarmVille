@@ -19,9 +19,14 @@ namespace WannabeFarmVille
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            Jeu jeu = new Jeu();
+            Jeu jeu = new Jeu(this);
             Hide();
             jeu.ShowDialog();
+        }
+
+        private void MenuDepart_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
