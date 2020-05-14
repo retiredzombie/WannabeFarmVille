@@ -33,6 +33,7 @@ namespace WannabeFarmVille
         private Graphics g;
         private System.Media.SoundPlayer snd;
         Stopwatch stopwatchPayerConcierges;
+        Stopwatch stopwatchJeu;
         ThreadStart thStart; 
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
@@ -45,6 +46,7 @@ namespace WannabeFarmVille
         List<Dechet> dechets;
         List<Concierge> concierges;
         Thread bouclePrincipale;
+        DateTime datejeu;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -62,7 +64,9 @@ namespace WannabeFarmVille
          */
         private void Init()
         {
+            datejeu = DateTime.Now;
             stopWatch = new Stopwatch();
+            stopwatchJeu = new Stopwatch();
             stopwatchPayerConcierges = new Stopwatch();
             stopwatchPayerConcierges.Start();
             concierges = new List<Concierge>();
@@ -188,6 +192,8 @@ namespace WannabeFarmVille
 
             this.affichageArgent.Text = this.Player.Argent.ToString() + "$";
 
+            this.dateToolStripMenuItem.Text = this.datejeu.Date.ToString("dd MMMM yyyy");
+
             g.DrawImage(Properties.Resources.Background_game, 0, 0, this.Width, this.Height);
 
             for (int i = 0; i < visiteurs.Count; i++)
@@ -220,6 +226,13 @@ namespace WannabeFarmVille
         {
             LogicVisiteurs();
             LogicConcierges();
+
+            if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
+            {
+                this.datejeu = this.datejeu.AddDays(1);
+
+                this.stopwatchJeu.Restart();
+            }
         }
 
         /*
@@ -503,8 +516,6 @@ namespace WannabeFarmVille
 
         private void BouclePrincipaleDuJeu()
         {
-            
-
             while (!gameover)
             {
                 if (stopWatch.ElapsedMilliseconds >= FPS)
