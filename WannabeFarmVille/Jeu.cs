@@ -443,5 +443,12 @@ namespace WannabeFarmVille
         {
 
         }
+
+        private void aideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Se déplacer: W,A,S,D" +
+                            "Arrêter la musique: M" +
+                            "Nourrir un animal: N");
+        }
     }
 }
