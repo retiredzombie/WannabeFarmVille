@@ -57,8 +57,11 @@ namespace WannabeFarmVille
             {
                 this.Argent = 0;
             }
+        }
 
-
+        public void AjouterArgent(int cout)
+        {
+            this.Argent += cout;
         }
     }
 }
