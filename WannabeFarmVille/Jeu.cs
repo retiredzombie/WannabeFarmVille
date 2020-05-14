@@ -40,6 +40,8 @@ namespace WannabeFarmVille
         private bool gameover;
         Stopwatch stopWatch;
         DelegateRefresh refreshFormDelegate;
+        int tailleTuile;
+        List<Dechet> dechets;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -64,6 +66,7 @@ namespace WannabeFarmVille
             this.DoubleBuffered = true;
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
             tuile = TilesetImageGenerator.GetTile(0);
+            dechets = new List<Dechet>();
             for (int row = 0; row < 28; row++)
             {
                 for (int column = 0; column < 40; column++)
@@ -98,6 +101,7 @@ namespace WannabeFarmVille
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
             gameover = false;
+            tailleTuile = 32;
             //Stream str = Properties.Resources.rd2;
             //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
             //snd.Play();
@@ -189,7 +193,12 @@ namespace WannabeFarmVille
 
                 g.DrawString(nom, font, drawBrush, new Point(nomX, nomY));
             }
-            
+
+            for (int i = 0; i < dechets.Count; i++)
+            {
+                g.DrawImage(dechets[i].Image, dechets[i].X, dechets[i].Y, 32, 32);
+            }
+
         }
 
         /* Logique du jeu (1x par tick).
@@ -206,63 +215,87 @@ namespace WannabeFarmVille
         {
             Console.WriteLine("LogicVisiteurs.");
             
-                for (int i = 0; i < visiteurs.Count; i++)
-                {
-                    int randX = rand.Next(3);
-                    int randY = rand.Next(3);
+            for (int i = 0; i < visiteurs.Count; i++)
+            {
+                int randX = rand.Next(3);
+                int randY = rand.Next(3);
+
                 while ((randX == randY) ||
                         (randY == 0 && visiteurs[i].Y - tuile.Height <= 0 + tuile.Height) ||
                         (randY == 1 && visiteurs[i].Y + tuile.Height >= this.Height - tuile.Height) ||
                         (randX == 0 && visiteurs[i].X - tuile.Width <= 0 + tuile.Width) ||
                         (randX == 1 && visiteurs[i].X + tuile.Width >= this.Width - tuile.Height) ||
-                        (randX != 2 && randY != 2) ||
-                        (IsColliding(randX, randY, visiteurs[i]))
-                      )
-                    {
-                        randX = rand.Next(3);
-                        randY = rand.Next(3);
-                    }
-
-                    if (randX == 0)
-                    { 
-                        visiteurs[i].X -= tuile.Width;
-                        visiteurs[i].MovingX = -1;
-                        visiteurs[i].MovingY = 0;
-                    } 
-                    else if (randX == 1)
-                    { 
-                        visiteurs[i].X += tuile.Width;
-                        visiteurs[i].MovingX = 1;
-                        visiteurs[i].MovingY = 0;
-                    }
-
-                    if (randY == 0)
-                    {
-                        visiteurs[i].Y -= tuile.Height;
-                        visiteurs[i].MovingY = 1;
-                        visiteurs[i].MovingX = -0;
-                    }
-                    else if (randY == 1)
-                    {
-                        visiteurs[i].Y += tuile.Height;
-                        visiteurs[i].MovingY = -1;
-                        visiteurs[i].MovingX = 0;
-                    }
-
-                    visiteurs[i].ReloadImages();
-
-                    /*
-                    string visiteurPBName = "visiteurPB" + i.ToString().Trim();
-                    Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
-                    PictureBox visiteurPB = (PictureBox)foundVisiteurs.First();
-                    if (randX == 0) visiteurPB.Location = new Point(visiteurPB.Location.X - tuile.Width, visiteurPB.Location.Y);
-                    else if (randX == 1) visiteurPB.Location = new Point(visiteurPB.Location.X + tuile.Width, visiteurPB.Location.Y);
-
-                    if (randY == 0) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y - tuile.Height);
-                    else if (randY == 1) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y + tuile.Height);
-                    */
+                        (randX != 2 && randY != 2) //||
+                        //(IsColliding(randX, randY, visiteurs[i]))
+                        )
+                {
+                    randX = rand.Next(3);
+                    randY = rand.Next(3);
                 }
-            Console.WriteLine("LogicVisiteurs Fin.");
+
+                int vX = visiteurs[i].X / this.tailleTuile;
+                int vY = visiteurs[i].Y / this.tailleTuile;
+
+                Console.WriteLine("vX = " + vX);
+                Console.WriteLine("vY = " + vY);
+                
+                if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
+                { 
+                    visiteurs[i].X -= tuile.Width;
+                    visiteurs[i].MovingX = -1;
+                    visiteurs[i].MovingY = 0;
+                } 
+                else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
+                { 
+                    visiteurs[i].X += tuile.Width;
+                    visiteurs[i].MovingX = 1;
+                    visiteurs[i].MovingY = 0;
+                }
+
+                if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 4 && vX <= 13) && !(vY >= 3 && vY <= 13 && vX >= 25 && vX <= 34) && !(vY >= 16 && vY <= 26 && vX >= 4 && vX <= 13) && !(vY >= 16 && vY <= 26 && vX >= 25 && vX <= 34))
+                {
+                    visiteurs[i].Y -= tuile.Height;
+                    visiteurs[i].MovingY = 1;
+                    visiteurs[i].MovingX = 0;
+                }
+                else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 4 && vX <= 13) && !(vY >= 1 && vY <= 10 && vX >= 25 && vX <= 34) && !(vY >= 14 && vY <= 24 && vX >= 4 && vX <= 13) && !(vY >= 14 && vY <= 24 && vX >= 25 && vX <= 34))
+                {
+                    visiteurs[i].Y += tuile.Height;
+                    visiteurs[i].MovingY = -1;
+                    visiteurs[i].MovingX = 0;
+                }
+
+                visiteurs[i].ReloadImages();
+
+                EchapeDechet(vX, vY);
+
+                /*
+                string visiteurPBName = "visiteurPB" + i.ToString().Trim();
+                Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
+                PictureBox visiteurPB = (PictureBox)foundVisiteurs.First();
+                if (randX == 0) visiteurPB.Location = new Point(visiteurPB.Location.X - tuile.Width, visiteurPB.Location.Y);
+                else if (randX == 1) visiteurPB.Location = new Point(visiteurPB.Location.X + tuile.Width, visiteurPB.Location.Y);
+
+                if (randY == 0) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y - tuile.Height);
+                else if (randY == 1) visiteurPB.Location = new Point(visiteurPB.Location.X, visiteurPB.Location.Y + tuile.Height);
+                */
+            }
+                
+                Console.WriteLine("LogicVisiteurs Fin.");
+        }
+
+        private void EchapeDechet(int x, int y)
+        {
+            int chance = this.rand.Next(0, 100);
+            int limite = 1;
+
+            if (chance < limite)
+            {
+                x *= tailleTuile;
+                y *= tailleTuile;
+
+                this.dechets.Add(new Dechet(x, y));
+            }
         }
 
         private bool IsColliding(int randX, int randY, Visiteur visiteur)
