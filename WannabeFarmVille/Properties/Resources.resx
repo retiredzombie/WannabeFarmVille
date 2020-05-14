@@ -262,4 +262,76 @@
   <data name="trash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\trash-bags-needed-garbage-bag-cartoon-11562886153l2nznq4tzq.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="buffleLeftDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesBuffle\buffleLeftDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="buffleLeftUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesBuffle\buffleLeftUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="buffleRightDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesBuffle\buffleRightDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="buffleRightUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesBuffle\buffleRightUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grizzlyLeftDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesGrizzly\grizzlyLeftDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grizzlyLeftUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesGrizzly\grizzlyLeftUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grizzlyRightDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesGrizzly\grizzlyRightDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grizzlyRightUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesGrizzly\grizzlyRightUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="licorneLeftDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesLicorne\licorneLeftDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="licorneLeftUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesLicorne\licorneLeftUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="licorneRightDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesLicorne\licorneRightDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="licorneRightUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesLicorne\licorneRightUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lionLeftDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesLion\lionLeftDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lionLeftUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesLion\lionLeftUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lionRightDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesLion\lionRightDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lionRightUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesLion\lionRightUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="moutonLeftDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesMouton\moutonLeftDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="moutonLeftUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesMouton\moutonLeftUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="moutonRightDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesMouton\moutonRightDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="moutonRightUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesMouton\moutonRightUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rhinoLeftDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesRhinoceoros\rhinoLeftDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rhinoLeftUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesRhinoceoros\rhinoLeftUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rhinoRightDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesRhinoceoros\rhinoRightDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rhinoRightUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpritesAnimaux\spritesRhinoceoros\rhinoRightUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
