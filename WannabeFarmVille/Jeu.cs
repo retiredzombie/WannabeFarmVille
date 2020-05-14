@@ -42,6 +42,7 @@ namespace WannabeFarmVille
         DelegateRefresh refreshFormDelegate;
         int tailleTuile;
         List<Dechet> dechets;
+        List<Concierge> concierges;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -60,6 +61,7 @@ namespace WannabeFarmVille
         private void Init()
         {
             stopWatch = new Stopwatch();
+            concierges = new List<Concierge>();
             stopWatch.Start();
             rand = new Random();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -100,6 +102,7 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
+            thStart = delegate { this.VisiteurThread(); };
             gameover = false;
             tailleTuile = 32;
             //Stream str = Properties.Resources.rd2;
@@ -109,7 +112,6 @@ namespace WannabeFarmVille
             snd = new System.Media.SoundPlayer(str);
             snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
-            thStart = delegate { this.VisiteurThread(); };
             visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 10; i++)
             {
@@ -199,6 +201,10 @@ namespace WannabeFarmVille
                 g.DrawImage(dechets[i].Image, dechets[i].X, dechets[i].Y, 32, 32);
             }
 
+            for (int i = 0; i < concierges.Count; i++)
+            {
+                g.DrawImage(concierges[i].Image, concierges[i].X, concierges[i].Y, 32, 32);
+            }
         }
 
         /* Logique du jeu (1x par tick).
@@ -284,6 +290,9 @@ namespace WannabeFarmVille
                 Console.WriteLine("LogicVisiteurs Fin.");
         }
 
+        /*
+         * Un visiteur a certaines chances d'échapper un déchet.
+         */
         private void EchapeDechet(int x, int y)
         {
             int chance = this.rand.Next(0, 100);
@@ -298,7 +307,7 @@ namespace WannabeFarmVille
             }
         }
 
-        private bool IsColliding(int randX, int randY, Visiteur visiteur)
+        /*private bool IsColliding(int randX, int randY, Visiteur visiteur)
         {
             bool colliding = false;
 
@@ -331,6 +340,7 @@ namespace WannabeFarmVille
                 visiteur.MovingY = -1;
                 visiteur.MovingX = 0;
             }
+            
 
 
             for (int i = 0; i < Carte.GetLength(1); i++)
@@ -363,7 +373,7 @@ namespace WannabeFarmVille
             visiteur.MovingX = oldMovingY;
 
             return colliding;
-        }
+        }*/
 
 
         private void Jeu_Load(object sender, EventArgs e)
@@ -408,7 +418,15 @@ namespace WannabeFarmVille
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            NewConcierge();
+        }
 
+        private void NewConcierge()
+        {
+            int cX = Player.X * tailleTuile;
+            int cY = Player.Y * tailleTuile;
+
+            concierges.Add(new Concierge(cX, cY));
         }
 
         private void dateToolStripMenuItem_Click(object sender, EventArgs e)
