@@ -773,6 +773,7 @@ namespace WannabeFarmVille
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
+            MessageBox.Show("Vous avez fait un profit de " + this.Player.ProfitTotal.ToString() + "$.");
             snd.Stop();
             snd.Dispose();
             menuDepart.Dispose();
