@@ -107,6 +107,30 @@
     <None Include="Ressources\TileSet\zoo_tileset.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SpritesAnimaux\spritesRhinoceoros\rhinoRightUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesRhinoceoros\rhinoRightDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesRhinoceoros\rhinoLeftUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesRhinoceoros\rhinoLeftDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesMouton\moutonRightUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesMouton\moutonRightDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesMouton\moutonLeftUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesMouton\moutonLeftDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesLion\lionRightUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesLion\lionRightDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesLion\lionLeftUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesLion\lionLeftDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesLicorne\licorneRightUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesLicorne\licorneRightDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesLicorne\licorneLeftUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesLicorne\licorneLeftDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesGrizzly\grizzlyRightUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesGrizzly\grizzlyRightDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesGrizzly\grizzlyLeftUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesGrizzly\grizzlyLeftDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesBuffle\buffleRightUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesBuffle\buffleRightDown.png" />
+    <None Include="Resources\SpritesAnimaux\spritesBuffle\buffleLeftUp.png" />
+    <None Include="Resources\SpritesAnimaux\spritesBuffle\buffleLeftDown.png" />
     <None Include="Resources\trash-bags-needed-garbage-bag-cartoon-11562886153l2nznq4tzq.png" />
     <None Include="Resources\SpritesConcierge\ConUpRight.png" />
     <None Include="Resources\SpritesConcierge\ConUpLeft.png" />
