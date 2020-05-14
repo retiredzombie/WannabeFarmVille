@@ -33,3 +33,4 @@ C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\Wan
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.exe
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\bin\Debug\WannabeFarmVille.pdb
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csprojAssemblyReference.cache
+E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\Resources\joeExotic.png

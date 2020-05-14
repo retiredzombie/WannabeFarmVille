@@ -200,7 +200,6 @@
             // 
             // mouton20ToolStripMenuItem
             // 
-            this.mouton20ToolStripMenuItem.Enabled = false;
             this.mouton20ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mouton20ToolStripMenuItem.Name = "mouton20ToolStripMenuItem";
             this.mouton20ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
@@ -208,7 +207,6 @@
             // 
             // grizzly30ToolStripMenuItem
             // 
-            this.grizzly30ToolStripMenuItem.Enabled = false;
             this.grizzly30ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grizzly30ToolStripMenuItem.Name = "grizzly30ToolStripMenuItem";
             this.grizzly30ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
@@ -216,7 +214,6 @@
             // 
             // lion35ToolStripMenuItem
             // 
-            this.lion35ToolStripMenuItem.Enabled = false;
             this.lion35ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lion35ToolStripMenuItem.Name = "lion35ToolStripMenuItem";
             this.lion35ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
@@ -225,7 +222,6 @@
             // 
             // buffle30ToolStripMenuItem
             // 
-            this.buffle30ToolStripMenuItem.Enabled = false;
             this.buffle30ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buffle30ToolStripMenuItem.Name = "buffle30ToolStripMenuItem";
             this.buffle30ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
@@ -233,7 +229,6 @@
             // 
             // rhinocéros40ToolStripMenuItem
             // 
-            this.rhinocéros40ToolStripMenuItem.Enabled = false;
             this.rhinocéros40ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rhinocéros40ToolStripMenuItem.Name = "rhinocéros40ToolStripMenuItem";
             this.rhinocéros40ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
@@ -241,7 +236,6 @@
             // 
             // buffle40ToolStripMenuItem
             // 
-            this.buffle40ToolStripMenuItem.Enabled = false;
             this.buffle40ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buffle40ToolStripMenuItem.Name = "buffle40ToolStripMenuItem";
             this.buffle40ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
