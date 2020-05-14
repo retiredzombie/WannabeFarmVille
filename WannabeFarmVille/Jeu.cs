@@ -26,14 +26,17 @@ namespace WannabeFarmVille
         // VARIABLES
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
-        int intFPS, coutConcierge;
+        int intFPS;
         private Joueur Player;
         private List<Visiteur> visiteurs;
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
         private System.Media.SoundPlayer snd;
+<<<<<<< HEAD
+=======
         Stopwatch stopwatchPayerConcierges;
         Stopwatch stopwatchJeu;
+>>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
         ThreadStart thStart; 
         Bitmap tuile;
         List<PictureBox> visiteursPicBox;
@@ -45,8 +48,11 @@ namespace WannabeFarmVille
         int tailleTuile;
         List<Dechet> dechets;
         List<Concierge> concierges;
+<<<<<<< HEAD
+=======
         Thread bouclePrincipale;
         DateTime datejeu;
+>>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -55,7 +61,7 @@ namespace WannabeFarmVille
             this.menuDepart = menuDepart;
             Init();
 
-            bouclePrincipale = new Thread(BouclePrincipaleDuJeu);
+            Thread bouclePrincipale = new Thread(BouclePrincipaleDuJeu);
             bouclePrincipale.Start();
         }
 
@@ -66,11 +72,13 @@ namespace WannabeFarmVille
         {
             datejeu = DateTime.Now;
             stopWatch = new Stopwatch();
+<<<<<<< HEAD
+=======
             stopwatchJeu = new Stopwatch();
             stopwatchPayerConcierges = new Stopwatch();
             stopwatchPayerConcierges.Start();
+>>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
             concierges = new List<Concierge>();
-            coutConcierge = 2;
             stopWatch.Start();
             rand = new Random();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -190,10 +198,13 @@ namespace WannabeFarmVille
         {
             g = e.Graphics;
 
+<<<<<<< HEAD
+=======
             this.affichageArgent.Text = this.Player.Argent.ToString() + "$";
 
             this.dateToolStripMenuItem.Text = this.datejeu.Date.ToString("dd MMMM yyyy");
 
+>>>>>>> 6d008de13475d8040fb2eaca2210560ccde40f00
             g.DrawImage(Properties.Resources.Background_game, 0, 0, this.Width, this.Height);
 
             for (int i = 0; i < visiteurs.Count; i++)
@@ -310,111 +321,6 @@ namespace WannabeFarmVille
                 
                 Console.WriteLine("LogicVisiteurs Fin.");
         }
-
-        /*
-         * Fait bouger les concierges.
-         */
-        private void LogicConcierges()
-        {
-
-            for (int i = 0; i < concierges.Count; i++)
-            {
-                int randX = rand.Next(3);
-                int randY = rand.Next(3);
-
-                while ((randX == randY) ||
-                        (randY == 0 && concierges[i].Y - tuile.Height <= 0 + tuile.Height) ||
-                        (randY == 1 && concierges[i].Y + tuile.Height >= this.Height - tuile.Height) ||
-                        (randX == 0 && concierges[i].X - tuile.Width <= 0 + tuile.Width) ||
-                        (randX == 1 && concierges[i].X + tuile.Width >= this.Width - tuile.Height) ||
-                        (randX != 2 && randY != 2) //||
-                                                   //(IsColliding(randX, randY, visiteurs[i]))
-                        )
-                {
-                    randX = rand.Next(3);
-                    randY = rand.Next(3);
-                }
-
-                int vX = concierges[i].X / this.tailleTuile;
-                int vY = concierges[i].Y / this.tailleTuile;
-
-                Console.WriteLine("vX = " + vX);
-                Console.WriteLine("vY = " + vY);
-
-                if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
-                {
-                    concierges[i].X -= tuile.Width;
-                    concierges[i].MovingX = -1;
-                    concierges[i].MovingY = 0;
-                }
-                else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
-                {
-                    concierges[i].X += tuile.Width;
-                    concierges[i].MovingX = 1;
-                    concierges[i].MovingY = 0;
-                }
-
-                if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 4 && vX <= 13) && !(vY >= 3 && vY <= 13 && vX >= 25 && vX <= 34) && !(vY >= 16 && vY <= 26 && vX >= 4 && vX <= 13) && !(vY >= 16 && vY <= 26 && vX >= 25 && vX <= 34))
-                {
-                    concierges[i].Y -= tuile.Height;
-                    concierges[i].MovingY = 1;
-                    concierges[i].MovingX = 0;
-                }
-                else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 4 && vX <= 13) && !(vY >= 1 && vY <= 10 && vX >= 25 && vX <= 34) && !(vY >= 14 && vY <= 24 && vX >= 4 && vX <= 13) && !(vY >= 14 && vY <= 24 && vX >= 25 && vX <= 34))
-                {
-                    concierges[i].Y += tuile.Height;
-                    concierges[i].MovingY = -1;
-                    concierges[i].MovingX = 0;
-                }
-
-                concierges[i].ReloadImages();
-
-                int cX = concierges[i].X;
-                int cY = concierges[i].Y;
-
-                //Ramasser déchets.
-
-                for (int d = 0; d < dechets.Count; d++)
-                {
-                    int dX = dechets[d].X;
-                    int dY = dechets[d].Y;
-
-                    if (dX == cX && dY == cY)
-                    {
-                        dechets.RemoveAt(d);
-                    }
-                }
-
-
-                PayerConcierges();
-            }
-;
-        }
-
-        private void PayerConcierges()
-        {
-            if (stopwatchPayerConcierges.Elapsed.TotalSeconds >= 60)
-            {
-                int cout = this.concierges.Count * coutConcierge;
-
-                this.Player.RetirerArgent(cout);
-
-                stopwatchPayerConcierges.Restart();
-            }
-        }
-
-        public bool AssezArgent(int cout)
-        {
-            bool assez = true;
-
-            if (this.Player.Argent < cout)
-            {
-                assez = false;
-            }
-
-            return assez;
-        }
-
 
         /*
          * Un visiteur a certaines chances d'échapper un déchet.
@@ -547,8 +453,8 @@ namespace WannabeFarmVille
 
         private void NewConcierge()
         {
-            int cX = Player.CurrentColumn * tailleTuile;
-            int cY = Player.CurrentRow * tailleTuile;
+            int cX = Player.X * tailleTuile;
+            int cY = Player.Y * tailleTuile;
 
             concierges.Add(new Concierge(cX, cY));
         }
@@ -612,192 +518,31 @@ namespace WannabeFarmVille
             }
         }
 
-        /**
-         * Déduit 20$ du joueur et instancie un nouveau Mouton
-         */
-        private void mouton20ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(20, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Mouton mouton = new Mouton(Mouton.Nombre_Moutons);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un mouton.");
-            }
-        }
-
-        /**
-         * Déduit 30$ du joueur et instancie un nouveau Grizzly
-         */
-        private void grizzly30ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(30, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Grizzly grizzly = new Grizzly(Grizzly.Nombre_Grizzlys);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un grizzly.");
-            }
-        }
-
-        /**
-         * Déduit 35$ du joueur et instancie un nouveau Lion
-         */
+        // Déduit 35$ du joueur et crée un nouveau Lion
+        // NE FONCTIONNE PAS
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(35, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                Lion lion = new Lion(Lion.Nombre_Lions);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
-            }
-        }
-
-        /**
-         * Déduit 50$ du joueur et instancie une nouvelle Licorne
-         */
-        private void licorne50ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(50, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Licorne licorne = new Licorne(Licorne.Nombre_Licornes);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter une licorne.");
-            }
-        }
-
-        /**
-         * Déduit 40$ du joueur et instancie un nouveau Rhinocéros
-         */
-        private void rhinocéros40ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(40, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Rhino rhino = new Rhino(Rhino.Nombre_Rhinos);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un rhinocéros.");
-            }
-        }
-
-        /**
-         * Déduit 40$ du joueur et instancie un nouveau Buffle
-         */
-        private void buffle40ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(40, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Buffle buffle = new Buffle(Buffle.Nombre_Buffles);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un buffle.");
-            }
-        }
-
-        /**
-         * Ajoute ou retire de l'argent du joueur selon le modificateur indiqué.
-         * Met à jour l'affichage.
-         * 
-         * @param Montant - Quantité d'argent
-         * @param Modificateur - True => Ajouter / False => Retirer
-         */
-        private bool Modifier_Argent(int Montant, bool Modificateur)
         {
             String[] TextArray = affichageArgent.Text.Split('$');
             String TextArgent = TextArray[0];
-            int IntArgent;
-            bool AjoutReussi = true;
+            int IntArgent = Int32.Parse(TextArgent);
 
-            if (Modificateur)
-            {
-                Player.Argent += Montant;
-            }
-            else
-            {
-                if (Player.Argent - Montant >= 0)
-                {
-                    Player.Argent -= Montant;
-                }
-                else
-                {
-                    AjoutReussi = false;
-                }
-            }
-
+            Player.Argent -= 35;
             IntArgent = Player.Argent;
             TextArgent = IntArgent.ToString();
-
-            affichageArgent.Text = TextArgent + " $";
-
-            return AjoutReussi;
-        }
-
-        /**
-         * Ajoute un animal au compteur visuel.
-         */
-        private void Ajouter_Animal()
-        {
-            String[] TextArray = animauxToolStripMenuItem.Text.Split(' ');
-            String TextAnimaux = TextArray[0];
-            int NombreAnimaux = Int32.Parse(TextAnimaux);
-
-            TextAnimaux = (++NombreAnimaux).ToString();
-
-            animauxToolStripMenuItem.Text = NombreAnimaux + " Animaux";
+            
+            affichageArgent.Text = TextArgent + "$";
+            
+            Lion lion = new Lion(0);
+            Console.WriteLine("Un lion a été ajouté");
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("Vous avez fait un profit de " + this.Player.ProfitTotal.ToString() + "$.");
-
-            this.bouclePrincipale.Abort();
-
-            snd.Stop();
-            snd.Dispose();
             menuDepart.Dispose();
-            this.Dispose();
         }
 
         private void PicUpRight_LoadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-
+            
         }
 
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
