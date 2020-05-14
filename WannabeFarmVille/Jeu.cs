@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTilesetMario;
+using WannabeFarmVille.Animaux;
 using WannabeFarmVille.Properties;
 
 namespace WannabeFarmVille
@@ -612,7 +613,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                //Mouton mouton = new Mouton(Mouton.Nombre_Moutons);
+                Mouton mouton = new Mouton(Mouton.Nombre_Moutons);
             }
             else
             {
@@ -632,7 +633,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                //Grizzly grizzly = new Grizzly(Grizzly.Nombre_Grizzlys);
+                Grizzly grizzly = new Grizzly(Grizzly.Nombre_Grizzlys);
             }
             else
             {
@@ -672,7 +673,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                //Licorne licorne = new Licorne(Licorne.Nombre_Licornes);
+                Licorne licorne = new Licorne(Licorne.Nombre_Licornes);
             }
             else
             {
@@ -692,7 +693,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                //Rhino rhino = new Rhino(Rhino.Nombre_Rhinos);
+                Rhino rhino = new Rhino(Rhino.Nombre_Rhinos);
             }
             else
             {
@@ -712,7 +713,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                //Buffle buffle = new Buffle(Buffle.Nombre_Buffles);
+                Buffle buffle = new Buffle(Buffle.Nombre_Buffles);
             }
             else
             {
@@ -736,13 +737,13 @@ namespace WannabeFarmVille
 
             if (Modificateur)
             {
-                Player.Argent += Montant;
+                Player.AjouterArgent(Montant);
             }
             else
             {
                 if (Player.Argent - Montant >= 0)
                 {
-                    Player.Argent -= Montant;
+                    Player.RetirerArgent(Montant);
                 }
                 else
                 {
