@@ -448,6 +448,26 @@ namespace WannabeFarmVille
             {
                 Player.MoveLeft();
             }
+            if(e.KeyCode == Keys.N)
+            {
+                int row = Player.CurrentRow, column = Player.CurrentColumn;
+                try
+                {
+                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    {
+                        MessageBox.Show("Num NUnm nuM");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
+                }
+            }
         }
 
         // Déduit 35$ du joueur et crée un nouveau Lion
@@ -479,8 +499,8 @@ namespace WannabeFarmVille
 
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Se déplacer: W,A,S,D" +
-                            "Arrêter la musique: M" +
+            MessageBox.Show("Se déplacer: W,A,S,D \n" + 
+                            "Arrêter la musique: M \n" +
                             "Nourrir un animal: N");
         }
     }
