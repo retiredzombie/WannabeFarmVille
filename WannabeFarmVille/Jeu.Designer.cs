@@ -50,6 +50,7 @@
             this.déchetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
@@ -160,7 +161,8 @@
             this.affichageArgent,
             this.animauxToolStripMenuItem,
             this.déchetsToolStripMenuItem,
-            this.conciergesToolStripMenuItem});
+            this.conciergesToolStripMenuItem,
+            this.aideToolStripMenuItem});
             this.menu_haut.Location = new System.Drawing.Point(0, 0);
             this.menu_haut.Name = "menu_haut";
             this.menu_haut.Size = new System.Drawing.Size(1264, 32);
@@ -270,6 +272,14 @@
             this.embaucherToolStripMenuItem.Text = "Embaucher";
             this.embaucherToolStripMenuItem.Click += new System.EventHandler(this.embaucherToolStripMenuItem_Click);
             // 
+            // aideToolStripMenuItem
+            // 
+            this.aideToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.aideToolStripMenuItem.Name = "aideToolStripMenuItem";
+            this.aideToolStripMenuItem.Size = new System.Drawing.Size(67, 28);
+            this.aideToolStripMenuItem.Text = "Aide";
+            this.aideToolStripMenuItem.Click += new System.EventHandler(this.aideToolStripMenuItem_Click);
+            // 
             // Jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,6 +348,7 @@
         private System.Windows.Forms.PictureBox PicLeftRight;
         private System.Windows.Forms.PictureBox PicDownLeft;
         private System.Windows.Forms.PictureBox PicDownRight;
+        private System.Windows.Forms.ToolStripMenuItem aideToolStripMenuItem;
     }
 }
 
