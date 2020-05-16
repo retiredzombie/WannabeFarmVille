@@ -141,7 +141,24 @@ namespace WannabeFarmVille
 
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
-            MessageBox.Show("Click!");
+            MessageBox.Show("X: " + e.X + " Y: " + e.Y);
+            for(int ligne = 0; ligne < 28; ligne++)
+            {
+                for(int colonne = 0; colonne < 40; colonne++)
+                {
+                    if(e.X > Carte[ligne, colonne].X && e.X < (32 + Carte[ligne, colonne].X) && e.Y > Carte[ligne, colonne].Y && e.Y < (32 + Carte[ligne, colonne].Y))
+                    {
+                        if(Carte[ligne, colonne].ContientUnAnimal)
+                        {
+                            NourrirAnimal();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Il n'y a pas d'animal sur cette case");
+                        }
+                    }
+                }
+            }
         }
 
         private void DefinirInterieurEnclos()
@@ -790,6 +807,13 @@ namespace WannabeFarmVille
             {
                 Console.WriteLine("Tu n'as pas assez d'argent pour acheter un buffle.");
             }
+        }
+        /// <summary>
+        /// Cette méthode servira à nourrir un animal
+        /// </summary>
+        private void NourrirAnimal()
+        {
+            throw new NotImplementedException();
         }
 
         /**

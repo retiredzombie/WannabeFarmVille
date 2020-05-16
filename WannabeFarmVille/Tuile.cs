@@ -18,6 +18,7 @@ namespace WannabeFarmVille
         {
             EstUnObstacle = false;
             EstDansUnEnclo = false;
+            ContientUnAnimal = false;
             Ligne = 0;
             Colonne = 0;
             Bouton = null;
@@ -44,6 +45,7 @@ namespace WannabeFarmVille
         }
         public bool EstUnObstacle { get; set; }
         public bool EstDansUnEnclo { get; set; }
+        public bool ContientUnAnimal { get; set; }
         public int Ligne { get; set; }
         public int Colonne { get; set; }
         public Button Bouton { get; set; }
