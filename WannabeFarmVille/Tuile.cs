@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WannabeFarmVille
 {
@@ -16,8 +17,10 @@ namespace WannabeFarmVille
         public Tuile()
         {
             EstUnObstacle = false;
+            EstDansUnEnclo = false;
             Ligne = 0;
             Colonne = 0;
+            Bouton = null;
         }
         public Tuile(int type)
         {
@@ -40,7 +43,11 @@ namespace WannabeFarmVille
             return image.Height;
         }
         public bool EstUnObstacle { get; set; }
+        public bool EstDansUnEnclo { get; set; }
         public int Ligne { get; set; }
         public int Colonne { get; set; }
+        public Button Bouton { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }

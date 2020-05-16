@@ -49,6 +49,7 @@ namespace WannabeFarmVille
         private DateTime datejeu;
         private int NbConcierge = 0;
         private int NombreAnimaux = 0;
+        
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -80,6 +81,7 @@ namespace WannabeFarmVille
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
             tuile = TilesetImageGenerator.GetTile(0);
             dechets = new List<Dechet>();
+            int x = 0, y = 32;
             for (int row = 0; row < 28; row++)
             {
                 for (int column = 0; column < 40; column++)
@@ -87,7 +89,12 @@ namespace WannabeFarmVille
                     Carte[row, column] = new Tuile();
                     Carte[row, column].Ligne = row;
                     Carte[row, column].Colonne = column;
+                    Carte[row, column].X = x;
+                    Carte[row, column].Y = y;
+                    x += 32;
                 }
+                x = 0;
+                y += 32;
             }
             refreshFormDelegate = new DelegateRefresh(Refresh);
             FPS = 1 / FPS * 1000;
@@ -96,6 +103,7 @@ namespace WannabeFarmVille
             RendreClotureSolide(15, 4);
             RendreClotureSolide(15, 25);
             RendreClotureSolide(2, 25);
+            DefinirInterieurEnclos();
             PicUpRight.Size = new Size(32, 32);
             PicUpRight.Location = new Point(0, 32);
             Player = new Joueur(PicUpLeft, PicUpRight, PicDownLeft, PicDownRight, 
@@ -127,6 +135,32 @@ namespace WannabeFarmVille
             for (int i = 0; i < 10; i++)
             {
                AjouterVisiteurSpawn();
+            }
+        }
+
+        private void DefinirInterieurEnclos()
+        {
+            bool enclo = false;
+            for (int ligne = 0; ligne < 28; ligne++)
+            {
+                for (int colonne = 0; colonne < 40; colonne++)
+                {
+                    if (enclo && !Carte[ligne, colonne].EstUnObstacle)
+                    {
+                        Carte[ligne, colonne].EstDansUnEnclo = true;
+                    }
+                    if (Carte[ligne, colonne].EstUnObstacle)
+                    {
+                        if (enclo)
+                        {
+                            enclo = false;
+                        }
+                        else
+                        {
+                            enclo = true;
+                        }
+                    }
+                }
             }
         }
 
@@ -587,7 +621,8 @@ namespace WannabeFarmVille
             Console.WriteLine("KeyDown");
             if (e.KeyCode == Keys.U)
             {
-                MessageBox.Show("(" + Player.CurrentRow + "," + Player.CurrentColumn + ")");
+                MessageBox.Show("(" + Player.CurrentRow + "," + Player.CurrentColumn + ")\n" + 
+                                "X: " + Player.CurrentSprite.Location.X + " Y: " + Player.CurrentSprite.Location.Y);
             }
             if(e.KeyCode == Keys.M)
             {

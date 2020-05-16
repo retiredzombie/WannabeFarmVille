@@ -50,7 +50,6 @@ namespace WannabeFarmVille
         public PictureBox JoeRightRight { get; set; }
         public Point JoeRightRightLocation { get; set; }
         public PictureBox JoeRightLeft { get; set; }
-        public PictureBox CurrentSprite { get; set; }
         public double ProfitTotal { get => profitTotal; set => profitTotal = value; }
 
         public void RetirerArgent(int cout)
