@@ -76,6 +76,7 @@ namespace WannabeFarmVille
             coutConcierge = 2;
             stopWatch.Start();
             rand = new Random();
+            this.MouseClick += new MouseEventHandler(this.Jeu_MouseClick);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.DoubleBuffered = true;
             map = new Map(this.Width, this.Height, TilesetImageGenerator.GetTile(0));
@@ -136,6 +137,11 @@ namespace WannabeFarmVille
             {
                AjouterVisiteurSpawn();
             }
+        }
+
+        private void Jeu_MouseClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("Click!");
         }
 
         private void DefinirInterieurEnclos()
@@ -228,7 +234,7 @@ namespace WannabeFarmVille
             if(prix < 0)
             {
                 MessageBox.Show("Votre zoo est tellement dégeulasse que vous payez " + prix + "$ \n " +
-                                "aux visiteurs pour qu'ils le visitent.");
+                                "aux visiteurs pour qu'ils viennent.");
             }
             Player.Argent += prix;
             affichageArgent.Text = Player.Argent + "$";
@@ -652,7 +658,7 @@ namespace WannabeFarmVille
                     if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
                        || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
                     {
-                        MessageBox.Show("Num NUnm nuM");
+                        MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
                     }
                     else
                     {
