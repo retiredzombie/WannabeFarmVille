@@ -32,21 +32,23 @@ namespace WannabeFarmVille
         private Bitmap ImgJoe = new Bitmap(Properties.Resources.joeExotic);
         private Graphics g;
         private System.Media.SoundPlayer snd;
-        Stopwatch stopwatchPayerConcierges;
-        Stopwatch stopwatchJeu;
-        ThreadStart thStart; 
-        Bitmap tuile;
-        List<PictureBox> visiteursPicBox;
-        MenuDepart menuDepart;
-        Random rand;
+        private Stopwatch stopwatchPayerConcierges;
+        private Stopwatch stopwatchJeu;
+        private ThreadStart thStart;
+        private Bitmap tuile;
+        private List<PictureBox> visiteursPicBox;
+        private MenuDepart menuDepart;
+        private Random rand;
         private bool gameover;
-        Stopwatch stopWatch;
-        DelegateRefresh refreshFormDelegate;
-        int tailleTuile;
-        List<Dechet> dechets;
-        List<Concierge> concierges;
-        Thread bouclePrincipale;
-        DateTime datejeu;
+        private Stopwatch stopWatch;
+        private DelegateRefresh refreshFormDelegate;
+        private int tailleTuile;
+        private List<Dechet> dechets;
+        private List<Concierge> concierges;
+        private Thread bouclePrincipale;
+        private DateTime datejeu;
+        private int NbConcierge = 0;
+        private int NombreAnimaux = 0;
 
         public Jeu(MenuDepart menuDepart)
         {
@@ -167,6 +169,7 @@ namespace WannabeFarmVille
         public void AjouterVisiteurSpawn()
         {
             this.visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25, rand));
+            CalculerEtFacturerPrixEntree();
             /*
             PictureBox newVisiteur = new PictureBox();
             newVisiteur.BackgroundImage = visiteurs[visiteurs.Count - 1].imageVisiteur;
@@ -181,6 +184,20 @@ namespace WannabeFarmVille
 
             visiteursPicBox.Add(newVisiteur);
             */
+        }
+
+        private void CalculerEtFacturerPrixEntree()
+        {
+            double prix = 2.0; //On met le prix de base à 2$ même si y'a pas d'animaux, c'est pour tester
+            prix = 2.0 * NombreAnimaux;
+            prix -= 0.1 * dechets.Count;
+            if(prix < 0)
+            {
+                MessageBox.Show("Votre zoo est tellement dégeulasse que vous payez " + prix + "$ \n " +
+                                "aux visiteurs pour qu'ils le visitent.");
+            }
+            Player.Argent += prix;
+            affichageArgent.Text = Player.Argent + "$";
         }
 
 
@@ -398,7 +415,7 @@ namespace WannabeFarmVille
                 int cout = this.concierges.Count * coutConcierge;
 
                 this.Player.RetirerArgent(cout);
-
+                affichageArgent.Text = Player.Argent + " $";
                 stopwatchPayerConcierges.Restart();
             }
         }
@@ -543,6 +560,8 @@ namespace WannabeFarmVille
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NewConcierge();
+            NbConcierge++;
+            conciergesToolStripMenuItem.Text = NbConcierge + " Concierges";
         }
 
         private void NewConcierge()
@@ -743,7 +762,7 @@ namespace WannabeFarmVille
         {
             String[] TextArray = affichageArgent.Text.Split('$');
             String TextArgent = TextArray[0];
-            int IntArgent;
+            double DoubleArgent;
             bool AjoutReussi = true;
 
             if (Modificateur)
@@ -762,8 +781,8 @@ namespace WannabeFarmVille
                 }
             }
 
-            IntArgent = Player.Argent;
-            TextArgent = IntArgent.ToString();
+            DoubleArgent = Player.Argent;
+            TextArgent = DoubleArgent.ToString();
 
             affichageArgent.Text = TextArgent + " $";
 
@@ -778,10 +797,11 @@ namespace WannabeFarmVille
             String[] TextArray = animauxToolStripMenuItem.Text.Split(' ');
             String TextAnimaux = TextArray[0];
             int NombreAnimaux = Int32.Parse(TextAnimaux);
-
+           
             TextAnimaux = (++NombreAnimaux).ToString();
-
+            this.NombreAnimaux = NombreAnimaux;
             animauxToolStripMenuItem.Text = NombreAnimaux + " Animaux";
+            
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {

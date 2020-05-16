@@ -13,7 +13,7 @@ namespace WannabeFarmVille
     /// </summary>
     class Joueur: Movable
     {
-        private int profitTotal;
+        private double profitTotal;
 
         public Joueur(PictureBox PicUpLeft, PictureBox PicUpRight, PictureBox PicDownLeft, PictureBox PicDownRight,
             PictureBox PicLeftLeft, PictureBox PicLeftRight, PictureBox PicRightLeft, PictureBox PicRightRight, int CurrentRow,
@@ -30,7 +30,7 @@ namespace WannabeFarmVille
             Width = 50;
             Height = 20;
         }
-        public int Argent { get; set; }
+        public double Argent { get; set; }
 
         public int X { get; set; }
         public int Y { get; set; }
@@ -51,7 +51,7 @@ namespace WannabeFarmVille
         public Point JoeRightRightLocation { get; set; }
         public PictureBox JoeRightLeft { get; set; }
         public PictureBox CurrentSprite { get; set; }
-        public int ProfitTotal { get => profitTotal; set => profitTotal = value; }
+        public double ProfitTotal { get => profitTotal; set => profitTotal = value; }
 
         public void RetirerArgent(int cout)
         {
