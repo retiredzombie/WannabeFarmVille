@@ -100,10 +100,10 @@ namespace WannabeFarmVille
             refreshFormDelegate = new DelegateRefresh(Refresh);
             FPS = 1 / FPS * 1000;
             intFPS = Convert.ToInt32(FPS);
-            RendreClotureSolide(2, 4);
-            RendreClotureSolide(15, 4);
-            RendreClotureSolide(15, 25);
-            RendreClotureSolide(2, 25);
+            RendreClotureSolide(2, 4, Enclo.UpLeft);
+            RendreClotureSolide(15, 4, Enclo.DownLeft);
+            RendreClotureSolide(15, 25, Enclo.DownRight);
+            RendreClotureSolide(2, 25, Enclo.UpRight);
             DefinirInterieurEnclos();
             PicUpRight.Size = new Size(32, 32);
             PicUpRight.Location = new Point(0, 32);
@@ -152,10 +152,17 @@ namespace WannabeFarmVille
                             {
                                 if (Player.PeutNourrir)
                                 {
-                                    Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
-                                    MessageBox.Show("L'animal cri de joie et est rassasié !");
-                                    Player.Argent -= 1;
-                                    affichageArgent.Text = Player.Argent + "$";
+                                    if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
+                                    {
+                                        Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
+                                        MessageBox.Show("L'animal cri de joie et est rassasié !");
+                                        Player.Argent -= 1;
+                                        affichageArgent.Text = Player.Argent + "$";
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
+                                    }
                                 }
                             }
                             else
@@ -210,26 +217,30 @@ namespace WannabeFarmVille
             }
         }
 
-        private void RendreClotureSolide(int row, int column)
+        private void RendreClotureSolide(int row, int column, Enclo enclo)
         {   
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
+                Carte[row, column].PositionEnclo = enclo;
                 column++;
             }
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
+                Carte[row, column].PositionEnclo = enclo;
                 row++;
             }
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
+                Carte[row, column].PositionEnclo = enclo;
                 column--;
             }
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
+                Carte[row, column].PositionEnclo = enclo;
                 row--;
             }
         }
@@ -688,11 +699,13 @@ namespace WannabeFarmVille
                     else
                     {
                         Player.PeutNourrir = false;
+                        Player.EncloChoisi = Enclo.PasEnclo;
                     }
                 }
                 catch (IndexOutOfRangeException)
                 {
                     Player.PeutNourrir = false;
+                    Player.EncloChoisi = Enclo.PasEnclo;
                 }
             }
             if (e.KeyCode == Keys.W)
@@ -708,11 +721,13 @@ namespace WannabeFarmVille
                     else
                     {
                         Player.PeutNourrir = false;
+                        Player.EncloChoisi = Enclo.PasEnclo;
                     }
                 }
                 catch (IndexOutOfRangeException)
                 {
                     Player.PeutNourrir = false;
+                    Player.EncloChoisi = Enclo.PasEnclo;
                 }
             }
             if (e.KeyCode == Keys.D)
@@ -728,11 +743,13 @@ namespace WannabeFarmVille
                     else
                     {
                         Player.PeutNourrir = false;
+                        Player.EncloChoisi = Enclo.PasEnclo;
                     }
                 }
                 catch (IndexOutOfRangeException)
                 {
                     Player.PeutNourrir = false;
+                    Player.EncloChoisi = Enclo.PasEnclo;
                 }
             }
             if (e.KeyCode == Keys.A)
@@ -748,11 +765,13 @@ namespace WannabeFarmVille
                     else
                     {
                         Player.PeutNourrir = false;
+                        Player.EncloChoisi = Enclo.PasEnclo;
                     }
                 }
                 catch (IndexOutOfRangeException)
                 {
                     Player.PeutNourrir = false;
+                    Player.EncloChoisi = Enclo.PasEnclo;
                 }
             }
             if(e.KeyCode == Keys.N)
@@ -764,6 +783,22 @@ namespace WannabeFarmVille
                     {
                         MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
                         Player.PeutNourrir = true;
+                        if (Carte[row + 1, column].EstUnObstacle)
+                        {
+                            Player.EncloChoisi = Carte[row + 1, column].PositionEnclo;
+                        }
+                        else if (Carte[row - 1, column].EstUnObstacle)
+                        {
+                            Player.EncloChoisi = Carte[row - 1, column].PositionEnclo;
+                        }
+                        else if (Carte[row, column + 1].EstUnObstacle)
+                        {
+                            Player.EncloChoisi = Carte[row, column + 1].PositionEnclo;
+                        }
+                        else
+                        {
+                            Player.EncloChoisi = Carte[row, column - 1].PositionEnclo;
+                        }
                     }
                     else
                     {

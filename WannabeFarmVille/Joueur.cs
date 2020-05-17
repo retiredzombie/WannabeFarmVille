@@ -51,6 +51,7 @@ namespace WannabeFarmVille
         public PictureBox JoeRightRight { get; set; }
         public Point JoeRightRightLocation { get; set; }
         public PictureBox JoeRightLeft { get; set; }
+        public Enclo EncloChoisi { get; set; } = Enclo.PasEnclo;
         public bool PeutNourrir { get; set; }
         public double ProfitTotal { get => profitTotal; set => profitTotal = value; }
 
