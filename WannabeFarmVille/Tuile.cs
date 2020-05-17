@@ -9,11 +9,18 @@ using System.Windows.Forms;
 
 namespace WannabeFarmVille
 {
+    public enum Enclo
+    {
+        UpLeft,
+        UpRight,
+        DownLeft,
+        DownRight,
+        PasEnclo
+    }
     class Tuile
     {
         private int type;
         Bitmap image;
-
         public Tuile()
         {
             EstUnObstacle = false;
@@ -51,5 +58,7 @@ namespace WannabeFarmVille
         public Button Bouton { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public Animal AnimalSurLaCase { get; set; }
+        public Enclo PositionEnclo { get; set; } = Enclo.PasEnclo;
     }
 }

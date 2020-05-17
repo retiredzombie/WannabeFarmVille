@@ -29,6 +29,7 @@ namespace WannabeFarmVille
             CurrentColumn = 0;
             Width = 50;
             Height = 20;
+            PeutNourrir = false;
         }
         public double Argent { get; set; }
 
@@ -50,6 +51,7 @@ namespace WannabeFarmVille
         public PictureBox JoeRightRight { get; set; }
         public Point JoeRightRightLocation { get; set; }
         public PictureBox JoeRightLeft { get; set; }
+        public bool PeutNourrir { get; set; }
         public double ProfitTotal { get => profitTotal; set => profitTotal = value; }
 
         public void RetirerArgent(int cout)

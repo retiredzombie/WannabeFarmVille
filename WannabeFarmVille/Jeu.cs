@@ -141,29 +141,36 @@ namespace WannabeFarmVille
 
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
-            MessageBox.Show("X: " + e.X + " Y: " + e.Y);
-            for(int ligne = 0; ligne < 28; ligne++)
-            {
-                for(int colonne = 0; colonne < 40; colonne++)
+                MessageBox.Show("X: " + e.X + " Y: " + e.Y);
+                for (int ligne = 0; ligne < 28; ligne++)
                 {
-                    if(e.X > Carte[ligne, colonne].X && e.X < (32 + Carte[ligne, colonne].X) && e.Y > Carte[ligne, colonne].Y && e.Y < (32 + Carte[ligne, colonne].Y))
+                    for (int colonne = 0; colonne < 40; colonne++)
                     {
-                        if(Carte[ligne, colonne].ContientUnAnimal)
+                        if (e.X > Carte[ligne, colonne].X && e.X < (32 + Carte[ligne, colonne].X) && e.Y > Carte[ligne, colonne].Y && e.Y < (32 + Carte[ligne, colonne].Y))
                         {
-                            NourrirAnimal();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Il n'y a pas d'animal sur cette case");
+                            if (Carte[ligne, colonne].ContientUnAnimal)
+                            {
+                                if (Player.PeutNourrir && Carte[ligne, colonne].AnimalSurLaCase != null)
+                                {
+                                    Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
+                                    MessageBox.Show("L'animal cri de joie et est rassasié !");
+                                    Player.Argent -= 1;
+                                    affichageArgent.Text = Player.Argent + "$";
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Il n'y a pas d'animal sur cette case");
+                            }
                         }
                     }
                 }
-            }
         }
 
         private void DefinirInterieurEnclos()
         {
             bool enclo = false;
+
             for (int ligne = 0; ligne < 28; ligne++)
             {
                 for (int colonne = 0; colonne < 40; colonne++)
@@ -171,6 +178,22 @@ namespace WannabeFarmVille
                     if (enclo && !Carte[ligne, colonne].EstUnObstacle)
                     {
                         Carte[ligne, colonne].EstDansUnEnclo = true;
+                        if(ligne < 13 && colonne < 18)
+                        {
+                            Carte[ligne, colonne].PositionEnclo = Enclo.UpLeft;
+                        }
+                        else if(ligne < 13 && colonne > 18)
+                        {
+                            Carte[ligne, colonne].PositionEnclo = Enclo.UpRight;
+                        }
+                        else if(ligne > 13 && colonne < 18)
+                        {
+                            Carte[ligne, colonne].PositionEnclo = Enclo.DownLeft;
+                        }
+                        else
+                        {
+                            Carte[ligne, colonne].PositionEnclo = Enclo.DownRight;
+                        }
                     }
                     if (Carte[ligne, colonne].EstUnObstacle)
                     {
@@ -641,6 +664,7 @@ namespace WannabeFarmVille
 
         private void BougerJoueur(KeyEventArgs e)
         {
+            int row = Player.CurrentRow, column = Player.CurrentColumn;
             Console.WriteLine("KeyDown");
             if (e.KeyCode == Keys.U)
             {
@@ -654,28 +678,92 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.S)
             {
                 Player.MoveDown();
+                try
+                {
+                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    {
+                        Player.PeutNourrir = true;
+                    }
+                    else
+                    {
+                        Player.PeutNourrir = false;
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Player.PeutNourrir = false;
+                }
             }
             if (e.KeyCode == Keys.W)
             {
                 Player.MoveUp();
+                try
+                {
+                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    {
+                        Player.PeutNourrir = true;
+                    }
+                    else
+                    {
+                        Player.PeutNourrir = false;
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Player.PeutNourrir = false;
+                }
             }
             if (e.KeyCode == Keys.D)
             {
                 Player.MoveRight();
+                try
+                {
+                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    {
+                        Player.PeutNourrir = true;
+                    }
+                    else
+                    {
+                        Player.PeutNourrir = false;
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Player.PeutNourrir = false;
+                }
             }
             if (e.KeyCode == Keys.A)
             {
                 Player.MoveLeft();
+                try
+                {
+                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    {
+                        Player.PeutNourrir = true;
+                    }
+                    else
+                    {
+                        Player.PeutNourrir = false;
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Player.PeutNourrir = false;
+                }
             }
             if(e.KeyCode == Keys.N)
             {
-                int row = Player.CurrentRow, column = Player.CurrentColumn;
                 try
                 {
                     if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
                        || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
                     {
                         MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
+                        Player.PeutNourrir = true;
                     }
                     else
                     {
@@ -807,13 +895,6 @@ namespace WannabeFarmVille
             {
                 Console.WriteLine("Tu n'as pas assez d'argent pour acheter un buffle.");
             }
-        }
-        /// <summary>
-        /// Cette méthode servira à nourrir un animal
-        /// </summary>
-        private void NourrirAnimal()
-        {
-            throw new NotImplementedException();
         }
 
         /**
