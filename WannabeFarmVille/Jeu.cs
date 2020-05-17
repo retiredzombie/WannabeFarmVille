@@ -148,9 +148,9 @@ namespace WannabeFarmVille
                     {
                         if (e.X > Carte[ligne, colonne].X && e.X < (32 + Carte[ligne, colonne].X) && e.Y > Carte[ligne, colonne].Y && e.Y < (32 + Carte[ligne, colonne].Y))
                         {
-                            if (Carte[ligne, colonne].ContientUnAnimal)
+                            if (Carte[ligne, colonne].AnimalSurLaCase != null)
                             {
-                                if (Player.PeutNourrir && Carte[ligne, colonne].AnimalSurLaCase != null)
+                                if (Player.PeutNourrir)
                                 {
                                     Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
                                     MessageBox.Show("L'animal cri de joie et est rassasié !");
