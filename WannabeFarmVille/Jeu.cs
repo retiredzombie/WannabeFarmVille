@@ -138,10 +138,13 @@ namespace WannabeFarmVille
                AjouterVisiteurSpawn();
             }
         }
-
+        /// <summary>
+        /// Event qui se déclenche lorsque l'utilisateur clique avec sa sourie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
-                MessageBox.Show("X: " + e.X + " Y: " + e.Y);
                 for (int ligne = 0; ligne < 28; ligne++)
                 {
                     for (int colonne = 0; colonne < 40; colonne++)
@@ -173,11 +176,14 @@ namespace WannabeFarmVille
                     }
                 }
         }
-
+        /// <summary>
+        /// Cette méthode définie les tuiles situées 
+        /// à l'intérieur d'un enclo
+        /// </summary>
         private void DefinirInterieurEnclos()
         {
             bool enclo = false;
-
+            int compt = 0;
             for (int ligne = 0; ligne < 28; ligne++)
             {
                 for (int colonne = 0; colonne < 40; colonne++)
@@ -185,6 +191,12 @@ namespace WannabeFarmVille
                     if (enclo && !Carte[ligne, colonne].EstUnObstacle)
                     {
                         Carte[ligne, colonne].EstDansUnEnclo = true;
+                        if(compt == 0)
+                        {
+                            Lion lion = new Lion(117);
+                            Carte[ligne, colonne].AnimalSurLaCase = lion;
+                            compt++;
+                        }
                         if(ligne < 13 && colonne < 18)
                         {
                             Carte[ligne, colonne].PositionEnclo = Enclo.UpLeft;
@@ -216,7 +228,13 @@ namespace WannabeFarmVille
                 }
             }
         }
-
+        /// <summary>
+        /// Définir les obstacles (clotures) à l'intérieur
+        /// du tableau Carte
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <param name="enclo"></param>
         private void RendreClotureSolide(int row, int column, Enclo enclo)
         {   
             for (int i = 0; i < 9; i++)
@@ -260,6 +278,7 @@ namespace WannabeFarmVille
         public void AjouterVisiteurSpawn()
         {
             this.visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25, rand));
+            Carte[24, 19].EstUnObstacle = true;
             CalculerEtFacturerPrixEntree();
             /*
             PictureBox newVisiteur = new PictureBox();
@@ -276,7 +295,10 @@ namespace WannabeFarmVille
             visiteursPicBox.Add(newVisiteur);
             */
         }
-
+        /// <summary>
+        /// Calcule le prix d'entré du zoo et le facture au visiteur
+        /// tout juste ajouté
+        /// </summary>
         private void CalculerEtFacturerPrixEntree()
         {
             double prix = 2.0; //On met le prix de base à 2$ même si y'a pas d'animaux, c'est pour tester
@@ -373,31 +395,57 @@ namespace WannabeFarmVille
 
                 Console.WriteLine("vX = " + vX);
                 Console.WriteLine("vY = " + vY);
-                
+                //GAUCHE
                 if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
                 { 
                     visiteurs[i].X -= tuile.Width;
                     visiteurs[i].MovingX = -1;
                     visiteurs[i].MovingY = 0;
+                    if (visiteurs[i].CurrentColumn != 0)
+                    {
+                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                        visiteurs[i].CurrentColumn--;
+                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                    }
                 } 
+                //DROITE
                 else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
                 { 
                     visiteurs[i].X += tuile.Width;
                     visiteurs[i].MovingX = 1;
                     visiteurs[i].MovingY = 0;
+                    if (visiteurs[i].CurrentColumn != 39)
+                    {
+                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                        visiteurs[i].CurrentColumn++;
+                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                    }
                 }
-
+                //HAUT
                 if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 4 && vX <= 13) && !(vY >= 3 && vY <= 13 && vX >= 25 && vX <= 34) && !(vY >= 16 && vY <= 26 && vX >= 4 && vX <= 13) && !(vY >= 16 && vY <= 26 && vX >= 25 && vX <= 34))
                 {
                     visiteurs[i].Y -= tuile.Height;
                     visiteurs[i].MovingY = 1;
                     visiteurs[i].MovingX = 0;
+                    if (visiteurs[i].CurrentRow != 0)
+                    {
+                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                        visiteurs[i].CurrentRow--;
+                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                    }
                 }
+                //BAS
                 else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 4 && vX <= 13) && !(vY >= 1 && vY <= 10 && vX >= 25 && vX <= 34) && !(vY >= 14 && vY <= 24 && vX >= 4 && vX <= 13) && !(vY >= 14 && vY <= 24 && vX >= 25 && vX <= 34))
                 {
                     visiteurs[i].Y += tuile.Height;
                     visiteurs[i].MovingY = -1;
                     visiteurs[i].MovingX = 0;
+                    if (visiteurs[i].CurrentRow != 27)
+                    {
+                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                        visiteurs[i].CurrentRow++;
+                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                    }
                 }
 
                 visiteurs[i].ReloadImages();
@@ -448,31 +496,57 @@ namespace WannabeFarmVille
 
                 Console.WriteLine("vX = " + vX);
                 Console.WriteLine("vY = " + vY);
-
+                //GAUCHE
                 if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
                 {
                     concierges[i].X -= tuile.Width;
                     concierges[i].MovingX = -1;
                     concierges[i].MovingY = 0;
+                    if (concierges[i].CurrentColumn != 0)
+                    {
+                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                        concierges[i].CurrentColumn--;
+                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                    }
                 }
+                //DROITE
                 else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
                 {
                     concierges[i].X += tuile.Width;
                     concierges[i].MovingX = 1;
                     concierges[i].MovingY = 0;
+                    if (concierges[i].CurrentColumn != 39)
+                    {
+                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                        concierges[i].CurrentColumn++;
+                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                    }
                 }
-
+                //HAUT
                 if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 4 && vX <= 13) && !(vY >= 3 && vY <= 13 && vX >= 25 && vX <= 34) && !(vY >= 16 && vY <= 26 && vX >= 4 && vX <= 13) && !(vY >= 16 && vY <= 26 && vX >= 25 && vX <= 34))
                 {
                     concierges[i].Y -= tuile.Height;
                     concierges[i].MovingY = 1;
                     concierges[i].MovingX = 0;
+                    if (concierges[i].CurrentRow != 0)
+                    {
+                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                        concierges[i].CurrentRow--;
+                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                    }
                 }
+                //BAS
                 else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 4 && vX <= 13) && !(vY >= 1 && vY <= 10 && vX >= 25 && vX <= 34) && !(vY >= 14 && vY <= 24 && vX >= 4 && vX <= 13) && !(vY >= 14 && vY <= 24 && vX >= 25 && vX <= 34))
                 {
                     concierges[i].Y += tuile.Height;
                     concierges[i].MovingY = -1;
                     concierges[i].MovingX = 0;
+                    if (concierges[i].CurrentRow != 27)
+                    {
+                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                        concierges[i].CurrentRow++;
+                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                    }
                 }
 
                 concierges[i].ReloadImages();
@@ -659,8 +733,13 @@ namespace WannabeFarmVille
         {
             int cX = Player.CurrentColumn * tailleTuile;
             int cY = Player.CurrentRow * tailleTuile;
-
-            concierges.Add(new Concierge(cX, cY));
+            try
+            {
+                concierges.Add(new Concierge(cX, cY, Player.CurrentRow - 1, Player.CurrentColumn));
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
         }
 
         private void dateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -672,7 +751,12 @@ namespace WannabeFarmVille
         {
             BougerJoueur(e);
         }
-
+        /// <summary>
+        /// Event qui se se déclenche lorsqu'un
+        /// touche du clavié est enfoncée et fait bouger le joueur
+        /// et les autres actions aux clavier
+        /// </summary>
+        /// <param name="e"></param>
         private void BougerJoueur(KeyEventArgs e)
         {
             int row = Player.CurrentRow, column = Player.CurrentColumn;

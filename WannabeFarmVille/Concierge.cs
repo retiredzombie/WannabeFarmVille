@@ -14,11 +14,13 @@ namespace WannabeFarmVille
         private int movingX;
         private int movingY;
 
-        public Concierge(int x, int y)
+        public Concierge(int x, int y, int row, int column)
         {
             this.Image = Properties.Resources.ConDownRight;
             this.x = x;
             this.y = y;
+            CurrentRow = row;
+            CurrentColumn = column;
         }
 
         public Image Image { get => image; set => image = value; }
@@ -26,7 +28,8 @@ namespace WannabeFarmVille
         public int Y { get => y; set => y = value; }
         public int MovingX { get => movingX; set => movingX = value; }
         public int MovingY { get => movingY; set => movingY = value; }
-
+        public int CurrentRow { get; set; }
+        public int CurrentColumn { get; set; }
         public void ReloadImages()
         {
             ReloadImage();
