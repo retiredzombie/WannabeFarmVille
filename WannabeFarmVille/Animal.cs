@@ -9,10 +9,23 @@ namespace WannabeFarmVille
     abstract class Animal
     {
         public bool AFaim { get; set; } = false;
+        public DateTime DernierRepas { get => dernierRepas; set => dernierRepas = value; }
+        public int Faim { get; set; }
 
-        internal void NourrirDoublePrix()
+        int tmpsRepasSec; // Le temps requis entre chaque repas pour éviter les pénalités.
+
+        private DateTime dernierRepas;
+
+        public Animal()
         {
-            // A FAIRE.
+            this.dernierRepas = DateTime.Now;
+        }
+
+        internal void NourrirDoublePrix(Joueur Player)
+        {
+            Player.RetirerArgent(2);
+            AFaim = false;
+            dernierRepas = DateTime.Now;
         }
     }
 }

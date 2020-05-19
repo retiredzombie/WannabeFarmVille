@@ -531,9 +531,9 @@ namespace WannabeFarmVille
         {
             for (int i = 0; i < animaux.Count; i++)
             {
-                if (animaux[i].AFaim)
+                if ((DateTime.Now - animaux[i].DernierRepas).TotalSeconds >= animaux[i].Faim)
                 {
-                    animaux[i].NourrirDoublePrix();
+                    animaux[i].NourrirDoublePrix(Player);
                 }
             }
         }
