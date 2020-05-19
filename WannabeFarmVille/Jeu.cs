@@ -349,7 +349,16 @@ namespace WannabeFarmVille
             int x = e.X;
             int y = e.Y;
 
-            switch (typeAnimalSelectionne)
+            int[] xyTuile = ToTuile(x, y);
+
+            x = xyTuile[0];
+            y = xyTuile[1];
+
+            bool placementLegal = VerifierXYEnclos(x, y);
+
+            if (placementLegal)
+            {
+                switch (typeAnimalSelectionne)
             {
                 case 1:
                     AjouterMouton(x, y);
@@ -376,6 +385,33 @@ namespace WannabeFarmVille
                     typeAnimalSelectionne = 0;
                     break;
             }
+        }
+
+        private int[] ToTuile(int x, int y)
+        {
+            while (x % 32 != 0)
+            {
+                x -= 1;
+            }
+            while (y % 32 != 0)
+            {
+                y -= 1;
+            }
+
+            return new int[] { x, y };
+        }
+
+        private bool VerifierXYEnclos(int x, int y)
+        {
+            x /= tailleTuile;
+            y /= tailleTuile;
+            bool bon = false;
+            Console.WriteLine("CLICK " + x.ToString() + ", " + y.ToString());
+            if (Carte[x, y].EstDansUnEnclo && !Carte[x, y].EstUnObstacle)
+            {
+                bon = true;
+            }
+            return bon;
         }
         
         //Ajoute un mouton au X,Y choisi.
@@ -414,8 +450,9 @@ namespace WannabeFarmVille
             {
                 Console.WriteLine("Tu n'as pas assez d'argent pour acheter un grizzly.");
             }
+            
         }
-
+        
         //Ajoute un lion au X,Y choisi.
         private void AjouterLion(int X, int Y)
         {
