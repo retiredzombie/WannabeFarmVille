@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTilesetMario;
+using WannabeFarmVille.Animaux;
 using WannabeFarmVille.Properties;
 
 namespace WannabeFarmVille
@@ -351,6 +352,12 @@ namespace WannabeFarmVille
             int x = e.X;
             int y = e.Y;
 
+            if (typeAnimalSelectionne == 1)
+            {
+                AjouterMouton(x, y);
+                typeAnimalSelectionne = 0;
+            }
+
             if (typeAnimalSelectionne == 3)
             {
                 AjouterLion(x, y);
@@ -371,6 +378,25 @@ namespace WannabeFarmVille
                 Ajouter_Animal();
                 Lion lion = new Lion(X, Y);
                 animaux.Add(lion);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
+            }
+        }
+
+        //Ajoute un mouton au X,Y choisi.
+        private void AjouterMouton(int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(20, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Mouton mouton = new Mouton(X, Y);
+                animaux.Add(mouton);
             }
             else
             {
@@ -1289,19 +1315,8 @@ namespace WannabeFarmVille
          */
         private void mouton20ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(20, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Mouton mouton = new Mouton(Mouton.Nombre_Moutons);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un mouton.");
-            }
+            typeAnimalSelectionne = 1;
+            MessageBox.Show("Appuyez quelque part pour ajouter un mouton.");
         }
 
         /**

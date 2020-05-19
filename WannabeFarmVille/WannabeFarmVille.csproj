@@ -47,7 +47,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animal.cs" />
+    <Compile Include="Animaux\Animal.cs" />
+    <Compile Include="Animaux\Mouton.cs" />
     <Compile Include="Concierge.cs" />
     <Compile Include="Dechet.cs" />
     <Compile Include="Jeu.cs">
@@ -57,7 +58,7 @@
       <DependentUpon>Jeu.cs</DependentUpon>
     </Compile>
     <Compile Include="Joueur.cs" />
-    <Compile Include="Lion.cs" />
+    <Compile Include="Animaux\Lion.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MenuDepart.cs">
       <SubType>Form</SubType>
