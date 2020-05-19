@@ -27,7 +27,6 @@ namespace WannabeFarmVille
             EstDansUnEnclo = false;
             Ligne = 0;
             Colonne = 0;
-            Bouton = null;
         }
         public Tuile(int type)
         {

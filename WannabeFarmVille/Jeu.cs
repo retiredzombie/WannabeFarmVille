@@ -480,7 +480,7 @@ namespace WannabeFarmVille
                     }
                 }
                 //HAUT
-                if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 4 && vX <= 13) && !(vY >= 3 && vY <= 13 && vX >= 25 && vX <= 34) && !(vY >= 16 && vY <= 26 && vX >= 4 && vX <= 13) && !(vY >= 16 && vY <= 26 && vX >= 25 && vX <= 34))
+                if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 5 && vX <= 12) && !(vY >= 3 && vY <= 13 && vX >= 26 && vX <= 33) && !(vY >= 16 && vY <= 26 && vX >= 5 && vX <= 12) && !(vY >= 16 && vY <= 26 && vX >= 26 && vX <= 33))
                 {
                     visiteurs[i].Y -= tuile.Height;
                     visiteurs[i].MovingY = 1;
@@ -494,7 +494,7 @@ namespace WannabeFarmVille
                     }
                 }
                 //BAS
-                else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 4 && vX <= 13) && !(vY >= 1 && vY <= 10 && vX >= 25 && vX <= 34) && !(vY >= 14 && vY <= 24 && vX >= 4 && vX <= 13) && !(vY >= 14 && vY <= 24 && vX >= 25 && vX <= 34))
+                else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 5 && vX <= 12) && !(vY >= 1 && vY <= 10 && vX >= 26 && vX <= 33) && !(vY >= 14 && vY <= 24 && vX >= 5 && vX <= 12) && !(vY >= 14 && vY <= 24 && vX >= 26 && vX <= 33))
                 {
                     visiteurs[i].Y += tuile.Height;
                     visiteurs[i].MovingY = -1;
