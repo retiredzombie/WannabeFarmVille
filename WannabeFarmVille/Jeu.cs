@@ -1431,22 +1431,26 @@ namespace WannabeFarmVille
 
         private void mouton20ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 1;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un mouton.");
         }
 
         private void buffle40ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 6;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un Buffle.");
         }
 
         private void buffle30ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 4;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un licorne.");
         }
 
         private void grizzly30ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 2;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un grizzly.");
         }
 
         private void nourrirUnAnimalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1486,6 +1490,12 @@ namespace WannabeFarmVille
             {
                 MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
             }
+        }
+
+        private void rhinocéros40ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            typeAnimalSelectionne = 5;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un rhinocéros.");
         }
 
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
