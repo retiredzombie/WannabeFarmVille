@@ -310,15 +310,13 @@ namespace WannabeFarmVille
                                     MessageBox.Show("Il n'y a pas d'animal sur cette case");
                                  }
                             }
-                            if (Carte[ligne, colonne].EstAdjacente && Carte[ligne, colonne].DechetSurTuile != null)
+                            if (Carte[ligne, colonne].EstAdjacente)
                             {
-                                MessageBox.Show("get in first if");
                                 for(int i = 0; i < dechets.Count; i++)
                                 {
-                                    if(dechets.ElementAt(i).Equals(Carte[ligne, colonne].DechetSurTuile))
+                                    if(Carte[ligne, colonne].X == dechets[i].X && Carte[ligne, colonne].Y == dechets[i].Y)
                                     {
                                         dechets.RemoveAt(i);
-                                        MessageBox.Show("Remove trash");
                                     }
                                 }
                             }
@@ -1340,14 +1338,7 @@ namespace WannabeFarmVille
            
             TextAnimaux = (++NombreAnimaux).ToString();
             this.NombreAnimaux = NombreAnimaux;
-
-            string txtAnimaux = "Animaux";
-            if (NombreAnimaux == 1)
-            {
-                txtAnimaux = "Animal";
-            }
-
-            animauxToolStripMenuItem.Text = NombreAnimaux + " " + txtAnimaux;
+            animauxToolStripMenuItem.Text = NombreAnimaux + " Animaux";
             
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
