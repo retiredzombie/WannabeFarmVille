@@ -138,9 +138,6 @@ namespace WannabeFarmVille
             Player.CurrentSprite = Player.JoeUpRight;
             gameover = false;
             tailleTuile = 32;
-            //Stream str = Properties.Resources.rd2;
-            //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
-            //snd.Play();
             Stream str = Properties.Resources.rd2;
             snd = new System.Media.SoundPlayer(str);
             snd.Play();
