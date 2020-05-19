@@ -12,8 +12,6 @@ namespace WannabeFarmVille
         public DateTime DernierRepas { get => dernierRepas; set => dernierRepas = value; }
         public int Faim { get; set; }
 
-        int tmpsRepasSec; // Le temps requis entre chaque repas pour éviter les pénalités.
-
         private DateTime dernierRepas;
 
         public Animal()
