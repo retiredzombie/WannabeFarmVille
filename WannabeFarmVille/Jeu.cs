@@ -1222,6 +1222,7 @@ namespace WannabeFarmVille
             {
                 Ajouter_Animal();
                 Lion lion = new Lion(Lion.Nombre_Lions);
+                animaux.Add(lion);
             }
             else
             {
