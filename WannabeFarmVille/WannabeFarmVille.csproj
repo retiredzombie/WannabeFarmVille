@@ -48,7 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animaux\Animal.cs" />
+    <Compile Include="Animaux\Buffle.cs" />
+    <Compile Include="Animaux\Grizzly.cs" />
+    <Compile Include="Animaux\Licorne.cs" />
     <Compile Include="Animaux\Mouton.cs" />
+    <Compile Include="Animaux\Rhino.cs" />
     <Compile Include="Concierge.cs" />
     <Compile Include="Dechet.cs" />
     <Compile Include="Jeu.cs">

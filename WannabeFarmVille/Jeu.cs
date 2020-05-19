@@ -355,16 +355,32 @@ namespace WannabeFarmVille
 
             if (placementLegal)
             {
-                if (typeAnimalSelectionne == 1)
+                switch (typeAnimalSelectionne)
                 {
-                    AjouterMouton(x, y);
-                    typeAnimalSelectionne = 0;
-                }
-
-                if (typeAnimalSelectionne == 3)
-                {
-                    AjouterLion(x, y);
-                    typeAnimalSelectionne = 0;
+                    case 1:
+                        AjouterMouton(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 2:
+                        AjouterGrizzly(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 3:
+                        AjouterLion(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 4:
+                        AjouterLicorne(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 5:
+                        AjouterRhino(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 6:
+                        AjouterBuffle(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
                 }
             }
         }
@@ -398,7 +414,46 @@ namespace WannabeFarmVille
 
             return bon;
         }
+        
+        //Ajoute un mouton au X,Y choisi.
+        private void AjouterMouton(int X, int Y)
+        {
+            bool PeutAjouter;
 
+            PeutAjouter = Modifier_Argent(20, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Mouton mouton = new Mouton(X, Y);
+                animaux.Add(mouton);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un mouton.");
+            }
+        }
+
+        //Ajoute un grizzly au X,Y choisi.
+        private void AjouterGrizzly (int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(30, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Grizzly grizzly = new Grizzly(X, Y);
+                animaux.Add(grizzly);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un grizzly.");
+            }
+            
+        }
+        
         //Ajoute un lion au X,Y choisi.
         private void AjouterLion(int X, int Y)
         {
@@ -418,18 +473,56 @@ namespace WannabeFarmVille
             }
         }
 
-        //Ajoute un mouton au X,Y choisi.
-        private void AjouterMouton(int X, int Y)
+        //Ajoute une licorne au X,Y choisi.
+        private void AjouterLicorne(int X, int Y)
         {
             bool PeutAjouter;
 
-            PeutAjouter = Modifier_Argent(20, false);
+            PeutAjouter = Modifier_Argent(50, false);
 
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Mouton mouton = new Mouton(X, Y);
-                animaux.Add(mouton);
+                Licorne licorne = new Licorne(X, Y);
+                animaux.Add(licorne);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter une licorne.");
+            }
+        }
+
+        //Ajoute un rhinocéros au X,Y choisi.
+        private void AjouterRhino(int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Rhino rhino = new Rhino(X, Y);
+                animaux.Add(rhino);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un rhinocéros.");
+            }
+        }
+
+        //Ajoute un buffle au X,Y choisi.
+        private void AjouterBuffle(int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Buffle buffle = new Buffle(X, Y);
+                animaux.Add(buffle);
             }
             else
             {
@@ -1357,19 +1450,8 @@ namespace WannabeFarmVille
          */
         private void grizzly30ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(30, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Grizzly grizzly = new Grizzly(Grizzly.Nombre_Grizzlys);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un grizzly.");
-            }
+            typeAnimalSelectionne = 2;
+            MessageBox.Show("Appuyez quelque part pour ajouter un grizzly.");
         }
 
         /**
@@ -1386,19 +1468,8 @@ namespace WannabeFarmVille
          */
         private void licorne50ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(50, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Licorne licorne = new Licorne(Licorne.Nombre_Licornes);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter une licorne.");
-            }
+            typeAnimalSelectionne = 4;
+            MessageBox.Show("Appuyez quelque part pour ajouter une licorne.");
         }
 
         /**
@@ -1406,19 +1477,8 @@ namespace WannabeFarmVille
          */
         private void rhinocéros40ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(40, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Rhino rhino = new Rhino(Rhino.Nombre_Rhinos);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un rhinocéros.");
-            }
+            typeAnimalSelectionne = 5;
+            MessageBox.Show("Appuyez quelque part pour ajouter un rhinocéros.");
         }
 
         /**
@@ -1426,19 +1486,8 @@ namespace WannabeFarmVille
          */
         private void buffle40ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(40, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Buffle buffle = new Buffle(Buffle.Nombre_Buffles);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un buffle.");
-            }
+            typeAnimalSelectionne = 6;
+            MessageBox.Show("Appuyez quelque part pour ajouter un buffle.");
         }
 
         /**
