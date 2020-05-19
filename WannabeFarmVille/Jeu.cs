@@ -57,6 +57,7 @@ namespace WannabeFarmVille
         private DateTime datejeu;
         private int NbConcierge = 0;
         private int NombreAnimaux = 0;
+        private List<Animal> animaux;
         
 
         public Jeu(MenuDepart menuDepart)
@@ -82,6 +83,7 @@ namespace WannabeFarmVille
             stopwatchPayerConcierges = new Stopwatch();
             stopwatchPayerConcierges.Start();
             concierges = new List<Concierge>();
+            animaux = new List<Animal>();
             coutConcierge = 2;
             stopWatch.Start();
             rand = new Random();
@@ -506,8 +508,7 @@ namespace WannabeFarmVille
         {
             LogicVisiteurs();
             LogicConcierges();
-
-            
+            LogicContravention();
 
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
@@ -523,6 +524,17 @@ namespace WannabeFarmVille
                 PayeJoueur();
 
                 this.dt_remuneration = DateTime.Now;
+            }
+        }
+
+        private void LogicContravention()
+        {
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                if (animaux[i].AFaim)
+                {
+                    animaux[i].NourrirDoublePrix();
+                }
             }
         }
 

@@ -9,5 +9,10 @@ namespace WannabeFarmVille
     abstract class Animal
     {
         public bool AFaim { get; set; } = false;
+
+        internal void NourrirDoublePrix()
+        {
+            // A FAIRE.
+        }
     }
 }
