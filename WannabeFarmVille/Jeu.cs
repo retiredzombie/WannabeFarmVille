@@ -133,7 +133,6 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
-            thStart = delegate { this.VisiteurThread(); };
             gameover = false;
             tailleTuile = 32;
             //Stream str = Properties.Resources.rd2;
@@ -283,6 +282,8 @@ namespace WannabeFarmVille
         /// <param name="e"></param>
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
+            PlacerAnimal(e);
+
                 for (int ligne = 0; ligne < 28; ligne++)
                 {
                     for (int colonne = 0; colonne < 40; colonne++)
@@ -341,6 +342,33 @@ namespace WannabeFarmVille
                     }
                 }
         }
+
+        private void PlacerAnimal(MouseEventArgs e)
+        {
+            int x = e.X;
+            int y = e.Y;
+
+            AjouterLion(x, y);
+        }
+
+        private void AjouterLion(int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(35, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Lion lion = new Lion(X, Y, NombreAnimaux++);
+                animaux.Add(lion);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
+            }
+        }
+
         /// <summary>
         /// Cette méthode définie les tuiles situées 
         /// à l'intérieur d'un enclo
@@ -530,7 +558,7 @@ namespace WannabeFarmVille
 
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
-              this.datejeu = this.datejeu.AddDays(1);
+                this.datejeu = this.datejeu.AddDays(1);
 
                 this.stopwatchJeu.Restart();
             }
@@ -545,6 +573,7 @@ namespace WannabeFarmVille
             }
         }
 
+        // Nourris les animaux à double le prix si ils ont faim.
         private void LogicContravention()
         {
             for (int i = 0; i < animaux.Count; i++)
@@ -556,6 +585,7 @@ namespace WannabeFarmVille
             }
         }
 
+        // Active ou désactive les options du menu dépendament de l'argent du joueur.
         private void LogiqueMenuBar()
         {
             double argent = Player.Argent;
@@ -614,6 +644,7 @@ namespace WannabeFarmVille
             }
         }
 
+        // Paye le joueur (nombre de visiteurs * nombre d'animaux).
         private void PayeJoueur()
         {
             double paye = 0.0;
@@ -865,6 +896,7 @@ namespace WannabeFarmVille
 ;
         }
 
+        // Retire de l'argent au joueurs pour la paye des concierges.
         private void PayerConcierges()
         {
             if (stopwatchPayerConcierges.Elapsed.TotalSeconds >= 60)
@@ -877,6 +909,7 @@ namespace WannabeFarmVille
             }
         }
 
+        // Verifie si le joueur à assez d'argent.
         public bool AssezArgent(int cout)
         {
             bool assez = true;
@@ -988,7 +1021,7 @@ namespace WannabeFarmVille
 
         public delegate void DelegateRefresh();
         
-
+        // La boucle principale du jeu.
         private void BouclePrincipaleDuJeu()
         {
             while (!gameover)
@@ -1008,11 +1041,6 @@ namespace WannabeFarmVille
              Refresh();
         /*    Thread th = new Thread(thStart);
             th.Start();*/
-        }
-
-        private void VisiteurThread()
-        {
-
         }
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1259,20 +1287,7 @@ namespace WannabeFarmVille
          */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(35, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                Lion lion = new Lion(Player.X, Player.Y, NombreAnimaux++);
-                animaux.Add(lion);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
-            }
+            
         }
 
         /**
