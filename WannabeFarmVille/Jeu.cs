@@ -1410,6 +1410,45 @@ namespace WannabeFarmVille
 
         }
 
+        private void nourrirUnAnimalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int row = Player.CurrentRow;
+            int column = Player.CurrentColumn;
+            try
+            {
+                if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                   || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                {
+                    MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
+                    Player.PeutNourrir = true;
+                    if (Carte[row + 1, column].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[row + 1, column].PositionEnclo;
+                    }
+                    else if (Carte[row - 1, column].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[row - 1, column].PositionEnclo;
+                    }
+                    else if (Carte[row, column + 1].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[row, column + 1].PositionEnclo;
+                    }
+                    else
+                    {
+                        Player.EncloChoisi = Carte[row, column - 1].PositionEnclo;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
+            }
+        }
+
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Se déplacer: W,A,S,D \n" + 
