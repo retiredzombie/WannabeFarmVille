@@ -57,6 +57,7 @@ namespace WannabeFarmVille
         private DateTime datejeu;
         private int NbConcierge = 0;
         private int NombreAnimaux = 0;
+        private List<Animal> animaux;
         
 
         public Jeu(MenuDepart menuDepart)
@@ -82,6 +83,7 @@ namespace WannabeFarmVille
             stopwatchPayerConcierges = new Stopwatch();
             stopwatchPayerConcierges.Start();
             concierges = new List<Concierge>();
+            animaux = new List<Animal>();
             coutConcierge = 2;
             stopWatch.Start();
             rand = new Random();
@@ -473,6 +475,8 @@ namespace WannabeFarmVille
         {
             g = e.Graphics;
 
+            LogiqueMenuBar();
+
             this.affichageArgent.Text = this.Player.Argent.ToString() + "$";
 
             this.dateToolStripMenuItem.Text = this.datejeu.Date.ToString("dd MMMM yyyy");
@@ -509,8 +513,7 @@ namespace WannabeFarmVille
         {
             LogicVisiteurs();
             LogicConcierges();
-
-            LogiqueMenuBar();
+            LogicContravention();
 
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
@@ -526,6 +529,17 @@ namespace WannabeFarmVille
                 PayeJoueur();
 
                 this.dt_remuneration = DateTime.Now;
+            }
+        }
+
+        private void LogicContravention()
+        {
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                if ((DateTime.Now - animaux[i].DernierRepas).TotalSeconds >= animaux[i].Faim)
+                {
+                    animaux[i].NourrirDoublePrix(Player);
+                }
             }
         }
 

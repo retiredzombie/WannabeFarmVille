@@ -15,9 +15,9 @@ namespace WannabeFarmVille
         // Toutes les durées sont en "jours"
         private int Gestation { get; set; } = 110;
         private int Croissance { get; set; } = 110;
-        private int Faim { get; set; } = 120;
         private int Genre { get; set; }
         private int ID { get; set; }
+
         private Timer CompteARebours { get; set; }
 
         private const int Jour = MS; // En millisecondes
@@ -27,8 +27,8 @@ namespace WannabeFarmVille
         {
             Nombre_Lions++;
             this.ID = id;
+            this.Faim = 120;
             Commencer_Timer(CompteARebours, Jour);
-            
         }
 
         /**
