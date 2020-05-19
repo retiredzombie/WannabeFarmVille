@@ -359,31 +359,32 @@ namespace WannabeFarmVille
             if (placementLegal)
             {
                 switch (typeAnimalSelectionne)
-            {
-                case 1:
-                    AjouterMouton(x, y);
-                    typeAnimalSelectionne = 0;
-                    break;
-                case 2:
-                    AjouterGrizzly(x, y);
-                    typeAnimalSelectionne = 0;
-                    break;
-                case 3:
-                    AjouterLion(x, y);
-                    typeAnimalSelectionne = 0;
-                    break;
-                case 4:
-                    AjouterLicorne(x, y);
-                    typeAnimalSelectionne = 0;
-                    break;
-                case 5:
-                    AjouterRhino(x, y);
-                    typeAnimalSelectionne = 0;
-                    break;
-                case 6:
-                    AjouterBuffle(x, y);
-                    typeAnimalSelectionne = 0;
-                    break;
+                {
+                    case 1:
+                        AjouterMouton(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 2:
+                        AjouterGrizzly(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 3:
+                        AjouterLion(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 4:
+                        AjouterLicorne(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 5:
+                        AjouterRhino(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 6:
+                        AjouterBuffle(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                }
             }
         }
 
