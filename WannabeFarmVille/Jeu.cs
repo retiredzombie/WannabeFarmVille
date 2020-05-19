@@ -23,6 +23,13 @@ namespace WannabeFarmVille
         double FPS = 1;
 
 
+        // CONFIGURABLE
+
+
+        double PAYE_PAR_VISITEUR = 1.0; // Chaque visiteur paye ce montant fois le nombre d'animaux.
+        double MALUS_PAR_DECHET = 0.10;
+
+
         // VARIABLES
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
@@ -41,6 +48,7 @@ namespace WannabeFarmVille
         private Random rand;
         private bool gameover;
         private Stopwatch stopWatch;
+        private DateTime dt_remuneration;
         private DelegateRefresh refreshFormDelegate;
         private int tailleTuile;
         private List<Dechet> dechets;
@@ -69,6 +77,7 @@ namespace WannabeFarmVille
         {
             datejeu = DateTime.Now;
             stopWatch = new Stopwatch();
+            dt_remuneration = DateTime.Now;
             stopwatchJeu = new Stopwatch();
             stopwatchPayerConcierges = new Stopwatch();
             stopwatchPayerConcierges.Start();
@@ -496,12 +505,98 @@ namespace WannabeFarmVille
             LogicVisiteurs();
             LogicConcierges();
 
+            LogiqueMenuBar();
+
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
-                this.datejeu = this.datejeu.AddDays(1);
+              this.datejeu = this.datejeu.AddDays(1);
 
                 this.stopwatchJeu.Restart();
             }
+
+
+            //Paye le joueur en fonction du nombre de visiteurs et de déchets (1x par minute).
+            if ((DateTime.Now - dt_remuneration).TotalSeconds >= 60)
+            {
+                PayeJoueur();
+
+                this.dt_remuneration = DateTime.Now;
+            }
+        }
+
+        private void LogiqueMenuBar()
+        {
+            double argent = Player.Argent;
+
+            if (argent >= 20)
+            {
+                mouton20ToolStripMenuItem.Enabled = true;
+            } else
+            {
+                mouton20ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 30)
+            {
+                grizzly30ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                grizzly30ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 35)
+            {
+                lion35ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                lion35ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 50)
+            {
+                buffle30ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                buffle30ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 40)
+            {
+                rhinocéros40ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                rhinocéros40ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 40)
+            {
+                buffle40ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                buffle40ToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void PayeJoueur()
+        {
+            double paye = 0.0;
+
+            for (int i = 0; i < visiteurs.Count; i++)
+            {
+                paye += PAYE_PAR_VISITEUR * NombreAnimaux;
+            }
+
+            for (int i = 0; i < dechets.Count; i++)
+            {
+                paye -= MALUS_PAR_DECHET;
+            }
+
+            this.Player.AjouterArgent(paye);
         }
 
         /*
@@ -1246,6 +1341,26 @@ namespace WannabeFarmVille
         }
 
         private void PicUpRight_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+
+        }
+
+        private void mouton20ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buffle40ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buffle30ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grizzly30ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
 
         }

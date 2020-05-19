@@ -67,7 +67,7 @@ namespace WannabeFarmVille
             this.profitTotal = this.Argent;
         }
 
-        public void AjouterArgent(int cout)
+        public void AjouterArgent(double cout)
         {
             this.Argent += cout;
         }
