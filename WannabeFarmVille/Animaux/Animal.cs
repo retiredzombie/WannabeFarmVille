@@ -21,13 +21,12 @@ namespace WannabeFarmVille
 
         private DateTime dernierRepas;
 
-        public Animal(int X, int Y, int ID)
+        public Animal(int X, int Y)
         {
             this.dernierRepas = DateTime.Now;
 
             this.X = X;
             this.Y = Y;
-            this.ID = ID;
         }
 
         internal void NourrirDoublePrix(Joueur Player)
