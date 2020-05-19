@@ -47,11 +47,11 @@
             this.buffle30ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rhinocéros40ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buffle40ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nourrirUnAnimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.déchetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nourrirUnAnimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
@@ -205,7 +205,7 @@
             this.mouton20ToolStripMenuItem.Enabled = false;
             this.mouton20ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mouton20ToolStripMenuItem.Name = "mouton20ToolStripMenuItem";
-            this.mouton20ToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
+            this.mouton20ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.mouton20ToolStripMenuItem.Text = "+ Mouton 20$";
             this.mouton20ToolStripMenuItem.Click += new System.EventHandler(this.mouton20ToolStripMenuItem_Click_1);
             // 
@@ -214,7 +214,7 @@
             this.grizzly30ToolStripMenuItem.Enabled = false;
             this.grizzly30ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grizzly30ToolStripMenuItem.Name = "grizzly30ToolStripMenuItem";
-            this.grizzly30ToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
+            this.grizzly30ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.grizzly30ToolStripMenuItem.Text = "+ Grizzly 30$";
             this.grizzly30ToolStripMenuItem.Click += new System.EventHandler(this.grizzly30ToolStripMenuItem_Click_1);
             // 
@@ -223,7 +223,7 @@
             this.lion35ToolStripMenuItem.Enabled = false;
             this.lion35ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lion35ToolStripMenuItem.Name = "lion35ToolStripMenuItem";
-            this.lion35ToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
+            this.lion35ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.lion35ToolStripMenuItem.Text = "+ Lion 35$";
             this.lion35ToolStripMenuItem.Click += new System.EventHandler(this.lion35ToolStripMenuItem_Click);
             // 
@@ -232,7 +232,7 @@
             this.buffle30ToolStripMenuItem.Enabled = false;
             this.buffle30ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buffle30ToolStripMenuItem.Name = "buffle30ToolStripMenuItem";
-            this.buffle30ToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
+            this.buffle30ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.buffle30ToolStripMenuItem.Text = "+ Licorne 50$";
             this.buffle30ToolStripMenuItem.Click += new System.EventHandler(this.buffle30ToolStripMenuItem_Click);
             // 
@@ -241,17 +241,26 @@
             this.rhinocéros40ToolStripMenuItem.Enabled = false;
             this.rhinocéros40ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rhinocéros40ToolStripMenuItem.Name = "rhinocéros40ToolStripMenuItem";
-            this.rhinocéros40ToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
+            this.rhinocéros40ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.rhinocéros40ToolStripMenuItem.Text = "+ Rhinocéros 40$";
+            this.rhinocéros40ToolStripMenuItem.Click += new System.EventHandler(this.rhinocéros40ToolStripMenuItem_Click_1);
             // 
             // buffle40ToolStripMenuItem
             // 
             this.buffle40ToolStripMenuItem.Enabled = false;
             this.buffle40ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buffle40ToolStripMenuItem.Name = "buffle40ToolStripMenuItem";
-            this.buffle40ToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
+            this.buffle40ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.buffle40ToolStripMenuItem.Text = "+ Buffle 40$";
             this.buffle40ToolStripMenuItem.Click += new System.EventHandler(this.buffle40ToolStripMenuItem_Click_1);
+            // 
+            // nourrirUnAnimalToolStripMenuItem
+            // 
+            this.nourrirUnAnimalToolStripMenuItem.Name = "nourrirUnAnimalToolStripMenuItem";
+            this.nourrirUnAnimalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.nourrirUnAnimalToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
+            this.nourrirUnAnimalToolStripMenuItem.Text = "Nourrir Un Animal";
+            this.nourrirUnAnimalToolStripMenuItem.Click += new System.EventHandler(this.nourrirUnAnimalToolStripMenuItem_Click);
             // 
             // déchetsToolStripMenuItem
             // 
@@ -284,13 +293,6 @@
             this.aideToolStripMenuItem.Size = new System.Drawing.Size(67, 28);
             this.aideToolStripMenuItem.Text = "Aide";
             this.aideToolStripMenuItem.Click += new System.EventHandler(this.aideToolStripMenuItem_Click);
-            // 
-            // nourrirUnAnimalToolStripMenuItem
-            // 
-            this.nourrirUnAnimalToolStripMenuItem.Name = "nourrirUnAnimalToolStripMenuItem";
-            this.nourrirUnAnimalToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
-            this.nourrirUnAnimalToolStripMenuItem.Text = "Nourrir Un Animal";
-            this.nourrirUnAnimalToolStripMenuItem.Click += new System.EventHandler(this.nourrirUnAnimalToolStripMenuItem_Click);
             // 
             // Jeu
             // 

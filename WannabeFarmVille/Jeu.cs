@@ -432,14 +432,31 @@ namespace WannabeFarmVille
         /// <param name="enclo"></param>
         private void RendreClotureSolide(int row, int column, Enclo enclo)
         {   
+            
             for (int i = 0; i < 9; i++)
             {
+                if(i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if(i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 column++;
             }
             for (int i = 0; i < 9; i++)
             {
+                if (i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if (i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 row++;
@@ -449,12 +466,28 @@ namespace WannabeFarmVille
             row++;
             for (int i = 0; i < 9; i++)
             {
+                if (i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if (i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 column--;
             }
             for (int i = 0; i < 9; i++)
             {
+                if (i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if (i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 row--;
@@ -1108,8 +1141,8 @@ namespace WannabeFarmVille
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1137,8 +1170,8 @@ namespace WannabeFarmVille
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1166,8 +1199,8 @@ namespace WannabeFarmVille
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1195,8 +1228,8 @@ namespace WannabeFarmVille
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                            || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1217,8 +1250,8 @@ namespace WannabeFarmVille
             {
                 try
                 {
-                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                     {
                         MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
                         Player.PeutNourrir = true;
@@ -1431,22 +1464,26 @@ namespace WannabeFarmVille
 
         private void mouton20ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 1;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un mouton.");
         }
 
         private void buffle40ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 6;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un Buffle.");
         }
 
         private void buffle30ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 4;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un licorne.");
         }
 
         private void grizzly30ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 2;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un grizzly.");
         }
 
         private void nourrirUnAnimalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1455,8 +1492,8 @@ namespace WannabeFarmVille
             int column = Player.CurrentColumn;
             try
             {
-                if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                   || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                 {
                     MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
                     Player.PeutNourrir = true;
@@ -1486,6 +1523,12 @@ namespace WannabeFarmVille
             {
                 MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
             }
+        }
+
+        private void rhinocéros40ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            typeAnimalSelectionne = 5;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un rhinocéros.");
         }
 
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
