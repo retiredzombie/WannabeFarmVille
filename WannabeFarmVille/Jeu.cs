@@ -369,7 +369,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Lion lion = new Lion(X, Y, NombreAnimaux++);
+                Lion lion = new Lion(X, Y);
                 animaux.Add(lion);
             }
             else
