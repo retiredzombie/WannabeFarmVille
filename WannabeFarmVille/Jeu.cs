@@ -450,6 +450,8 @@ namespace WannabeFarmVille
         {
             g = e.Graphics;
 
+            LogiqueMenuBar();
+
             this.affichageArgent.Text = this.Player.Argent.ToString() + "$";
 
             this.dateToolStripMenuItem.Text = this.datejeu.Date.ToString("dd MMMM yyyy");
@@ -487,7 +489,7 @@ namespace WannabeFarmVille
             LogicVisiteurs();
             LogicConcierges();
 
-            LogiqueMenuBar();
+            
 
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
