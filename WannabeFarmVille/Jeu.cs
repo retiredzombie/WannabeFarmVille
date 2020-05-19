@@ -1340,7 +1340,14 @@ namespace WannabeFarmVille
            
             TextAnimaux = (++NombreAnimaux).ToString();
             this.NombreAnimaux = NombreAnimaux;
-            animauxToolStripMenuItem.Text = NombreAnimaux + " Animaux";
+
+            string txtAnimaux = "Animaux";
+            if (NombreAnimaux == 1)
+            {
+                txtAnimaux = "Animal";
+            }
+
+            animauxToolStripMenuItem.Text = NombreAnimaux + " " + txtAnimaux;
             
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
