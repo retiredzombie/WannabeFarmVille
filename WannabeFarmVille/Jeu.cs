@@ -341,7 +341,7 @@ namespace WannabeFarmVille
                         Carte[ligne, colonne].EstDansUnEnclo = true;
                         if(compt == 0)
                         {
-                            Lion lion = new Lion(117);
+                            Lion lion = new Lion(0, 0, NombreAnimaux++);
                             Carte[ligne, colonne].AnimalSurLaCase = lion;
                             compt++;
                         }
@@ -492,6 +492,11 @@ namespace WannabeFarmVille
                 string nom = visiteurs[i].Nom;
 
                 g.DrawString(nom, font, drawBrush, new Point(nomX, nomY));
+            }
+
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                g.DrawImage(animaux[i].image, animaux[i].X, animaux[i].Y, 32, 32);
             }
 
             for (int i = 0; i < dechets.Count; i++)
@@ -1221,7 +1226,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Lion lion = new Lion(Lion.Nombre_Lions);
+                Lion lion = new Lion(Player.X, Player.Y, NombreAnimaux++);
                 animaux.Add(lion);
             }
             else
