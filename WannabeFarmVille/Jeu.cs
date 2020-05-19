@@ -1099,8 +1099,8 @@ namespace WannabeFarmVille
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1128,8 +1128,8 @@ namespace WannabeFarmVille
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1157,8 +1157,8 @@ namespace WannabeFarmVille
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1186,8 +1186,8 @@ namespace WannabeFarmVille
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                            || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1208,8 +1208,8 @@ namespace WannabeFarmVille
             {
                 try
                 {
-                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                     {
                         MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
                         Player.PeutNourrir = true;
@@ -1445,8 +1445,8 @@ namespace WannabeFarmVille
             int column = Player.CurrentColumn;
             try
             {
-                if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                   || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                 {
                     MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
                     Player.PeutNourrir = true;
