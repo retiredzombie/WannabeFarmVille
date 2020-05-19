@@ -423,14 +423,31 @@ namespace WannabeFarmVille
         /// <param name="enclo"></param>
         private void RendreClotureSolide(int row, int column, Enclo enclo)
         {   
+            
             for (int i = 0; i < 9; i++)
             {
+                if(i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if(i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 column++;
             }
             for (int i = 0; i < 9; i++)
             {
+                if (i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if (i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 row++;
@@ -440,12 +457,28 @@ namespace WannabeFarmVille
             row++;
             for (int i = 0; i < 9; i++)
             {
+                if (i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if (i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 column--;
             }
             for (int i = 0; i < 9; i++)
             {
+                if (i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if (i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 row--;
