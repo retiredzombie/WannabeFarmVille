@@ -132,6 +132,16 @@ namespace WannabeFarmVille
             snd = new System.Media.SoundPlayer(str);
             snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
+            MettreTuilesAdjacentes();
+            visiteursPicBox = new List<PictureBox>();
+            for (int i = 0; i < 10; i++)
+            {
+               AjouterVisiteurSpawn();
+            }
+        }
+
+        private void MettreTuilesAdjacentes()
+        {
             try
             {
                 Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstAdjacente = true;
@@ -188,12 +198,67 @@ namespace WannabeFarmVille
             catch (IndexOutOfRangeException)
             {
             }
-            visiteursPicBox = new List<PictureBox>();
-            for (int i = 0; i < 10; i++)
+        }
+        private void EnleverTuilesAdjacentes()
+        {
+            try
             {
-               AjouterVisiteurSpawn();
+                Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstAdjacente = false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow + 1, Player.CurrentColumn + 1].EstAdjacente = false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow + 1, Player.CurrentColumn - 1].EstAdjacente = false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow, Player.CurrentColumn - 1].EstAdjacente = false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow, Player.CurrentColumn + 1].EstAdjacente = false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow - 1, Player.CurrentColumn].EstAdjacente = false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow - 1, Player.CurrentColumn + 1].EstAdjacente = false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow - 1, Player.CurrentColumn - 1].EstAdjacente = false;
+            }
+            catch (IndexOutOfRangeException)
+            {
             }
         }
+
         /// <summary>
         /// Event qui se déclenche lorsque l'utilisateur clique avec sa sourie
         /// </summary>
@@ -834,7 +899,9 @@ namespace WannabeFarmVille
             }
             if (e.KeyCode == Keys.S)
             {
+                EnleverTuilesAdjacentes();
                 Player.MoveDown();
+                MettreTuilesAdjacentes();
                 try
                 {
                     if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
@@ -856,7 +923,9 @@ namespace WannabeFarmVille
             }
             if (e.KeyCode == Keys.W)
             {
+                EnleverTuilesAdjacentes();
                 Player.MoveUp();
+                MettreTuilesAdjacentes();
                 try
                 {
                     if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
@@ -878,7 +947,9 @@ namespace WannabeFarmVille
             }
             if (e.KeyCode == Keys.D)
             {
+                EnleverTuilesAdjacentes();
                 Player.MoveRight();
+                MettreTuilesAdjacentes();
                 try
                 {
                     if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
@@ -900,7 +971,9 @@ namespace WannabeFarmVille
             }
             if (e.KeyCode == Keys.A)
             {
+                EnleverTuilesAdjacentes();
                 Player.MoveLeft();
+                MettreTuilesAdjacentes();
                 try
                 {
                     if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
