@@ -330,7 +330,6 @@ namespace WannabeFarmVille
         private void DefinirInterieurEnclos()
         {
             bool enclo = false;
-            int compt = 0;
             for (int ligne = 0; ligne < 28; ligne++)
             {
                 for (int colonne = 0; colonne < 40; colonne++)
@@ -338,12 +337,6 @@ namespace WannabeFarmVille
                     if (enclo && !Carte[ligne, colonne].EstUnObstacle)
                     {
                         Carte[ligne, colonne].EstDansUnEnclo = true;
-                        if(compt == 0)
-                        {
-                            Lion lion = new Lion(117);
-                            Carte[ligne, colonne].AnimalSurLaCase = lion;
-                            compt++;
-                        }
                         if(ligne < 13 && colonne < 18)
                         {
                             Carte[ligne, colonne].PositionEnclo = Enclo.UpLeft;
