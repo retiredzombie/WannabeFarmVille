@@ -143,6 +143,7 @@ namespace WannabeFarmVille
             snd = new System.Media.SoundPlayer(str);
             snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
+            Carte[0, 0].EstUnObstacle = true;
             MettreTuilesAdjacentes();
             visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 10; i++)
@@ -1043,7 +1044,9 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.S)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveDown();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
@@ -1070,7 +1073,9 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.W)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveUp();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
@@ -1097,7 +1102,9 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.D)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveRight();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
@@ -1124,7 +1131,9 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.A)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveLeft();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
