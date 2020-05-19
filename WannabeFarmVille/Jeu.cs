@@ -139,7 +139,9 @@ namespace WannabeFarmVille
                AjouterVisiteurSpawn();
             }
         }
-
+        /// <summary>
+        /// Rendre les tuiles de la cartes autour de soit, adjacentes
+        /// </summary>
         private void MettreTuilesAdjacentes()
         {
             try
@@ -199,6 +201,9 @@ namespace WannabeFarmVille
             {
             }
         }
+        /// <summary>
+        /// Enlever les tuiles adjacentes
+        /// </summary>
         private void EnleverTuilesAdjacentes()
         {
             try
@@ -272,26 +277,39 @@ namespace WannabeFarmVille
                     {
                         if (e.X > Carte[ligne, colonne].X && e.X < (32 + Carte[ligne, colonne].X) && e.Y > Carte[ligne, colonne].Y && e.Y < (32 + Carte[ligne, colonne].Y))
                         {
-                            if (Carte[ligne, colonne].AnimalSurLaCase != null)
+                        MessageBox.Show( " efwe " + Carte[ligne, colonne].EstAdjacente);
+                            if (Player.PeutNourrir)
                             {
-                                if (Player.PeutNourrir)
-                                {
+                                 if (Carte[ligne, colonne].AnimalSurLaCase != null)
+                                 {
                                     if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
                                     {
-                                        Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
-                                        MessageBox.Show("L'animal cri de joie et est rassasié !");
-                                        Player.Argent -= 1;
-                                        affichageArgent.Text = Player.Argent + "$";
+                                         Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
+                                         MessageBox.Show("L'animal cri de joie et est rassasié !");
+                                         Player.Argent -= 1;
+                                         affichageArgent.Text = Player.Argent + "$";
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
+                                         MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
+                                    }
+                                 }
+                                 else
+                                 {
+                                    MessageBox.Show("Il n'y a pas d'animal sur cette case");
+                                 }
+                            }
+                            if (Carte[ligne, colonne].EstAdjacente && Carte[ligne, colonne].DechetSurTuile != null)
+                            {
+                                MessageBox.Show("get in first if");
+                                for(int i = 0; i < dechets.Count; i++)
+                                {
+                                    if(dechets.ElementAt(i).Equals(Carte[ligne, colonne].DechetSurTuile))
+                                    {
+                                        dechets.RemoveAt(i);
+                                        MessageBox.Show("Remove trash");
                                     }
                                 }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Il n'y a pas d'animal sur cette case");
                             }
                         }
                     }
@@ -902,23 +920,26 @@ namespace WannabeFarmVille
                 EnleverTuilesAdjacentes();
                 Player.MoveDown();
                 MettreTuilesAdjacentes();
-                try
+                if (Player.PeutNourrir)
                 {
-                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    try
                     {
-                        Player.PeutNourrir = true;
+                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        {
+                            Player.PeutNourrir = true;
+                        }
+                        else
+                        {
+                            Player.PeutNourrir = false;
+                            Player.EncloChoisi = Enclo.PasEnclo;
+                        }
                     }
-                    else
+                    catch (IndexOutOfRangeException)
                     {
                         Player.PeutNourrir = false;
                         Player.EncloChoisi = Enclo.PasEnclo;
                     }
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    Player.PeutNourrir = false;
-                    Player.EncloChoisi = Enclo.PasEnclo;
                 }
             }
             if (e.KeyCode == Keys.W)
@@ -926,23 +947,26 @@ namespace WannabeFarmVille
                 EnleverTuilesAdjacentes();
                 Player.MoveUp();
                 MettreTuilesAdjacentes();
-                try
+                if (Player.PeutNourrir)
                 {
-                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    try
                     {
-                        Player.PeutNourrir = true;
+                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        {
+                            Player.PeutNourrir = true;
+                        }
+                        else
+                        {
+                            Player.PeutNourrir = false;
+                            Player.EncloChoisi = Enclo.PasEnclo;
+                        }
                     }
-                    else
+                    catch (IndexOutOfRangeException)
                     {
                         Player.PeutNourrir = false;
                         Player.EncloChoisi = Enclo.PasEnclo;
                     }
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    Player.PeutNourrir = false;
-                    Player.EncloChoisi = Enclo.PasEnclo;
                 }
             }
             if (e.KeyCode == Keys.D)
@@ -950,23 +974,26 @@ namespace WannabeFarmVille
                 EnleverTuilesAdjacentes();
                 Player.MoveRight();
                 MettreTuilesAdjacentes();
-                try
+                if (Player.PeutNourrir)
                 {
-                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    try
                     {
-                        Player.PeutNourrir = true;
+                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        {
+                            Player.PeutNourrir = true;
+                        }
+                        else
+                        {
+                            Player.PeutNourrir = false;
+                            Player.EncloChoisi = Enclo.PasEnclo;
+                        }
                     }
-                    else
+                    catch (IndexOutOfRangeException)
                     {
                         Player.PeutNourrir = false;
                         Player.EncloChoisi = Enclo.PasEnclo;
                     }
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    Player.PeutNourrir = false;
-                    Player.EncloChoisi = Enclo.PasEnclo;
                 }
             }
             if (e.KeyCode == Keys.A)
@@ -974,23 +1001,26 @@ namespace WannabeFarmVille
                 EnleverTuilesAdjacentes();
                 Player.MoveLeft();
                 MettreTuilesAdjacentes();
-                try
+                if (Player.PeutNourrir)
                 {
-                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    try
                     {
-                        Player.PeutNourrir = true;
+                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        {
+                            Player.PeutNourrir = true;
+                        }
+                        else
+                        {
+                            Player.PeutNourrir = false;
+                            Player.EncloChoisi = Enclo.PasEnclo;
+                        }
                     }
-                    else
+                    catch (IndexOutOfRangeException)
                     {
                         Player.PeutNourrir = false;
                         Player.EncloChoisi = Enclo.PasEnclo;
                     }
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    Player.PeutNourrir = false;
-                    Player.EncloChoisi = Enclo.PasEnclo;
                 }
             }
             if(e.KeyCode == Keys.N)
