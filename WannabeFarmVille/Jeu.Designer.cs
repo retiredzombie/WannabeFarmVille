@@ -290,6 +290,7 @@
             this.nourrirUnAnimalToolStripMenuItem.Name = "nourrirUnAnimalToolStripMenuItem";
             this.nourrirUnAnimalToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
             this.nourrirUnAnimalToolStripMenuItem.Text = "Nourrir Un Animal";
+            this.nourrirUnAnimalToolStripMenuItem.Click += new System.EventHandler(this.nourrirUnAnimalToolStripMenuItem_Click);
             // 
             // Jeu
             // 

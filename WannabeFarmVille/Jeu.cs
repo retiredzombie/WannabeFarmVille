@@ -313,13 +313,30 @@ namespace WannabeFarmVille
                             }
                             if (Carte[ligne, colonne].EstAdjacente)
                             {
-                                for(int i = 0; i < dechets.Count; i++)
+                                if (Player.PeutEngagerConcierge)
                                 {
-                                    if(Carte[ligne, colonne].X == dechets[i].X && Carte[ligne, colonne].Y == dechets[i].Y)
+                                    if (!Carte[ligne, colonne].EstUnObstacle)
+                                    {
+                                        NewConcierge(Carte[ligne, colonne].X, Carte[ligne, colonne].Y, ligne, colonne);
+                                        NbConcierge++;
+                                        conciergesToolStripMenuItem.Text = NbConcierge + " Concierges";
+                                        Player.PeutEngagerConcierge = false;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Vous devez choisir une case vide");
+                                    }
+                                }
+                            else
+                            {
+                                for (int i = 0; i < dechets.Count; i++)
+                                {
+                                    if (Carte[ligne, colonne].X == dechets[i].X && Carte[ligne, colonne].Y == dechets[i].Y)
                                     {
                                         dechets.RemoveAt(i);
                                     }
                                 }
+                            }
                             }
                         }
                     }
@@ -1028,18 +1045,15 @@ namespace WannabeFarmVille
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewConcierge();
-            NbConcierge++;
-            conciergesToolStripMenuItem.Text = NbConcierge + " Concierges";
+            Player.PeutEngagerConcierge = true;
+            MessageBox.Show("Séléctionnez la tuile adjaçente sur laquelle vous \n voulez faire apparaître le concierge");
         }
 
-        private void NewConcierge()
+        private void NewConcierge(int cX, int cY, int ligne, int colonne)
         {
-            int cX = Player.CurrentColumn * tailleTuile;
-            int cY = Player.CurrentRow * tailleTuile;
             try
             {
-                concierges.Add(new Concierge(cX, cY, Player.CurrentRow - 1, Player.CurrentColumn));
+                concierges.Add(new Concierge(cX, cY, ligne, colonne));
             }
             catch (IndexOutOfRangeException)
             {
@@ -1423,6 +1437,45 @@ namespace WannabeFarmVille
         private void grizzly30ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void nourrirUnAnimalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int row = Player.CurrentRow;
+            int column = Player.CurrentColumn;
+            try
+            {
+                if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
+                   || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                {
+                    MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
+                    Player.PeutNourrir = true;
+                    if (Carte[row + 1, column].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[row + 1, column].PositionEnclo;
+                    }
+                    else if (Carte[row - 1, column].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[row - 1, column].PositionEnclo;
+                    }
+                    else if (Carte[row, column + 1].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[row, column + 1].PositionEnclo;
+                    }
+                    else
+                    {
+                        Player.EncloChoisi = Carte[row, column - 1].PositionEnclo;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
+            }
         }
 
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
