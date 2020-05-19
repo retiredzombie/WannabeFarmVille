@@ -1297,6 +1297,7 @@ namespace WannabeFarmVille
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             typeAnimalSelectionne = 3;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un lion.");
         }
 
         /**
@@ -1413,7 +1414,7 @@ namespace WannabeFarmVille
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("Vous avez fait un profit de " + this.Player.ProfitTotal.ToString() + "$.");
+            MessageBox.Show("Vous avez fait un profit de " + this.Player.Argent.ToString() + "$.");
 
             this.bouclePrincipale.Abort();
 
