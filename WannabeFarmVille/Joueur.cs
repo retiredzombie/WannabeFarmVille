@@ -53,6 +53,7 @@ namespace WannabeFarmVille
         public PictureBox JoeRightLeft { get; set; }
         public Enclo EncloChoisi { get; set; } = Enclo.PasEnclo;
         public bool PeutNourrir { get; set; }
+        public bool PeutEngagerConcierge { get; set; } = false;
         public double ProfitTotal { get => profitTotal; set => profitTotal = value; }
 
         public void RetirerArgent(int cout)

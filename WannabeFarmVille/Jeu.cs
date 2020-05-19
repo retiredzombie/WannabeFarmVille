@@ -312,13 +312,30 @@ namespace WannabeFarmVille
                             }
                             if (Carte[ligne, colonne].EstAdjacente)
                             {
-                                for(int i = 0; i < dechets.Count; i++)
+                                if (Player.PeutEngagerConcierge)
                                 {
-                                    if(Carte[ligne, colonne].X == dechets[i].X && Carte[ligne, colonne].Y == dechets[i].Y)
+                                    if (!Carte[ligne, colonne].EstUnObstacle)
+                                    {
+                                        NewConcierge(Carte[ligne, colonne].X, Carte[ligne, colonne].Y, ligne, colonne);
+                                        NbConcierge++;
+                                        conciergesToolStripMenuItem.Text = NbConcierge + " Concierges";
+                                        Player.PeutEngagerConcierge = false;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Vous devez choisir une case vide");
+                                    }
+                                }
+                            else
+                            {
+                                for (int i = 0; i < dechets.Count; i++)
+                                {
+                                    if (Carte[ligne, colonne].X == dechets[i].X && Carte[ligne, colonne].Y == dechets[i].Y)
                                     {
                                         dechets.RemoveAt(i);
                                     }
                                 }
+                            }
                             }
                         }
                     }
@@ -1000,18 +1017,15 @@ namespace WannabeFarmVille
 
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewConcierge();
-            NbConcierge++;
-            conciergesToolStripMenuItem.Text = NbConcierge + " Concierges";
+            Player.PeutEngagerConcierge = true;
+            MessageBox.Show("Séléctionnez la tuile adjaçente sur laquelle vous \n voulez faire apparaître le concierge");
         }
 
-        private void NewConcierge()
+        private void NewConcierge(int cX, int cY, int ligne, int colonne)
         {
-            int cX = Player.CurrentColumn * tailleTuile;
-            int cY = Player.CurrentRow * tailleTuile;
             try
             {
-                concierges.Add(new Concierge(cX, cY, Player.CurrentRow - 1, Player.CurrentColumn));
+                concierges.Add(new Concierge(cX, cY, ligne, colonne));
             }
             catch (IndexOutOfRangeException)
             {
