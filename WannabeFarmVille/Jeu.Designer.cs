@@ -52,6 +52,11 @@
             this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PnlVisiteurs = new System.Windows.Forms.Panel();
+            this.lblVisNom = new System.Windows.Forms.Label();
+            this.IconVis = new System.Windows.Forms.PictureBox();
+            this.lblGenre = new System.Windows.Forms.Label();
+            this.lblTemps = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
@@ -61,6 +66,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicUpRight)).BeginInit();
             this.menu_haut.SuspendLayout();
+            this.PnlVisiteurs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IconVis)).BeginInit();
             this.SuspendLayout();
             // 
             // PicDownRight
@@ -257,6 +264,7 @@
             // nourrirUnAnimalToolStripMenuItem
             // 
             this.nourrirUnAnimalToolStripMenuItem.Name = "nourrirUnAnimalToolStripMenuItem";
+            this.nourrirUnAnimalToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
             this.nourrirUnAnimalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.nourrirUnAnimalToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.nourrirUnAnimalToolStripMenuItem.Text = "Nourrir Un Animal";
@@ -294,6 +302,65 @@
             this.aideToolStripMenuItem.Text = "Aide";
             this.aideToolStripMenuItem.Click += new System.EventHandler(this.aideToolStripMenuItem_Click);
             // 
+            // PnlVisiteurs
+            // 
+            this.PnlVisiteurs.BackColor = System.Drawing.Color.Transparent;
+            this.PnlVisiteurs.Controls.Add(this.lblTemps);
+            this.PnlVisiteurs.Controls.Add(this.lblGenre);
+            this.PnlVisiteurs.Controls.Add(this.lblVisNom);
+            this.PnlVisiteurs.Controls.Add(this.IconVis);
+            this.PnlVisiteurs.Location = new System.Drawing.Point(110, 282);
+            this.PnlVisiteurs.Name = "PnlVisiteurs";
+            this.PnlVisiteurs.Size = new System.Drawing.Size(130, 72);
+            this.PnlVisiteurs.TabIndex = 10;
+            this.PnlVisiteurs.Visible = false;
+            // 
+            // lblVisNom
+            // 
+            this.lblVisNom.AutoSize = true;
+            this.lblVisNom.BackColor = System.Drawing.Color.Transparent;
+            this.lblVisNom.ForeColor = System.Drawing.Color.Black;
+            this.lblVisNom.Location = new System.Drawing.Point(63, 19);
+            this.lblVisNom.Name = "lblVisNom";
+            this.lblVisNom.Size = new System.Drawing.Size(63, 13);
+            this.lblVisNom.TabIndex = 1;
+            this.lblVisNom.Text = "Scott Ryder";
+            this.lblVisNom.Visible = false;
+            // 
+            // IconVis
+            // 
+            this.IconVis.Image = ((System.Drawing.Image)(resources.GetObject("IconVis.Image")));
+            this.IconVis.Location = new System.Drawing.Point(26, 19);
+            this.IconVis.Name = "IconVis";
+            this.IconVis.Size = new System.Drawing.Size(31, 35);
+            this.IconVis.TabIndex = 0;
+            this.IconVis.TabStop = false;
+            this.IconVis.Visible = false;
+            // 
+            // lblGenre
+            // 
+            this.lblGenre.AutoSize = true;
+            this.lblGenre.BackColor = System.Drawing.Color.Transparent;
+            this.lblGenre.ForeColor = System.Drawing.Color.Black;
+            this.lblGenre.Location = new System.Drawing.Point(63, 32);
+            this.lblGenre.Name = "lblGenre";
+            this.lblGenre.Size = new System.Drawing.Size(43, 13);
+            this.lblGenre.TabIndex = 2;
+            this.lblGenre.Text = "Homme";
+            this.lblGenre.Visible = false;
+            // 
+            // lblTemps
+            // 
+            this.lblTemps.AutoSize = true;
+            this.lblTemps.BackColor = System.Drawing.Color.Transparent;
+            this.lblTemps.ForeColor = System.Drawing.Color.Black;
+            this.lblTemps.Location = new System.Drawing.Point(63, 45);
+            this.lblTemps.Name = "lblTemps";
+            this.lblTemps.Size = new System.Drawing.Size(53, 13);
+            this.lblTemps.TabIndex = 3;
+            this.lblTemps.Text = "2 Minutes";
+            this.lblTemps.Visible = false;
+            // 
             // Jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,6 +377,7 @@
             this.Controls.Add(this.PicUpLeft);
             this.Controls.Add(this.PicUpRight);
             this.Controls.Add(this.menu_haut);
+            this.Controls.Add(this.PnlVisiteurs);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Transparent;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -334,6 +402,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.PicUpRight)).EndInit();
             this.menu_haut.ResumeLayout(false);
             this.menu_haut.PerformLayout();
+            this.PnlVisiteurs.ResumeLayout(false);
+            this.PnlVisiteurs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IconVis)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -364,6 +435,11 @@
         private System.Windows.Forms.PictureBox PicDownRight;
         private System.Windows.Forms.ToolStripMenuItem aideToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nourrirUnAnimalToolStripMenuItem;
+        private System.Windows.Forms.Panel PnlVisiteurs;
+        private System.Windows.Forms.PictureBox IconVis;
+        private System.Windows.Forms.Label lblVisNom;
+        private System.Windows.Forms.Label lblGenre;
+        private System.Windows.Forms.Label lblTemps;
     }
 }
 
