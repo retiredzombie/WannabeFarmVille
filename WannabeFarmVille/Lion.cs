@@ -16,19 +16,23 @@ namespace WannabeFarmVille
         private int Gestation { get; set; } = 110;
         private int Croissance { get; set; } = 110;
         private int Genre { get; set; }
-        private int ID { get; set; }
+       
 
         private Timer CompteARebours { get; set; }
 
         private const int Jour = MS; // En millisecondes
 
         // Commence le timer et assigne un id à l'animal
-        public Lion(int id)
+        public Lion(int X, int Y, int ID) : base (X, Y, ID)
         {
+            this.DernierRepas = DateTime.Now;
             Nombre_Lions++;
-            this.ID = id;
+            this.ID = ID;
             this.Faim = 120;
             Commencer_Timer(CompteARebours, Jour);
+            this.X = X;
+            this.Y = Y;
+            this.image = Properties.Resources.lionLeftDown;
         }
 
         /**

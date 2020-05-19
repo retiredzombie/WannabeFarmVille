@@ -487,6 +487,11 @@ namespace WannabeFarmVille
                 g.DrawString(nom, font, drawBrush, new Point(nomX, nomY));
             }
 
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                g.DrawImage(animaux[i].image, animaux[i].X, animaux[i].Y, 32, 32);
+            }
+
             for (int i = 0; i < dechets.Count; i++)
             {
                 g.DrawImage(dechets[i].Image, dechets[i].X, dechets[i].Y, 32, 32);
@@ -1247,7 +1252,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Lion lion = new Lion(Lion.Nombre_Lions);
+                Lion lion = new Lion(Player.X, Player.Y, NombreAnimaux++);
                 animaux.Add(lion);
             }
             else
