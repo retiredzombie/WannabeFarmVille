@@ -58,6 +58,7 @@ namespace WannabeFarmVille
         private int NbConcierge = 0;
         private int NombreAnimaux = 0;
         private List<Animal> animaux;
+        private int typeAnimalSelectionne; // 0: aucun 1-6:animal.
         
 
         public Jeu(MenuDepart menuDepart)
@@ -77,6 +78,7 @@ namespace WannabeFarmVille
         private void Init()
         {
             datejeu = DateTime.Now;
+            typeAnimalSelectionne = 0;
             stopWatch = new Stopwatch();
             dt_remuneration = DateTime.Now;
             stopwatchJeu = new Stopwatch();
@@ -343,14 +345,21 @@ namespace WannabeFarmVille
                 }
         }
 
+        // Place un animal au X, Y choisi en fonction du type choisi.
         private void PlacerAnimal(MouseEventArgs e)
         {
             int x = e.X;
             int y = e.Y;
 
-            AjouterLion(x, y);
+            if (typeAnimalSelectionne == 3)
+            {
+                AjouterLion(x, y);
+                typeAnimalSelectionne = 0;
+            }
+            
         }
 
+        //Ajoute un lion au X,Y choisi.
         private void AjouterLion(int X, int Y)
         {
             bool PeutAjouter;
@@ -1320,7 +1329,8 @@ namespace WannabeFarmVille
          */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            typeAnimalSelectionne = 3;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un lion.");
         }
 
         /**
@@ -1437,7 +1447,7 @@ namespace WannabeFarmVille
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("Vous avez fait un profit de " + this.Player.ProfitTotal.ToString() + "$.");
+            MessageBox.Show("Vous avez fait un profit de " + this.Player.Argent.ToString() + "$.");
 
             this.bouclePrincipale.Abort();
 
