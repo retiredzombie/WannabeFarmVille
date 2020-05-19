@@ -143,6 +143,8 @@ namespace WannabeFarmVille
 
         public int X { get; set; }
         public int Y { get; set; }
+        public int XInfos { get; set; }
+        public int YInfos { get; set; }
         public int CurrentRow { get; set; } = 24;
         public int CurrentColumn { get; set; } = 19;
 
