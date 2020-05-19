@@ -290,26 +290,35 @@ namespace WannabeFarmVille
                     {
                         if (e.X > Carte[ligne, colonne].X && e.X < (32 + Carte[ligne, colonne].X) && e.Y > Carte[ligne, colonne].Y && e.Y < (32 + Carte[ligne, colonne].Y))
                         {
+                        if (e.Button == MouseButtons.Right)
+                        {
+                            if(Carte[ligne, colonne].VisiteurSurLaTuile != null)
+                            {
+
+                            }
+                        }
+                        else
+                        {
                             if (Player.PeutNourrir)
                             {
-                                 if (Carte[ligne, colonne].AnimalSurLaCase != null)
-                                 {
+                                if (Carte[ligne, colonne].AnimalSurLaCase != null)
+                                {
                                     if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
                                     {
-                                         Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
-                                         MessageBox.Show("L'animal cri de joie et est rassasié !");
-                                         Player.Argent -= 1;
-                                         affichageArgent.Text = Player.Argent + "$";
+                                        Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
+                                        MessageBox.Show("L'animal cri de joie et est rassasié !");
+                                        Player.Argent -= 1;
+                                        affichageArgent.Text = Player.Argent + "$";
                                     }
                                     else
                                     {
-                                         MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
+                                        MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
                                     }
-                                 }
-                                 else
-                                 {
+                                }
+                                else
+                                {
                                     MessageBox.Show("Il n'y a pas d'animal sur cette case");
-                                 }
+                                }
                             }
                             if (Carte[ligne, colonne].EstAdjacente)
                             {
@@ -327,17 +336,18 @@ namespace WannabeFarmVille
                                         MessageBox.Show("Vous devez choisir une case vide");
                                     }
                                 }
-                            else
-                            {
-                                for (int i = 0; i < dechets.Count; i++)
+                                else
                                 {
-                                    if (Carte[ligne, colonne].X == dechets[i].X && Carte[ligne, colonne].Y == dechets[i].Y)
+                                    for (int i = 0; i < dechets.Count; i++)
                                     {
-                                        dechets.RemoveAt(i);
+                                        if (Carte[ligne, colonne].X == dechets[i].X && Carte[ligne, colonne].Y == dechets[i].Y)
+                                        {
+                                            dechets.RemoveAt(i);
+                                        }
                                     }
                                 }
                             }
-                            }
+                        }
                         }
                     }
                 }
@@ -348,9 +358,16 @@ namespace WannabeFarmVille
         {
             int x = e.X;
             int y = e.Y;
+            if (typeAnimalSelectionne == 1)
+            {
+                AjouterMouton(x, y);
+                typeAnimalSelectionne = 0;
+            }
 
-            bool placementLegal = VerifierXYEnclos(x, y);
-
+            if (typeAnimalSelectionne == 3)
+            {
+                bool placementLegal = VerifierXYEnclos(x, y);
+            }
             // MessageBox.Show(x.ToString() + " " + y.ToString());
 
             if (placementLegal)
@@ -409,7 +426,8 @@ namespace WannabeFarmVille
             // Enclo #4
             if ((x >= 865 && x < 1075) && (y >= 565 && y <= 805))
             {
-                bon = true;
+                AjouterLion(x, y);
+                typeAnimalSelectionne = 0;
             }
 
             return bon;
@@ -662,7 +680,11 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteurSpawn()
         {
-            this.visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25, rand));
+            Visiteur vis = new Visiteur(tuile.Width * 19, tuile.Height * 25, rand);
+            Carte[24, 19].VisiteurSurLaTuile = vis;
+            vis.XInfos = Carte[24, 19].X + 96;
+            vis.YInfos = Carte[24, 19].Y;
+            this.visiteurs.Add(vis);
             Carte[24, 19].EstUnObstacle = true;
             CalculerEtFacturerPrixEntree();
             /*
@@ -723,7 +745,8 @@ namespace WannabeFarmVille
                 int nomY = visiteurs[i].Y - 20;
                 string nom = visiteurs[i].Nom;
 
-                g.DrawString(nom, font, drawBrush, new Point(nomX, nomY));
+            //    g.DrawString(nom, font, drawBrush, new Point(nomX, nomY));
+                
             }
 
             for (int i = 0; i < animaux.Count; i++)
@@ -862,7 +885,7 @@ namespace WannabeFarmVille
         private void LogicVisiteurs()
         {
             Console.WriteLine("LogicVisiteurs.");
-            
+            Visiteur BackUp;
             for (int i = 0; i < visiteurs.Count; i++)
             {
                 int randX = rand.Next(3);
@@ -893,12 +916,15 @@ namespace WannabeFarmVille
                     {
                         if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn - 1].EstUnObstacle)
                         {
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                            visiteurs[i].CurrentColumn--;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
                             visiteurs[i].X -= tuile.Width;
                             visiteurs[i].MovingX = -1;
                             visiteurs[i].MovingY = 0;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                            visiteurs[i].CurrentColumn--;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
                         }
                     }
                 } 
@@ -909,12 +935,15 @@ namespace WannabeFarmVille
                     {
                         if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn + 1].EstUnObstacle)
                         {
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                            visiteurs[i].CurrentColumn++;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
                             visiteurs[i].X += tuile.Width;
                             visiteurs[i].MovingX = 1;
                             visiteurs[i].MovingY = 0;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                            visiteurs[i].CurrentColumn++;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
                         }
                     }
                 }
@@ -925,13 +954,15 @@ namespace WannabeFarmVille
                     {
                         if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentRow - 1].EstUnObstacle)
                         {
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                            visiteurs[i].CurrentRow--;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
                             visiteurs[i].Y -= tuile.Height;
                             visiteurs[i].MovingY = 1;
                             visiteurs[i].MovingX = 0;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                            visiteurs[i].CurrentRow--;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
-                            
                         }
                     }
                 }
@@ -942,12 +973,15 @@ namespace WannabeFarmVille
                     {
                         if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentRow + 1].EstUnObstacle)
                         {
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                            visiteurs[i].CurrentRow++;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
                             visiteurs[i].Y += tuile.Height;
                             visiteurs[i].MovingY = -1;
                             visiteurs[i].MovingX = 0;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                            visiteurs[i].CurrentRow++;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
                         }
                     }
                 }

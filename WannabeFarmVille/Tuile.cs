@@ -57,6 +57,7 @@ namespace WannabeFarmVille
         public int X { get; set; }
         public int Y { get; set; }
         public Animal AnimalSurLaCase { get; set; }
+        public Visiteur VisiteurSurLaTuile { get; set; } = null;
         public Enclo PositionEnclo { get; set; } = Enclo.PasEnclo;
     }
 }
