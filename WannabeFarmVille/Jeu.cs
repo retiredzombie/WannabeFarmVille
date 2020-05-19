@@ -352,18 +352,55 @@ namespace WannabeFarmVille
             int x = e.X;
             int y = e.Y;
 
-            if (typeAnimalSelectionne == 1)
+            int[] xyTuile = ToTuile(x, y);
+
+            x = xyTuile[0];
+            y = xyTuile[1];
+
+            bool placementLegal = VerifierXYEnclos(x, y);
+
+            if (placementLegal)
             {
-                AjouterMouton(x, y);
-                typeAnimalSelectionne = 0;
+                if (typeAnimalSelectionne == 1)
+                {
+                    AjouterMouton(x, y);
+                    typeAnimalSelectionne = 0;
+                }
+
+                if (typeAnimalSelectionne == 3)
+                {
+                    AjouterLion(x, y);
+                    typeAnimalSelectionne = 0;
+                }
+            }
+        }
+
+        private int[] ToTuile(int x, int y)
+        {
+            while (x % 32 != 0)
+            {
+                x -= 1;
             }
 
-            if (typeAnimalSelectionne == 3)
+            while (y % 32 != 0)
             {
-                AjouterLion(x, y);
-                typeAnimalSelectionne = 0;
+                y -= 1;
             }
-            
+
+            return new int[] { x, y };
+        }
+
+        private bool VerifierXYEnclos(int x, int y)
+        {
+            x /= tailleTuile;
+            y /= tailleTuile;
+            bool bon = false;
+            Console.WriteLine("CLICK " + x.ToString() + ", " + y.ToString());
+            if (Carte[x, y].EstDansUnEnclo && !Carte[x, y].EstUnObstacle)
+            {
+                bon = true;
+            }
+            return bon;
         }
 
         //Ajoute un lion au X,Y choisi.
