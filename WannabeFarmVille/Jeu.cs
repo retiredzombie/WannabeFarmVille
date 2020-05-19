@@ -487,6 +487,8 @@ namespace WannabeFarmVille
             LogicVisiteurs();
             LogicConcierges();
 
+            LogiqueMenuBar();
+
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
               this.datejeu = this.datejeu.AddDays(1);
@@ -496,11 +498,69 @@ namespace WannabeFarmVille
 
 
             //Paye le joueur en fonction du nombre de visiteurs et de déchets (1x par minute).
-            if ((DateTime.Now - dt_remuneration).TotalSeconds >= 6)
+            if ((DateTime.Now - dt_remuneration).TotalSeconds >= 60)
             {
                 PayeJoueur();
 
                 this.dt_remuneration = DateTime.Now;
+            }
+        }
+
+        private void LogiqueMenuBar()
+        {
+            double argent = Player.Argent;
+
+            if (argent >= 20)
+            {
+                mouton20ToolStripMenuItem.Enabled = true;
+            } else
+            {
+                mouton20ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 30)
+            {
+                grizzly30ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                grizzly30ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 35)
+            {
+                lion35ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                lion35ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 50)
+            {
+                buffle30ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                buffle30ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 40)
+            {
+                rhinocéros40ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                rhinocéros40ToolStripMenuItem.Enabled = false;
+            }
+
+            if (argent >= 40)
+            {
+                buffle40ToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                buffle40ToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -1251,6 +1311,26 @@ namespace WannabeFarmVille
         }
 
         private void PicUpRight_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+
+        }
+
+        private void mouton20ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buffle40ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buffle30ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grizzly30ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
 
         }
