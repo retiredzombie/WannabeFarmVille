@@ -143,6 +143,7 @@ namespace WannabeFarmVille
             snd = new System.Media.SoundPlayer(str);
             snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
+            Carte[0, 0].EstUnObstacle = true;
             MettreTuilesAdjacentes();
             visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 10; i++)
@@ -288,7 +289,6 @@ namespace WannabeFarmVille
                     {
                         if (e.X > Carte[ligne, colonne].X && e.X < (32 + Carte[ligne, colonne].X) && e.Y > Carte[ligne, colonne].Y && e.Y < (32 + Carte[ligne, colonne].Y))
                         {
-                        MessageBox.Show( " efwe " + Carte[ligne, colonne].EstAdjacente);
                             if (Player.PeutNourrir)
                             {
                                  if (Carte[ligne, colonne].AnimalSurLaCase != null)
@@ -331,7 +331,6 @@ namespace WannabeFarmVille
         private void DefinirInterieurEnclos()
         {
             bool enclo = false;
-            int compt = 0;
             for (int ligne = 0; ligne < 28; ligne++)
             {
                 for (int colonne = 0; colonne < 40; colonne++)
@@ -653,54 +652,67 @@ namespace WannabeFarmVille
                 Console.WriteLine("vY = " + vY);
                 //GAUCHE
                 if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
-                { 
-                    visiteurs[i].X -= tuile.Width;
-                    visiteurs[i].MovingX = -1;
-                    visiteurs[i].MovingY = 0;
+                {
                     if (visiteurs[i].CurrentColumn != 0)
                     {
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                        visiteurs[i].CurrentColumn--;
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn - 1].EstUnObstacle)
+                        {
+                            visiteurs[i].X -= tuile.Width;
+                            visiteurs[i].MovingX = -1;
+                            visiteurs[i].MovingY = 0;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            visiteurs[i].CurrentColumn--;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 } 
                 //DROITE
                 else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
-                { 
-                    visiteurs[i].X += tuile.Width;
-                    visiteurs[i].MovingX = 1;
-                    visiteurs[i].MovingY = 0;
+                {
                     if (visiteurs[i].CurrentColumn != 39)
                     {
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                        visiteurs[i].CurrentColumn++;
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn + 1].EstUnObstacle)
+                        {
+                            visiteurs[i].X += tuile.Width;
+                            visiteurs[i].MovingX = 1;
+                            visiteurs[i].MovingY = 0;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            visiteurs[i].CurrentColumn++;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
                 //HAUT
                 if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 5 && vX <= 12) && !(vY >= 3 && vY <= 13 && vX >= 26 && vX <= 33) && !(vY >= 16 && vY <= 26 && vX >= 5 && vX <= 12) && !(vY >= 16 && vY <= 26 && vX >= 26 && vX <= 33))
                 {
-                    visiteurs[i].Y -= tuile.Height;
-                    visiteurs[i].MovingY = 1;
-                    visiteurs[i].MovingX = 0;
                     if (visiteurs[i].CurrentRow != 0)
                     {
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                        visiteurs[i].CurrentRow--;
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentRow - 1].EstUnObstacle)
+                        {
+                            visiteurs[i].Y -= tuile.Height;
+                            visiteurs[i].MovingY = 1;
+                            visiteurs[i].MovingX = 0;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            visiteurs[i].CurrentRow--;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                            
+                        }
                     }
                 }
                 //BAS
                 else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 5 && vX <= 12) && !(vY >= 1 && vY <= 10 && vX >= 26 && vX <= 33) && !(vY >= 14 && vY <= 24 && vX >= 5 && vX <= 12) && !(vY >= 14 && vY <= 24 && vX >= 26 && vX <= 33))
                 {
-                    visiteurs[i].Y += tuile.Height;
-                    visiteurs[i].MovingY = -1;
-                    visiteurs[i].MovingX = 0;
                     if (visiteurs[i].CurrentRow != 27)
                     {
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                        visiteurs[i].CurrentRow++;
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentRow + 1].EstUnObstacle)
+                        {
+                            visiteurs[i].Y += tuile.Height;
+                            visiteurs[i].MovingY = -1;
+                            visiteurs[i].MovingX = 0;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            visiteurs[i].CurrentRow++;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
                 visiteurs[i].ReloadImages();
@@ -752,57 +764,69 @@ namespace WannabeFarmVille
                 //GAUCHE
                 if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
                 {
-                    concierges[i].X -= tuile.Width;
-                    concierges[i].MovingX = -1;
-                    concierges[i].MovingY = 0;
-                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentColumn != 0)
                     {
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
-                        concierges[i].CurrentColumn--;
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn - 1].EstUnObstacle)
+                        {
+                            concierges[i].X -= tuile.Width;
+                            concierges[i].MovingX = -1;
+                            concierges[i].MovingY = 0;
+                            concierges[i].ReloadImages();
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                            concierges[i].CurrentColumn--;
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
                 //DROITE
                 else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
                 {
-                    concierges[i].X += tuile.Width;
-                    concierges[i].MovingX = 1;
-                    concierges[i].MovingY = 0;
-                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentColumn != 39)
                     {
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
-                        concierges[i].CurrentColumn++;
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn + 1].EstUnObstacle)
+                        {
+                            concierges[i].X += tuile.Width;
+                            concierges[i].MovingX = 1;
+                            concierges[i].MovingY = 0;
+                            concierges[i].ReloadImages();
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                            concierges[i].CurrentColumn++;
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
                 //HAUT
                 if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 4 && vX <= 13) && !(vY >= 3 && vY <= 13 && vX >= 25 && vX <= 34) && !(vY >= 16 && vY <= 26 && vX >= 4 && vX <= 13) && !(vY >= 16 && vY <= 26 && vX >= 25 && vX <= 34))
                 {
-                    concierges[i].Y -= tuile.Height;
-                    concierges[i].MovingY = 1;
-                    concierges[i].MovingX = 0;
-                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentRow != 0)
                     {
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
-                        concierges[i].CurrentRow--;
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[concierges[i].CurrentRow - 1, concierges[i].CurrentColumn].EstUnObstacle)
+                        {
+                            concierges[i].Y -= tuile.Height;
+                            concierges[i].MovingY = 1;
+                            concierges[i].MovingX = 0;
+                            concierges[i].ReloadImages();
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                            concierges[i].CurrentRow--;
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
                 //BAS
                 else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 4 && vX <= 13) && !(vY >= 1 && vY <= 10 && vX >= 25 && vX <= 34) && !(vY >= 14 && vY <= 24 && vX >= 4 && vX <= 13) && !(vY >= 14 && vY <= 24 && vX >= 25 && vX <= 34))
                 {
-                    concierges[i].Y += tuile.Height;
-                    concierges[i].MovingY = -1;
-                    concierges[i].MovingX = 0;
-                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentRow != 27)
                     {
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
-                        concierges[i].CurrentRow++;
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[concierges[i].CurrentRow - 1, concierges[i].CurrentColumn].EstUnObstacle)
+                        {
+                            concierges[i].Y += tuile.Height;
+                            concierges[i].MovingY = -1;
+                            concierges[i].MovingX = 0;
+                            concierges[i].ReloadImages();
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                            concierges[i].CurrentRow++;
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
 
@@ -1031,7 +1055,9 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.S)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveDown();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
@@ -1058,7 +1084,9 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.W)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveUp();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
@@ -1085,7 +1113,9 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.D)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveRight();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
@@ -1112,7 +1142,9 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.A)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveLeft();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
