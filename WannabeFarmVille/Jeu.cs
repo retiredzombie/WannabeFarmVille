@@ -338,12 +338,6 @@ namespace WannabeFarmVille
                     if (enclo && !Carte[ligne, colonne].EstUnObstacle)
                     {
                         Carte[ligne, colonne].EstDansUnEnclo = true;
-                        if(compt == 0)
-                        {
-                            Lion lion = new Lion(0, 0, NombreAnimaux++);
-                            Carte[ligne, colonne].AnimalSurLaCase = lion;
-                            compt++;
-                        }
                         if(ligne < 13 && colonne < 18)
                         {
                             Carte[ligne, colonne].PositionEnclo = Enclo.UpLeft;
