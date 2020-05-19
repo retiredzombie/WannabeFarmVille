@@ -345,6 +345,7 @@ namespace WannabeFarmVille
                 }
         }
 
+        // Place un animal au X, Y choisi en fonction du type choisi.
         private void PlacerAnimal(MouseEventArgs e)
         {
             int x = e.X;
@@ -358,6 +359,7 @@ namespace WannabeFarmVille
             
         }
 
+        //Ajoute un lion au X,Y choisi.
         private void AjouterLion(int X, int Y)
         {
             bool PeutAjouter;
