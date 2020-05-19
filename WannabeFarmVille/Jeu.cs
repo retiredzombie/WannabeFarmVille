@@ -349,12 +349,9 @@ namespace WannabeFarmVille
             int x = e.X;
             int y = e.Y;
 
-            int[] xyTuile = ToTuile(x, y);
-
-            x = xyTuile[0];
-            y = xyTuile[1];
-
             bool placementLegal = VerifierXYEnclos(x, y);
+
+            // MessageBox.Show(x.ToString() + " " + y.ToString());
 
             if (placementLegal)
             {
@@ -372,31 +369,33 @@ namespace WannabeFarmVille
             }
         }
 
-        private int[] ToTuile(int x, int y)
-        {
-            while (x % 32 != 0)
-            {
-                x -= 1;
-            }
-
-            while (y % 32 != 0)
-            {
-                y -= 1;
-            }
-
-            return new int[] { x, y };
-        }
-
         private bool VerifierXYEnclos(int x, int y)
         {
-            x /= tailleTuile;
-            y /= tailleTuile;
             bool bon = false;
-            Console.WriteLine("CLICK " + x.ToString() + ", " + y.ToString());
-            if (Carte[x, y].EstDansUnEnclo && !Carte[x, y].EstUnObstacle)
+            // Enclo #1
+            if ((x >= 175 && x < 395) && (y >= 155 && y <= 385))
             {
                 bon = true;
             }
+
+            // Enclo #2
+            if ((x >= 865 && x < 1075) && (y >= 155 && y <= 385))
+            {
+                bon = true;
+            }
+
+            // Enclo #3
+            if ((x >= 175 && x < 395) && (y >= 565 && y <= 805))
+            {
+                bon = true;
+            }
+
+            // Enclo #4
+            if ((x >= 865 && x < 1075) && (y >= 565 && y <= 805))
+            {
+                bon = true;
+            }
+
             return bon;
         }
 
