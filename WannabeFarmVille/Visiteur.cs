@@ -135,6 +135,7 @@ namespace WannabeFarmVille
             else if (movingX == 0 && movingY == -1)
             {
                 this.imageVisiteur = Properties.Resources.FemDownLeft;
+                
             }
         }
 
