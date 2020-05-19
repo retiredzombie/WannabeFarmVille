@@ -58,6 +58,7 @@ namespace WannabeFarmVille
         private int NbConcierge = 0;
         private int NombreAnimaux = 0;
         private List<Animal> animaux;
+        private int typeAnimalSelectionne; // 0: aucun 1-6:animal.
         
 
         public Jeu(MenuDepart menuDepart)
@@ -77,6 +78,7 @@ namespace WannabeFarmVille
         private void Init()
         {
             datejeu = DateTime.Now;
+            typeAnimalSelectionne = 0;
             stopWatch = new Stopwatch();
             dt_remuneration = DateTime.Now;
             stopwatchJeu = new Stopwatch();
@@ -348,7 +350,12 @@ namespace WannabeFarmVille
             int x = e.X;
             int y = e.Y;
 
-            AjouterLion(x, y);
+            if (typeAnimalSelectionne == 3)
+            {
+                AjouterLion(x, y);
+                typeAnimalSelectionne = 0;
+            }
+            
         }
 
         private void AjouterLion(int X, int Y)
@@ -1287,7 +1294,7 @@ namespace WannabeFarmVille
          */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            typeAnimalSelectionne = 3;
         }
 
         /**
