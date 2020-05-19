@@ -51,9 +51,10 @@ namespace WannabeFarmVille
         }
         public bool EstUnObstacle { get; set; }
         public bool EstDansUnEnclo { get; set; }
+        public bool EstAdjacente { get; set; } = false;
+        public Dechet DechetSurTuile { get; set; } = null;
         public int Ligne { get; set; }
         public int Colonne { get; set; }
-        public Button Bouton { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
         public Animal AnimalSurLaCase { get; set; }

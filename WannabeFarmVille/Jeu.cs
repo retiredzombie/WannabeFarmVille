@@ -132,6 +132,62 @@ namespace WannabeFarmVille
             snd = new System.Media.SoundPlayer(str);
             snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
+            try
+            {
+                Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstAdjacente = true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow + 1, Player.CurrentColumn + 1].EstAdjacente = true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow + 1, Player.CurrentColumn - 1].EstAdjacente = true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow, Player.CurrentColumn - 1].EstAdjacente = true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow, Player.CurrentColumn + 1].EstAdjacente = true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow - 1, Player.CurrentColumn].EstAdjacente = true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow - 1, Player.CurrentColumn + 1].EstAdjacente = true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+            try
+            {
+                Carte[Player.CurrentRow - 1, Player.CurrentColumn - 1].EstAdjacente = true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
             visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 10; i++)
             {
@@ -401,6 +457,7 @@ namespace WannabeFarmVille
                     visiteurs[i].X -= tuile.Width;
                     visiteurs[i].MovingX = -1;
                     visiteurs[i].MovingY = 0;
+                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentColumn != 0)
                     {
                         Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
@@ -414,6 +471,7 @@ namespace WannabeFarmVille
                     visiteurs[i].X += tuile.Width;
                     visiteurs[i].MovingX = 1;
                     visiteurs[i].MovingY = 0;
+                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentColumn != 39)
                     {
                         Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
@@ -427,6 +485,7 @@ namespace WannabeFarmVille
                     visiteurs[i].Y -= tuile.Height;
                     visiteurs[i].MovingY = 1;
                     visiteurs[i].MovingX = 0;
+                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentRow != 0)
                     {
                         Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
@@ -440,6 +499,7 @@ namespace WannabeFarmVille
                     visiteurs[i].Y += tuile.Height;
                     visiteurs[i].MovingY = -1;
                     visiteurs[i].MovingX = 0;
+                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentRow != 27)
                     {
                         Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
@@ -448,10 +508,7 @@ namespace WannabeFarmVille
                     }
                 }
 
-                visiteurs[i].ReloadImages();
-
-                EchapeDechet(vX, vY);
-
+                EchapeDechet(vX, vY, visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn);
                 /*
                 string visiteurPBName = "visiteurPB" + i.ToString().Trim();
                 Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
@@ -502,6 +559,7 @@ namespace WannabeFarmVille
                     concierges[i].X -= tuile.Width;
                     concierges[i].MovingX = -1;
                     concierges[i].MovingY = 0;
+                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentColumn != 0)
                     {
                         Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
@@ -515,6 +573,7 @@ namespace WannabeFarmVille
                     concierges[i].X += tuile.Width;
                     concierges[i].MovingX = 1;
                     concierges[i].MovingY = 0;
+                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentColumn != 39)
                     {
                         Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
@@ -528,6 +587,7 @@ namespace WannabeFarmVille
                     concierges[i].Y -= tuile.Height;
                     concierges[i].MovingY = 1;
                     concierges[i].MovingX = 0;
+                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentRow != 0)
                     {
                         Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
@@ -541,6 +601,7 @@ namespace WannabeFarmVille
                     concierges[i].Y += tuile.Height;
                     concierges[i].MovingY = -1;
                     concierges[i].MovingX = 0;
+                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentRow != 27)
                     {
                         Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
@@ -549,7 +610,6 @@ namespace WannabeFarmVille
                     }
                 }
 
-                concierges[i].ReloadImages();
 
                 int cX = concierges[i].X;
                 int cY = concierges[i].Y;
@@ -563,6 +623,7 @@ namespace WannabeFarmVille
 
                     if (dX == cX && dY == cY)
                     {
+                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].DechetSurTuile = null;
                         dechets.RemoveAt(d);
                     }
                 }
@@ -601,7 +662,7 @@ namespace WannabeFarmVille
         /*
          * Un visiteur a certaines chances d'échapper un déchet.
          */
-        private void EchapeDechet(int x, int y)
+        private void EchapeDechet(int x, int y, int row, int column)
         {
             int chance = this.rand.Next(0, 100);
             int limite = 1;
@@ -610,8 +671,9 @@ namespace WannabeFarmVille
             {
                 x *= tailleTuile;
                 y *= tailleTuile;
-
-                this.dechets.Add(new Dechet(x, y));
+                Dechet Trash = new Dechet(x, y);
+                Carte[row, column].DechetSurTuile = Trash;
+                this.dechets.Add(Trash);
             }
         }
 
