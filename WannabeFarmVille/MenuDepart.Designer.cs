@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuDepart));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTitre = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,12 +58,25 @@
             this.lblTitre.TabIndex = 3;
             this.lblTitre.Text = "TIGER KING: THE GAME";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(381, 119);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(549, 67);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "(mais y\'a pas de tigres)";
+            // 
             // MenuDepart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::WannabeFarmVille.Properties.Resources.tigerKingRezize;
             this.ClientSize = new System.Drawing.Size(1264, 921);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTitre);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -79,5 +93,6 @@
         #endregion
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblTitre;
+        private System.Windows.Forms.Label label1;
     }
 }

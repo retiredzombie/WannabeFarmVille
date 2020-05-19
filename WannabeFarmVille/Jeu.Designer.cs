@@ -205,6 +205,7 @@
             this.mouton20ToolStripMenuItem.Name = "mouton20ToolStripMenuItem";
             this.mouton20ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
             this.mouton20ToolStripMenuItem.Text = "+ Mouton 20$";
+            this.mouton20ToolStripMenuItem.Click += new System.EventHandler(this.mouton20ToolStripMenuItem_Click_1);
             // 
             // grizzly30ToolStripMenuItem
             // 
@@ -213,6 +214,7 @@
             this.grizzly30ToolStripMenuItem.Name = "grizzly30ToolStripMenuItem";
             this.grizzly30ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
             this.grizzly30ToolStripMenuItem.Text = "+ Grizzly 30$";
+            this.grizzly30ToolStripMenuItem.Click += new System.EventHandler(this.grizzly30ToolStripMenuItem_Click_1);
             // 
             // lion35ToolStripMenuItem
             // 
@@ -230,6 +232,7 @@
             this.buffle30ToolStripMenuItem.Name = "buffle30ToolStripMenuItem";
             this.buffle30ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
             this.buffle30ToolStripMenuItem.Text = "+ Licorne 50$";
+            this.buffle30ToolStripMenuItem.Click += new System.EventHandler(this.buffle30ToolStripMenuItem_Click);
             // 
             // rhinocéros40ToolStripMenuItem
             // 
@@ -246,6 +249,7 @@
             this.buffle40ToolStripMenuItem.Name = "buffle40ToolStripMenuItem";
             this.buffle40ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
             this.buffle40ToolStripMenuItem.Text = "+ Buffle 40$";
+            this.buffle40ToolStripMenuItem.Click += new System.EventHandler(this.buffle40ToolStripMenuItem_Click_1);
             // 
             // déchetsToolStripMenuItem
             // 

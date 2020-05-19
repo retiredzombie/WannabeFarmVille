@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace WannabeFarmVille
 {
-    class Lion
+    class Lion : Animal
     {
         public static int Nombre_Lions = 0;
 
