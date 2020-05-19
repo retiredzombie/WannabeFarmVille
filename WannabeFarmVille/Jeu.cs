@@ -397,6 +397,9 @@ namespace WannabeFarmVille
                 Carte[row, column].PositionEnclo = enclo;
                 row++;
             }
+            Carte[row, column].EstUnObstacle = true;
+            Carte[row, column].PositionEnclo = enclo;
+            row++;
             for (int i = 0; i < 9; i++)
             {
                 Carte[row, column].EstUnObstacle = true;
@@ -409,6 +412,8 @@ namespace WannabeFarmVille
                 Carte[row, column].PositionEnclo = enclo;
                 row--;
             }
+            Carte[row, column].EstUnObstacle = true;
+            Carte[row, column].PositionEnclo = enclo;
         }
 
         /*
@@ -635,7 +640,6 @@ namespace WannabeFarmVille
                     visiteurs[i].X -= tuile.Width;
                     visiteurs[i].MovingX = -1;
                     visiteurs[i].MovingY = 0;
-                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentColumn != 0)
                     {
                         Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
@@ -649,7 +653,6 @@ namespace WannabeFarmVille
                     visiteurs[i].X += tuile.Width;
                     visiteurs[i].MovingX = 1;
                     visiteurs[i].MovingY = 0;
-                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentColumn != 39)
                     {
                         Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
@@ -663,7 +666,6 @@ namespace WannabeFarmVille
                     visiteurs[i].Y -= tuile.Height;
                     visiteurs[i].MovingY = 1;
                     visiteurs[i].MovingX = 0;
-                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentRow != 0)
                     {
                         Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
@@ -677,7 +679,6 @@ namespace WannabeFarmVille
                     visiteurs[i].Y += tuile.Height;
                     visiteurs[i].MovingY = -1;
                     visiteurs[i].MovingX = 0;
-                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentRow != 27)
                     {
                         Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
@@ -685,7 +686,7 @@ namespace WannabeFarmVille
                         Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
                     }
                 }
-
+                visiteurs[i].ReloadImages();
                 EchapeDechet(vX, vY, visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn);
                 /*
                 string visiteurPBName = "visiteurPB" + i.ToString().Trim();
@@ -850,7 +851,7 @@ namespace WannabeFarmVille
                 x *= tailleTuile;
                 y *= tailleTuile;
                 Dechet Trash = new Dechet(x, y);
-                Carte[row, column].DechetSurTuile = Trash;
+                Carte[row , column].DechetSurTuile = Trash;
                 this.dechets.Add(Trash);
             }
         }
