@@ -358,16 +358,8 @@ namespace WannabeFarmVille
         {
             int x = e.X;
             int y = e.Y;
-            if (typeAnimalSelectionne == 1)
-            {
-                AjouterMouton(x, y);
-                typeAnimalSelectionne = 0;
-            }
 
-            if (typeAnimalSelectionne == 3)
-            {
-                bool placementLegal = VerifierXYEnclos(x, y);
-            }
+            bool placementLegal = VerifierXYEnclos(x, y);
             // MessageBox.Show(x.ToString() + " " + y.ToString());
                 switch (typeAnimalSelectionne)
                 {
