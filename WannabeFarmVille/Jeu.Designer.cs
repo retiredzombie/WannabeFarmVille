@@ -53,10 +53,10 @@
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PnlVisiteurs = new System.Windows.Forms.Panel();
+            this.lblTemps = new System.Windows.Forms.Label();
+            this.lblGenre = new System.Windows.Forms.Label();
             this.lblVisNom = new System.Windows.Forms.Label();
             this.IconVis = new System.Windows.Forms.PictureBox();
-            this.lblGenre = new System.Windows.Forms.Label();
-            this.lblTemps = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
@@ -264,7 +264,6 @@
             // nourrirUnAnimalToolStripMenuItem
             // 
             this.nourrirUnAnimalToolStripMenuItem.Name = "nourrirUnAnimalToolStripMenuItem";
-            this.nourrirUnAnimalToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
             this.nourrirUnAnimalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.nourrirUnAnimalToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.nourrirUnAnimalToolStripMenuItem.Text = "Nourrir Un Animal";
@@ -315,6 +314,30 @@
             this.PnlVisiteurs.TabIndex = 10;
             this.PnlVisiteurs.Visible = false;
             // 
+            // lblTemps
+            // 
+            this.lblTemps.AutoSize = true;
+            this.lblTemps.BackColor = System.Drawing.Color.Transparent;
+            this.lblTemps.ForeColor = System.Drawing.Color.Black;
+            this.lblTemps.Location = new System.Drawing.Point(63, 45);
+            this.lblTemps.Name = "lblTemps";
+            this.lblTemps.Size = new System.Drawing.Size(53, 13);
+            this.lblTemps.TabIndex = 3;
+            this.lblTemps.Text = "2 Minutes";
+            this.lblTemps.Visible = false;
+            // 
+            // lblGenre
+            // 
+            this.lblGenre.AutoSize = true;
+            this.lblGenre.BackColor = System.Drawing.Color.Transparent;
+            this.lblGenre.ForeColor = System.Drawing.Color.Black;
+            this.lblGenre.Location = new System.Drawing.Point(63, 32);
+            this.lblGenre.Name = "lblGenre";
+            this.lblGenre.Size = new System.Drawing.Size(43, 13);
+            this.lblGenre.TabIndex = 2;
+            this.lblGenre.Text = "Homme";
+            this.lblGenre.Visible = false;
+            // 
             // lblVisNom
             // 
             this.lblVisNom.AutoSize = true;
@@ -337,30 +360,6 @@
             this.IconVis.TabStop = false;
             this.IconVis.Visible = false;
             // 
-            // lblGenre
-            // 
-            this.lblGenre.AutoSize = true;
-            this.lblGenre.BackColor = System.Drawing.Color.Transparent;
-            this.lblGenre.ForeColor = System.Drawing.Color.Black;
-            this.lblGenre.Location = new System.Drawing.Point(63, 32);
-            this.lblGenre.Name = "lblGenre";
-            this.lblGenre.Size = new System.Drawing.Size(43, 13);
-            this.lblGenre.TabIndex = 2;
-            this.lblGenre.Text = "Homme";
-            this.lblGenre.Visible = false;
-            // 
-            // lblTemps
-            // 
-            this.lblTemps.AutoSize = true;
-            this.lblTemps.BackColor = System.Drawing.Color.Transparent;
-            this.lblTemps.ForeColor = System.Drawing.Color.Black;
-            this.lblTemps.Location = new System.Drawing.Point(63, 45);
-            this.lblTemps.Name = "lblTemps";
-            this.lblTemps.Size = new System.Drawing.Size(53, 13);
-            this.lblTemps.TabIndex = 3;
-            this.lblTemps.Text = "2 Minutes";
-            this.lblTemps.Visible = false;
-            // 
             // Jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -368,6 +367,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1264, 921);
+            this.Controls.Add(this.PnlVisiteurs);
             this.Controls.Add(this.PicDownRight);
             this.Controls.Add(this.PicDownLeft);
             this.Controls.Add(this.PicLeftRight);
@@ -377,7 +377,6 @@
             this.Controls.Add(this.PicUpLeft);
             this.Controls.Add(this.PicUpRight);
             this.Controls.Add(this.menu_haut);
-            this.Controls.Add(this.PnlVisiteurs);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Transparent;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

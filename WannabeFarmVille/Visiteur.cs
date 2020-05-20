@@ -48,9 +48,11 @@ namespace WannabeFarmVille
             if (rand.Next(2) == 1)
             {
                 genre = Genre.Femme;
+                Sexe = "Femme";
             } else
             {
                 genre = Genre.Homme;
+                Sexe = "Homme";
             }
 
             if (genre.Equals(Genre.Homme))
@@ -140,14 +142,14 @@ namespace WannabeFarmVille
         }
 
         public String Nom { get; set; }
-
+        public String Sexe { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
         public int XInfos { get; set; }
         public int YInfos { get; set; }
         public int CurrentRow { get; set; } = 24;
         public int CurrentColumn { get; set; } = 19;
-
+        public bool IsSelected { get; set; } = false;
         public int Width { get; set; }
         public int Height { get; set; }
 
