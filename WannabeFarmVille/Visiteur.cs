@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -159,5 +160,6 @@ namespace WannabeFarmVille
         public Image imageVisiteur { get; set; }
         public int MovingX { get => movingX; set => movingX = value; }
         public int MovingY { get => movingY; set => movingY = value; }
+        public Stopwatch TempsDansLeZoo { get; set; }
     }
 }

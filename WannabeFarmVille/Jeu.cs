@@ -303,9 +303,12 @@ namespace WannabeFarmVille
                             {
                                 if (Carte[ligne, colonne].X == visiteurs[i].X && Carte[ligne, colonne].Y == visiteurs[i].Y)
                                 {
-
+                                    TimeSpan ts = visiteurs[i].TempsDansLeZoo.Elapsed;
+                                    double minutes = ts.TotalMinutes;
+                                    minutes = Math.Truncate(100 * minutes) / 100;
+                                    String temps = minutes + " Minutes";
                                     InfoVis = new InfoVisiteur();
-                                    InfoVis.SetInformations(visiteurs[i].Nom, visiteurs[i].Sexe, "2 Minutes");
+                                    InfoVis.SetInformations(visiteurs[i].Nom, visiteurs[i].Sexe, temps);
                                     InfoVis.Show();
                                     i = visiteurs.Count + 1;
                                     /*  visiteurs[i].IsSelected = true;
@@ -697,6 +700,8 @@ namespace WannabeFarmVille
             vis.XInfos = Carte[24, 19].X;
             vis.YInfos = Carte[24, 19].Y + 5;
             this.visiteurs.Add(vis);
+            visiteurs[visiteurs.Count - 1].TempsDansLeZoo = new Stopwatch();
+            visiteurs[visiteurs.Count - 1].TempsDansLeZoo.Start();
             Carte[24, 19].EstUnObstacle = true;
             CalculerEtFacturerPrixEntree();
             /*
