@@ -369,9 +369,6 @@ namespace WannabeFarmVille
                 bool placementLegal = VerifierXYEnclos(x, y);
             }
             // MessageBox.Show(x.ToString() + " " + y.ToString());
-
-            if (placementLegal)
-            {
                 switch (typeAnimalSelectionne)
                 {
                     case 1:
@@ -399,7 +396,6 @@ namespace WannabeFarmVille
                         typeAnimalSelectionne = 0;
                         break;
                 }
-            }
         }
 
         private bool VerifierXYEnclos(int x, int y)
