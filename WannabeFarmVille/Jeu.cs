@@ -441,7 +441,7 @@ namespace WannabeFarmVille
                             {
                                 if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
                                 {
-                                    PlacerAnimal(e.X, e.Y);
+                                    PlacerAnimal(e.X, e.Y, ligne, colonne);
                                 }
                                 else
                                 {
@@ -475,7 +475,7 @@ namespace WannabeFarmVille
                                     }
                                 }
                             }
-                            else if (!Player.PeutEngagerConcierge)
+                            else if (!Player.PeutEngagerConcierge && !Player.PeutAjouterAnimal)
                             {
                                 MessageBox.Show("Vous devez être adjacent à la case contenant le déchet pour le ramasser");
                             }
@@ -486,7 +486,7 @@ namespace WannabeFarmVille
         }
 
         // Place un animal au X, Y choisi en fonction du type choisi.
-        private void PlacerAnimal(int x, int y)
+        private void PlacerAnimal(int x, int y, int ligne, int colonne)
         {
 
             bool placementLegal = VerifierXYEnclos(x, y);
@@ -521,6 +521,9 @@ namespace WannabeFarmVille
                         break;
                 }
                 animaux[animaux.Count - 1].Adulte = true;
+                animaux[animaux.Count - 1].CurrentRow = ligne;
+                animaux[animaux.Count - 1].CurrentColumn = colonne;
+                Carte[ligne, colonne].EstUnObstacle = true;
             } else
             {
                 typeAnimalSelectionne = 0;
@@ -559,7 +562,7 @@ namespace WannabeFarmVille
         }
 
         // Accouche (gratuit) un animal au X, Y choisi en fonction du type choisi.
-        private void Accoucher(int X, int Y)
+        private void Accoucher(int X, int Y, int ligne, int colonne)
         {
 
             bool placementLegal = VerifierXYEnclos(X, Y);
@@ -605,6 +608,8 @@ namespace WannabeFarmVille
                         typeAnimalSelectionne = 0;
                         break;
                 }
+                animaux[animaux.Count - 1].CurrentRow = ligne;
+                animaux[animaux.Count - 1].CurrentColumn = colonne;
             }
             else
             {
@@ -1081,6 +1086,7 @@ namespace WannabeFarmVille
                     animaux[i].X -= tuile.Width;
                     animaux[i].MovingX = -1;
                     animaux[i].MovingY = 0;
+                    
                     animaux[i].ReloadImages();
                 }
                 //DROITE
@@ -1130,7 +1136,7 @@ namespace WannabeFarmVille
                 {
                     animaux[i].JrsDepuitDebGest = 0;
                     this.typeAnimalSelectionne = animaux[i].Type;
-                    this.Accoucher(animaux[i].X, animaux[i].Y);
+                    this.Accoucher(animaux[i].X, animaux[i].Y, animaux[i].CurrentRow, animaux[i].CurrentColumn);
                 }
             }
         }

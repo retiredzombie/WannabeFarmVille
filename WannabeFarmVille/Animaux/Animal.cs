@@ -24,15 +24,15 @@ namespace WannabeFarmVille
         public int ID { get; set; }
         private bool enGestation;
         public int Type { get; set; }
+        public int CurrentRow { get; set; }
+        public int CurrentColumn { get; set; }
         public int Enclos { get; set; } // 1:Haut-Gauche, 2:Haut-Droite, 3:Bas-Gauche, 4:Bas-Droite.
         public int MovingX { get => movingX; set => movingX = value; }
         public int MovingY { get => movingY; set => movingY = value; }
         public int Gestation { get; set; }
         public int Croissance { get; set; }
-        public int CurrentRow { get; set; }
         private int gestation;
         private int croissance;
-        public int CurrentColumn { get; set; }
         public Genre genre;
         public enum Genre
         {
