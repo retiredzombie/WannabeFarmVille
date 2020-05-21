@@ -476,6 +476,10 @@ namespace WannabeFarmVille
                                     }
                                 }
                             }
+                            else if (!Player.PeutEngagerConcierge)
+                            {
+                                MessageBox.Show("Vous devez être adjacent à la case contenant le déchet pour le ramasser");
+                            }
                         }
                         }
                     }
