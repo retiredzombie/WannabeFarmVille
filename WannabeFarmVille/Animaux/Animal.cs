@@ -9,6 +9,9 @@ namespace WannabeFarmVille
 {
     abstract class Animal
     {
+        private int movingX;
+        private int movingY;
+
         public bool AFaim { get; set; } = false;
         public DateTime DernierRepas { get => dernierRepas; set => dernierRepas = value; }
         public int Faim { get; set; }
@@ -16,6 +19,10 @@ namespace WannabeFarmVille
         public int X { get; set; }
         public int Y { get; set; }
         public int ID { get; set; }
+        public int MovingX { get => movingX; set => movingX = value; }
+        public int MovingY { get => movingY; set => movingY = value; }
+        public int CurrentRow { get; set; }
+        public int CurrentColumn { get; set; }
 
         public Image image { get; set; }
 
@@ -35,5 +42,7 @@ namespace WannabeFarmVille
             AFaim = false;
             dernierRepas = DateTime.Now;
         }
+
+        internal abstract void ReloadImages();
     }
 }
