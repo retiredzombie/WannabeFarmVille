@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using TestTilesetMario;
 using WannabeFarmVille.Animaux;
 using WannabeFarmVille.Properties;
@@ -284,6 +285,7 @@ namespace WannabeFarmVille
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
             PlacerAnimal(e);
+            BruitAnimal(e);
             for (int c = 0; c < visiteurs.Count; c++)
             {
                 if (visiteurs[c].IsSelected)
@@ -380,6 +382,36 @@ namespace WannabeFarmVille
                 }
         }
 
+        private void BruitAnimal(MouseEventArgs e)
+        {
+            int x = e.X;
+            int y = e.Y;
+
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                int xAni = animaux[i].X;
+                int yAni = animaux[i].Y;
+                int wAni = animaux[i].image.Width;
+                int hAni = animaux[i].image.Height;
+                int typeAni = animaux[i].Type;
+
+                if (x >= xAni && x <= xAni + wAni)
+                {
+                    if (y >= yAni && y <= hAni)
+                    {
+                        if (typeAni == 1)
+                        {
+                            MessageBox.Show("Le mouton bêle.");
+                        }
+                        else if (typeAni == 2)
+                        {
+                            MessageBox.Show("Le mouton bêle.");
+                        }
+                    }
+                }
+            }
+        }
+
         // Place un animal au X, Y choisi en fonction du type choisi.
         private void PlacerAnimal(MouseEventArgs e)
         {
@@ -417,6 +449,9 @@ namespace WannabeFarmVille
                         typeAnimalSelectionne = 0;
                         break;
                 }
+            } else
+            {
+                typeAnimalSelectionne = 0;
             }
         }
 
@@ -438,7 +473,7 @@ namespace WannabeFarmVille
             {
                 if (animaux[i].Enclos == enclosClique)
                 {
-                    if (animaux[i].Type != typeAnimalSelectionne)
+                    if (animaux[i].Type != typeAnimalSelectionne && typeAnimalSelectionne != 0)
                     {
                         bonType = false;
                         MessageBox.Show("Un seul type d'animal par enclos.");
