@@ -318,10 +318,11 @@ namespace WannabeFarmVille
                             {
                                 if (e.X > animaux[i].X && e.X < (32 + animaux[i].X) && e.Y > animaux[i].Y && e.Y < (32 + animaux[i].Y))
                                 {
-                                    String race;
+                                    String race = "";
                                     String sexe = "Non-Binaire";
                                     String age = "Adulte";
                                     String food;
+                                    String enceinte = " ";
                                     if(animaux[i] is Lion)
                                     {
                                         race = "Lion";
@@ -353,12 +354,16 @@ namespace WannabeFarmVille
                                     else
                                     {
                                         sexe = "Femelle";
+                                        enceinte = "N'attend pas de bébé";
                                     }
                                     double temps =  (DateTime.Now - animaux[i].DernierRepas).TotalSeconds;
-                                    
-
+                                    temps = temps / 60;
+                                    temps = Math.Truncate(100 * temps) / 100;
+                                    food = "A mangé il y a " + temps + " minutes";
                                     InfoAni = new InfoAnimal();
-
+                                    InfoAni.SetInformation(race, sexe, age, food, enceinte);
+                                    InfoAni.Show();
+                                    i = animaux.Count + 1;
                                 }
                             }
                         }
