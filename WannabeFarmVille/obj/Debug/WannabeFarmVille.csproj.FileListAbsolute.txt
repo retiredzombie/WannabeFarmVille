@@ -50,7 +50,6 @@ C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\Wan
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoVisiteur.resources
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoAnimal.resources
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoAnimal.resources
-D:\School\Hivert 2020\Developpement Graphique - Presque\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.csprojAssemblyReference.cache
 D:\School\Hivert 2020\Developpement Graphique - Presque\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoAnimal.resources
 D:\School\Hivert 2020\Developpement Graphique - Presque\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoVisiteur.resources
 D:\School\Hivert 2020\Developpement Graphique - Presque\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.Jeu.resources

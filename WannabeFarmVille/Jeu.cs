@@ -524,6 +524,60 @@ namespace WannabeFarmVille
             return bonType;
         }
 
+        // Accouche (gratuit) un animal au X, Y choisi en fonction du type choisi.
+        private void Accoucher(int X, int Y)
+        {
+
+            bool placementLegal = VerifierXYEnclos(X, Y);
+            // MessageBox.Show(x.ToString() + " " + y.ToString());
+            if (BonTypeEnclos(typeAnimalSelectionne, X, Y))
+            {
+                switch (typeAnimalSelectionne)
+                {
+                    case 1:
+                        Ajouter_Animal();
+                        Mouton mouton = new Mouton(X, Y);
+                        animaux.Add(mouton);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 2:
+                        Ajouter_Animal();
+                        Grizzly grizzly = new Grizzly(X, Y);
+                        animaux.Add(grizzly);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 3:
+                        Ajouter_Animal();
+                        Lion lion = new Lion(X, Y);
+                        animaux.Add(lion);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 4:
+                        Ajouter_Animal();
+                        Licorne licorne = new Licorne(X, Y);
+                        animaux.Add(licorne);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 5:
+                        Ajouter_Animal();
+                        Rhino rhino = new Rhino(X, Y);
+                        animaux.Add(rhino);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 6:
+                        Ajouter_Animal();
+                        Buffle buffle = new Buffle(X, Y);
+                        animaux.Add(buffle);
+                        typeAnimalSelectionne = 0;
+                        break;
+                }
+            }
+            else
+            {
+                typeAnimalSelectionne = 0;
+            }
+        }
+
         //Retourne quel enclos à été cliqué (int 1 à 4).
         private int GetEncloClique(int x, int y)
         {
@@ -1018,7 +1072,7 @@ namespace WannabeFarmVille
                     animaux[i].Adulte = true;
                 }
 
-                if (animaux[i].genre == Animal.Genre.Femelle && EncloContient(animaux[i].Enclos))
+                if (animaux[i].genre == Animal.Genre.Femelle && EncloContient(animaux[i].Enclos) && !animaux[i].EnGestation)
                 {
                     animaux[i].EnGestation = true;
                     animaux[i].DebutGestation = DateTime.Now;
@@ -1029,7 +1083,7 @@ namespace WannabeFarmVille
                     animaux[i].EnGestation = false;
                     animaux[i].DebutGestation = DateTime.Now;
                     this.typeAnimalSelectionne = animaux[i].Type;
-                    this.PlacerAnimal(animaux[i].X, animaux[i].Y);
+                    this.Accoucher(animaux[i].X, animaux[i].Y);
                 }
             }
         }
@@ -1904,8 +1958,6 @@ namespace WannabeFarmVille
 
             DoubleArgent = Player.Argent;
             TextArgent = DoubleArgent.ToString();
-
-            affichageArgent.Text = TextArgent + " $";
 
             return AjoutReussi;
         }
