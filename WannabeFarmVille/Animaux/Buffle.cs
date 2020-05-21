@@ -13,8 +13,8 @@ namespace WannabeFarmVille.Animaux
 
         private const int MS = 1000;
         // Toutes les durées sont en "jours"
-        private int Gestation { get; set; } = 110;
-        private int Croissance { get; set; } = 110;
+        private int Gestation { get; set; } = 340;
+        private int Croissance { get; set; } = 340;
 
         private Timer CompteARebours { get; set; }
 

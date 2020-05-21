@@ -14,32 +14,56 @@ namespace WannabeFarmVille
         private int movingY;
 
         public bool AFaim { get; set; } = false;
+        public bool Adulte { get; set; }
         public DateTime DernierRepas { get => dernierRepas; set => dernierRepas = value; }
         public int Faim { get; set; }
 
         public int X { get; set; }
         public int Y { get; set; }
         public int ID { get; set; }
+        public DateTime DateNaissance { get => DateNaissance; set => DateNaissance = value; }
+        public DateTime DebutGestation { get => DebutGestation; set => DebutGestation = value; }
         public int Type { get; set; }
         public int Enclos { get; set; } // 1:Haut-Gauche, 2:Haut-Droite, 3:Bas-Gauche, 4:Bas-Droite.
         public int MovingX { get => movingX; set => movingX = value; }
         public int MovingY { get => movingY; set => movingY = value; }
         public int CurrentRow { get; set; }
         public int CurrentColumn { get; set; }
-        public int Genre { get; set; }
+        public Genre genre;
+        public enum Genre
+        {
+            Male,
+            Femelle
+        }
 
         public Image image { get; set; }
 
         private DateTime dernierRepas;
+        private DateTime dateNaissance;
+        private DateTime debutGestation;
 
         public Animal(int X, int Y)
         {
             this.dernierRepas = DateTime.Now;
+            this.dateNaissance = DateTime.Now;
 
             this.X = X;
             this.Y = Y;
 
+            Adulte = true;
+
             this.Enclos = TrouverEnclos();
+
+            Random rand = new Random();
+
+            if (rand.Next(2) == 1)
+            {
+                genre = Genre.Femelle;
+            }
+            else
+            {
+                genre = Genre.Male;
+            }
         }
 
         private int TrouverEnclos()
