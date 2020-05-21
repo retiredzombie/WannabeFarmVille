@@ -974,7 +974,7 @@ namespace WannabeFarmVille
 
             LogiqueMenuBar();
 
-            this.affichageArgent.Text = this.Player.Argent.ToString() + "$";
+            this.affichageArgent.Text = Math.Round(this.Player.Argent, 2).ToString() + "$";
 
             this.dateToolStripMenuItem.Text = this.datejeu.Date.ToString("dd MMMM yyyy");
 
