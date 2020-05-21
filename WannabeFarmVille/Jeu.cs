@@ -1323,7 +1323,7 @@ namespace WannabeFarmVille
                 {
                     if (visiteurs[i].CurrentRow != 27)
                     {
-                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentRow + 1].EstUnObstacle)
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn + 1].EstUnObstacle)
                         {
                             Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
                             BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
