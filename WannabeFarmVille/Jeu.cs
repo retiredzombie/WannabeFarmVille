@@ -34,6 +34,7 @@ namespace WannabeFarmVille
 
         // VARIABLES
         private InfoVisiteur InfoVis;
+        private InfoAnimal InfoAni;
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
         int intFPS, coutConcierge;
@@ -44,7 +45,6 @@ namespace WannabeFarmVille
         private System.Media.SoundPlayer snd;
         private Stopwatch stopwatchPayerConcierges;
         private Stopwatch stopwatchJeu;
-        private ThreadStart thStart;
         private Bitmap tuile;
         private List<PictureBox> visiteursPicBox;
         private MenuDepart menuDepart;
@@ -313,16 +313,27 @@ namespace WannabeFarmVille
                                     InfoVis.SetInformations(visiteurs[i].Nom, visiteurs[i].Sexe, temps);
                                     InfoVis.Show();
                                     i = visiteurs.Count + 1;
-                                    /*  visiteurs[i].IsSelected = true;
-                                      Visiteur vis = visiteurs[i];
-                                      PnlVisiteurs.Location = new Point(vis.XInfos, vis.YInfos);
-                                      lblVisNom.Text = vis.Nom;
-                                      lblGenre.Text = vis.Sexe;
-                                      lblTemps.Text = "2 Minutes";
-                                      PnlVisiteurs.Visible = true;
-                                      lblVisNom.Visible = true;
-                                      lblGenre.Visible = true;
-                                      lblTemps.Visible = true;*/
+                                }
+                            }
+                            for (int i = 0; i < animaux.Count; i++)
+                            {
+                                if (e.X > animaux[i].X && e.X < (32 + animaux[i].X) && e.Y > animaux[i].Y && e.Y < (32 + animaux[i].Y))
+                                {
+                                    String race;
+                                    if(animaux[i] is Lion)
+                                    {
+                                        race = "Lion";
+                                    }
+                                    else if (animaux[i] is Buffle)
+                                    {
+                                        race = "Buffle";
+                                    }
+                                    else if (animaux[i] is Grizzly)
+                                    {
+                                        race = "Grizzly";
+                                    }
+                                    InfoAni = new InfoAnimal();
+
                                 }
                             }
                         }
