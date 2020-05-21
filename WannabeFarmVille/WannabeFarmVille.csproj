@@ -47,9 +47,26 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animal.cs" />
+    <Compile Include="Animaux\Animal.cs" />
+    <Compile Include="Animaux\Buffle.cs" />
+    <Compile Include="Animaux\Grizzly.cs" />
+    <Compile Include="Animaux\Licorne.cs" />
+    <Compile Include="Animaux\Mouton.cs" />
+    <Compile Include="Animaux\Rhino.cs" />
     <Compile Include="Concierge.cs" />
     <Compile Include="Dechet.cs" />
+    <Compile Include="InfoAnimal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoAnimal.Designer.cs">
+      <DependentUpon>InfoAnimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoVisiteur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoVisiteur.Designer.cs">
+      <DependentUpon>InfoVisiteur.cs</DependentUpon>
+    </Compile>
     <Compile Include="Jeu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,7 +74,7 @@
       <DependentUpon>Jeu.cs</DependentUpon>
     </Compile>
     <Compile Include="Joueur.cs" />
-    <Compile Include="Lion.cs" />
+    <Compile Include="Animaux\Lion.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MenuDepart.cs">
       <SubType>Form</SubType>
@@ -71,6 +88,12 @@
     <Compile Include="TilesetImageGenerator.cs" />
     <Compile Include="Tuile.cs" />
     <Compile Include="Visiteur.cs" />
+    <EmbeddedResource Include="InfoAnimal.resx">
+      <DependentUpon>InfoAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoVisiteur.resx">
+      <DependentUpon>InfoVisiteur.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Jeu.resx">
       <DependentUpon>Jeu.cs</DependentUpon>
     </EmbeddedResource>

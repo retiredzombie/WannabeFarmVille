@@ -10,7 +10,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using TestTilesetMario;
+using WannabeFarmVille.Animaux;
 using WannabeFarmVille.Properties;
 
 namespace WannabeFarmVille
@@ -31,6 +33,8 @@ namespace WannabeFarmVille
 
 
         // VARIABLES
+        private InfoVisiteur InfoVis;
+        private InfoAnimal InfoAni;
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
         int intFPS, coutConcierge;
@@ -41,7 +45,6 @@ namespace WannabeFarmVille
         private System.Media.SoundPlayer snd;
         private Stopwatch stopwatchPayerConcierges;
         private Stopwatch stopwatchJeu;
-        private ThreadStart thStart;
         private Bitmap tuile;
         private List<PictureBox> visiteursPicBox;
         private MenuDepart menuDepart;
@@ -57,6 +60,8 @@ namespace WannabeFarmVille
         private DateTime datejeu;
         private int NbConcierge = 0;
         private int NombreAnimaux = 0;
+        private List<Animal> animaux;
+        private int typeAnimalSelectionne; // 0: aucun 1-6:animal.
         
 
         public Jeu(MenuDepart menuDepart)
@@ -76,12 +81,14 @@ namespace WannabeFarmVille
         private void Init()
         {
             datejeu = DateTime.Now;
+            typeAnimalSelectionne = 0;
             stopWatch = new Stopwatch();
             dt_remuneration = DateTime.Now;
             stopwatchJeu = new Stopwatch();
             stopwatchPayerConcierges = new Stopwatch();
             stopwatchPayerConcierges.Start();
             concierges = new List<Concierge>();
+            animaux = new List<Animal>();
             coutConcierge = 2;
             stopWatch.Start();
             rand = new Random();
@@ -131,16 +138,13 @@ namespace WannabeFarmVille
             Player.JoeLeftLeft = PicLeftLeft;
             Player.JoeLeftRight = PicLeftRight;
             Player.CurrentSprite = Player.JoeUpRight;
-            thStart = delegate { this.VisiteurThread(); };
             gameover = false;
             tailleTuile = 32;
-            //Stream str = Properties.Resources.rd2;
-            //System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
-            //snd.Play();
             Stream str = Properties.Resources.rd2;
             snd = new System.Media.SoundPlayer(str);
             snd.Play();
             Player.CurrentSprite = Player.JoeUpRight;
+            Carte[0, 0].EstUnObstacle = true;
             MettreTuilesAdjacentes();
             visiteursPicBox = new List<PictureBox>();
             for (int i = 0; i < 10; i++)
@@ -280,50 +284,410 @@ namespace WannabeFarmVille
         /// <param name="e"></param>
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
-                for (int ligne = 0; ligne < 28; ligne++)
+            PlacerAnimal(e);
+            for (int c = 0; c < visiteurs.Count; c++)
+            {
+                if (visiteurs[c].IsSelected)
+                {
+                    visiteurs[c].IsSelected = false;
+                }
+            }
+            for (int ligne = 0; ligne < 28; ligne++)
                 {
                     for (int colonne = 0; colonne < 40; colonne++)
                     {
                         if (e.X > Carte[ligne, colonne].X && e.X < (32 + Carte[ligne, colonne].X) && e.Y > Carte[ligne, colonne].Y && e.Y < (32 + Carte[ligne, colonne].Y))
                         {
-                        MessageBox.Show( " efwe " + Carte[ligne, colonne].EstAdjacente);
+                        if (e.Button == MouseButtons.Right)
+                        {
+                            for (int i = 0; i < visiteurs.Count; i++)
+                            {
+                                if (Carte[ligne, colonne].X == visiteurs[i].X && Carte[ligne, colonne].Y == visiteurs[i].Y)
+                                {
+                                    TimeSpan ts = visiteurs[i].TempsDansLeZoo.Elapsed;
+                                    double minutes = ts.TotalMinutes;
+                                    minutes = Math.Truncate(100 * minutes) / 100;
+                                    String temps = minutes + " Minutes";
+                                    InfoVis = new InfoVisiteur();
+                                    InfoVis.SetInformations(visiteurs[i].Nom, visiteurs[i].Sexe, temps);
+                                    InfoVis.Show();
+                                    i = visiteurs.Count + 1;
+                                }
+                            }
+                            for (int i = 0; i < animaux.Count; i++)
+                            {
+                                if (e.X > animaux[i].X && e.X < (32 + animaux[i].X) && e.Y > animaux[i].Y && e.Y < (32 + animaux[i].Y))
+                                {
+                                    String race;
+                                    String sexe = "Non-Binaire";
+                                    if(animaux[i] is Lion)
+                                    {
+                                        race = "Lion";
+                                    }
+                                    else if (animaux[i] is Buffle)
+                                    {
+                                        race = "Buffle";
+                                    }
+                                    else if (animaux[i] is Grizzly)
+                                    {
+                                        race = "Grizzly";
+                                    }
+                                    else if (animaux[i] is Licorne)
+                                    {
+                                        race = "Licorne";
+                                    }
+                                    else if (animaux[i] is Mouton)
+                                    {
+                                        race = "Mouton";
+                                    }
+                                    else if (animaux[i] is Rhino)
+                                    {
+                                        race = "Rhinocéros";
+                                    }
+                                    
+                                    InfoAni = new InfoAnimal();
+
+                                }
+                            }
+                        }
+                        else
+                        {
                             if (Player.PeutNourrir)
                             {
-                                 if (Carte[ligne, colonne].AnimalSurLaCase != null)
-                                 {
-                                    if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
+                                bool trouve = false;
+                                for (int i = 0; i < animaux.Count; i++) {
+                                    if (e.X > animaux[i].X && e.X < (32 + animaux[i].X) && e.Y > animaux[i].Y && e.Y < (32 + animaux[i].Y))
                                     {
-                                         Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
-                                         MessageBox.Show("L'animal cri de joie et est rassasié !");
-                                         Player.Argent -= 1;
-                                         affichageArgent.Text = Player.Argent + "$";
+                                        if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
+                                        {
+                                            animaux[i].AFaim = false;
+
+                                            if (animaux[i].Type == 1)
+                                            {
+                                                MessageBox.Show("Le mouton bêle.");
+                                            }
+                                            else if (animaux[i].Type == 2)
+                                            {
+                                                MessageBox.Show("Le grizzly grogne.");
+                                            }
+                                            else if (animaux[i].Type == 3)
+                                            {
+                                                MessageBox.Show("Le lion rugit.");
+                                            }
+                                            else if (animaux[i].Type == 4)
+                                            {
+                                                MessageBox.Show("La licorne hennit.");
+                                            }
+                                            else if (animaux[i].Type == 5)
+                                            {
+                                                MessageBox.Show("Le rhinocéros barète.");
+                                            }
+                                            else if (animaux[i].Type == 6)
+                                            {
+                                                MessageBox.Show("Le buffle beugle.");
+                                            }
+
+                                            Player.Argent -= 1;
+                                            affichageArgent.Text = Player.Argent + "$";
+                                            trouve = true;
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
+                                        }
+                                    }
+                                }
+                                if(!trouve)
+                                {
+                                    MessageBox.Show("Il n'y a pas d'animal sur cette case");
+                                }
+                            }
+                            if (Carte[ligne, colonne].EstAdjacente)
+                            {
+                                if (Player.PeutEngagerConcierge)
+                                {
+                                    if (!Carte[ligne, colonne].EstUnObstacle)
+                                    {
+                                        NewConcierge(Carte[ligne, colonne].X, Carte[ligne, colonne].Y, ligne, colonne);
+                                        NbConcierge++;
+                                        conciergesToolStripMenuItem.Text = NbConcierge + " Concierges";
+                                        Player.PeutEngagerConcierge = false;
                                     }
                                     else
                                     {
-                                         MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
+                                        MessageBox.Show("Vous devez choisir une case vide");
                                     }
-                                 }
-                                 else
-                                 {
-                                    MessageBox.Show("Il n'y a pas d'animal sur cette case");
-                                 }
-                            }
-                            if (Carte[ligne, colonne].EstAdjacente && Carte[ligne, colonne].DechetSurTuile != null)
-                            {
-                                MessageBox.Show("get in first if");
-                                for(int i = 0; i < dechets.Count; i++)
+                                }
+                                else
                                 {
-                                    if(dechets.ElementAt(i).Equals(Carte[ligne, colonne].DechetSurTuile))
+                                    for (int i = 0; i < dechets.Count; i++)
                                     {
-                                        dechets.RemoveAt(i);
-                                        MessageBox.Show("Remove trash");
+                                        if (Carte[ligne, colonne].X == dechets[i].X && Carte[ligne, colonne].Y == dechets[i].Y)
+                                        {
+                                            dechets.RemoveAt(i);
+                                        }
                                     }
                                 }
                             }
                         }
+                        }
                     }
                 }
         }
+
+        // Place un animal au X, Y choisi en fonction du type choisi.
+        private void PlacerAnimal(MouseEventArgs e)
+        {
+            int x = e.X;
+            int y = e.Y;
+
+            bool placementLegal = VerifierXYEnclos(x, y);
+            // MessageBox.Show(x.ToString() + " " + y.ToString());
+            if (BonTypeEnclos(typeAnimalSelectionne, e, x, y))
+            {
+                switch (typeAnimalSelectionne)
+                {
+                    case 1:
+                        AjouterMouton(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 2:
+                        AjouterGrizzly(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 3:
+                        AjouterLion(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 4:
+                        AjouterLicorne(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 5:
+                        AjouterRhino(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                    case 6:
+                        AjouterBuffle(x, y);
+                        typeAnimalSelectionne = 0;
+                        break;
+                }
+            } else
+            {
+                typeAnimalSelectionne = 0;
+            }
+        }
+
+        //Verifie que le joueur à cliqué sur un enclos et retourne lequel si oui.
+        private bool BonTypeEnclos(int typeAnimalSelectionne, MouseEventArgs e, int x, int y)
+        {
+            bool bonType = true;
+
+            int enclosClique = GetEncloClique(e, x, y);
+
+            if (enclosClique == 0 && typeAnimalSelectionne != 0)
+            {
+                MessageBox.Show("Les animaux doivent êtres placés dans des enclos.");
+                return false;
+            }
+
+            for (int i = 0; i < animaux.Count; i++)
+
+            {
+                if (animaux[i].Enclos == enclosClique)
+                {
+                    if (animaux[i].Type != typeAnimalSelectionne && typeAnimalSelectionne != 0)
+                    {
+                        bonType = false;
+                        MessageBox.Show("Un seul type d'animal par enclos.");
+                        break;
+                    }
+                }
+            }
+
+
+            return bonType;
+        }
+
+        //Retourne quel enclos à été cliqué (int 1 à 4).
+        private int GetEncloClique(MouseEventArgs e, int x, int y)
+        {
+            int encloNum = 0;
+
+            int vX = x / 32;
+            int vY = y / 32;
+
+            //HAUT-GAUCHE
+            if ((vX >= 5 && vX <= 12) && (vY >= 4 && vY <= 13))
+            {
+                encloNum = 1;
+            }
+            //HAUT-DROITE
+            if ((vX >= 25 && vX <= 33) && (vY >= 4 && vY <= 13))
+            {
+                encloNum = 2;
+            }
+
+            //BAS-GAUCHE
+            if ((vY >= 16 && vY <= 25) && (vX >= 5 && vX <= 12))
+            {
+                encloNum = 3;
+            }
+            //BAS-DROITE
+            if ((vX >= 25 && vX <= 33) && (vY >= 16 && vY <= 25))
+            {
+                encloNum = 4;
+            }
+
+            return encloNum;
+        }
+
+        // Verifie rapidement si le x, y donné est sur un enclos.
+        private bool VerifierXYEnclos(int x, int y)
+        {
+            bool bon = false;
+            // Enclo #1
+            if ((x >= 175 && x < 395) && (y >= 155 && y <= 385))
+            {
+                bon = true;
+            }
+
+            // Enclo #2
+            if ((x >= 865 && x < 1075) && (y >= 155 && y <= 385))
+            {
+                bon = true;
+            }
+
+            // Enclo #3
+            if ((x >= 175 && x < 395) && (y >= 565 && y <= 805))
+            {
+                bon = true;
+            }
+
+            // Enclo #4
+            if ((x >= 865 && x < 1075) && (y >= 565 && y <= 805))
+            {
+                bon = true;
+            }
+
+            return bon;
+        }
+        
+        //Ajoute un mouton au X,Y choisi.
+        private void AjouterMouton(int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(20, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Mouton mouton = new Mouton(X, Y);
+                animaux.Add(mouton);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un mouton.");
+            }
+        }
+
+        //Ajoute un grizzly au X,Y choisi.
+        private void AjouterGrizzly (int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(30, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Grizzly grizzly = new Grizzly(X, Y);
+                animaux.Add(grizzly);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un grizzly.");
+            }
+            
+        }
+        
+        //Ajoute un lion au X,Y choisi.
+        private void AjouterLion(int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(35, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Lion lion = new Lion(X, Y);
+                animaux.Add(lion);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
+            }
+        }
+
+        //Ajoute une licorne au X,Y choisi.
+        private void AjouterLicorne(int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(50, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Licorne licorne = new Licorne(X, Y);
+                animaux.Add(licorne);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter une licorne.");
+            }
+        }
+
+        //Ajoute un rhinocéros au X,Y choisi.
+        private void AjouterRhino(int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Rhino rhino = new Rhino(X, Y);
+                animaux.Add(rhino);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un rhinocéros.");
+            }
+        }
+
+        //Ajoute un buffle au X,Y choisi.
+        private void AjouterBuffle(int X, int Y)
+        {
+            bool PeutAjouter;
+
+            PeutAjouter = Modifier_Argent(40, false);
+
+            if (PeutAjouter)
+            {
+                Ajouter_Animal();
+                Buffle buffle = new Buffle(X, Y);
+                animaux.Add(buffle);
+            }
+            else
+            {
+                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
+            }
+        }
+
         /// <summary>
         /// Cette méthode définie les tuiles situées 
         /// à l'intérieur d'un enclo
@@ -331,7 +695,6 @@ namespace WannabeFarmVille
         private void DefinirInterieurEnclos()
         {
             bool enclo = false;
-            int compt = 0;
             for (int ligne = 0; ligne < 28; ligne++)
             {
                 for (int colonne = 0; colonne < 40; colonne++)
@@ -339,12 +702,6 @@ namespace WannabeFarmVille
                     if (enclo && !Carte[ligne, colonne].EstUnObstacle)
                     {
                         Carte[ligne, colonne].EstDansUnEnclo = true;
-                        if(compt == 0)
-                        {
-                            Lion lion = new Lion(117);
-                            Carte[ligne, colonne].AnimalSurLaCase = lion;
-                            compt++;
-                        }
                         if(ligne < 13 && colonne < 18)
                         {
                             Carte[ligne, colonne].PositionEnclo = Enclo.UpLeft;
@@ -385,30 +742,68 @@ namespace WannabeFarmVille
         /// <param name="enclo"></param>
         private void RendreClotureSolide(int row, int column, Enclo enclo)
         {   
+            
             for (int i = 0; i < 9; i++)
             {
+                if(i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if(i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 column++;
             }
             for (int i = 0; i < 9; i++)
             {
+                if (i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if (i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 row++;
             }
+            Carte[row, column].EstUnObstacle = true;
+            Carte[row, column].PositionEnclo = enclo;
+            row++;
             for (int i = 0; i < 9; i++)
             {
+                if (i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if (i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 column--;
             }
             for (int i = 0; i < 9; i++)
             {
+                if (i == 1)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
+                if (i == 7)
+                {
+                    Carte[row, column].EstDansUnEnclo = true;
+                }
                 Carte[row, column].EstUnObstacle = true;
                 Carte[row, column].PositionEnclo = enclo;
                 row--;
             }
+            Carte[row, column].EstUnObstacle = true;
+            Carte[row, column].PositionEnclo = enclo;
         }
 
         /*
@@ -425,7 +820,13 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteurSpawn()
         {
-            this.visiteurs.Add(new Visiteur(tuile.Width * 19, tuile.Height * 25, rand));
+            Visiteur vis = new Visiteur(tuile.Width * 19, tuile.Height * 25, rand);
+            Carte[24, 19].VisiteurSurLaTuile = vis;
+            vis.XInfos = Carte[24, 19].X;
+            vis.YInfos = Carte[24, 19].Y + 5;
+            this.visiteurs.Add(vis);
+            visiteurs[visiteurs.Count - 1].TempsDansLeZoo = new Stopwatch();
+            visiteurs[visiteurs.Count - 1].TempsDansLeZoo.Start();
             Carte[24, 19].EstUnObstacle = true;
             CalculerEtFacturerPrixEntree();
             /*
@@ -486,7 +887,13 @@ namespace WannabeFarmVille
                 int nomY = visiteurs[i].Y - 20;
                 string nom = visiteurs[i].Nom;
 
-                g.DrawString(nom, font, drawBrush, new Point(nomX, nomY));
+            //    g.DrawString(nom, font, drawBrush, new Point(nomX, nomY));
+                
+            }
+
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                g.DrawImage(animaux[i].image, animaux[i].X, animaux[i].Y, 32, 32);
             }
 
             for (int i = 0; i < dechets.Count; i++)
@@ -506,12 +913,12 @@ namespace WannabeFarmVille
         {
             LogicVisiteurs();
             LogicConcierges();
-
-            
+            LogicContravention();
+            LogicAnimaux();
 
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
-              this.datejeu = this.datejeu.AddDays(1);
+                this.datejeu = this.datejeu.AddDays(1);
 
                 this.stopwatchJeu.Restart();
             }
@@ -526,6 +933,84 @@ namespace WannabeFarmVille
             }
         }
 
+        // Fait bouger les animaux en restant dans les enclos.
+        private void LogicAnimaux()
+        {
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                int randX = rand.Next(3);
+                int randY = rand.Next(3);
+
+                while ((randX == randY) ||
+                        (randY == 0 && animaux[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                        (randY == 1 && animaux[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                        (randX == 0 && animaux[i].X - tuile.Width <= 0 + tuile.Width) ||
+                        (randX == 1 && animaux[i].X + tuile.Width >= this.Width - tuile.Height) ||
+                        (randX != 2 && randY != 2) //||
+                                                   //(IsColliding(randX, randY, visiteurs[i]))
+                        )
+                {
+                    randX = rand.Next(3);
+                    randY = rand.Next(3);
+                }
+
+                int vX = animaux[i].X / this.tailleTuile;
+                int vY = animaux[i].Y / this.tailleTuile;
+
+                Console.WriteLine("vX = " + vX);
+                Console.WriteLine("vY = " + vY);
+                //GAUCHE
+                if (randX == 0 && !(vX >= 4 && vX <= 5) && !(vX >= 25 && vX <= 26))
+                {
+                    animaux[i].X -= tuile.Width;
+                    animaux[i].MovingX = -1;
+                    animaux[i].MovingY = 0;
+                    animaux[i].ReloadImages();
+                }
+                //DROITE
+                else if (randX == 1 && !(vX >= 11 && vX <= 12) && !(vX >= 32 && vX <= 33))
+                {
+                    animaux[i].X += tuile.Width;
+                    animaux[i].MovingX = 1;
+                    animaux[i].MovingY = 0;
+                    animaux[i].ReloadImages();
+                }
+                //HAUT
+                if (randY == 0 && !(vY >= 3 && vY <= 4) && !(vY >= 16 && vY <= 17))
+                {
+                    animaux[i].Y -= tuile.Height;
+                    animaux[i].MovingY = 1;
+                    animaux[i].MovingX = 0;
+                    animaux[i].ReloadImages();
+                }
+                //BAS
+                else if (randY == 1 && !(vY >= 12 && vY <= 13) && !(vY >= 24 && vY <= 25))
+                {
+                    animaux[i].Y += tuile.Height;
+                    animaux[i].MovingY = -1;
+                    animaux[i].MovingX = 0;
+                    animaux[i].ReloadImages();
+                }
+
+
+                int cX = animaux[i].X;
+                int cY = animaux[i].Y;
+            }
+        }
+
+        // Nourris les animaux à double le prix si ils ont faim.
+        private void LogicContravention()
+        {
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                if ((DateTime.Now - animaux[i].DernierRepas).TotalSeconds >= animaux[i].Faim)
+                {
+                    animaux[i].NourrirDoublePrix(Player);
+                }
+            }
+        }
+
+        // Active ou désactive les options du menu dépendament de l'argent du joueur.
         private void LogiqueMenuBar()
         {
             double argent = Player.Argent;
@@ -584,6 +1069,7 @@ namespace WannabeFarmVille
             }
         }
 
+        // Paye le joueur (nombre de visiteurs * nombre d'animaux).
         private void PayeJoueur()
         {
             double paye = 0.0;
@@ -607,7 +1093,7 @@ namespace WannabeFarmVille
         private void LogicVisiteurs()
         {
             Console.WriteLine("LogicVisiteurs.");
-            
+            Visiteur BackUp;
             for (int i = 0; i < visiteurs.Count; i++)
             {
                 int randX = rand.Next(3);
@@ -633,61 +1119,89 @@ namespace WannabeFarmVille
                 Console.WriteLine("vY = " + vY);
                 //GAUCHE
                 if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
-                { 
-                    visiteurs[i].X -= tuile.Width;
-                    visiteurs[i].MovingX = -1;
-                    visiteurs[i].MovingY = 0;
-                    visiteurs[i].ReloadImages();
+                {
                     if (visiteurs[i].CurrentColumn != 0)
                     {
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                        visiteurs[i].CurrentColumn--;
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn - 1].EstUnObstacle)
+                        {
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                            visiteurs[i].CurrentColumn--;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
+                            visiteurs[i].X -= tuile.Width;
+                            visiteurs[i].MovingX = -1;
+                            visiteurs[i].MovingY = 0;
+                            visiteurs[i].XInfos = visiteurs[i].X;
+                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
+                        }
                     }
                 } 
                 //DROITE
                 else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
-                { 
-                    visiteurs[i].X += tuile.Width;
-                    visiteurs[i].MovingX = 1;
-                    visiteurs[i].MovingY = 0;
-                    visiteurs[i].ReloadImages();
+                {
                     if (visiteurs[i].CurrentColumn != 39)
                     {
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                        visiteurs[i].CurrentColumn++;
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn + 1].EstUnObstacle)
+                        {
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                            visiteurs[i].CurrentColumn++;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
+                            visiteurs[i].X += tuile.Width;
+                            visiteurs[i].MovingX = 1;
+                            visiteurs[i].MovingY = 0;
+                            visiteurs[i].XInfos = visiteurs[i].X;
+                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
+                        }
                     }
                 }
                 //HAUT
                 if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 5 && vX <= 12) && !(vY >= 3 && vY <= 13 && vX >= 26 && vX <= 33) && !(vY >= 16 && vY <= 26 && vX >= 5 && vX <= 12) && !(vY >= 16 && vY <= 26 && vX >= 26 && vX <= 33))
                 {
-                    visiteurs[i].Y -= tuile.Height;
-                    visiteurs[i].MovingY = 1;
-                    visiteurs[i].MovingX = 0;
-                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentRow != 0)
                     {
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                        visiteurs[i].CurrentRow--;
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentRow - 1].EstUnObstacle)
+                        {
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                            visiteurs[i].CurrentRow--;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
+                            visiteurs[i].Y -= tuile.Height;
+                            visiteurs[i].MovingY = 1;
+                            visiteurs[i].MovingX = 0;
+                            visiteurs[i].XInfos = visiteurs[i].X;
+                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
+                        }
                     }
                 }
                 //BAS
                 else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 5 && vX <= 12) && !(vY >= 1 && vY <= 10 && vX >= 26 && vX <= 33) && !(vY >= 14 && vY <= 24 && vX >= 5 && vX <= 12) && !(vY >= 14 && vY <= 24 && vX >= 26 && vX <= 33))
                 {
-                    visiteurs[i].Y += tuile.Height;
-                    visiteurs[i].MovingY = -1;
-                    visiteurs[i].MovingX = 0;
-                    visiteurs[i].ReloadImages();
                     if (visiteurs[i].CurrentRow != 27)
                     {
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                        visiteurs[i].CurrentRow++;
-                        Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentRow + 1].EstUnObstacle)
+                        {
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                            visiteurs[i].CurrentRow++;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
+                            visiteurs[i].Y += tuile.Height;
+                            visiteurs[i].MovingY = -1;
+                            visiteurs[i].MovingX = 0;
+                            visiteurs[i].XInfos = visiteurs[i].X;
+                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
+                        }
                     }
                 }
-
+                visiteurs[i].ReloadImages();
                 EchapeDechet(vX, vY, visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn);
                 /*
                 string visiteurPBName = "visiteurPB" + i.ToString().Trim();
@@ -736,57 +1250,69 @@ namespace WannabeFarmVille
                 //GAUCHE
                 if (randX == 0 && !(vX >= 3 && vX <= 13 && vY >= 2 && vY <= 12) && !(vX >= 3 && vX <= 13 && vY >= 15 && vY <= 25) && !(vX >= 24 && vX <= 34 && vY >= 2 && vY <= 12) && !(vX >= 24 && vX <= 34 && vY >= 15 && vY <= 25))
                 {
-                    concierges[i].X -= tuile.Width;
-                    concierges[i].MovingX = -1;
-                    concierges[i].MovingY = 0;
-                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentColumn != 0)
                     {
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
-                        concierges[i].CurrentColumn--;
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn - 1].EstUnObstacle)
+                        {
+                            concierges[i].X -= tuile.Width;
+                            concierges[i].MovingX = -1;
+                            concierges[i].MovingY = 0;
+                            concierges[i].ReloadImages();
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                            concierges[i].CurrentColumn--;
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
                 //DROITE
                 else if (randX == 1 && !(vX >= 4 && vX <= 14 && vY >= 2 && vY <= 12) && !(vX >= 4 && vX <= 14 && vY >= 15 && vY <= 25) && !(vX >= 25 && vX <= 35 && vY >= 2 && vY <= 12) && !(vX >= 25 && vX <= 35 && vY >= 15 && vY <= 25))
                 {
-                    concierges[i].X += tuile.Width;
-                    concierges[i].MovingX = 1;
-                    concierges[i].MovingY = 0;
-                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentColumn != 39)
                     {
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
-                        concierges[i].CurrentColumn++;
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn + 1].EstUnObstacle)
+                        {
+                            concierges[i].X += tuile.Width;
+                            concierges[i].MovingX = 1;
+                            concierges[i].MovingY = 0;
+                            concierges[i].ReloadImages();
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                            concierges[i].CurrentColumn++;
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
                 //HAUT
                 if (randY == 0 && !(vY >= 3 && vY <= 13 && vX >= 4 && vX <= 13) && !(vY >= 3 && vY <= 13 && vX >= 25 && vX <= 34) && !(vY >= 16 && vY <= 26 && vX >= 4 && vX <= 13) && !(vY >= 16 && vY <= 26 && vX >= 25 && vX <= 34))
                 {
-                    concierges[i].Y -= tuile.Height;
-                    concierges[i].MovingY = 1;
-                    concierges[i].MovingX = 0;
-                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentRow != 0)
                     {
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
-                        concierges[i].CurrentRow--;
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[concierges[i].CurrentRow - 1, concierges[i].CurrentColumn].EstUnObstacle)
+                        {
+                            concierges[i].Y -= tuile.Height;
+                            concierges[i].MovingY = 1;
+                            concierges[i].MovingX = 0;
+                            concierges[i].ReloadImages();
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                            concierges[i].CurrentRow--;
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
                 //BAS
                 else if (randY == 1 && !(vY >= 1 && vY <= 10 && vX >= 4 && vX <= 13) && !(vY >= 1 && vY <= 10 && vX >= 25 && vX <= 34) && !(vY >= 14 && vY <= 24 && vX >= 4 && vX <= 13) && !(vY >= 14 && vY <= 24 && vX >= 25 && vX <= 34))
                 {
-                    concierges[i].Y += tuile.Height;
-                    concierges[i].MovingY = -1;
-                    concierges[i].MovingX = 0;
-                    concierges[i].ReloadImages();
                     if (concierges[i].CurrentRow != 27)
                     {
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
-                        concierges[i].CurrentRow++;
-                        Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        if (!Carte[concierges[i].CurrentRow - 1, concierges[i].CurrentColumn].EstUnObstacle)
+                        {
+                            concierges[i].Y += tuile.Height;
+                            concierges[i].MovingY = -1;
+                            concierges[i].MovingX = 0;
+                            concierges[i].ReloadImages();
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = false;
+                            concierges[i].CurrentRow++;
+                            Carte[concierges[i].CurrentRow, concierges[i].CurrentColumn].EstUnObstacle = true;
+                        }
                     }
                 }
 
@@ -814,6 +1340,7 @@ namespace WannabeFarmVille
 ;
         }
 
+        // Retire de l'argent au joueurs pour la paye des concierges.
         private void PayerConcierges()
         {
             if (stopwatchPayerConcierges.Elapsed.TotalSeconds >= 60)
@@ -826,6 +1353,7 @@ namespace WannabeFarmVille
             }
         }
 
+        // Verifie si le joueur à assez d'argent.
         public bool AssezArgent(int cout)
         {
             bool assez = true;
@@ -852,7 +1380,7 @@ namespace WannabeFarmVille
                 x *= tailleTuile;
                 y *= tailleTuile;
                 Dechet Trash = new Dechet(x, y);
-                Carte[row, column].DechetSurTuile = Trash;
+                Carte[row , column].DechetSurTuile = Trash;
                 this.dechets.Add(Trash);
             }
         }
@@ -937,7 +1465,7 @@ namespace WannabeFarmVille
 
         public delegate void DelegateRefresh();
         
-
+        // La boucle principale du jeu.
         private void BouclePrincipaleDuJeu()
         {
             while (!gameover)
@@ -959,25 +1487,18 @@ namespace WannabeFarmVille
             th.Start();*/
         }
 
-        private void VisiteurThread()
-        {
-
-        }
-
         private void embaucherToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewConcierge();
-            NbConcierge++;
-            conciergesToolStripMenuItem.Text = NbConcierge + " Concierges";
+            Player.PeutEngagerConcierge = true;
+            MessageBox.Show("Séléctionnez la tuile adjaçente sur laquelle vous \n voulez faire apparaître le concierge");
         }
 
-        private void NewConcierge()
+        // Ajoute un nouveau concierge à la position donnée.
+        private void NewConcierge(int cX, int cY, int ligne, int colonne)
         {
-            int cX = Player.CurrentColumn * tailleTuile;
-            int cY = Player.CurrentRow * tailleTuile;
             try
             {
-                concierges.Add(new Concierge(cX, cY, Player.CurrentRow - 1, Player.CurrentColumn));
+                concierges.Add(new Concierge(cX, cY, ligne, colonne));
             }
             catch (IndexOutOfRangeException)
             {
@@ -1015,14 +1536,16 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.S)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveDown();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1042,14 +1565,16 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.W)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveUp();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1069,14 +1594,16 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.D)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveRight();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1096,14 +1623,16 @@ namespace WannabeFarmVille
             if (e.KeyCode == Keys.A)
             {
                 EnleverTuilesAdjacentes();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = false;
                 Player.MoveLeft();
+                Carte[Player.CurrentRow, Player.CurrentColumn].EstUnObstacle = true;
                 MettreTuilesAdjacentes();
                 if (Player.PeutNourrir)
                 {
                     try
                     {
-                        if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                           || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                            || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                         {
                             Player.PeutNourrir = true;
                         }
@@ -1124,8 +1653,8 @@ namespace WannabeFarmVille
             {
                 try
                 {
-                    if (Carte[row + 1, column].EstUnObstacle || Carte[row - 1, column].EstUnObstacle
-                       || Carte[row, column + 1].EstUnObstacle || Carte[row, column - 1].EstUnObstacle)
+                    if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
                     {
                         MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
                         Player.PeutNourrir = true;
@@ -1163,19 +1692,8 @@ namespace WannabeFarmVille
          */
         private void mouton20ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(20, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Mouton mouton = new Mouton(Mouton.Nombre_Moutons);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un mouton.");
-            }
+            typeAnimalSelectionne = 1;
+            MessageBox.Show("Appuyez quelque part pour ajouter un mouton.");
         }
 
         /**
@@ -1183,19 +1701,8 @@ namespace WannabeFarmVille
          */
         private void grizzly30ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(30, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Grizzly grizzly = new Grizzly(Grizzly.Nombre_Grizzlys);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un grizzly.");
-            }
+            typeAnimalSelectionne = 2;
+            MessageBox.Show("Appuyez quelque part pour ajouter un grizzly.");
         }
 
         /**
@@ -1203,19 +1710,8 @@ namespace WannabeFarmVille
          */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(35, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                Lion lion = new Lion(Lion.Nombre_Lions);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un lion.");
-            }
+            typeAnimalSelectionne = 3;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un lion.");
         }
 
         /**
@@ -1223,19 +1719,8 @@ namespace WannabeFarmVille
          */
         private void licorne50ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(50, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Licorne licorne = new Licorne(Licorne.Nombre_Licornes);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter une licorne.");
-            }
+            typeAnimalSelectionne = 4;
+            MessageBox.Show("Appuyez quelque part pour ajouter une licorne.");
         }
 
         /**
@@ -1243,19 +1728,8 @@ namespace WannabeFarmVille
          */
         private void rhinocéros40ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(40, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Rhino rhino = new Rhino(Rhino.Nombre_Rhinos);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un rhinocéros.");
-            }
+            typeAnimalSelectionne = 5;
+            MessageBox.Show("Appuyez quelque part pour ajouter un rhinocéros.");
         }
 
         /**
@@ -1263,19 +1737,8 @@ namespace WannabeFarmVille
          */
         private void buffle40ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool PeutAjouter;
-
-            PeutAjouter = Modifier_Argent(40, false);
-
-            if (PeutAjouter)
-            {
-                Ajouter_Animal();
-                //Buffle buffle = new Buffle(Buffle.Nombre_Buffles);
-            }
-            else
-            {
-                Console.WriteLine("Tu n'as pas assez d'argent pour acheter un buffle.");
-            }
+            typeAnimalSelectionne = 6;
+            MessageBox.Show("Appuyez quelque part pour ajouter un buffle.");
         }
 
         /**
@@ -1332,7 +1795,7 @@ namespace WannabeFarmVille
         }
         private void Jeu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("Vous avez fait un profit de " + this.Player.ProfitTotal.ToString() + "$.");
+            MessageBox.Show("Vous avez fait un profit de " + this.Player.Argent.ToString() + "$.");
 
             this.bouclePrincipale.Abort();
 
@@ -1349,22 +1812,71 @@ namespace WannabeFarmVille
 
         private void mouton20ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 1;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un mouton.");
         }
 
         private void buffle40ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 6;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un Buffle.");
         }
 
         private void buffle30ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            typeAnimalSelectionne = 4;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un licorne.");
         }
 
         private void grizzly30ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+            typeAnimalSelectionne = 2;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un grizzly.");
+        }
 
+        private void nourrirUnAnimalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int row = Player.CurrentRow;
+            int column = Player.CurrentColumn;
+            try
+            {
+                if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
+                {
+                    MessageBox.Show("Cliquez sur l'animal que vous voulez nourrir.");
+                    Player.PeutNourrir = true;
+                    if (Carte[row + 1, column].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[row + 1, column].PositionEnclo;
+                    }
+                    else if (Carte[row - 1, column].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[row - 1, column].PositionEnclo;
+                    }
+                    else if (Carte[row, column + 1].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[row, column + 1].PositionEnclo;
+                    }
+                    else
+                    {
+                        Player.EncloChoisi = Carte[row, column - 1].PositionEnclo;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
+            }
+        }
+
+        private void rhinocéros40ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            typeAnimalSelectionne = 5;
+            MessageBox.Show("Appuyez quelqueparts pour ajouter un rhinocéros.");
         }
 
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)

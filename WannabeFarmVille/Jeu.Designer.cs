@@ -47,10 +47,16 @@
             this.buffle30ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rhinocéros40ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buffle40ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nourrirUnAnimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.déchetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conciergesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.embaucherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PnlVisiteurs = new System.Windows.Forms.Panel();
+            this.lblTemps = new System.Windows.Forms.Label();
+            this.lblGenre = new System.Windows.Forms.Label();
+            this.lblVisNom = new System.Windows.Forms.Label();
+            this.IconVis = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
@@ -60,6 +66,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.PicUpLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicUpRight)).BeginInit();
             this.menu_haut.SuspendLayout();
+            this.PnlVisiteurs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IconVis)).BeginInit();
             this.SuspendLayout();
             // 
             // PicDownRight
@@ -192,7 +200,8 @@
             this.lion35ToolStripMenuItem,
             this.buffle30ToolStripMenuItem,
             this.rhinocéros40ToolStripMenuItem,
-            this.buffle40ToolStripMenuItem});
+            this.buffle40ToolStripMenuItem,
+            this.nourrirUnAnimalToolStripMenuItem});
             this.animauxToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.animauxToolStripMenuItem.Name = "animauxToolStripMenuItem";
             this.animauxToolStripMenuItem.Size = new System.Drawing.Size(128, 28);
@@ -203,7 +212,7 @@
             this.mouton20ToolStripMenuItem.Enabled = false;
             this.mouton20ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mouton20ToolStripMenuItem.Name = "mouton20ToolStripMenuItem";
-            this.mouton20ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
+            this.mouton20ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.mouton20ToolStripMenuItem.Text = "+ Mouton 20$";
             this.mouton20ToolStripMenuItem.Click += new System.EventHandler(this.mouton20ToolStripMenuItem_Click_1);
             // 
@@ -212,7 +221,7 @@
             this.grizzly30ToolStripMenuItem.Enabled = false;
             this.grizzly30ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grizzly30ToolStripMenuItem.Name = "grizzly30ToolStripMenuItem";
-            this.grizzly30ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
+            this.grizzly30ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.grizzly30ToolStripMenuItem.Text = "+ Grizzly 30$";
             this.grizzly30ToolStripMenuItem.Click += new System.EventHandler(this.grizzly30ToolStripMenuItem_Click_1);
             // 
@@ -221,7 +230,7 @@
             this.lion35ToolStripMenuItem.Enabled = false;
             this.lion35ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lion35ToolStripMenuItem.Name = "lion35ToolStripMenuItem";
-            this.lion35ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
+            this.lion35ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.lion35ToolStripMenuItem.Text = "+ Lion 35$";
             this.lion35ToolStripMenuItem.Click += new System.EventHandler(this.lion35ToolStripMenuItem_Click);
             // 
@@ -230,7 +239,7 @@
             this.buffle30ToolStripMenuItem.Enabled = false;
             this.buffle30ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buffle30ToolStripMenuItem.Name = "buffle30ToolStripMenuItem";
-            this.buffle30ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
+            this.buffle30ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.buffle30ToolStripMenuItem.Text = "+ Licorne 50$";
             this.buffle30ToolStripMenuItem.Click += new System.EventHandler(this.buffle30ToolStripMenuItem_Click);
             // 
@@ -239,17 +248,26 @@
             this.rhinocéros40ToolStripMenuItem.Enabled = false;
             this.rhinocéros40ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rhinocéros40ToolStripMenuItem.Name = "rhinocéros40ToolStripMenuItem";
-            this.rhinocéros40ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
+            this.rhinocéros40ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.rhinocéros40ToolStripMenuItem.Text = "+ Rhinocéros 40$";
+            this.rhinocéros40ToolStripMenuItem.Click += new System.EventHandler(this.rhinocéros40ToolStripMenuItem_Click_1);
             // 
             // buffle40ToolStripMenuItem
             // 
             this.buffle40ToolStripMenuItem.Enabled = false;
             this.buffle40ToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buffle40ToolStripMenuItem.Name = "buffle40ToolStripMenuItem";
-            this.buffle40ToolStripMenuItem.Size = new System.Drawing.Size(241, 26);
+            this.buffle40ToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
             this.buffle40ToolStripMenuItem.Text = "+ Buffle 40$";
             this.buffle40ToolStripMenuItem.Click += new System.EventHandler(this.buffle40ToolStripMenuItem_Click_1);
+            // 
+            // nourrirUnAnimalToolStripMenuItem
+            // 
+            this.nourrirUnAnimalToolStripMenuItem.Name = "nourrirUnAnimalToolStripMenuItem";
+            this.nourrirUnAnimalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.nourrirUnAnimalToolStripMenuItem.Size = new System.Drawing.Size(327, 28);
+            this.nourrirUnAnimalToolStripMenuItem.Text = "Nourrir Un Animal";
+            this.nourrirUnAnimalToolStripMenuItem.Click += new System.EventHandler(this.nourrirUnAnimalToolStripMenuItem_Click);
             // 
             // déchetsToolStripMenuItem
             // 
@@ -283,6 +301,65 @@
             this.aideToolStripMenuItem.Text = "Aide";
             this.aideToolStripMenuItem.Click += new System.EventHandler(this.aideToolStripMenuItem_Click);
             // 
+            // PnlVisiteurs
+            // 
+            this.PnlVisiteurs.BackColor = System.Drawing.Color.Transparent;
+            this.PnlVisiteurs.Controls.Add(this.lblTemps);
+            this.PnlVisiteurs.Controls.Add(this.lblGenre);
+            this.PnlVisiteurs.Controls.Add(this.lblVisNom);
+            this.PnlVisiteurs.Controls.Add(this.IconVis);
+            this.PnlVisiteurs.Location = new System.Drawing.Point(110, 282);
+            this.PnlVisiteurs.Name = "PnlVisiteurs";
+            this.PnlVisiteurs.Size = new System.Drawing.Size(130, 72);
+            this.PnlVisiteurs.TabIndex = 10;
+            this.PnlVisiteurs.Visible = false;
+            // 
+            // lblTemps
+            // 
+            this.lblTemps.AutoSize = true;
+            this.lblTemps.BackColor = System.Drawing.Color.Transparent;
+            this.lblTemps.ForeColor = System.Drawing.Color.Black;
+            this.lblTemps.Location = new System.Drawing.Point(63, 45);
+            this.lblTemps.Name = "lblTemps";
+            this.lblTemps.Size = new System.Drawing.Size(53, 13);
+            this.lblTemps.TabIndex = 3;
+            this.lblTemps.Text = "2 Minutes";
+            this.lblTemps.Visible = false;
+            // 
+            // lblGenre
+            // 
+            this.lblGenre.AutoSize = true;
+            this.lblGenre.BackColor = System.Drawing.Color.Transparent;
+            this.lblGenre.ForeColor = System.Drawing.Color.Black;
+            this.lblGenre.Location = new System.Drawing.Point(63, 32);
+            this.lblGenre.Name = "lblGenre";
+            this.lblGenre.Size = new System.Drawing.Size(43, 13);
+            this.lblGenre.TabIndex = 2;
+            this.lblGenre.Text = "Homme";
+            this.lblGenre.Visible = false;
+            // 
+            // lblVisNom
+            // 
+            this.lblVisNom.AutoSize = true;
+            this.lblVisNom.BackColor = System.Drawing.Color.Transparent;
+            this.lblVisNom.ForeColor = System.Drawing.Color.Black;
+            this.lblVisNom.Location = new System.Drawing.Point(63, 19);
+            this.lblVisNom.Name = "lblVisNom";
+            this.lblVisNom.Size = new System.Drawing.Size(63, 13);
+            this.lblVisNom.TabIndex = 1;
+            this.lblVisNom.Text = "Scott Ryder";
+            this.lblVisNom.Visible = false;
+            // 
+            // IconVis
+            // 
+            this.IconVis.Image = ((System.Drawing.Image)(resources.GetObject("IconVis.Image")));
+            this.IconVis.Location = new System.Drawing.Point(26, 19);
+            this.IconVis.Name = "IconVis";
+            this.IconVis.Size = new System.Drawing.Size(31, 35);
+            this.IconVis.TabIndex = 0;
+            this.IconVis.TabStop = false;
+            this.IconVis.Visible = false;
+            // 
             // Jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,6 +367,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1264, 921);
+            this.Controls.Add(this.PnlVisiteurs);
             this.Controls.Add(this.PicDownRight);
             this.Controls.Add(this.PicDownLeft);
             this.Controls.Add(this.PicLeftRight);
@@ -323,6 +401,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.PicUpRight)).EndInit();
             this.menu_haut.ResumeLayout(false);
             this.menu_haut.PerformLayout();
+            this.PnlVisiteurs.ResumeLayout(false);
+            this.PnlVisiteurs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IconVis)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,6 +433,12 @@
         private System.Windows.Forms.PictureBox PicDownLeft;
         private System.Windows.Forms.PictureBox PicDownRight;
         private System.Windows.Forms.ToolStripMenuItem aideToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nourrirUnAnimalToolStripMenuItem;
+        private System.Windows.Forms.Panel PnlVisiteurs;
+        private System.Windows.Forms.PictureBox IconVis;
+        private System.Windows.Forms.Label lblVisNom;
+        private System.Windows.Forms.Label lblGenre;
+        private System.Windows.Forms.Label lblTemps;
     }
 }
 
