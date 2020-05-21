@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,6 +36,7 @@ namespace WannabeFarmVille
 
 
         // VARIABLES
+        private Point spawVis = new Point(32 * 19, 32 * 25);
         private InfoVisiteur InfoVis;
         private InfoAnimal InfoAni;
         private static Tuile[,] Carte = new Tuile[28, 40];
@@ -63,6 +65,7 @@ namespace WannabeFarmVille
         private int NbConcierge = 0;
         private int NombreAnimaux = 0;
         private List<Animal> animaux;
+        private Hashtable PointsVisiteurs = new Hashtable();
         private int typeAnimalSelectionne; // 0: aucun 1-6:animal.
         
 
@@ -1242,6 +1245,7 @@ namespace WannabeFarmVille
             Visiteur BackUp;
             for (int i = 0; i < visiteurs.Count; i++)
             {
+                Point point;
                 int randX = rand.Next(3);
                 int randY = rand.Next(3);
 
@@ -1270,17 +1274,17 @@ namespace WannabeFarmVille
                     {
                         if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn - 1].EstUnObstacle)
                         {
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
-                            visiteurs[i].CurrentColumn--;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
-                            visiteurs[i].X -= tuile.Width;
-                            visiteurs[i].MovingX = -1;
-                            visiteurs[i].MovingY = 0;
-                            visiteurs[i].XInfos = visiteurs[i].X;
-                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
+                                Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                                BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                                Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                                visiteurs[i].CurrentColumn--;
+                                Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                                Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
+                                visiteurs[i].X -= tuile.Width;
+                                visiteurs[i].MovingX = -1;
+                                visiteurs[i].MovingY = 0;
+                                visiteurs[i].XInfos = visiteurs[i].X;
+                                visiteurs[i].YInfos = visiteurs[i].Y + 5;
                         }
                     }
                 } 
@@ -1291,17 +1295,18 @@ namespace WannabeFarmVille
                     {
                         if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn + 1].EstUnObstacle)
                         {
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
-                            BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
-                            visiteurs[i].CurrentColumn++;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
-                            Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
-                            visiteurs[i].X += tuile.Width;
-                            visiteurs[i].MovingX = 1;
-                            visiteurs[i].MovingY = 0;
-                            visiteurs[i].XInfos = visiteurs[i].X;
-                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
+                                Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
+                                BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
+                                Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = null;
+                                visiteurs[i].CurrentColumn++;
+                                Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
+                                Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
+                                point = new Point(visiteurs[i].X, visiteurs[i].Y);
+                                visiteurs[i].X += tuile.Width;
+                                visiteurs[i].MovingX = 1;
+                                visiteurs[i].MovingY = 0;
+                                visiteurs[i].XInfos = visiteurs[i].X;
+                                visiteurs[i].YInfos = visiteurs[i].Y + 5;
                         }
                     }
                 }
@@ -1310,7 +1315,7 @@ namespace WannabeFarmVille
                 {
                     if (visiteurs[i].CurrentRow != 0)
                     {
-                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentRow - 1].EstUnObstacle)
+                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn - 1].EstUnObstacle)
                         {
                             Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
                             BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
@@ -1318,6 +1323,7 @@ namespace WannabeFarmVille
                             visiteurs[i].CurrentRow--;
                             Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = true;
                             Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile = BackUp;
+                            point = new Point(visiteurs[i].X, visiteurs[i].Y);
                             visiteurs[i].Y -= tuile.Height;
                             visiteurs[i].MovingY = 1;
                             visiteurs[i].MovingX = 0;
@@ -1349,6 +1355,10 @@ namespace WannabeFarmVille
                 }
                 visiteurs[i].ReloadImages();
                 EchapeDechet(vX, vY, visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn);
+                if(visiteurs[i].X == 608 && visiteurs[i].Y == 896)
+                {
+                    visiteurs.RemoveAt(i);
+                }
                 /*
                 string visiteurPBName = "visiteurPB" + i.ToString().Trim();
                 Control[] foundVisiteurs = Controls.Find(visiteurPBName, true);
