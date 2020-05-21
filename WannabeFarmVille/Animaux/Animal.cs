@@ -26,6 +26,7 @@ namespace WannabeFarmVille
         public int MovingY { get => movingY; set => movingY = value; }
         public int CurrentRow { get; set; }
         public int CurrentColumn { get; set; }
+        public int Genre { get; set; }
 
         public Image image { get; set; }
 

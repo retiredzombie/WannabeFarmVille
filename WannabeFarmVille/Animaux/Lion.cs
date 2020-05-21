@@ -15,7 +15,6 @@ namespace WannabeFarmVille
         // Toutes les durées sont en "jours"
         private int Gestation { get; set; } = 110;
         private int Croissance { get; set; } = 110;
-        private int Genre { get; set; }
        
         private Timer CompteARebours { get; set; }
 
