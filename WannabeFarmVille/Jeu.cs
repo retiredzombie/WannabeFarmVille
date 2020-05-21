@@ -284,7 +284,6 @@ namespace WannabeFarmVille
         /// <param name="e"></param>
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
-            PlacerAnimal(e.X, e.Y);
             for (int c = 0; c < visiteurs.Count; c++)
             {
                 if (visiteurs[c].IsSelected)
@@ -354,8 +353,14 @@ namespace WannabeFarmVille
                                     else
                                     {
                                         sexe = "Femelle";
-                                        
-                                        enceinte = "N'attend pas de bébé";
+                                        if (animaux[i].EnGestation)
+                                        {
+                                            enceinte = "Attend un bébé";
+                                        }
+                                        else
+                                        {
+                                            enceinte = "N'attend pas de bébé";
+                                        }
                                     }
                                     double temps =  (DateTime.Now - animaux[i].DernierRepas).TotalSeconds;
                                     temps = temps / 60;
@@ -412,12 +417,24 @@ namespace WannabeFarmVille
                                         else
                                         {
                                             MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
+                                            trouve = true;
                                         }
                                     }
                                 }
                                 if(!trouve)
                                 {
                                     MessageBox.Show("Il n'y a pas d'animal sur cette case");
+                                }
+                            }
+                            if (Player.PeutAjouterAnimal)
+                            {
+                                if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
+                                {
+                                    PlacerAnimal(e.X, e.Y);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Vous ne pouvez pas ajouter un animal dans \n un enclo qui n'est pas à côté de vous ");
                                 }
                             }
                             if (Carte[ligne, colonne].EstAdjacente)
@@ -1824,31 +1841,6 @@ namespace WannabeFarmVille
         }
 
         /**
-         * Déduit 20$ du joueur et instancie un nouveau Mouton
-         */
-        private void mouton20ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Carte[Player.CurrentRow + 2, Player.CurrentColumn].EstDansUnEnclo || Carte[Player.CurrentRow - 2, Player.CurrentColumn].EstDansUnEnclo
-                           || Carte[Player.CurrentRow, Player.CurrentColumn + 2].EstDansUnEnclo || Carte[Player.CurrentRow, Player.CurrentColumn - 2].EstDansUnEnclo)
-                {
-                    Player.PeutAjouterAnimal = true;
-                    typeAnimalSelectionne = 1;
-                    MessageBox.Show("Appuyez quelque part pour ajouter un mouton.");
-                }
-                else
-                {
-                    MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
-                }
-            }
-            catch (IndexOutOfRangeException)
-            {
-                MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
-            }
-        }
-
-        /**
          * Déduit 35$ du joueur et instancie un nouveau Lion
          */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1861,6 +1853,22 @@ namespace WannabeFarmVille
                     Player.PeutAjouterAnimal = true;
                     typeAnimalSelectionne = 3;
                     MessageBox.Show("Appuyez quelque part pour ajouter un lion.");
+                    if (Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow + 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow - 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow - 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow, Player.CurrentColumn + 1].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn + 1].PositionEnclo;
+                    }
+                    else
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn - 1].PositionEnclo;
+                    }
                 }
                 else
                 {
@@ -1952,6 +1960,22 @@ namespace WannabeFarmVille
                     Player.PeutAjouterAnimal = true;
                     typeAnimalSelectionne = 1;
                     MessageBox.Show("Appuyez quelque part pour ajouter un mouton.");
+                    if (Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow + 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow - 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow - 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow, Player.CurrentColumn + 1].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn + 1].PositionEnclo;
+                    }
+                    else
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn - 1].PositionEnclo;
+                    }
                 }
                 else
                 {
@@ -1974,6 +1998,22 @@ namespace WannabeFarmVille
                     Player.PeutAjouterAnimal = true;
                     typeAnimalSelectionne = 6;
                     MessageBox.Show("Appuyez quelque part pour ajouter un buffle.");
+                    if (Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow + 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow - 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow - 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow, Player.CurrentColumn + 1].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn + 1].PositionEnclo;
+                    }
+                    else
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn - 1].PositionEnclo;
+                    }
                 }
                 else
                 {
@@ -1996,6 +2036,22 @@ namespace WannabeFarmVille
                     Player.PeutAjouterAnimal = true;
                     typeAnimalSelectionne = 4;
                     MessageBox.Show("Appuyez quelque part pour ajouter une licorne.");
+                    if (Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow + 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow - 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow - 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow, Player.CurrentColumn + 1].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn + 1].PositionEnclo;
+                    }
+                    else
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn - 1].PositionEnclo;
+                    }
                 }
                 else
                 {
@@ -2018,6 +2074,22 @@ namespace WannabeFarmVille
                     Player.PeutAjouterAnimal = true;
                     typeAnimalSelectionne = 2;
                     MessageBox.Show("Appuyez quelque part pour ajouter un grizzly.");
+                    if (Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow+ 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow - 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow - 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow, Player.CurrentColumn + 1].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn + 1].PositionEnclo;
+                    }
+                    else
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn- 1].PositionEnclo;
+                    }
                 }
                 else
                 {
@@ -2079,6 +2151,22 @@ namespace WannabeFarmVille
                     Player.PeutAjouterAnimal = true;
                     typeAnimalSelectionne = 5;
                     MessageBox.Show("Appuyez quelque part pour ajouter un rhinocéros.");
+                    if (Carte[Player.CurrentRow + 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow + 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow - 1, Player.CurrentColumn].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow - 1, Player.CurrentColumn].PositionEnclo;
+                    }
+                    else if (Carte[Player.CurrentRow, Player.CurrentColumn + 1].EstUnObstacle)
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn + 1].PositionEnclo;
+                    }
+                    else
+                    {
+                        Player.EncloChoisi = Carte[Player.CurrentRow, Player.CurrentColumn - 1].PositionEnclo;
+                    }
                 }
                 else
                 {
