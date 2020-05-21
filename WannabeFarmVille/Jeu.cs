@@ -328,21 +328,25 @@ namespace WannabeFarmVille
                         {
                             if (Player.PeutNourrir)
                             {
-                                if (Carte[ligne, colonne].AnimalSurLaCase != null)
-                                {
-                                    if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
+                                bool trouve = false;
+                                for (int i = 0; i < animaux.Count; i++) {
+                                    if (Carte[ligne, colonne].X == animaux[i].X && Carte[ligne, colonne].Y == animaux[i].Y)
                                     {
-                                        Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
-                                        MessageBox.Show("L'animal cri de joie et est rassasié !");
-                                        Player.Argent -= 1;
-                                        affichageArgent.Text = Player.Argent + "$";
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
+                                        if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
+                                        {
+                                            Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
+                                            MessageBox.Show("L'animal cri de joie et est rassasié !");
+                                            Player.Argent -= 1;
+                                            affichageArgent.Text = Player.Argent + "$";
+                                            trouve = true;
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Vous ne pouvez pas nourrir un animal qui ne se trouve \n pas dans l'enclo à côté de vous.");
+                                        }
                                     }
                                 }
-                                else
+                                if(!trouve)
                                 {
                                     MessageBox.Show("Il n'y a pas d'animal sur cette case");
                                 }
