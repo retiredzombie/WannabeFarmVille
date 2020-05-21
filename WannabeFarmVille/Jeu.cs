@@ -32,6 +32,7 @@ namespace WannabeFarmVille
 
 
         // VARIABLES
+        private InfoVisiteur InfoVis;
         private static Tuile[,] Carte = new Tuile[28, 40];
         private Map map;
         int intFPS, coutConcierge;
@@ -283,8 +284,14 @@ namespace WannabeFarmVille
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
             PlacerAnimal(e);
-
-                for (int ligne = 0; ligne < 28; ligne++)
+            for (int c = 0; c < visiteurs.Count; c++)
+            {
+                if (visiteurs[c].IsSelected)
+                {
+                    visiteurs[c].IsSelected = false;
+                }
+            }
+            for (int ligne = 0; ligne < 28; ligne++)
                 {
                     for (int colonne = 0; colonne < 40; colonne++)
                     {
@@ -292,9 +299,29 @@ namespace WannabeFarmVille
                         {
                         if (e.Button == MouseButtons.Right)
                         {
-                            if(Carte[ligne, colonne].VisiteurSurLaTuile != null)
+                            for (int i = 0; i < visiteurs.Count; i++)
                             {
-
+                                if (Carte[ligne, colonne].X == visiteurs[i].X && Carte[ligne, colonne].Y == visiteurs[i].Y)
+                                {
+                                    TimeSpan ts = visiteurs[i].TempsDansLeZoo.Elapsed;
+                                    double minutes = ts.TotalMinutes;
+                                    minutes = Math.Truncate(100 * minutes) / 100;
+                                    String temps = minutes + " Minutes";
+                                    InfoVis = new InfoVisiteur();
+                                    InfoVis.SetInformations(visiteurs[i].Nom, visiteurs[i].Sexe, temps);
+                                    InfoVis.Show();
+                                    i = visiteurs.Count + 1;
+                                    /*  visiteurs[i].IsSelected = true;
+                                      Visiteur vis = visiteurs[i];
+                                      PnlVisiteurs.Location = new Point(vis.XInfos, vis.YInfos);
+                                      lblVisNom.Text = vis.Nom;
+                                      lblGenre.Text = vis.Sexe;
+                                      lblTemps.Text = "2 Minutes";
+                                      PnlVisiteurs.Visible = true;
+                                      lblVisNom.Visible = true;
+                                      lblGenre.Visible = true;
+                                      lblTemps.Visible = true;*/
+                                }
                             }
                         }
                         else
@@ -361,9 +388,6 @@ namespace WannabeFarmVille
 
             bool placementLegal = VerifierXYEnclos(x, y);
             // MessageBox.Show(x.ToString() + " " + y.ToString());
-
-            if (placementLegal)
-            {
                 switch (typeAnimalSelectionne)
                 {
                     case 1:
@@ -391,7 +415,6 @@ namespace WannabeFarmVille
                         typeAnimalSelectionne = 0;
                         break;
                 }
-            }
         }
 
         private bool VerifierXYEnclos(int x, int y)
@@ -674,9 +697,11 @@ namespace WannabeFarmVille
         {
             Visiteur vis = new Visiteur(tuile.Width * 19, tuile.Height * 25, rand);
             Carte[24, 19].VisiteurSurLaTuile = vis;
-            vis.XInfos = Carte[24, 19].X + 96;
-            vis.YInfos = Carte[24, 19].Y;
+            vis.XInfos = Carte[24, 19].X;
+            vis.YInfos = Carte[24, 19].Y + 5;
             this.visiteurs.Add(vis);
+            visiteurs[visiteurs.Count - 1].TempsDansLeZoo = new Stopwatch();
+            visiteurs[visiteurs.Count - 1].TempsDansLeZoo.Start();
             Carte[24, 19].EstUnObstacle = true;
             CalculerEtFacturerPrixEntree();
             /*
@@ -917,6 +942,8 @@ namespace WannabeFarmVille
                             visiteurs[i].X -= tuile.Width;
                             visiteurs[i].MovingX = -1;
                             visiteurs[i].MovingY = 0;
+                            visiteurs[i].XInfos = visiteurs[i].X;
+                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
                         }
                     }
                 } 
@@ -936,6 +963,8 @@ namespace WannabeFarmVille
                             visiteurs[i].X += tuile.Width;
                             visiteurs[i].MovingX = 1;
                             visiteurs[i].MovingY = 0;
+                            visiteurs[i].XInfos = visiteurs[i].X;
+                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
                         }
                     }
                 }
@@ -955,6 +984,8 @@ namespace WannabeFarmVille
                             visiteurs[i].Y -= tuile.Height;
                             visiteurs[i].MovingY = 1;
                             visiteurs[i].MovingX = 0;
+                            visiteurs[i].XInfos = visiteurs[i].X;
+                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
                         }
                     }
                 }
@@ -974,6 +1005,8 @@ namespace WannabeFarmVille
                             visiteurs[i].Y += tuile.Height;
                             visiteurs[i].MovingY = -1;
                             visiteurs[i].MovingX = 0;
+                            visiteurs[i].XInfos = visiteurs[i].X;
+                            visiteurs[i].YInfos = visiteurs[i].Y + 5;
                         }
                     }
                 }
