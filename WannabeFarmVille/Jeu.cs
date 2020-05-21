@@ -284,7 +284,7 @@ namespace WannabeFarmVille
         /// <param name="e"></param>
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
-            PlacerAnimal(e);
+            PlacerAnimal(e.X, e.Y);
             for (int c = 0; c < visiteurs.Count; c++)
             {
                 if (visiteurs[c].IsSelected)
@@ -453,14 +453,12 @@ namespace WannabeFarmVille
         }
 
         // Place un animal au X, Y choisi en fonction du type choisi.
-        private void PlacerAnimal(MouseEventArgs e)
+        private void PlacerAnimal(int x, int y)
         {
-            int x = e.X;
-            int y = e.Y;
 
             bool placementLegal = VerifierXYEnclos(x, y);
             // MessageBox.Show(x.ToString() + " " + y.ToString());
-            if (BonTypeEnclos(typeAnimalSelectionne, e, x, y))
+            if (BonTypeEnclos(typeAnimalSelectionne, x, y))
             {
                 switch (typeAnimalSelectionne)
                 {
@@ -496,11 +494,11 @@ namespace WannabeFarmVille
         }
 
         //Verifie que le joueur à cliqué sur un enclos et retourne lequel si oui.
-        private bool BonTypeEnclos(int typeAnimalSelectionne, MouseEventArgs e, int x, int y)
+        private bool BonTypeEnclos(int typeAnimalSelectionne, int x, int y)
         {
             bool bonType = true;
 
-            int enclosClique = GetEncloClique(e, x, y);
+            int enclosClique = GetEncloClique(x, y);
 
             if (enclosClique == 0 && typeAnimalSelectionne != 0)
             {
@@ -527,7 +525,7 @@ namespace WannabeFarmVille
         }
 
         //Retourne quel enclos à été cliqué (int 1 à 4).
-        private int GetEncloClique(MouseEventArgs e, int x, int y)
+        private int GetEncloClique(int x, int y)
         {
             int encloNum = 0;
 
@@ -1012,7 +1010,43 @@ namespace WannabeFarmVille
 
                 int cX = animaux[i].X;
                 int cY = animaux[i].Y;
+
+                // Animaux Croissance
+
+                if ((DateTime.Now - animaux[i].DateNaissance).TotalMilliseconds >= 5 / 365 * 3600 && !animaux[i].Adulte)
+                {
+                    animaux[i].Adulte = true;
+                }
+
+                if (animaux[i].genre == Animal.Genre.Femelle && EncloContient(animaux[i].Enclos))
+                {
+                    animaux[i].EnGestation = true;
+                    animaux[i].DebutGestation = DateTime.Now;
+                }
+
+                if (animaux[i].EnGestation && (DateTime.Now - animaux[i].DebutGestation).TotalMilliseconds * 5 / 365 * 3600 >= animaux[i].Gestation)
+                {
+                    animaux[i].EnGestation = false;
+                    animaux[i].DebutGestation = DateTime.Now;
+                    this.typeAnimalSelectionne = animaux[i].Type;
+                    this.PlacerAnimal(animaux[i].X, animaux[i].Y);
+                }
             }
+        }
+
+        private bool EncloContient(int enclos)
+        {
+            bool contient = false;
+
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                if (animaux[i].Enclos == enclos && animaux[i].genre == Animal.Genre.Male)
+                {
+                    contient = true;
+                }
+            }
+
+            return contient;
         }
 
         // Nourris les animaux à double le prix si ils ont faim.
