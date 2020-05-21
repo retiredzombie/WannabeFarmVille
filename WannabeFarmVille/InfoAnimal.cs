@@ -38,6 +38,10 @@ namespace WannabeFarmVille
                     break;
                 case "Buffle": IconBuffle.Visible = true;
                     break;
+                case "Licorne": IconLicorne.Visible = true;
+                    break;
+                case "Grizzly": IconGrizzly.Visible = true;
+                    break;
             }
         }
     }
