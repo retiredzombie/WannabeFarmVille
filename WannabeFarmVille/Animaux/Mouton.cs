@@ -29,8 +29,8 @@ namespace WannabeFarmVille.Animaux
             this.Y = Y;
             this.image = Properties.Resources.moutonLeftDown;
             this.Type = 1;
-            this.Gestation = 2; // 150
-            this.Croissance = 5;
+            this.Gestation = 150;
+            this.Croissance = 150;
         }
 
         /**
