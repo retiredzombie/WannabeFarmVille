@@ -354,6 +354,7 @@ namespace WannabeFarmVille
                                     else
                                     {
                                         sexe = "Femelle";
+                                        
                                         enceinte = "N'attend pas de bébé";
                                     }
                                     double temps =  (DateTime.Now - animaux[i].DernierRepas).TotalSeconds;
