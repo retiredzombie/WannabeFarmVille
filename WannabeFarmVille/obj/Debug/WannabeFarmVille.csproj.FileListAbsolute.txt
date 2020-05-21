@@ -49,3 +49,4 @@ E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\Resources\joeEx
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoVisiteur.resources
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoVisiteur.resources
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoAnimal.resources
+D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoAnimal.resources

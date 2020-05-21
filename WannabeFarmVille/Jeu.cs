@@ -386,36 +386,6 @@ namespace WannabeFarmVille
                 }
         }
 
-        private void BruitAnimal(MouseEventArgs e)
-        {
-            int x = e.X;
-            int y = e.Y;
-
-            for (int i = 0; i < animaux.Count; i++)
-            {
-                int xAni = animaux[i].X;
-                int yAni = animaux[i].Y;
-                int wAni = animaux[i].image.Width;
-                int hAni = animaux[i].image.Height;
-                int typeAni = animaux[i].Type;
-
-                if (x >= xAni && x <= xAni + wAni)
-                {
-                    if (y >= yAni && y <= hAni)
-                    {
-                        if (typeAni == 1)
-                        {
-                            MessageBox.Show("Le mouton bêle.");
-                        }
-                        else if (typeAni == 2)
-                        {
-                            MessageBox.Show("Le mouton bêle.");
-                        }
-                    }
-                }
-            }
-        }
-
         // Place un animal au X, Y choisi en fonction du type choisi.
         private void PlacerAnimal(MouseEventArgs e)
         {
