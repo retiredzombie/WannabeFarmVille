@@ -970,7 +970,6 @@ namespace WannabeFarmVille
                                 "aux visiteurs pour qu'ils viennent.");
             }
             Player.Argent += prix;
-            affichageArgent.Text = Player.Argent + "$";
         }
 
 
