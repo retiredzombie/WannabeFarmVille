@@ -31,6 +31,8 @@ namespace WannabeFarmVille
 
         double PAYE_PAR_VISITEUR = 1.0; // Chaque visiteur paye ce montant fois le nombre d'animaux.
         double MALUS_PAR_DECHET = 0.10;
+        int LIMITE_ANIMAUX = 50;
+        int LIMITE_VISITEURS = 100;
 
 
         // VARIABLES
@@ -322,7 +324,14 @@ namespace WannabeFarmVille
                                 {
                                     String race = "";
                                     String sexe = "Non-Binaire";
-                                    String age = "Adulte";
+                                    String age = "NULL";
+                                    if (animaux[i].Adulte)
+                                    {
+                                        age = "Adulte";
+                                    } else
+                                    {
+                                        age = "Bébé";
+                                    }
                                     String food;
                                     String enceinte = " ";
                                     if(animaux[i] is Lion)
@@ -368,7 +377,7 @@ namespace WannabeFarmVille
                                     double temps =  (DateTime.Now - animaux[i].DernierRepas).TotalSeconds;
                                     temps = temps / 60;
                                     temps = Math.Truncate(100 * temps) / 100;
-                                    food = "A mangé il y a " + temps + " minutes";
+                                    food = "A mangé il y a " + animaux[i].JrsDepuitManger + " jours";
                                     InfoAni = new InfoAnimal();
                                     InfoAni.SetInformation(race, sexe, age, food, enceinte);
                                     InfoAni.Show();
@@ -479,7 +488,7 @@ namespace WannabeFarmVille
 
             bool placementLegal = VerifierXYEnclos(x, y);
             // MessageBox.Show(x.ToString() + " " + y.ToString());
-            if (BonTypeEnclos(typeAnimalSelectionne, x, y))
+            if (BonTypeEnclos(typeAnimalSelectionne, x, y) && animaux.Count < LIMITE_ANIMAUX)
             {
                 switch (typeAnimalSelectionne)
                 {
@@ -508,6 +517,7 @@ namespace WannabeFarmVille
                         typeAnimalSelectionne = 0;
                         break;
                 }
+                animaux[animaux.Count - 1].Adulte = true;
             } else
             {
                 typeAnimalSelectionne = 0;
@@ -551,43 +561,43 @@ namespace WannabeFarmVille
 
             bool placementLegal = VerifierXYEnclos(X, Y);
             // MessageBox.Show(x.ToString() + " " + y.ToString());
-            if (BonTypeEnclos(typeAnimalSelectionne, X, Y))
+            if (BonTypeEnclos(typeAnimalSelectionne, X, Y) && animaux.Count < LIMITE_ANIMAUX)
             {
                 switch (typeAnimalSelectionne)
                 {
                     case 1:
                         Ajouter_Animal();
-                        Mouton mouton = new Mouton(X, Y);
+                        Mouton mouton = new Mouton(X, Y, rand);
                         animaux.Add(mouton);
                         typeAnimalSelectionne = 0;
                         break;
                     case 2:
                         Ajouter_Animal();
-                        Grizzly grizzly = new Grizzly(X, Y);
+                        Grizzly grizzly = new Grizzly(X, Y, rand);
                         animaux.Add(grizzly);
                         typeAnimalSelectionne = 0;
                         break;
                     case 3:
                         Ajouter_Animal();
-                        Lion lion = new Lion(X, Y);
+                        Lion lion = new Lion(X, Y, rand);
                         animaux.Add(lion);
                         typeAnimalSelectionne = 0;
                         break;
                     case 4:
                         Ajouter_Animal();
-                        Licorne licorne = new Licorne(X, Y);
+                        Licorne licorne = new Licorne(X, Y, rand);
                         animaux.Add(licorne);
                         typeAnimalSelectionne = 0;
                         break;
                     case 5:
                         Ajouter_Animal();
-                        Rhino rhino = new Rhino(X, Y);
+                        Rhino rhino = new Rhino(X, Y, rand);
                         animaux.Add(rhino);
                         typeAnimalSelectionne = 0;
                         break;
                     case 6:
                         Ajouter_Animal();
-                        Buffle buffle = new Buffle(X, Y);
+                        Buffle buffle = new Buffle(X, Y, rand);
                         animaux.Add(buffle);
                         typeAnimalSelectionne = 0;
                         break;
@@ -673,7 +683,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Mouton mouton = new Mouton(X, Y);
+                Mouton mouton = new Mouton(X, Y, rand);
                 animaux.Add(mouton);
             }
             else
@@ -692,7 +702,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Grizzly grizzly = new Grizzly(X, Y);
+                Grizzly grizzly = new Grizzly(X, Y, rand);
                 animaux.Add(grizzly);
             }
             else
@@ -712,7 +722,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Lion lion = new Lion(X, Y);
+                Lion lion = new Lion(X, Y, rand);
                 animaux.Add(lion);
             }
             else
@@ -731,7 +741,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Licorne licorne = new Licorne(X, Y);
+                Licorne licorne = new Licorne(X, Y, rand);
                 animaux.Add(licorne);
             }
             else
@@ -750,7 +760,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Rhino rhino = new Rhino(X, Y);
+                Rhino rhino = new Rhino(X, Y, rand);
                 animaux.Add(rhino);
             }
             else
@@ -769,7 +779,7 @@ namespace WannabeFarmVille
             if (PeutAjouter)
             {
                 Ajouter_Animal();
-                Buffle buffle = new Buffle(X, Y);
+                Buffle buffle = new Buffle(X, Y, rand);
                 animaux.Add(buffle);
             }
             else
@@ -910,24 +920,18 @@ namespace WannabeFarmVille
          */
         public void AjouterVisiteurSpawn()
         {
-            Visiteur vis = new Visiteur(tuile.Width * 19, tuile.Height * 25, rand);
-            Carte[24, 19].VisiteurSurLaTuile = vis;
-            vis.XInfos = Carte[24, 19].X;
-            vis.YInfos = Carte[24, 19].Y + 5;
-            this.visiteurs.Add(vis);
-            visiteurs[visiteurs.Count - 1].TempsDansLeZoo = new Stopwatch();
-            visiteurs[visiteurs.Count - 1].TempsDansLeZoo.Start();
-            Point point = new Point(visiteurs[visiteurs.Count - 1].X, visiteurs[visiteurs.Count - 1].Y);
-            try
+            if (visiteurs.Count < LIMITE_VISITEURS)
             {
-                PointsVisiteurs.Add(point, visiteurs[visiteurs.Count - 1]);
+                Visiteur vis = new Visiteur(tuile.Width * 19, tuile.Height * 25, rand);
+                Carte[24, 19].VisiteurSurLaTuile = vis;
+                vis.XInfos = Carte[24, 19].X;
+                vis.YInfos = Carte[24, 19].Y + 5;
+                this.visiteurs.Add(vis);
+                visiteurs[visiteurs.Count - 1].TempsDansLeZoo = new Stopwatch();
+                visiteurs[visiteurs.Count - 1].TempsDansLeZoo.Start();
+                Carte[24, 19].EstUnObstacle = true;
+                CalculerEtFacturerPrixEntree();
             }
-            catch (ArgumentException)
-            {
-
-            }
-            Carte[24, 19].EstUnObstacle = true;
-            CalculerEtFacturerPrixEntree();
             /*
             PictureBox newVisiteur = new PictureBox();
             newVisiteur.BackgroundImage = visiteurs[visiteurs.Count - 1].imageVisiteur;
@@ -1019,6 +1023,16 @@ namespace WannabeFarmVille
             {
                 this.datejeu = this.datejeu.AddDays(1);
 
+                for (int i = 0; i < animaux.Count; i++)
+                {
+                    if (animaux[i].EnGestation)
+                    {
+                        animaux[i].JrsDepuitDebGest++;
+                        animaux[i].Age++;
+                        animaux[i].JrsDepuitManger++;
+                    }
+                }
+
                 this.stopwatchJeu.Restart();
             }
 
@@ -1096,22 +1110,22 @@ namespace WannabeFarmVille
                 int cY = animaux[i].Y;
 
                 // Animaux Croissance
-
-                if ((DateTime.Now - animaux[i].DateNaissance).TotalMilliseconds >= 5 / 365 * 3600 && !animaux[i].Adulte)
+                if (animaux[i].Age > animaux[i].Croissance && !animaux[i].Adulte)
                 {
                     animaux[i].Adulte = true;
                 }
 
+
+                // Gestation
                 if (animaux[i].genre == Animal.Genre.Femelle && EncloContient(animaux[i].Enclos) && !animaux[i].EnGestation)
                 {
                     animaux[i].EnGestation = true;
-                    animaux[i].DebutGestation = DateTime.Now;
+                    animaux[i].JrsDepuitDebGest = 0;
                 }
 
-                if (animaux[i].EnGestation && (DateTime.Now - animaux[i].DebutGestation).TotalMilliseconds * 5 / 365 * 3600 >= animaux[i].Gestation)
+                if (animaux[i].EnGestation && animaux[i].JrsDepuitDebGest >= animaux[i].Gestation)
                 {
-                    animaux[i].EnGestation = false;
-                    animaux[i].DebutGestation = DateTime.Now;
+                    animaux[i].JrsDepuitDebGest = 0;
                     this.typeAnimalSelectionne = animaux[i].Type;
                     this.Accoucher(animaux[i].X, animaux[i].Y);
                 }

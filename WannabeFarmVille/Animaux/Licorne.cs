@@ -19,7 +19,7 @@ namespace WannabeFarmVille.Animaux
         private const int Jour = MS; // En millisecondes
 
         // Commence le timer et assigne un id à l'animal
-        public Licorne(int X, int Y) : base(X, Y)
+        public Licorne(int X, int Y, Random rand) : base(X, Y, rand)
         {
             this.DernierRepas = DateTime.Now;
             Nombre_Licornes++;
