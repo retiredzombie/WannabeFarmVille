@@ -21,6 +21,7 @@ namespace WannabeFarmVille
 
         public void SetInformation(String race, String genre, String age, String nourris, String grosse)
         {
+            this.Text = race;
             IconBuffle.Visible = false;
             IconGrizzly.Visible = false;
             IconLicorne.Visible = false;

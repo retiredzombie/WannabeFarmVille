@@ -30,24 +30,24 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InfoAnimal));
             this.PnlVisiteurs = new System.Windows.Forms.Panel();
-            this.IconBuffle = new System.Windows.Forms.PictureBox();
-            this.lblAge = new System.Windows.Forms.Label();
-            this.lblSexe = new System.Windows.Forms.Label();
-            this.lblRace = new System.Windows.Forms.Label();
-            this.IconGrizzly = new System.Windows.Forms.PictureBox();
-            this.lblNourissement = new System.Windows.Forms.Label();
-            this.lblGrossesse = new System.Windows.Forms.Label();
-            this.IconLicorne = new System.Windows.Forms.PictureBox();
-            this.IconMouton = new System.Windows.Forms.PictureBox();
-            this.IconRhino = new System.Windows.Forms.PictureBox();
             this.IconLion = new System.Windows.Forms.PictureBox();
+            this.lblGrossesse = new System.Windows.Forms.Label();
+            this.IconRhino = new System.Windows.Forms.PictureBox();
+            this.lblNourissement = new System.Windows.Forms.Label();
+            this.IconMouton = new System.Windows.Forms.PictureBox();
+            this.lblAge = new System.Windows.Forms.Label();
+            this.IconLicorne = new System.Windows.Forms.PictureBox();
+            this.lblSexe = new System.Windows.Forms.Label();
+            this.IconBuffle = new System.Windows.Forms.PictureBox();
+            this.IconGrizzly = new System.Windows.Forms.PictureBox();
+            this.lblRace = new System.Windows.Forms.Label();
             this.PnlVisiteurs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IconLion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconRhino)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconMouton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconLicorne)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IconBuffle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IconGrizzly)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IconLicorne)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IconMouton)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IconRhino)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IconLion)).BeginInit();
             this.SuspendLayout();
             // 
             // PnlVisiteurs
@@ -66,129 +66,129 @@
             this.PnlVisiteurs.Controls.Add(this.lblRace);
             this.PnlVisiteurs.Location = new System.Drawing.Point(1, 0);
             this.PnlVisiteurs.Name = "PnlVisiteurs";
-            this.PnlVisiteurs.Size = new System.Drawing.Size(190, 112);
+            this.PnlVisiteurs.Size = new System.Drawing.Size(190, 78);
             this.PnlVisiteurs.TabIndex = 12;
-            // 
-            // IconBuffle
-            // 
-            this.IconBuffle.Image = ((System.Drawing.Image)(resources.GetObject("IconBuffle.Image")));
-            this.IconBuffle.Location = new System.Drawing.Point(11, 36);
-            this.IconBuffle.Name = "IconBuffle";
-            this.IconBuffle.Size = new System.Drawing.Size(31, 35);
-            this.IconBuffle.TabIndex = 4;
-            this.IconBuffle.TabStop = false;
-            this.IconBuffle.Visible = false;
-            // 
-            // lblAge
-            // 
-            this.lblAge.AutoSize = true;
-            this.lblAge.BackColor = System.Drawing.Color.Transparent;
-            this.lblAge.ForeColor = System.Drawing.Color.Black;
-            this.lblAge.Location = new System.Drawing.Point(63, 45);
-            this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(37, 13);
-            this.lblAge.TabIndex = 3;
-            this.lblAge.Text = "Adulte";
-            // 
-            // lblSexe
-            // 
-            this.lblSexe.AutoSize = true;
-            this.lblSexe.BackColor = System.Drawing.Color.Transparent;
-            this.lblSexe.ForeColor = System.Drawing.Color.Black;
-            this.lblSexe.Location = new System.Drawing.Point(63, 32);
-            this.lblSexe.Name = "lblSexe";
-            this.lblSexe.Size = new System.Drawing.Size(43, 13);
-            this.lblSexe.TabIndex = 2;
-            this.lblSexe.Text = "Femelle";
-            // 
-            // lblRace
-            // 
-            this.lblRace.AutoSize = true;
-            this.lblRace.BackColor = System.Drawing.Color.Transparent;
-            this.lblRace.ForeColor = System.Drawing.Color.Black;
-            this.lblRace.Location = new System.Drawing.Point(63, 19);
-            this.lblRace.Name = "lblRace";
-            this.lblRace.Size = new System.Drawing.Size(27, 13);
-            this.lblRace.TabIndex = 1;
-            this.lblRace.Text = "Lion";
-            // 
-            // IconGrizzly
-            // 
-            this.IconGrizzly.Image = ((System.Drawing.Image)(resources.GetObject("IconGrizzly.Image")));
-            this.IconGrizzly.Location = new System.Drawing.Point(11, 36);
-            this.IconGrizzly.Name = "IconGrizzly";
-            this.IconGrizzly.Size = new System.Drawing.Size(31, 35);
-            this.IconGrizzly.TabIndex = 0;
-            this.IconGrizzly.TabStop = false;
-            this.IconGrizzly.Visible = false;
-            // 
-            // lblNourissement
-            // 
-            this.lblNourissement.AutoSize = true;
-            this.lblNourissement.BackColor = System.Drawing.Color.Transparent;
-            this.lblNourissement.ForeColor = System.Drawing.Color.Black;
-            this.lblNourissement.Location = new System.Drawing.Point(63, 58);
-            this.lblNourissement.Name = "lblNourissement";
-            this.lblNourissement.Size = new System.Drawing.Size(118, 13);
-            this.lblNourissement.TabIndex = 4;
-            this.lblNourissement.Text = "A faim depuis 2 minutes";
-            // 
-            // lblGrossesse
-            // 
-            this.lblGrossesse.AutoSize = true;
-            this.lblGrossesse.BackColor = System.Drawing.Color.Transparent;
-            this.lblGrossesse.ForeColor = System.Drawing.Color.Black;
-            this.lblGrossesse.Location = new System.Drawing.Point(63, 71);
-            this.lblGrossesse.Name = "lblGrossesse";
-            this.lblGrossesse.Size = new System.Drawing.Size(109, 13);
-            this.lblGrossesse.TabIndex = 5;
-            this.lblGrossesse.Text = "N\'attend pas de bébé";
-            // 
-            // IconLicorne
-            // 
-            this.IconLicorne.Image = ((System.Drawing.Image)(resources.GetObject("IconLicorne.Image")));
-            this.IconLicorne.Location = new System.Drawing.Point(11, 36);
-            this.IconLicorne.Name = "IconLicorne";
-            this.IconLicorne.Size = new System.Drawing.Size(31, 35);
-            this.IconLicorne.TabIndex = 13;
-            this.IconLicorne.TabStop = false;
-            this.IconLicorne.Visible = false;
-            // 
-            // IconMouton
-            // 
-            this.IconMouton.Image = ((System.Drawing.Image)(resources.GetObject("IconMouton.Image")));
-            this.IconMouton.Location = new System.Drawing.Point(11, 36);
-            this.IconMouton.Name = "IconMouton";
-            this.IconMouton.Size = new System.Drawing.Size(31, 35);
-            this.IconMouton.TabIndex = 14;
-            this.IconMouton.TabStop = false;
-            this.IconMouton.Visible = false;
-            // 
-            // IconRhino
-            // 
-            this.IconRhino.Image = ((System.Drawing.Image)(resources.GetObject("IconRhino.Image")));
-            this.IconRhino.Location = new System.Drawing.Point(11, 36);
-            this.IconRhino.Name = "IconRhino";
-            this.IconRhino.Size = new System.Drawing.Size(31, 35);
-            this.IconRhino.TabIndex = 15;
-            this.IconRhino.TabStop = false;
-            this.IconRhino.Visible = false;
             // 
             // IconLion
             // 
             this.IconLion.Image = ((System.Drawing.Image)(resources.GetObject("IconLion.Image")));
-            this.IconLion.Location = new System.Drawing.Point(11, 36);
+            this.IconLion.Location = new System.Drawing.Point(11, 20);
             this.IconLion.Name = "IconLion";
             this.IconLion.Size = new System.Drawing.Size(31, 35);
             this.IconLion.TabIndex = 16;
             this.IconLion.TabStop = false;
             this.IconLion.Visible = false;
             // 
+            // lblGrossesse
+            // 
+            this.lblGrossesse.AutoSize = true;
+            this.lblGrossesse.BackColor = System.Drawing.Color.Transparent;
+            this.lblGrossesse.ForeColor = System.Drawing.Color.Black;
+            this.lblGrossesse.Location = new System.Drawing.Point(54, 55);
+            this.lblGrossesse.Name = "lblGrossesse";
+            this.lblGrossesse.Size = new System.Drawing.Size(109, 13);
+            this.lblGrossesse.TabIndex = 5;
+            this.lblGrossesse.Text = "N\'attend pas de bébé";
+            // 
+            // IconRhino
+            // 
+            this.IconRhino.Image = ((System.Drawing.Image)(resources.GetObject("IconRhino.Image")));
+            this.IconRhino.Location = new System.Drawing.Point(11, 20);
+            this.IconRhino.Name = "IconRhino";
+            this.IconRhino.Size = new System.Drawing.Size(31, 35);
+            this.IconRhino.TabIndex = 15;
+            this.IconRhino.TabStop = false;
+            this.IconRhino.Visible = false;
+            // 
+            // lblNourissement
+            // 
+            this.lblNourissement.AutoSize = true;
+            this.lblNourissement.BackColor = System.Drawing.Color.Transparent;
+            this.lblNourissement.ForeColor = System.Drawing.Color.Black;
+            this.lblNourissement.Location = new System.Drawing.Point(54, 42);
+            this.lblNourissement.Name = "lblNourissement";
+            this.lblNourissement.Size = new System.Drawing.Size(118, 13);
+            this.lblNourissement.TabIndex = 4;
+            this.lblNourissement.Text = "A faim depuis 2 minutes";
+            // 
+            // IconMouton
+            // 
+            this.IconMouton.Image = ((System.Drawing.Image)(resources.GetObject("IconMouton.Image")));
+            this.IconMouton.Location = new System.Drawing.Point(11, 20);
+            this.IconMouton.Name = "IconMouton";
+            this.IconMouton.Size = new System.Drawing.Size(31, 35);
+            this.IconMouton.TabIndex = 14;
+            this.IconMouton.TabStop = false;
+            this.IconMouton.Visible = false;
+            // 
+            // lblAge
+            // 
+            this.lblAge.AutoSize = true;
+            this.lblAge.BackColor = System.Drawing.Color.Transparent;
+            this.lblAge.ForeColor = System.Drawing.Color.Black;
+            this.lblAge.Location = new System.Drawing.Point(54, 29);
+            this.lblAge.Name = "lblAge";
+            this.lblAge.Size = new System.Drawing.Size(37, 13);
+            this.lblAge.TabIndex = 3;
+            this.lblAge.Text = "Adulte";
+            // 
+            // IconLicorne
+            // 
+            this.IconLicorne.Image = ((System.Drawing.Image)(resources.GetObject("IconLicorne.Image")));
+            this.IconLicorne.Location = new System.Drawing.Point(11, 20);
+            this.IconLicorne.Name = "IconLicorne";
+            this.IconLicorne.Size = new System.Drawing.Size(31, 35);
+            this.IconLicorne.TabIndex = 13;
+            this.IconLicorne.TabStop = false;
+            this.IconLicorne.Visible = false;
+            // 
+            // lblSexe
+            // 
+            this.lblSexe.AutoSize = true;
+            this.lblSexe.BackColor = System.Drawing.Color.Transparent;
+            this.lblSexe.ForeColor = System.Drawing.Color.Black;
+            this.lblSexe.Location = new System.Drawing.Point(54, 16);
+            this.lblSexe.Name = "lblSexe";
+            this.lblSexe.Size = new System.Drawing.Size(43, 13);
+            this.lblSexe.TabIndex = 2;
+            this.lblSexe.Text = "Femelle";
+            // 
+            // IconBuffle
+            // 
+            this.IconBuffle.Image = ((System.Drawing.Image)(resources.GetObject("IconBuffle.Image")));
+            this.IconBuffle.Location = new System.Drawing.Point(11, 20);
+            this.IconBuffle.Name = "IconBuffle";
+            this.IconBuffle.Size = new System.Drawing.Size(31, 35);
+            this.IconBuffle.TabIndex = 4;
+            this.IconBuffle.TabStop = false;
+            this.IconBuffle.Visible = false;
+            // 
+            // IconGrizzly
+            // 
+            this.IconGrizzly.Image = ((System.Drawing.Image)(resources.GetObject("IconGrizzly.Image")));
+            this.IconGrizzly.Location = new System.Drawing.Point(11, 20);
+            this.IconGrizzly.Name = "IconGrizzly";
+            this.IconGrizzly.Size = new System.Drawing.Size(31, 35);
+            this.IconGrizzly.TabIndex = 0;
+            this.IconGrizzly.TabStop = false;
+            this.IconGrizzly.Visible = false;
+            // 
+            // lblRace
+            // 
+            this.lblRace.AutoSize = true;
+            this.lblRace.BackColor = System.Drawing.Color.Transparent;
+            this.lblRace.ForeColor = System.Drawing.Color.Black;
+            this.lblRace.Location = new System.Drawing.Point(54, 3);
+            this.lblRace.Name = "lblRace";
+            this.lblRace.Size = new System.Drawing.Size(27, 13);
+            this.lblRace.TabIndex = 1;
+            this.lblRace.Text = "Lion";
+            // 
             // InfoAnimal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(191, 112);
+            this.ClientSize = new System.Drawing.Size(191, 78);
             this.Controls.Add(this.PnlVisiteurs);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -197,12 +197,12 @@
             this.Text = "InfoAnimal";
             this.PnlVisiteurs.ResumeLayout(false);
             this.PnlVisiteurs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IconLion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconRhino)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconMouton)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconLicorne)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IconBuffle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IconGrizzly)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IconLicorne)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IconMouton)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IconRhino)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IconLion)).EndInit();
             this.ResumeLayout(false);
 
         }
