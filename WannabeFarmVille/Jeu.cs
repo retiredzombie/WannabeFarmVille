@@ -1612,6 +1612,27 @@ namespace WannabeFarmVille
                         Player.EncloChoisi = Enclo.PasEnclo;
                     }
                 }
+                if (Player.PeutAjouterAnimal)
+                {
+                    try
+                    {
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
+                        {
+                            Player.PeutAjouterAnimal = true;
+                        }
+                        else
+                        {
+                            Player.PeutAjouterAnimal = false;
+                            Player.EncloChoisi = Enclo.PasEnclo;
+                        }
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        Player.PeutAjouterAnimal = false;
+                        Player.EncloChoisi = Enclo.PasEnclo;
+                    }
+                }
             }
             if (e.KeyCode == Keys.W)
             {
@@ -1638,6 +1659,27 @@ namespace WannabeFarmVille
                     catch (IndexOutOfRangeException)
                     {
                         Player.PeutNourrir = false;
+                        Player.EncloChoisi = Enclo.PasEnclo;
+                    }
+                }
+                if (Player.PeutAjouterAnimal)
+                {
+                    try
+                    {
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
+                        {
+                            Player.PeutAjouterAnimal = true;
+                        }
+                        else
+                        {
+                            Player.PeutAjouterAnimal = false;
+                            Player.EncloChoisi = Enclo.PasEnclo;
+                        }
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        Player.PeutAjouterAnimal = false;
                         Player.EncloChoisi = Enclo.PasEnclo;
                     }
                 }
@@ -1670,6 +1712,27 @@ namespace WannabeFarmVille
                         Player.EncloChoisi = Enclo.PasEnclo;
                     }
                 }
+                if (Player.PeutAjouterAnimal)
+                {
+                    try
+                    {
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
+                        {
+                            Player.PeutAjouterAnimal = true;
+                        }
+                        else
+                        {
+                            Player.PeutAjouterAnimal = false;
+                            Player.EncloChoisi = Enclo.PasEnclo;
+                        }
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        Player.PeutAjouterAnimal = false;
+                        Player.EncloChoisi = Enclo.PasEnclo;
+                    }
+                }
             }
             if (e.KeyCode == Keys.A)
             {
@@ -1696,6 +1759,27 @@ namespace WannabeFarmVille
                     catch (IndexOutOfRangeException)
                     {
                         Player.PeutNourrir = false;
+                        Player.EncloChoisi = Enclo.PasEnclo;
+                    }
+                }
+                if (Player.PeutAjouterAnimal)
+                {
+                    try
+                    {
+                        if (Carte[row + 2, column].EstDansUnEnclo || Carte[row - 2, column].EstDansUnEnclo
+                       || Carte[row, column + 2].EstDansUnEnclo || Carte[row, column - 2].EstDansUnEnclo)
+                        {
+                            Player.PeutAjouterAnimal = true;
+                        }
+                        else
+                        {
+                            Player.PeutAjouterAnimal = false;
+                            Player.EncloChoisi = Enclo.PasEnclo;
+                        }
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        Player.PeutAjouterAnimal = false;
                         Player.EncloChoisi = Enclo.PasEnclo;
                     }
                 }
@@ -1743,17 +1827,24 @@ namespace WannabeFarmVille
          */
         private void mouton20ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            typeAnimalSelectionne = 1;
-            MessageBox.Show("Appuyez quelque part pour ajouter un mouton.");
-        }
-
-        /**
-         * Déduit 30$ du joueur et instancie un nouveau Grizzly
-         */
-        private void grizzly30ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            typeAnimalSelectionne = 2;
-            MessageBox.Show("Appuyez quelque part pour ajouter un grizzly.");
+            try
+            {
+                if (Carte[Player.CurrentRow + 2, Player.CurrentColumn].EstDansUnEnclo || Carte[Player.CurrentRow - 2, Player.CurrentColumn].EstDansUnEnclo
+                           || Carte[Player.CurrentRow, Player.CurrentColumn + 2].EstDansUnEnclo || Carte[Player.CurrentRow, Player.CurrentColumn - 2].EstDansUnEnclo)
+                {
+                    Player.PeutAjouterAnimal = true;
+                    typeAnimalSelectionne = 1;
+                    MessageBox.Show("Appuyez quelque part pour ajouter un mouton.");
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+            }
         }
 
         /**
@@ -1761,35 +1852,24 @@ namespace WannabeFarmVille
          */
         private void lion35ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            typeAnimalSelectionne = 3;
-            MessageBox.Show("Appuyez quelqueparts pour ajouter un lion.");
-        }
-
-        /**
-         * Déduit 50$ du joueur et instancie une nouvelle Licorne
-         */
-        private void licorne50ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            typeAnimalSelectionne = 4;
-            MessageBox.Show("Appuyez quelque part pour ajouter une licorne.");
-        }
-
-        /**
-         * Déduit 40$ du joueur et instancie un nouveau Rhinocéros
-         */
-        private void rhinocéros40ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            typeAnimalSelectionne = 5;
-            MessageBox.Show("Appuyez quelque part pour ajouter un rhinocéros.");
-        }
-
-        /**
-         * Déduit 40$ du joueur et instancie un nouveau Buffle
-         */
-        private void buffle40ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            typeAnimalSelectionne = 6;
-            MessageBox.Show("Appuyez quelque part pour ajouter un buffle.");
+            try
+            {
+                if (Carte[Player.CurrentRow + 2, Player.CurrentColumn].EstDansUnEnclo || Carte[Player.CurrentRow - 2, Player.CurrentColumn].EstDansUnEnclo
+                          || Carte[Player.CurrentRow, Player.CurrentColumn + 2].EstDansUnEnclo || Carte[Player.CurrentRow, Player.CurrentColumn - 2].EstDansUnEnclo)
+                {
+                    Player.PeutAjouterAnimal = true;
+                    typeAnimalSelectionne = 3;
+                    MessageBox.Show("Appuyez quelque part pour ajouter un lion.");
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+            }
         }
 
         /**
@@ -1863,26 +1943,90 @@ namespace WannabeFarmVille
 
         private void mouton20ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            typeAnimalSelectionne = 1;
-            MessageBox.Show("Appuyez quelqueparts pour ajouter un mouton.");
+            try
+            {
+                if (Carte[Player.CurrentRow + 2, Player.CurrentColumn].EstDansUnEnclo || Carte[Player.CurrentRow - 2, Player.CurrentColumn].EstDansUnEnclo
+                           || Carte[Player.CurrentRow, Player.CurrentColumn + 2].EstDansUnEnclo || Carte[Player.CurrentRow, Player.CurrentColumn - 2].EstDansUnEnclo)
+                {
+                    Player.PeutAjouterAnimal = true;
+                    typeAnimalSelectionne = 1;
+                    MessageBox.Show("Appuyez quelque part pour ajouter un mouton.");
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+            }
         }
 
         private void buffle40ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            typeAnimalSelectionne = 6;
-            MessageBox.Show("Appuyez quelqueparts pour ajouter un Buffle.");
+            try
+            {
+                if (Carte[Player.CurrentRow + 2, Player.CurrentColumn].EstDansUnEnclo || Carte[Player.CurrentRow - 2, Player.CurrentColumn].EstDansUnEnclo
+                          || Carte[Player.CurrentRow, Player.CurrentColumn + 2].EstDansUnEnclo || Carte[Player.CurrentRow, Player.CurrentColumn - 2].EstDansUnEnclo)
+                {
+                    Player.PeutAjouterAnimal = true;
+                    typeAnimalSelectionne = 6;
+                    MessageBox.Show("Appuyez quelque part pour ajouter un buffle.");
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+            }
         }
 
         private void buffle30ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            typeAnimalSelectionne = 4;
-            MessageBox.Show("Appuyez quelqueparts pour ajouter un licorne.");
+            try
+            {
+                if (Carte[Player.CurrentRow + 2, Player.CurrentColumn].EstDansUnEnclo || Carte[Player.CurrentRow - 2, Player.CurrentColumn].EstDansUnEnclo
+                          || Carte[Player.CurrentRow, Player.CurrentColumn + 2].EstDansUnEnclo || Carte[Player.CurrentRow, Player.CurrentColumn - 2].EstDansUnEnclo)
+                {
+                    Player.PeutAjouterAnimal = true;
+                    typeAnimalSelectionne = 4;
+                    MessageBox.Show("Appuyez quelque part pour ajouter une licorne.");
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+            }
         }
 
         private void grizzly30ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            typeAnimalSelectionne = 2;
-            MessageBox.Show("Appuyez quelqueparts pour ajouter un grizzly.");
+            try
+            {
+                if (Carte[Player.CurrentRow + 2, Player.CurrentColumn].EstDansUnEnclo || Carte[Player.CurrentRow - 2, Player.CurrentColumn].EstDansUnEnclo
+                           || Carte[Player.CurrentRow, Player.CurrentColumn + 2].EstDansUnEnclo || Carte[Player.CurrentRow, Player.CurrentColumn - 2].EstDansUnEnclo)
+                {
+                    Player.PeutAjouterAnimal = true;
+                    typeAnimalSelectionne = 2;
+                    MessageBox.Show("Appuyez quelque part pour ajouter un grizzly.");
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+            }
         }
 
         private void nourrirUnAnimalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1926,8 +2070,24 @@ namespace WannabeFarmVille
 
         private void rhinocéros40ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            typeAnimalSelectionne = 5;
-            MessageBox.Show("Appuyez quelqueparts pour ajouter un rhinocéros.");
+            try
+            {
+                if (Carte[Player.CurrentRow + 2, Player.CurrentColumn].EstDansUnEnclo || Carte[Player.CurrentRow - 2, Player.CurrentColumn].EstDansUnEnclo
+                          || Carte[Player.CurrentRow, Player.CurrentColumn + 2].EstDansUnEnclo || Carte[Player.CurrentRow, Player.CurrentColumn - 2].EstDansUnEnclo)
+                {
+                    Player.PeutAjouterAnimal = true;
+                    typeAnimalSelectionne = 5;
+                    MessageBox.Show("Appuyez quelque part pour ajouter un rhinocéros.");
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Vous devez être à côté d'un enclo pour \n ajouter un animal");
+            }
         }
 
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
