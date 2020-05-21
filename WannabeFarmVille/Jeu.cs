@@ -366,7 +366,8 @@ namespace WannabeFarmVille
                                         sexe = "Femelle";
                                         if (animaux[i].EnGestation)
                                         {
-                                            enceinte = "Attend un bébé";
+                                            enceinte = "Accouchera dans " + (animaux[i].Gestation - animaux[i].JrsDepuitDebGest).ToString() + " jours";
+                                            
                                         }
                                         else
                                         {
@@ -441,7 +442,7 @@ namespace WannabeFarmVille
                             {
                                 if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
                                 {
-                                    PlacerAnimal(e.X, e.Y, ligne, colonne);
+                                    PlacerAnimal(Carte[ligne, colonne].X, Carte[ligne, colonne].Y, ligne, colonne);
                                 }
                                 else
                                 {
@@ -1083,37 +1084,58 @@ namespace WannabeFarmVille
                 //GAUCHE
                 if (randX == 0 && !(vX >= 4 && vX <= 5) && !(vX >= 25 && vX <= 26))
                 {
-                    if (Carte[animaux[i].CurrentRow, animaux[i].CurrentRow - 1].EstUnObstacle)
+                    if (!Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn - 1].EstUnObstacle)
                     {
+                        Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn].EstUnObstacle = false;
                         animaux[i].X -= tuile.Width;
                         animaux[i].MovingX = -1;
                         animaux[i].MovingY = 0;
+                        animaux[i].CurrentColumn--;
+                        Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn].EstUnObstacle = true;
                         animaux[i].ReloadImages();
                     }
                 }
                 //DROITE
                 else if (randX == 1 && !(vX >= 11 && vX <= 12) && !(vX >= 32 && vX <= 33))
                 {
-                    animaux[i].X += tuile.Width;
-                    animaux[i].MovingX = 1;
-                    animaux[i].MovingY = 0;
-                    animaux[i].ReloadImages();
+                    if (!Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn + 1].EstUnObstacle)
+                    {
+                        Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn].EstUnObstacle = false;
+                        animaux[i].X += tuile.Width;
+                        animaux[i].MovingX = 1;
+                        animaux[i].MovingY = 0;
+                        animaux[i].CurrentColumn++;
+                        Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn].EstUnObstacle = true;
+                        animaux[i].ReloadImages();
+                    }
                 }
                 //HAUT
                 if (randY == 0 && !(vY >= 3 && vY <= 4) && !(vY >= 16 && vY <= 17))
                 {
-                    animaux[i].Y -= tuile.Height;
-                    animaux[i].MovingY = 1;
-                    animaux[i].MovingX = 0;
-                    animaux[i].ReloadImages();
+                    if (!Carte[animaux[i].CurrentRow - 1, animaux[i].CurrentColumn].EstUnObstacle)
+                    {
+                        Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn].EstUnObstacle = false;
+                        animaux[i].Y -= tuile.Height;
+                        animaux[i].MovingY = 1;
+                        animaux[i].MovingX = 0;
+                        animaux[i].CurrentRow--;
+                        Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn].EstUnObstacle = true;
+                        animaux[i].ReloadImages();
+                    }
                 }
                 //BAS
-                else if (randY == 1 && !(vY >= 12 && vY <= 13) && !(vY >= 24 && vY <= 25))
+                else if (randY == 1 && !(vY >= 12 && vY <= 13) && !(vY >= 23 && vY <= 25))
                 {
-                    animaux[i].Y += tuile.Height;
-                    animaux[i].MovingY = -1;
-                    animaux[i].MovingX = 0;
-                    animaux[i].ReloadImages();
+                    if (!Carte[animaux[i].CurrentRow + 1, animaux[i].CurrentColumn].EstUnObstacle)
+                    {
+                        Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn].EstUnObstacle = false;
+                        animaux[i].Y += tuile.Height;
+                        animaux[i].MovingY = -1;
+                        animaux[i].MovingX = 0;
+                        animaux[i].CurrentRow++;
+                        Carte[animaux[i].CurrentRow, animaux[i].CurrentColumn].EstUnObstacle = true;
+                        animaux[i].ReloadImages();
+                    }
                 }
 
 
@@ -1332,7 +1354,7 @@ namespace WannabeFarmVille
                 {
                     if (visiteurs[i].CurrentRow != 0)
                     {
-                        if (!Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn - 1].EstUnObstacle)
+                        if (!Carte[visiteurs[i].CurrentRow - 1, visiteurs[i].CurrentColumn].EstUnObstacle)
                         {
                             Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].EstUnObstacle = false;
                             BackUp = Carte[visiteurs[i].CurrentRow, visiteurs[i].CurrentColumn].VisiteurSurLaTuile;
