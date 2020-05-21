@@ -67,6 +67,7 @@ namespace WannabeFarmVille
         private List<Animal> animaux;
         private Hashtable PointsVisiteurs = new Hashtable();
         private int typeAnimalSelectionne; // 0: aucun 1-6:animal.
+        private bool musique;
         
 
         public Jeu(MenuDepart menuDepart)
@@ -86,6 +87,7 @@ namespace WannabeFarmVille
         private void Init()
         {
             datejeu = DateTime.Now;
+            musique = true;
             typeAnimalSelectionne = 0;
             stopWatch = new Stopwatch();
             dt_remuneration = DateTime.Now;
@@ -1697,7 +1699,16 @@ namespace WannabeFarmVille
             }
             if(e.KeyCode == Keys.M)
             {
-                snd.Stop();
+                if (musique)
+                {
+                    snd.Stop();
+                    musique = false;
+                }
+                else if (!musique)
+                {
+                    snd.Play();
+                    musique = true;
+                }
             }
             if (e.KeyCode == Keys.S)
             {
