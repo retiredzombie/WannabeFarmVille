@@ -289,7 +289,8 @@
             // 
             this.embaucherToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.embaucherToolStripMenuItem.Name = "embaucherToolStripMenuItem";
-            this.embaucherToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
+            this.embaucherToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.embaucherToolStripMenuItem.Size = new System.Drawing.Size(254, 26);
             this.embaucherToolStripMenuItem.Text = "Embaucher";
             this.embaucherToolStripMenuItem.Click += new System.EventHandler(this.embaucherToolStripMenuItem_Click);
             // 
