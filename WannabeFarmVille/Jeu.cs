@@ -332,11 +332,11 @@ namespace WannabeFarmVille
                             {
                                 bool trouve = false;
                                 for (int i = 0; i < animaux.Count; i++) {
-                                    if (Carte[ligne, colonne].X == animaux[i].X && Carte[ligne, colonne].Y == animaux[i].Y)
+                                    if (e.X > animaux[i].X && e.X < (32 + animaux[i].X) && e.Y > animaux[i].Y && e.Y < (32 + animaux[i].Y))
                                     {
                                         if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
                                         {
-                                            Carte[ligne, colonne].AnimalSurLaCase.AFaim = false;
+                                            animaux[i].AFaim = false;
                                             MessageBox.Show("L'animal cri de joie et est rassasié !");
                                             Player.Argent -= 1;
                                             affichageArgent.Text = Player.Argent + "$";
