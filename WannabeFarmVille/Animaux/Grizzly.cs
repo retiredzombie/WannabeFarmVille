@@ -75,5 +75,26 @@ namespace WannabeFarmVille.Animaux
                 Console.WriteLine("Fin de la Faim");
             }
         }
+
+        internal override void ReloadImages()
+        {
+            if (MovingX == 1 && MovingY == 0)
+            {
+                this.image = Properties.Resources.grizzlyRightDown;
+            }
+            else if (MovingX == -1 && MovingY == 0)
+            {
+                this.image = Properties.Resources.grizzlyLeftDown;
+            }
+
+            else if (MovingX == 0 && MovingY == 1)
+            {
+                this.image = Properties.Resources.grizzlyRightUp;
+            }
+            else if (MovingX == 0 && MovingY == -1)
+            {
+                this.image = Properties.Resources.grizzlyLeftUp;
+            }
+        }
     }
 }

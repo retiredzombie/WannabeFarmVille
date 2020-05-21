@@ -789,6 +789,7 @@ namespace WannabeFarmVille
             LogicVisiteurs();
             LogicConcierges();
             LogicContravention();
+            LogicAnimaux();
 
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
@@ -804,6 +805,70 @@ namespace WannabeFarmVille
                 PayeJoueur();
 
                 this.dt_remuneration = DateTime.Now;
+            }
+        }
+
+        private void LogicAnimaux()
+        {
+            for (int i = 0; i < animaux.Count; i++)
+            {
+                int randX = rand.Next(3);
+                int randY = rand.Next(3);
+
+                while ((randX == randY) ||
+                        (randY == 0 && animaux[i].Y - tuile.Height <= 0 + tuile.Height) ||
+                        (randY == 1 && animaux[i].Y + tuile.Height >= this.Height - tuile.Height) ||
+                        (randX == 0 && animaux[i].X - tuile.Width <= 0 + tuile.Width) ||
+                        (randX == 1 && animaux[i].X + tuile.Width >= this.Width - tuile.Height) ||
+                        (randX != 2 && randY != 2) //||
+                                                   //(IsColliding(randX, randY, visiteurs[i]))
+                        )
+                {
+                    randX = rand.Next(3);
+                    randY = rand.Next(3);
+                }
+
+                int vX = animaux[i].X / this.tailleTuile;
+                int vY = animaux[i].Y / this.tailleTuile;
+
+                Console.WriteLine("vX = " + vX);
+                Console.WriteLine("vY = " + vY);
+                //GAUCHE
+                if (randX == 0 && !(vX >= 4 && vX <= 5) && !(vX >= 25 && vX <= 26))
+                {
+                    animaux[i].X -= tuile.Width;
+                    animaux[i].MovingX = -1;
+                    animaux[i].MovingY = 0;
+                    animaux[i].ReloadImages();
+                }
+                //DROITE
+                else if (randX == 1 && !(vX >= 11 && vX <= 12) && !(vX >= 32 && vX <= 33))
+                {
+                    animaux[i].X += tuile.Width;
+                    animaux[i].MovingX = 1;
+                    animaux[i].MovingY = 0;
+                    animaux[i].ReloadImages();
+                }
+                //HAUT
+                if (randY == 0 && !(vY >= 3 && vY <= 4) && !(vY >= 16 && vY <= 17))
+                {
+                    animaux[i].Y -= tuile.Height;
+                    animaux[i].MovingY = 1;
+                    animaux[i].MovingX = 0;
+                    animaux[i].ReloadImages();
+                }
+                //BAS
+                else if (randY == 1 && !(vY >= 12 && vY <= 13) && !(vY >= 24 && vY <= 25))
+                {
+                    animaux[i].Y += tuile.Height;
+                    animaux[i].MovingY = -1;
+                    animaux[i].MovingX = 0;
+                    animaux[i].ReloadImages();
+                }
+
+
+                int cX = animaux[i].X;
+                int cY = animaux[i].Y;
             }
         }
 
