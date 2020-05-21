@@ -971,7 +971,6 @@ namespace WannabeFarmVille
                                 "aux visiteurs pour qu'ils viennent.");
             }
             Player.Argent += prix;
-            affichageArgent.Text = Player.Argent + "$";
         }
 
 
@@ -1027,6 +1026,11 @@ namespace WannabeFarmVille
             LogicConcierges();
             LogicContravention();
             LogicAnimaux();
+
+            if (Player.Argent < 0)
+            {
+                Player.Argent = 0;
+            }
 
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
