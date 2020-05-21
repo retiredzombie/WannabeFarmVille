@@ -427,7 +427,7 @@ namespace WannabeFarmVille
 
             int enclosClique = GetEncloClique(e, x, y);
 
-            if (enclosClique == 0)
+            if (enclosClique == 0 && typeAnimalSelectionne != 0)
             {
                 MessageBox.Show("Les animaux doivent êtres placés dans des enclos.");
                 return false;
