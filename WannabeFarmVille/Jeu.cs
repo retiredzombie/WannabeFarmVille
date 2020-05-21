@@ -1027,6 +1027,11 @@ namespace WannabeFarmVille
             LogicContravention();
             LogicAnimaux();
 
+            if (Player.Argent < 0)
+            {
+                Player.Argent = 0;
+            }
+
             if (stopwatchJeu.Elapsed.TotalMilliseconds >= 5 / 365 * 3600)
             {
                 this.datejeu = this.datejeu.AddDays(1);
