@@ -388,6 +388,8 @@ namespace WannabeFarmVille
 
             bool placementLegal = VerifierXYEnclos(x, y);
             // MessageBox.Show(x.ToString() + " " + y.ToString());
+            if (BonTypeEnclos(typeAnimalSelectionne, e, x, y))
+            {
                 switch (typeAnimalSelectionne)
                 {
                     case 1:
@@ -415,6 +417,61 @@ namespace WannabeFarmVille
                         typeAnimalSelectionne = 0;
                         break;
                 }
+            }
+        }
+
+        private bool BonTypeEnclos(int typeAnimalSelectionne, MouseEventArgs e, int x, int y)
+        {
+            bool bonType = true;
+
+            int enclosClique = GetEncloClique(e, x, y);
+            for (int i = 0; i < animaux.Count; i++)
+
+            {
+                if (animaux[i].Enclos == enclosClique)
+                {
+                    if (animaux[i].Type != typeAnimalSelectionne)
+                    {
+                        bonType = false;
+                        MessageBox.Show("Un seul type d'animal par enclos.");
+                        break;
+                    }
+                }
+            }
+
+            return bonType;
+        }
+
+        private int GetEncloClique(MouseEventArgs e, int x, int y)
+        {
+            int encloNum = 0;
+
+            int vX = x / 32;
+            int vY = y / 32;
+
+            //HAUT-GAUCHE
+            if ((vX >= 5 && vX <= 12) && (vY >= 4 && vY <= 13))
+            {
+                encloNum = 1;
+            }
+            //HAUT-DROITE
+            if ((vX >= 25 && vX <= 33) && (vY >= 4 && vY <= 13))
+            {
+                encloNum = 2;
+            }
+
+            //BAS-GAUCHE
+            if ((vY >= 16 && vY <= 25) && (vX >= 5 && vX <= 12))
+            {
+                encloNum = 3;
+            }
+            //BAS-DROITE
+            if ((vX >= 25 && vX <= 33) && (vY >= 16 && vY <= 25))
+            {
+                encloNum = 4;
+            }
+
+            return encloNum;
         }
 
         private bool VerifierXYEnclos(int x, int y)

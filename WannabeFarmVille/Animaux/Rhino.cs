@@ -31,6 +31,7 @@ namespace WannabeFarmVille.Animaux
             this.X = X;
             this.Y = Y;
             this.image = Properties.Resources.rhinoLeftDown;
+            this.Type = 5;
         }
 
         /**
