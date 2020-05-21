@@ -57,6 +57,7 @@
             this.lblGenre = new System.Windows.Forms.Label();
             this.lblVisNom = new System.Windows.Forms.Label();
             this.IconVis = new System.Windows.Forms.PictureBox();
+            this.oUVRIRVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
@@ -170,7 +171,8 @@
             this.animauxToolStripMenuItem,
             this.déchetsToolStripMenuItem,
             this.conciergesToolStripMenuItem,
-            this.aideToolStripMenuItem});
+            this.aideToolStripMenuItem,
+            this.oUVRIRVToolStripMenuItem});
             this.menu_haut.Location = new System.Drawing.Point(0, 0);
             this.menu_haut.Name = "menu_haut";
             this.menu_haut.Size = new System.Drawing.Size(1264, 32);
@@ -289,7 +291,8 @@
             // 
             this.embaucherToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.embaucherToolStripMenuItem.Name = "embaucherToolStripMenuItem";
-            this.embaucherToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
+            this.embaucherToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.embaucherToolStripMenuItem.Size = new System.Drawing.Size(254, 26);
             this.embaucherToolStripMenuItem.Text = "Embaucher";
             this.embaucherToolStripMenuItem.Click += new System.EventHandler(this.embaucherToolStripMenuItem_Click);
             // 
@@ -359,6 +362,14 @@
             this.IconVis.TabIndex = 0;
             this.IconVis.TabStop = false;
             this.IconVis.Visible = false;
+            // 
+            // oUVRIRVToolStripMenuItem
+            // 
+            this.oUVRIRVToolStripMenuItem.ForeColor = System.Drawing.Color.Lime;
+            this.oUVRIRVToolStripMenuItem.Name = "oUVRIRVToolStripMenuItem";
+            this.oUVRIRVToolStripMenuItem.Size = new System.Drawing.Size(248, 28);
+            this.oUVRIRVToolStripMenuItem.Text = "OUVRIRE VOTRE ZOO!";
+            this.oUVRIRVToolStripMenuItem.Click += new System.EventHandler(this.oUVRIRVToolStripMenuItem_Click);
             // 
             // Jeu
             // 
@@ -439,6 +450,7 @@
         private System.Windows.Forms.Label lblVisNom;
         private System.Windows.Forms.Label lblGenre;
         private System.Windows.Forms.Label lblTemps;
+        private System.Windows.Forms.ToolStripMenuItem oUVRIRVToolStripMenuItem;
     }
 }
 

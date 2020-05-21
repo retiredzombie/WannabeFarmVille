@@ -13,15 +13,13 @@ namespace WannabeFarmVille.Animaux
 
         private const int MS = 1000;
         // Toutes les durées sont en "jours"
-        private int Gestation { get; set; } = 110;
-        private int Croissance { get; set; } = 110;
 
         private Timer CompteARebours { get; set; }
 
         private const int Jour = MS; // En millisecondes
 
         // Commence le timer et assigne un id à l'animal
-        public Licorne(int X, int Y) : base(X, Y)
+        public Licorne(int X, int Y, Random rand) : base(X, Y, rand)
         {
             this.DernierRepas = DateTime.Now;
             Nombre_Licornes++;
@@ -31,6 +29,8 @@ namespace WannabeFarmVille.Animaux
             this.Y = Y;
             this.image = Properties.Resources.licorneLeftDown;
             this.Type = 4;
+            this.Gestation = 360;
+            this.Croissance = 360;
         }
 
         /**
