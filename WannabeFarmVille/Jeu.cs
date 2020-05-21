@@ -425,6 +425,13 @@ namespace WannabeFarmVille
             bool bonType = true;
 
             int enclosClique = GetEncloClique(e, x, y);
+
+            if (enclosClique == 0)
+            {
+                MessageBox.Show("Les animaux doivent êtres placés dans des enclos.");
+                return false;
+            }
+
             for (int i = 0; i < animaux.Count; i++)
 
             {
@@ -438,6 +445,7 @@ namespace WannabeFarmVille
                     }
                 }
             }
+
 
             return bonType;
         }
