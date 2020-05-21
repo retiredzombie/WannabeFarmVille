@@ -388,6 +388,8 @@ namespace WannabeFarmVille
 
             bool placementLegal = VerifierXYEnclos(x, y);
             // MessageBox.Show(x.ToString() + " " + y.ToString());
+            if (BonTypeEnclos(typeAnimalSelectionne, e, x, y))
+            {
                 switch (typeAnimalSelectionne)
                 {
                     case 1:
@@ -415,8 +417,74 @@ namespace WannabeFarmVille
                         typeAnimalSelectionne = 0;
                         break;
                 }
+            }
         }
 
+        //Verifie que le joueur à cliqué sur un enclos et retourne lequel si oui.
+        private bool BonTypeEnclos(int typeAnimalSelectionne, MouseEventArgs e, int x, int y)
+        {
+            bool bonType = true;
+
+            int enclosClique = GetEncloClique(e, x, y);
+
+            if (enclosClique == 0 && typeAnimalSelectionne != 0)
+            {
+                MessageBox.Show("Les animaux doivent êtres placés dans des enclos.");
+                return false;
+            }
+
+            for (int i = 0; i < animaux.Count; i++)
+
+            {
+                if (animaux[i].Enclos == enclosClique)
+                {
+                    if (animaux[i].Type != typeAnimalSelectionne)
+                    {
+                        bonType = false;
+                        MessageBox.Show("Un seul type d'animal par enclos.");
+                        break;
+                    }
+                }
+            }
+
+
+            return bonType;
+        }
+
+        //Retourne quel enclos à été cliqué (int 1 à 4).
+        private int GetEncloClique(MouseEventArgs e, int x, int y)
+        {
+            int encloNum = 0;
+
+            int vX = x / 32;
+            int vY = y / 32;
+
+            //HAUT-GAUCHE
+            if ((vX >= 5 && vX <= 12) && (vY >= 4 && vY <= 13))
+            {
+                encloNum = 1;
+            }
+            //HAUT-DROITE
+            if ((vX >= 25 && vX <= 33) && (vY >= 4 && vY <= 13))
+            {
+                encloNum = 2;
+            }
+
+            //BAS-GAUCHE
+            if ((vY >= 16 && vY <= 25) && (vX >= 5 && vX <= 12))
+            {
+                encloNum = 3;
+            }
+            //BAS-DROITE
+            if ((vX >= 25 && vX <= 33) && (vY >= 16 && vY <= 25))
+            {
+                encloNum = 4;
+            }
+
+            return encloNum;
+        }
+
+        // Verifie rapidement si le x, y donné est sur un enclos.
         private bool VerifierXYEnclos(int x, int y)
         {
             bool bon = false;
@@ -441,8 +509,7 @@ namespace WannabeFarmVille
             // Enclo #4
             if ((x >= 865 && x < 1075) && (y >= 565 && y <= 805))
             {
-                AjouterLion(x, y);
-                typeAnimalSelectionne = 0;
+                bon = true;
             }
 
             return bon;
@@ -808,6 +875,7 @@ namespace WannabeFarmVille
             }
         }
 
+        // Fait bouger les animaux en restant dans les enclos.
         private void LogicAnimaux()
         {
             for (int i = 0; i < animaux.Count; i++)
@@ -1367,6 +1435,7 @@ namespace WannabeFarmVille
             MessageBox.Show("Séléctionnez la tuile adjaçente sur laquelle vous \n voulez faire apparaître le concierge");
         }
 
+        // Ajoute un nouveau concierge à la position donnée.
         private void NewConcierge(int cX, int cY, int ligne, int colonne)
         {
             try

@@ -31,6 +31,7 @@ namespace WannabeFarmVille
             this.X = X;
             this.Y = Y;
             this.image = Properties.Resources.lionLeftDown;
+            this.Type = 3;
         }
 
         /**
