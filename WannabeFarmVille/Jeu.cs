@@ -347,7 +347,7 @@ namespace WannabeFarmVille
                                     {
                                         race = "Rhinocéros";
                                     }
-                                    if(animaux[i].Genre == 0)
+                                    if(animaux[i].genre == Animal.Genre.Male)
                                     {
                                         sexe = "Mâle";
                                     }
