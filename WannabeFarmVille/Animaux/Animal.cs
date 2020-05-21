@@ -15,19 +15,23 @@ namespace WannabeFarmVille
 
         public bool AFaim { get; set; } = false;
         public bool Adulte { get; set; }
+        private bool adulte;
         public DateTime DernierRepas { get => dernierRepas; set => dernierRepas = value; }
         public int Faim { get; set; }
 
         public int X { get; set; }
         public int Y { get; set; }
         public int ID { get; set; }
-        public DateTime DateNaissance { get => DateNaissance; set => DateNaissance = value; }
-        public DateTime DebutGestation { get => DebutGestation; set => DebutGestation = value; }
+        private bool enGestation;
         public int Type { get; set; }
         public int Enclos { get; set; } // 1:Haut-Gauche, 2:Haut-Droite, 3:Bas-Gauche, 4:Bas-Droite.
         public int MovingX { get => movingX; set => movingX = value; }
         public int MovingY { get => movingY; set => movingY = value; }
+        public int Gestation { get; set; }
+        public int Croissance { get; set; }
         public int CurrentRow { get; set; }
+        private int gestation;
+        private int croissance;
         public int CurrentColumn { get; set; }
         public Genre genre;
         public enum Genre
@@ -37,6 +41,9 @@ namespace WannabeFarmVille
         }
 
         public Image image { get; set; }
+        public bool EnGestation { get => enGestation; set => enGestation = value; }
+        public DateTime DateNaissance { get => dateNaissance; set => dateNaissance = value; }
+        public DateTime DebutGestation { get => debutGestation; set => debutGestation = value; }
 
         private DateTime dernierRepas;
         private DateTime dateNaissance;
@@ -45,7 +52,8 @@ namespace WannabeFarmVille
         public Animal(int X, int Y)
         {
             this.dernierRepas = DateTime.Now;
-            this.dateNaissance = DateTime.Now;
+            this.DateNaissance = DateTime.Now;
+            this.enGestation = false;
 
             this.X = X;
             this.Y = Y;

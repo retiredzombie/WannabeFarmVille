@@ -13,8 +13,6 @@ namespace WannabeFarmVille
 
         private const int MS = 1000;
         // Toutes les durées sont en "jours"
-        private int Gestation { get; set; } = 110;
-        private int Croissance { get; set; } = 110;
        
         private Timer CompteARebours { get; set; }
 
@@ -31,6 +29,8 @@ namespace WannabeFarmVille
             this.Y = Y;
             this.image = Properties.Resources.lionLeftDown;
             this.Type = 3;
+            this.Gestation = 110;
+            this.Croissance = 110;
         }
 
         /**
