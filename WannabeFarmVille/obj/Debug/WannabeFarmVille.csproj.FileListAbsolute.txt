@@ -48,3 +48,4 @@ C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\Wan
 E:\Prog VisualStudio\WannabeFarmVille\WannabeFarmVille\bin\Debug\Resources\joeExotic.png
 C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoVisiteur.resources
 D:\School\Hivert 2020\Developpement Graphique\WannabeFarmVilleGit\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoVisiteur.resources
+C:\Users\Victor\Documents\GitHub\WannabeFarmVille\WannabeFarmVille\obj\Debug\WannabeFarmVille.InfoAnimal.resources
