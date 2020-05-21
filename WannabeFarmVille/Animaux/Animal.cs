@@ -44,12 +44,19 @@ namespace WannabeFarmVille
         public bool EnGestation { get => enGestation; set => enGestation = value; }
         public DateTime DateNaissance { get => dateNaissance; set => dateNaissance = value; }
         public DateTime DebutGestation { get => debutGestation; set => debutGestation = value; }
+        public int JrsDepuitDebGest { get => jrsDepuitDebGest; set => jrsDepuitDebGest = value; }
+        public int Age { get => age; set => age = value; }
+        public int JrsDepuitManger { get => jrsDepuitManger; set => jrsDepuitManger = value; }
 
         private DateTime dernierRepas;
         private DateTime dateNaissance;
         private DateTime debutGestation;
 
-        public Animal(int X, int Y)
+        private int jrsDepuitDebGest;
+        private int age;
+        private int jrsDepuitManger;
+
+        public Animal(int X, int Y, Random rand)
         {
             this.dernierRepas = DateTime.Now;
             this.DateNaissance = DateTime.Now;
@@ -58,13 +65,15 @@ namespace WannabeFarmVille
             this.X = X;
             this.Y = Y;
 
-            Adulte = true;
+            this.jrsDepuitDebGest = 0;
+            this.age = 0;
+            this.JrsDepuitManger = 0;
+
+            Adulte = false;
 
             this.Enclos = TrouverEnclos();
 
-            Random rand = new Random();
-
-            if (rand.Next(2) == 1)
+            if (rand.Next(2) == 0)
             {
                 genre = Genre.Femelle;
             }

@@ -19,7 +19,7 @@ namespace WannabeFarmVille.Animaux
         private const int Jour = MS; // En millisecondes
 
         // Commence le timer et assigne un id à l'animal
-        public Mouton(int X, int Y) : base(X, Y)
+        public Mouton(int X, int Y, Random rand) : base(X, Y, rand)
         {
             this.DernierRepas = DateTime.Now;
             Nombre_Moutons++;
@@ -42,39 +42,8 @@ namespace WannabeFarmVille.Animaux
             //timer = new Timer(MS);
             timer.AutoReset = true;
             timer.Start();
-            timer.Elapsed += OnTimedEvent;
         }
 
-        /**
-         * À chaque coup de timer (chaque jour donc),
-         * chaque variable est réduite de 1.
-         * Quand la variable arrive à 0, l'event associé se déclenche
-         * et la variable est remise à sa valeur initiale.
-         */
-        private void OnTimedEvent(Object source, ElapsedEventArgs e)
-        {
-            Gestation--;
-            Croissance--;
-            Faim--;
-            if (Gestation == 0)
-            {
-                // A un bébé
-                Gestation = 110;
-                Console.WriteLine("Fin de la Gestation");
-            }
-            if (Croissance == 0)
-            {
-                // Atteint la maturité
-                Croissance = 110;
-                Console.WriteLine("Fin de la Croissance");
-            }
-            if (Faim == 0)
-            {
-                // Contravention
-                Faim = 120;
-                Console.WriteLine("Fin de la Faim");
-            }
-        }
 
         internal override void ReloadImages()
         {
