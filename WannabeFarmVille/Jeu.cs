@@ -1086,11 +1086,13 @@ namespace WannabeFarmVille
                 //GAUCHE
                 if (randX == 0 && !(vX >= 4 && vX <= 5) && !(vX >= 25 && vX <= 26))
                 {
-                    animaux[i].X -= tuile.Width;
-                    animaux[i].MovingX = -1;
-                    animaux[i].MovingY = 0;
-                    
-                    animaux[i].ReloadImages();
+                    if (Carte[animaux[i].CurrentRow, animaux[i].CurrentRow - 1].EstUnObstacle)
+                    {
+                        animaux[i].X -= tuile.Width;
+                        animaux[i].MovingX = -1;
+                        animaux[i].MovingY = 0;
+                        animaux[i].ReloadImages();
+                    }
                 }
                 //DROITE
                 else if (randX == 1 && !(vX >= 11 && vX <= 12) && !(vX >= 32 && vX <= 33))
