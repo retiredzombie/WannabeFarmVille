@@ -420,6 +420,7 @@ namespace WannabeFarmVille
             }
         }
 
+        //Verifie que le joueur à cliqué sur un enclos et retourne lequel si oui.
         private bool BonTypeEnclos(int typeAnimalSelectionne, MouseEventArgs e, int x, int y)
         {
             bool bonType = true;
@@ -450,6 +451,7 @@ namespace WannabeFarmVille
             return bonType;
         }
 
+        //Retourne quel enclos à été cliqué (int 1 à 4).
         private int GetEncloClique(MouseEventArgs e, int x, int y)
         {
             int encloNum = 0;
@@ -482,6 +484,7 @@ namespace WannabeFarmVille
             return encloNum;
         }
 
+        // Verifie rapidement si le x, y donné est sur un enclos.
         private bool VerifierXYEnclos(int x, int y)
         {
             bool bon = false;
@@ -506,8 +509,7 @@ namespace WannabeFarmVille
             // Enclo #4
             if ((x >= 865 && x < 1075) && (y >= 565 && y <= 805))
             {
-                AjouterLion(x, y);
-                typeAnimalSelectionne = 0;
+                bon = true;
             }
 
             return bon;
@@ -873,6 +875,7 @@ namespace WannabeFarmVille
             }
         }
 
+        // Fait bouger les animaux en restant dans les enclos.
         private void LogicAnimaux()
         {
             for (int i = 0; i < animaux.Count; i++)
@@ -1432,6 +1435,7 @@ namespace WannabeFarmVille
             MessageBox.Show("Séléctionnez la tuile adjaçente sur laquelle vous \n voulez faire apparaître le concierge");
         }
 
+        // Ajoute un nouveau concierge à la position donnée.
         private void NewConcierge(int cX, int cY, int ligne, int colonne)
         {
             try
