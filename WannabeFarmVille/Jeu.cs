@@ -319,6 +319,7 @@ namespace WannabeFarmVille
                                 if (e.X > animaux[i].X && e.X < (32 + animaux[i].X) && e.Y > animaux[i].Y && e.Y < (32 + animaux[i].Y))
                                 {
                                     String race;
+                                    String sexe = "Non-Binaire";
                                     if(animaux[i] is Lion)
                                     {
                                         race = "Lion";
@@ -331,6 +332,19 @@ namespace WannabeFarmVille
                                     {
                                         race = "Grizzly";
                                     }
+                                    else if (animaux[i] is Licorne)
+                                    {
+                                        race = "Licorne";
+                                    }
+                                    else if (animaux[i] is Mouton)
+                                    {
+                                        race = "Mouton";
+                                    }
+                                    else if (animaux[i] is Rhino)
+                                    {
+                                        race = "Rhinocéros";
+                                    }
+                                    
                                     InfoAni = new InfoAnimal();
 
                                 }
