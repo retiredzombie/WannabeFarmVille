@@ -320,6 +320,8 @@ namespace WannabeFarmVille
                                 {
                                     String race;
                                     String sexe = "Non-Binaire";
+                                    String age = "Adulte";
+                                    String food;
                                     if(animaux[i] is Lion)
                                     {
                                         race = "Lion";
@@ -344,7 +346,17 @@ namespace WannabeFarmVille
                                     {
                                         race = "Rhinocéros";
                                     }
+                                    if(animaux[i].Genre == 0)
+                                    {
+                                        sexe = "Mâle";
+                                    }
+                                    else
+                                    {
+                                        sexe = "Femelle";
+                                    }
+                                    double temps =  (DateTime.Now - animaux[i].DernierRepas).TotalSeconds;
                                     
+
                                     InfoAni = new InfoAnimal();
 
                                 }
@@ -360,7 +372,7 @@ namespace WannabeFarmVille
                                     {
                                         if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
                                         {
-                                            animaux[i].AFaim = false;
+                                            animaux[i].DernierRepas = DateTime.Now;
 
                                             if (animaux[i].Type == 1)
                                             {
