@@ -67,7 +67,7 @@ namespace WannabeFarmVille
         private List<Animal> animaux;
         private Hashtable PointsVisiteurs = new Hashtable();
         private int typeAnimalSelectionne; // 0: aucun 1-6:animal.
-        private bool musique;
+        private bool musique, zooOuvert;
         
 
         public Jeu(MenuDepart menuDepart)
@@ -87,6 +87,7 @@ namespace WannabeFarmVille
         private void Init()
         {
             datejeu = DateTime.Now;
+            zooOuvert = false;
             musique = true;
             typeAnimalSelectionne = 0;
             stopWatch = new Stopwatch();
@@ -154,10 +155,6 @@ namespace WannabeFarmVille
             Carte[0, 0].EstUnObstacle = true;
             MettreTuilesAdjacentes();
             visiteursPicBox = new List<PictureBox>();
-            for (int i = 0; i < 10; i++)
-            {
-               AjouterVisiteurSpawn();
-            }
         }
         /// <summary>
         /// Rendre les tuiles de la cartes autour de soit, adjacentes
@@ -1243,10 +1240,16 @@ namespace WannabeFarmVille
         }
 
         /*
-         * Fait bouger les visiteurs.
+         * Fonctions principales des visituers (mouvement, etc).
          */
         private void LogicVisiteurs()
         {
+            // Spawn les visiteurs en fonction du nombre d'animaux.
+            while (animaux.Count > visiteurs.Count && zooOuvert)
+            {
+                AjouterVisiteurSpawn();
+            }
+
             Console.WriteLine("LogicVisiteurs.");
             Visiteur BackUp;
             for (int i = 0; i < visiteurs.Count; i++)
@@ -2238,6 +2241,23 @@ namespace WannabeFarmVille
             catch (IndexOutOfRangeException)
             {
                 MessageBox.Show("Vous devez être à côté d'un enclo pour nourrir un animal");
+            }
+        }
+
+        private void oUVRIRVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (zooOuvert)
+            {
+                oUVRIRVToolStripMenuItem.Text = "OUVRIR VOTRE ZOO!";
+                oUVRIRVToolStripMenuItem.ForeColor = Color.Lime;
+                MessageBox.Show("Votre zoo est maintenant fermé. Par contre, les visiteurs restants doivent partir de leur propre volonté.");
+                zooOuvert = false;
+            } else
+            {
+                oUVRIRVToolStripMenuItem.Text = "Fermer le zoo.";
+                oUVRIRVToolStripMenuItem.ForeColor = Color.Red;
+                MessageBox.Show("Bravo! Votre zoo est maintenant ouvert!");
+                zooOuvert = true;
             }
         }
 

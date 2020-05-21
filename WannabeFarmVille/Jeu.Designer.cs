@@ -57,6 +57,7 @@
             this.lblGenre = new System.Windows.Forms.Label();
             this.lblVisNom = new System.Windows.Forms.Label();
             this.IconVis = new System.Windows.Forms.PictureBox();
+            this.oUVRIRVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicDownLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicLeftRight)).BeginInit();
@@ -170,7 +171,8 @@
             this.animauxToolStripMenuItem,
             this.déchetsToolStripMenuItem,
             this.conciergesToolStripMenuItem,
-            this.aideToolStripMenuItem});
+            this.aideToolStripMenuItem,
+            this.oUVRIRVToolStripMenuItem});
             this.menu_haut.Location = new System.Drawing.Point(0, 0);
             this.menu_haut.Name = "menu_haut";
             this.menu_haut.Size = new System.Drawing.Size(1264, 32);
@@ -361,6 +363,14 @@
             this.IconVis.TabStop = false;
             this.IconVis.Visible = false;
             // 
+            // oUVRIRVToolStripMenuItem
+            // 
+            this.oUVRIRVToolStripMenuItem.ForeColor = System.Drawing.Color.Lime;
+            this.oUVRIRVToolStripMenuItem.Name = "oUVRIRVToolStripMenuItem";
+            this.oUVRIRVToolStripMenuItem.Size = new System.Drawing.Size(248, 28);
+            this.oUVRIRVToolStripMenuItem.Text = "OUVRIRE VOTRE ZOO!";
+            this.oUVRIRVToolStripMenuItem.Click += new System.EventHandler(this.oUVRIRVToolStripMenuItem_Click);
+            // 
             // Jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -440,6 +450,7 @@
         private System.Windows.Forms.Label lblVisNom;
         private System.Windows.Forms.Label lblGenre;
         private System.Windows.Forms.Label lblTemps;
+        private System.Windows.Forms.ToolStripMenuItem oUVRIRVToolStripMenuItem;
     }
 }
 
