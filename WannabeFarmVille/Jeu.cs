@@ -285,7 +285,6 @@ namespace WannabeFarmVille
         private void Jeu_MouseClick(object sender, MouseEventArgs e)
         {
             PlacerAnimal(e);
-            BruitAnimal(e);
             for (int c = 0; c < visiteurs.Count; c++)
             {
                 if (visiteurs[c].IsSelected)
@@ -337,7 +336,32 @@ namespace WannabeFarmVille
                                         if (Carte[ligne, colonne].PositionEnclo == Player.EncloChoisi)
                                         {
                                             animaux[i].AFaim = false;
-                                            MessageBox.Show("L'animal cri de joie et est rassasié !");
+
+                                            if (animaux[i].Type == 1)
+                                            {
+                                                MessageBox.Show("Le mouton bêle.");
+                                            }
+                                            else if (animaux[i].Type == 2)
+                                            {
+                                                MessageBox.Show("Le grizzly grogne.");
+                                            }
+                                            else if (animaux[i].Type == 3)
+                                            {
+                                                MessageBox.Show("Le lion rugit.");
+                                            }
+                                            else if (animaux[i].Type == 4)
+                                            {
+                                                MessageBox.Show("La licorne hennit.");
+                                            }
+                                            else if (animaux[i].Type == 5)
+                                            {
+                                                MessageBox.Show("Le rhinocéros barète.");
+                                            }
+                                            else if (animaux[i].Type == 6)
+                                            {
+                                                MessageBox.Show("Le buffle beugle.");
+                                            }
+
                                             Player.Argent -= 1;
                                             affichageArgent.Text = Player.Argent + "$";
                                             trouve = true;
