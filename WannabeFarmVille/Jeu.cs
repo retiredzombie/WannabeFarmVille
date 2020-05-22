@@ -986,7 +986,60 @@ namespace WannabeFarmVille
 
             this.dateToolStripMenuItem.Text = this.datejeu.Date.ToString("dd MMMM yyyy");
 
-            g.DrawImage(Properties.Resources.Background_game, 0, 0, this.Width, this.Height);
+            string date = this.dateToolStripMenuItem.Text;
+
+            if (date.Contains("January"))
+            {
+                date = date.Substring(0, date.IndexOf("J")) + "Janvier" + date.Substring(date.IndexOf("r"));
+            }
+            else if (date.Contains("February"))
+            {
+                date = date.Substring(0, date.IndexOf("F")) + "Février" + date.Substring(date.IndexOf("y") + 1);
+            }
+            else if (date.Contains("March"))
+            {
+                date = date.Substring(0, date.IndexOf("M")) + "Mars" + date.Substring(date.IndexOf("h") + 1);
+            }
+            else if (date.Contains("April"))
+            {
+                date = date.Substring(0, date.IndexOf("A")) + "Avril" + date.Substring(date.IndexOf("l") + 1);
+            }
+            else if (date.Contains("May"))
+            {
+                date = date.Substring(0, date.IndexOf("M")) + "Mai" + date.Substring(date.IndexOf("y") + 1);
+            }
+            else if (date.Contains("June"))
+            {
+                date = date.Substring(0, date.IndexOf("J")) + "Juin" + date.Substring(date.IndexOf("e") + 1);
+            }
+            else if (date.Contains("July"))
+            {
+                date = date.Substring(0, date.IndexOf("J")) + "Juillet" + date.Substring(date.IndexOf("y") + 1);
+            }
+            else if (date.Contains("August"))
+            {
+                date = date.Substring(0, date.IndexOf("A")) + "Août" + date.Substring(date.IndexOf("t") + 1);
+            }
+            else if (date.Contains("September"))
+            {
+                date = date.Substring(0, date.IndexOf("S")) + "Septembre" + date.Substring(date.IndexOf("r") + 1);
+            }
+            else if (date.Contains("October"))
+            {
+                date = date.Substring(0, date.IndexOf("O")) + "Octobre" + date.Substring(date.IndexOf("r") + 1);
+            }
+            else if (date.Contains("November"))
+            {
+                date = date.Substring(0, date.IndexOf("N")) + "Novembre" + date.Substring(date.IndexOf("r") + 1);
+            }
+            else if (date.Contains("December"))
+            {
+                date = date.Substring(0, date.IndexOf("D")) + "Décembre" + date.Substring(date.IndexOf("r") + 1);
+            }
+
+            this.dateToolStripMenuItem.Text = date;
+
+           g.DrawImage(Properties.Resources.Background_game, 0, 0, this.Width, this.Height);
 
             for (int i = 0; i < visiteurs.Count; i++)
             {
